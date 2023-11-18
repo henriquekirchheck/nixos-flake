@@ -21,7 +21,8 @@
     ../../user/sandboxing/virtualization.nix
     ../../user/sandboxing/wine.nix
     ../../user/games/yuzu.nix
-    ../../user/games/ryjinx.nix
+    ../../user/games/ryujinx.nix
+    ../../user/games/prismlauncher.nix
   ];
 
   home.packages = with pkgs; [
