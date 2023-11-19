@@ -16,7 +16,7 @@
     size = 24;
   };
 
-  home.packages = [ pkgs.grimblast ];
+  home.packages = with pkgs; [ grimblast swww ];
 
   wayland.windowManager.hyprland = {
     enable = true;
