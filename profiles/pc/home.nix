@@ -18,6 +18,7 @@
     ../../user/app/development/python.nix
     ../../user/app/development/rust.nix
     ../../user/app/development/nix.nix
+    ../../user/app/development/js.nix
     ../../user/app/sandboxing/flatpak.nix
     ../../user/app/sandboxing/virtualization.nix
     ../../user/app/sandboxing/wine.nix
