@@ -2,10 +2,17 @@
 
 {
   home.packages = with pkgs; [ git gh ];
-  programs.git.enable = true;
-  programs.git.userName = name;
-  programs.git.userEmail = email;
-  programs.git.extraConfig = {
-    init.defaultBranch = "main";
+  programs.git = {
+    enable = true;
+    userName = name;
+    userEmail = email;
+    extraConfig = {
+      init.defaultBranch = "main";
+    };
+  };
+  programs.gh = {
+    enable = true;
+    settings.git_protocol = "ssh";
+    gitCredentialHelper.enable = true;
   };
 }
