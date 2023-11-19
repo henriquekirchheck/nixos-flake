@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../../system/hardware-configuration.nix
+      ./hardware-configuration.nix
       ../../system/hardware/bootloader.nix
       ../../system/hardware/console.nix
       ../../system/hardware/kernel.nix

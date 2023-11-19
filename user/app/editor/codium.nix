@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  programs.vscode = let 
+  programs.vscode = let
     extensionsOpenVSX = with pkgs.open-vsx; [
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
@@ -136,6 +136,9 @@
       "npm-intellisense.recursivePackageJsonLookup" = true;
       "npm-intellisense.showBuildInLibs" = true;
       "npm-intellisense.importES6" = true;
+
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nil";
     };
 
     keybindings = [
