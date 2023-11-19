@@ -12,6 +12,7 @@
   services.xserver.videoDrivers = ["nvidia"];
 
   programs.hyprland.enableNvidiaPatches = true;
+  virtualisation.docker.enableNvidia = true;
 
   hardware.nvidia = {
 
