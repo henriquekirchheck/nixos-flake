@@ -73,6 +73,7 @@
     vim
     bash
     home-manager
+    mpv
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

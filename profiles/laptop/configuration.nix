@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../../system/hardware-configuration.nix
+      ./hardware-configuration.nix
       ../../system/hardware/bluetooth.nix
       ../../system/hardware/bootloader.nix
       ../../system/hardware/console.nix
@@ -70,6 +70,7 @@
     vim
     bash
     home-manager
+    mpv
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

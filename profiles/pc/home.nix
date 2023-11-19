@@ -24,6 +24,8 @@
     ../../user/app/games/yuzu.nix
     ../../user/app/games/ryujinx.nix
     ../../user/app/games/prismlauncher.nix
+    ../../user/app/chat/discord.nix
+    ../../user/app/media/mpv.nix
     ../../user/styles/gtk.nix
     ../../user/styles/qt.nix
   ];
