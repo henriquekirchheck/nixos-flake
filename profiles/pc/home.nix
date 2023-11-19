@@ -29,6 +29,7 @@
     ../../user/app/media/mpv.nix
     ../../user/styles/gtk.nix
     ../../user/styles/qt.nix
+    ../../user/hardware/sound.nix
   ];
 
   home.packages = with pkgs; [
