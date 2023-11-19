@@ -1,10 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extension; [
+  programs.vscode = let 
+    extensionsOpenVSX = with pkgs.open-vsx; [
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
       pkief.material-product-icons
@@ -29,24 +27,20 @@
       svelte.svelte-vscode
       ms-python.isort
       ms-python.python
-      ms-python.vscode-pylance
       bradlc.vscode-tailwindcss
       nvarner.typst-lsp
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        publisher = "yoavbls";
-        name = "pretty-ts-errors";
-      }
-      {
-        publisher = "calebfiggers";
-        name = "typst-companion";
-      }
-      {
-        publisher = "christian-kohler";
-        name = "npm-intellisense";
-      }
+      yoavbls.pretty-ts-errors
+      calebfiggers.typst-companion
+      christian-kohler.npm-intellisense
     ];
-
+    extensionsVSCodeMarketplace = with pkgs.vscode-marketplace; [
+      ms-python.vscode-pylance
+    ];
+    extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace;
+  in {
+    enable = true;
+    package = pkgs.vscodium;
+    inherit extensions;
     userSettings = {
       "editor.unicodeHighlight.nonBasicASCII" = false;
       "editor.bracketPairColorization.enabled" = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, username, editor, terminal, browser, dotfilesDir, wm, mainEditor, ... }:
+{ config, pkgs, lib, username, editor, terminal, browser, dotfilesDir, wm, mainEditor, ... }:
 
 {
   home.username = username;
@@ -8,21 +8,21 @@
 
   imports = [
     ../../user/wm/${wm}.nix
-    ../../app/browser/${browser}.nix
-    ../../app/terminal/${terminal}.nix
-    ../../app/editor/${mainEditor}.nix
+    ../../user/app/browser/${browser}.nix
+    ../../user/app/terminal/${terminal}.nix
+    ../../user/app/editor/${mainEditor}.nix
     ../../user/shell/sh.nix
     ../../user/shell/cmd-utils.nix
-    ../../user/development/git.nix
-    ../../user/development/cc.nix
-    ../../user/development/python.nix
-    ../../user/development/rust.nix
-    ../../user/sandboxing/flatpak.nix
-    ../../user/sandboxing/virtualization.nix
-    ../../user/sandboxing/wine.nix
-    ../../user/games/yuzu.nix
-    ../../user/games/ryujinx.nix
-    ../../user/games/prismlauncher.nix
+    ../../user/app/development/git.nix
+    ../../user/app/development/cc.nix
+    ../../user/app/development/python.nix
+    ../../user/app/development/rust.nix
+    ../../user/app/sandboxing/flatpak.nix
+    ../../user/app/sandboxing/virtualization.nix
+    ../../user/app/sandboxing/wine.nix
+    ../../user/app/games/yuzu.nix
+    ../../user/app/games/ryujinx.nix
+    ../../user/app/games/prismlauncher.nix
   ];
 
   home.packages = with pkgs; [

@@ -4,6 +4,7 @@
   programs.waybar = {
     enable = true;
     settings = {
+      mainBar = {
       "layer" = "top";
       "modules-left" = [
         "custom/launcher"
@@ -79,6 +80,7 @@
         "format" = " ";
         "on-click" = "rofi -show drun";
         "on-click-right" = "killall rofi";
+      };
       };
     };
     style = ''

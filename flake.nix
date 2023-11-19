@@ -1,7 +1,7 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, rust-overlay, ... }:
+  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, ... }:
   let
     ### OPTIONS
     # System Options
@@ -30,7 +30,6 @@
       inherit wm;
       inherit username;
       inherit name;
-      inherit lib;
       inherit email;
       inherit terminal;
       inherit browser;
@@ -44,14 +43,14 @@
     pkgs = import nixpkgs {
       inherit system;
       config = { allowUnfree = true; };
-      overlays = [ rust-overlay.overlays.default ];
+      overlays = [ rust-overlay.overlays.default nix-vscode-extensions.overlays.default ];
     };
   in {
     # NixOS System Configuration
     nixosConfigurations.system = lib.nixosSystem {
       inherit system;
       modules = [ (profilePath + "/configuration.nix") ];
-      specialArgs = someArgs;
+      specialArgs = (someArgs // { inherit lib; });
     };
 
     # Home Manager Configuration
@@ -70,5 +69,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 }

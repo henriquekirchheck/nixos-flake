@@ -31,7 +31,7 @@
       update_check_interval = 0;
       allow_hyperlinks = "yes";
     };
-    shellIntegration.mode = "enabled";
+    shellIntegration.mode = "no-sudo";
     keybindings = {
       "ctrl+shift+n" = "new_os_window_with_cwd";
       f1 = "clear_terminal clear active";

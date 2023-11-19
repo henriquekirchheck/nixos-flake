@@ -6,7 +6,7 @@
     ../app/terminal/${terminal}.nix
     ../app/editor/${mainEditor}.nix
     ../app/utils/rofi/rofi.nix
-    ../app/utils/dunst.nin
+    ../app/utils/dunst.nix
     ../app/utils/waybar.nix
   ];
 
@@ -22,7 +22,7 @@
     enable = true;
     xwayland.enable = true;
     enableNvidiaPatches = true;
-    systemdIntegration = true;
+    systemd.enable = true;
     settings = {};
     extraConfig = ''
       env = LIBVA_DRIVER_NAME,nvidia

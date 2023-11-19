@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   myAliases = {
     # ls
@@ -25,8 +25,8 @@ in
     enableCompletion = true;
     shellAliases = myAliases;
     dotDir = ".config/zsh";
-    autodir = true;
-    historySubstringSearch = true;
+    autocd = true;
+    historySubstringSearch.enable = true;
     history = {
       ignoreDups = true;
       ignoreAllDups = true;
@@ -36,11 +36,13 @@ in
     # syntaxHighlighting.enable = true;
     plugins = [
       {
-        name = "fast-syntax-highlighting";
+	name = "share/zsh/site-functions/fast-syntax-highlighting";
         src = pkgs.zsh-fast-syntax-highlighting;
       }
     ];
   };
+
+
 
   programs.bash = {
     enable = true;
@@ -61,14 +63,14 @@ in
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
-    config = {
-      format = """ $directory($git_branch )($git_state )($rust )($deno )($nodejs )($python )$character""";
-      right_format = """$cmd_duration""";
+    settings = {
+      format = lib.concatStrings [" " "$directory" "($git_branch )" "($git_state )" "($rust )" "($deno )" "($nodejs )" "($python )" "$character"];
+      right_format = lib.concatStrings [ "$cmd_duration" ];
       add_newline = false;
       line_break.disabled = true;
       character = {
         format = "$symbol ";
-        success_symbol = "[❯](#0ce8;30)";
+        success_symbol = "[❯](#0ce830)";
         error_symbol = "[❯](bright-red)";
         vicmd_symbol = "[❮](#0ce830)";
       };
