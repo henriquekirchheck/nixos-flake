@@ -36,7 +36,7 @@
 
   home.sessionVariables = {
     EDITOR = editor;
-    TERM = terminal;
+    TERMINAL = terminal;
     BROWSER = browser;
   };
 
