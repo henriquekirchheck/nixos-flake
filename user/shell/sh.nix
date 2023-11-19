@@ -17,12 +17,12 @@ let
     # git
     gitfetch = "onefetch";
   };
-in
-{
+in {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    initExtra = "zstyle ':completion:*' menu select";
     shellAliases = myAliases;
     dotDir = ".config/zsh";
     autocd = true;
@@ -36,7 +36,7 @@ in
     # syntaxHighlighting.enable = true;
     plugins = [
       {
-	name = "share/zsh/site-functions/fast-syntax-highlighting";
+	      name = "share/zsh/site-functions/fast-syntax-highlighting";
         src = pkgs.zsh-fast-syntax-highlighting;
       }
     ];
@@ -64,7 +64,7 @@ in
     enableZshIntegration = true;
     enableBashIntegration = true;
     settings = {
-      format = lib.concatStrings [" " "$directory" "($git_branch )" "($git_state )" "($rust )" "($deno )" "($nodejs )" "($python )" "$character"];
+      format = lib.concatStrings ["󱄅 " "$directory" "($git_branch )" "($git_state )" "($rust )" "($deno )" "($nodejs )" "($python )" "$character"];
       right_format = lib.concatStrings [ "$cmd_duration" ];
       add_newline = false;
       line_break.disabled = true;
