@@ -44,7 +44,7 @@
       exec-once = /usr/lib/polkit-kde-authentication-agent-1
       exec-once = dunst
       exec-once = hyprctl setcursor ${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}
-      exec-once = discord-canary --start-minimized
+      exec-once = discordcanary --start-minimized
 
       input {
           kb_layout = br
