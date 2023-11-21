@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [ ../utils/electron.nix ];
+
   programs.vscode = let
     extensionsOpenVSX = with pkgs.open-vsx; [
       catppuccin.catppuccin-vsc
