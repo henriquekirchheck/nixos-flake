@@ -16,7 +16,7 @@
     size = 24;
   };
 
-  home.packages = with pkgs; [ grimblast swww ];
+  home.packages = with pkgs; [ grimblast swww wl-clipboard ];
 
   wayland.windowManager.hyprland = {
     enable = true;
