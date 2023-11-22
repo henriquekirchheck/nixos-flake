@@ -34,6 +34,7 @@
 
   home.packages = with pkgs; [
     hello
+    nix-index
   ];
 
   home.stateVersion = "23.05";

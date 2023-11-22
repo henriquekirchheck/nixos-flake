@@ -1,7 +1,7 @@
 { config, lib, pkgs, username, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ virt-manager virtualbox ];
+  environment.systemPackages = with pkgs; [ virtualbox ];
   virtualisation.libvirtd = {
     allowedBridges = [
       "nm-bridge"
@@ -10,6 +10,7 @@
     enable = true;
     qemu.runAsRoot = false;
   };
+  programs.virt-manager.enable = true;
   boot.extraModulePackages = with config.boot.kernelPackages; [ virtualbox ];
   users.users.${username}.extraGroups = [ "libvirt" "kvm" ];
 }

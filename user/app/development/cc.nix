@@ -5,6 +5,7 @@
       gcc
       gnumake
       cmake
+      stdenv
       autoconf
       automake
       libtool
