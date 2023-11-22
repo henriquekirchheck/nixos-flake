@@ -11,6 +11,7 @@
     qemu.runAsRoot = false;
   };
   programs.virt-manager.enable = true;
+  programs.dconf.enable = true;
   boot.extraModulePackages = with config.boot.kernelPackages; [ virtualbox ];
-  users.users.${username}.extraGroups = [ "libvirt" "kvm" ];
+  users.users.${username}.extraGroups = [ "libvirtd" "kvm" ];
 }
