@@ -35,6 +35,7 @@
   home.packages = with pkgs; [
     hello
     nix-index
+    libreoffice-fresh
   ];
 
   home.stateVersion = "23.05";
