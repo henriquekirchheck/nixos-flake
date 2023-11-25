@@ -12,19 +12,20 @@
       ../../system/hardware/bootloader.nix
       ../../system/hardware/console.nix
       ../../system/hardware/kernel.nix
+      ../../system/hardware/amd-gpu.nix
       ../../system/hardware/networking.nix
       ../../system/hardware/printing.nix
       (./. + "../../../system/wm" + ("/" + wm) + ".nix")
       ../../system/app/flatpak.nix
       ( import ../../system/app/docker.nix {storageDriver = "btrfs"; inherit username pkgs config lib;} )
       ../../system/app/zsh.nix
+      ../../system/app/steam.nix
       ../../system/security/privilege_escalation/doas.nix
       ../../system/security/firewall.nix
       ../../system/security/gpg.nix
     ];
 
   networking.hostName = "${username}-laptop"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   time.timeZone = timeZone;
 
