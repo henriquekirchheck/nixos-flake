@@ -26,7 +26,17 @@ in {
     shellAliases = myAliases;
     dotDir = ".config/zsh";
     autocd = true;
-    historySubstringSearch.enable = true;
+    historySubstringSearch = {
+      enable = true;
+      searchUpKey = [
+        "^[[A"
+        "$terminfo[kcuu1]"
+      ];
+      searchDownKey = [
+        "^[[B"
+        "$terminfo[kcud1]"
+      ];
+    };
     history = {
       ignoreDups = true;
       ignoreAllDups = true;
