@@ -1,7 +1,7 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, ... }:
+  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, ... } @ inputs :
   let
     ### OPTIONS
     # System Options
@@ -36,6 +36,7 @@
       inherit mainEditor;
       inherit editor;
       inherit dotfilesDir;
+      inherit inputs;
     };
     profilePath = (./. + "/profiles" + ("/" + profile));
 
@@ -68,7 +69,14 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
     rust-overlay.url = "github:oxalica/rust-overlay";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 }

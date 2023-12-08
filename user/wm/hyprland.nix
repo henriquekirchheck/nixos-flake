@@ -1,6 +1,15 @@
-{ config, pkgs, lib, terminal, browser, mainEditor, ... }:
+{ config, pkgs, lib, terminal, browser, mainEditor, inputs, ... }:
 
-{
+let
+  winWrapClass = "terminal-background";
+  winWrapBinName = "cava-wrap";
+  winWrapBin = ''
+    #!/bin/sh
+    sleep 0.5 && cava
+  '';
+  winWrapConfigFile = ".config/hypr/kitty-${winWrapClass}.conf";
+  winWrapConfig = "background_opacity 1.0";
+in {
   imports = [
     ../app/browser/${browser}.nix
     ../app/terminal/${terminal}.nix
@@ -16,14 +25,20 @@
     size = 24;
   };
 
-  home.packages = with pkgs; [ grimblast swww wl-clipboard ];
+  home.packages = with pkgs; [
+    grimblast swww wl-clipboard
+    (pkgs.writeScriptBin winWrapBinName winWrapBin)
+  ];
+  home.file.${winWrapConfigFile}.text = winWrapConfig;
 
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    enableNvidiaPatches = true;
     systemd.enable = true;
     settings = {};
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
+    ];
     extraConfig = ''
       env = LIBVA_DRIVER_NAME,nvidia
       env = XDG_SESSION_TYPE,wayland
@@ -45,6 +60,7 @@
       exec-once = dunst
       exec-once = hyprctl setcursor ${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}
       exec-once = discordcanary --start-minimized
+      exec-once = kitty -c "~/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBin}
 
       input {
           kb_layout = br
@@ -125,6 +141,12 @@
           vfr = true
           enable_swallow = true
           swallow_regex = ^(?:Alacritty|kitty)$
+      }
+
+      plugin {
+        hyprwinwrap {
+          class = ${winWrapClass}
+        }
       }
 
       windowrulev2 = float,class:^(firefox)$,title:^(Picture-in-Picture)$
