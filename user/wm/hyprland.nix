@@ -7,8 +7,10 @@ let
     #!/bin/sh
     sleep 0.5 && cava
   '';
-  winWrapConfigFile = ".config/hypr/kitty-${winWrapClass}.conf";
-  winWrapConfig = "background_opacity 1.0";
+  winWrapConfigFile = "hypr/kitty-${winWrapClass}.conf";
+  winWrapConfig = ''
+    background_opacity 0.0
+  '';
 in {
   imports = [
     ../app/browser/${browser}.nix
@@ -17,6 +19,7 @@ in {
     ../app/utils/rofi/rofi.nix
     ../app/utils/dunst.nix
     ../app/utils/waybar.nix
+    inputs.hyprland.homeManagerModules.default
   ];
 
   gtk.cursorTheme = {
@@ -29,13 +32,39 @@ in {
     grimblast swww wl-clipboard
     (pkgs.writeScriptBin winWrapBinName winWrapBin)
   ];
-  home.file.${winWrapConfigFile}.text = winWrapConfig;
+  xdg.configFile.${winWrapConfigFile}.text = winWrapConfig;
+
+  programs.cava = {
+    enable = true;
+    settings = {
+      general = {
+        mode = "normal";
+        framerate = 60;
+      };
+      input = {
+        method = "pipewire";
+        source = "auto";
+      };
+      output.method = "noncurses";
+      color = {
+        gradient = 1;
+        gradient_count = 8;
+        gradient_color_1 = "'#bf616a'";
+        gradient_color_2 = "'#d08770'";
+        gradient_color_3 = "'#ebcb8b'";
+        gradient_color_4 = "'#a3be8c'";
+        gradient_color_5 = "'#b48ead'";
+        gradient_color_6 = "'#88c0d0'";
+        gradient_color_7 = "'#81a1c1'";
+        gradient_color_8 = "'#5e81ac'";
+      };
+      smoothing.noise_reduction = 88;
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    systemd.enable = true;
-    settings = {};
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
     ];
@@ -60,7 +89,7 @@ in {
       exec-once = dunst
       exec-once = hyprctl setcursor ${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}
       exec-once = discordcanary --start-minimized
-      exec-once = kitty -c "~/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBin}
+      exec-once = kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
 
       input {
           kb_layout = br
