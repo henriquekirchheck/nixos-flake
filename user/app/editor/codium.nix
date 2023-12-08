@@ -34,6 +34,8 @@
       yoavbls.pretty-ts-errors
       calebfiggers.typst-companion
       christian-kohler.npm-intellisense
+      biomejs.biome
+      jeanp413.open-remote-ssh
     ];
     extensionsVSCodeMarketplace = with pkgs.vscode-marketplace; [
       ms-python.vscode-pylance
@@ -41,7 +43,7 @@
     extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace;
   in {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.vscodium-fhs;
     inherit extensions;
     userSettings = {
       "editor.unicodeHighlight.nonBasicASCII" = false;
