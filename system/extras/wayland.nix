@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./pipewire.nix
+  imports = [ ../hardware/sound.nix
               ./dbus.nix
               ./keyring.nix
               ./fonts.nix

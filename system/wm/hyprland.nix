@@ -3,7 +3,6 @@
 {
   # Import wayland config
   imports = [ ../extras/wayland.nix
-              ../extras/pipewire.nix
               ../extras/dbus.nix
               ../extras/keyring.nix
               ../extras/fonts.nix

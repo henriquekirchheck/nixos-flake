@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, profile, ... }:
 
 {
   programs.waybar = {
@@ -13,8 +13,10 @@
       ];
       "modules-center" = ["hyprland/window"];
       "modules-right" = [
-        "cpu"
-        "memory"
+        (lib.mkIf (profile == "pc") "cpu")
+        (lib.mkIf (profile == "pc") "memory")
+        (lib.mkIf (profile == "laptop") "backlight")
+        (lib.mkIf (profile == "laptop") "battery")
         "pulseaudio"
         "clock"
       ];
@@ -56,8 +58,25 @@
         "tooltip" = false;
         "format" = " {}%";
         "interval" = 1;
-        "on-scroll-up" = "light -A 5";
-        "on-scroll-down" = "light -U 5";
+        "on-scroll-up" = "brightnessctl --min-value=1 set +1%";
+        "on-scroll-down" = "brightnessctl --min-value=1 set 1%-";
+      };
+      "battery" = {
+        "interval" = 10;
+        "states" = {
+            "warning" = 30;
+            "critical" = 15;
+        };
+        "format" = "  {icon}  {capacity}%";
+        "format-discharging" = "{icon}  {capacity}%";
+        "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+        ];
+        "tooltip" = true;
       };
       "tray" = {
         "icon-size" = 18;
@@ -77,7 +96,7 @@
         "max-length" = 10;
       };
       "custom/launcher" = {
-        "format" = " ";
+        "format" = "󱄅 ";
         "on-click" = "rofi -show drun";
         "on-click-right" = "killall rofi";
       };
@@ -206,6 +225,85 @@
         transition: none;
         color: #161320;
         background: #ddb6f2;
+      }
+
+      #backlight {
+        margin-top: 6px;
+        margin-left: 8px;
+        padding-left: 10px;
+        margin-bottom: 0px;
+        padding-right: 10px;
+        border-radius: 10px;
+        transition: none;
+        color: #161320;
+        background: #ddb6f2;
+      }
+
+      @keyframes blink-warning {
+        from {
+          color: white;
+          background-color: black;
+        }
+
+        70% {
+          color: white;
+          background-color: black;
+        }
+
+        to {
+          color: white;
+          background-color: #d08770;
+        }
+      }
+
+      @keyframes blink-critical {
+        from {
+          color: white;
+          background-color: black;
+        }
+        
+        70% {
+          color: white;
+          background-color: black;
+        }
+
+        to {
+          color: white;
+          background-color: #bf616a;
+        }
+      }
+
+      #battery {
+        margin-top: 6px;
+        margin-left: 8px;
+        padding-left: 10px;
+        margin-bottom: 0px;
+        padding-right: 10px;
+        border-radius: 10px;
+        transition: none;
+        color: #161320;
+        background: #96cdfb;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+
+      #battery.warning {
+        color: #d08770;
+      }
+
+      #battery.critical {
+        color: #bf616a;
+      }
+
+      #battery.warning.discharging {
+        animation-name: blink-warning;
+        animation-duration: 3s;
+      }
+
+      #battery.critical.discharging {
+          animation-name: blink-critical;
+          animation-duration: 2s;
       }
 
       #cpu {

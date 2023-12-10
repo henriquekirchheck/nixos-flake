@@ -11,5 +11,6 @@
       ../base/configuration.nix
       ../../system/hardware/bluetooth.nix
       ../../system/hardware/amd-gpu.nix
+      ../../system/hardware/backlight.nix
     ];
 }

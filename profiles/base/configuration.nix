@@ -8,6 +8,7 @@
       ../../system/hardware/kernel.nix
       ../../system/hardware/networking.nix
       ../../system/hardware/printing.nix
+      ../../system/hardware/sound.nix
       ../../system/wm/${wm}.nix
       ../../system/app/flatpak.nix
       ( import ../../system/app/docker.nix {storageDriver = "btrfs"; inherit username pkgs config lib;} )
