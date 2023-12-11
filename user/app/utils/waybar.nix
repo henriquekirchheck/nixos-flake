@@ -22,7 +22,7 @@
       ];
       "pulseaudio" = {
         "tooltip" = false;
-        "scroll-step" = 5;
+        "scroll-step" = if (lib.hasPrefix "laptop" profile) then 1 else 5;
         "format" = "{icon} {volume}%";
         "format-muted" = "{icon} {volume}%";
         "on-click" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
@@ -261,7 +261,7 @@
           color: white;
           background-color: black;
         }
-        
+
         70% {
           color: white;
           background-color: black;
