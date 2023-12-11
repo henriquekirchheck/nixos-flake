@@ -37,8 +37,9 @@
       inherit editor;
       inherit dotfilesDir;
       inherit inputs;
+      inherit profile;
     };
-    profilePath = (./. + "/profiles" + ("/" + profile));
+    profilePath = ./profiles/${profile};
 
     lib = nixpkgs.lib;
     pkgs = import nixpkgs {
@@ -69,7 +70,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     rust-overlay.url = "github:oxalica/rust-overlay";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
