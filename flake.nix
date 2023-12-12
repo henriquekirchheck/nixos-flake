@@ -1,7 +1,7 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, ... } @ inputs :
+  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, hyprland, ... } @ inputs :
   let
     ### OPTIONS
     # System Options
@@ -58,7 +58,7 @@
     # Home Manager Configuration
     homeConfigurations.system = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ (profilePath + "/home.nix") ];
+      modules = [ hyprland.homeManagerModules.default (profilePath + "/home.nix") ];
       extraSpecialArgs = someArgs;
     };
   };

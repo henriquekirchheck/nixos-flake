@@ -19,7 +19,6 @@ in {
     ../app/utils/rofi/rofi.nix
     ../app/utils/dunst.nix
     ../app/utils/waybar.nix
-    inputs.hyprland.homeManagerModules.default
   ];
 
   gtk.cursorTheme = {
