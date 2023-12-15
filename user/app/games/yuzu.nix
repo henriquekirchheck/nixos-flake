@@ -1,5 +1,14 @@
 { config, pkgs, lib, ... }:
 
-{
-  home.packages = with pkgs; [ yuzu-early-access ];
+let
+  yuzu = pkgs.yuzu-early-access;
+  xwrapper = ''
+    #!/bin/sh
+    QT_QPA_PLATFORM=xcb ${"${yuzu}/bin/yuzu"}
+  '';
+in {
+  home.packages = [
+    yuzu
+    (pkgs.writeScriptBin "xyuzu" xwrapper)
+  ];
 }

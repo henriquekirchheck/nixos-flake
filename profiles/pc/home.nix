@@ -8,5 +8,4 @@
     ../../user/app/games/ryujinx.nix
     ../../user/app/games/prismlauncher.nix
   ];
-  programs.waybar.mainBar.modules-right = [ "backlight" ];
 }
