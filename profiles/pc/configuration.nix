@@ -11,6 +11,7 @@
       ../base/configuration.nix
       ../../system/hardware/nvidia.nix
       ../../system/app/virtualization.nix
+      ../../system/app/obs.nix
       ../../system/security/sshd.nix
     ];
 }
