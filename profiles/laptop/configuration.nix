@@ -12,6 +12,6 @@
       ../../system/hardware/bluetooth.nix
       ../../system/hardware/amd-gpu.nix
       ../../system/hardware/backlight.nix
-      ../../system/wm/gnome.nix
+      ../../system/wm/kde.nix
     ];
 }
