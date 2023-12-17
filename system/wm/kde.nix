@@ -13,7 +13,27 @@
 
   services.xserver.displayManager.lightdm = {
     enable = lib.mkForce true;
-    greeters.pantheon.enable = true;
+    greeters.slick = {
+      enable = true;
+      theme = {
+        package = pkgs.catppuccin-gtk.override {
+          accents = [ "sapphire" ];
+          size = "compact";
+          variant = "mocha";
+          tweaks = [ "black" ];
+        };
+        name = "Catppuccin-Mocha-Compact-Sapphire-Dark";
+      };
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus-Dark";
+      };
+      cursorTheme = {
+        package = pkgs.phinger-cursors;
+        name = "phinger-cursors-light";
+        size = 24;
+      };
+    };
     background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
   };
 }

@@ -21,12 +21,6 @@ in {
     ../app/utils/waybar.nix
   ];
 
-  gtk.cursorTheme = {
-    package = pkgs.phinger-cursors;
-    name = "phinger-cursors-light";
-    size = 24;
-  };
-
   home.packages = with pkgs; [
     grimblast swww wl-clipboard
     (pkgs.writeScriptBin winWrapBinName winWrapBin)
