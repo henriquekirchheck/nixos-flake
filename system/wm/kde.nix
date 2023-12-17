@@ -1,6 +1,14 @@
 { config, pkgs, lib, ... }:
-
-{
+let
+  swayConfig = pkgs.writeText "greetd-sway-config" ''
+    exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
+    bindsym Mod4+shift+e exec swaynag \
+      -t warning \
+      -m 'O que você quer fazer?' \
+      -b 'Desligar' 'systemctl poweroff' \
+      -b 'Reiniciar' 'systemctl reboot'
+  '';
+in {
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   programs.dconf.enable = true;
@@ -11,29 +19,19 @@
     konsole
   ];
 
-  services.xserver.displayManager.lightdm = {
-    enable = lib.mkForce true;
-    greeters.slick = {
-      enable = true;
-      theme = {
-        package = pkgs.catppuccin-gtk.override {
-          accents = [ "sapphire" ];
-          size = "compact";
-          variant = "mocha";
-          tweaks = [ "black" ];
-        };
-        name = "Catppuccin-Mocha-Compact-Sapphire-Dark";
-      };
-      iconTheme = {
-        package = pkgs.papirus-icon-theme;
-        name = "Papirus-Dark";
-      };
-      cursorTheme = {
-        package = pkgs.phinger-cursors;
-        name = "phinger-cursors-light";
-        size = 24;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
       };
     };
-    background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
   };
+
+  environment.etc."greetd/environments".text = ''
+    Hyprland
+    startplasma-wayland
+    bash
+    zsh
+  '';
 }
