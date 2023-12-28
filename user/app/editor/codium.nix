@@ -36,6 +36,7 @@
       christian-kohler.npm-intellisense
       biomejs.biome
       jeanp413.open-remote-ssh
+      geequlim.godot-tools
     ];
     extensionsVSCodeMarketplace = with pkgs.vscode-marketplace; [
       ms-python.vscode-pylance
@@ -51,7 +52,7 @@
       "editor.tabSize" = 2;
       "editor.inlineSuggest.enabled" = true;
       "editor.codeActionsOnSave" = {
-        "source.organizeImports" = true;
+        "source.organizeImports" = "explicit";
       };
       "files.autoSave" = "afterDelay";
       "editor.formatOnPaste" = false;
@@ -144,6 +145,9 @@
 
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
+
+      "godot_tools.editor_path" = "${pkgs.godot_4}/bin/godot4";
+      "godot_tools.gdscript_lsp_server_port" = 6005;
     };
 
     keybindings = [
