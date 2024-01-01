@@ -44,7 +44,10 @@
     lib = nixpkgs.lib;
     pkgs = import nixpkgs {
       inherit system;
-      config = { allowUnfree = true; };
+      config = {
+        allowUnfree = true;
+        android_sdk.accept_license = true;
+      };
       overlays = [ rust-overlay.overlays.default nix-vscode-extensions.overlays.default ];
     };
   in {
@@ -70,10 +73,8 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     rust-overlay.url = "github:oxalica/rust-overlay";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
