@@ -19,6 +19,5 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  programs.hyprland.enableNvidiaPatches = false;
   virtualisation.docker.enableNvidia = false;
 }
