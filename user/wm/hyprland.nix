@@ -99,6 +99,8 @@ in {
 
           numlock_by_default = true
           sensitivity = 0
+
+	  float_switch_override_focus=0
       }
 
       general {
@@ -177,6 +179,7 @@ in {
       windowrulev2 = float,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$
       windowrulev2 = move 931 1049,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$
       windowrulev2 = opacity 0.98 0.95,class:^(?:Code|VSCodium|codium-url-handler|WebCord|code-url-handler|discord)$
+      windowrule = windowdance,title:^(Rhythm Doctor)$
 
       $mainMod = SUPER
 
