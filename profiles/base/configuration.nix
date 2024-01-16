@@ -66,6 +66,7 @@
     bash
     home-manager
     mpv
+    ffmpeg
   ];
 
   nix = {
