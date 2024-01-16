@@ -23,7 +23,7 @@ in {
 
   home.packages = with pkgs; [
     grimblast swww wl-clipboard
-    (pkgs.writeScriptBin winWrapBinName winWrapBin)
+    (pkgs.writeScriptBin winWrapBinName winWrapBin) kitty
   ];
   xdg.configFile.${winWrapConfigFile}.text = winWrapConfig;
 
