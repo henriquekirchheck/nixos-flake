@@ -37,6 +37,7 @@
       biomejs.biome
       jeanp413.open-remote-ssh
       geequlim.godot-tools
+      alfish.godot-files
     ];
     extensionsVSCodeMarketplace = with pkgs.vscode-marketplace; [
       ms-python.vscode-pylance
