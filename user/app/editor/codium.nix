@@ -29,6 +29,7 @@
       svelte.svelte-vscode
       ms-python.isort
       ms-python.python
+      ms-pyright.pyright
       bradlc.vscode-tailwindcss
       nvarner.typst-lsp
       yoavbls.pretty-ts-errors
