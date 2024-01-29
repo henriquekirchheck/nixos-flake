@@ -67,6 +67,22 @@
     home-manager
     mpv
     ffmpeg-full
+    file
+    rustdesk
+    zip
+    unzip
+    rar
+    unrar
+    dos2unix
+    gimp
+    krita
+    rename
+    imv
+    zathura
+    appimage-run
+    pandoc
+    jq
+    ncdu
   ];
 
   nix = {
