@@ -13,7 +13,7 @@
     freefont_ttf
     dejavu_fonts
     unifont
-    (nerdfonts.override { fonts = [ "FiraCode" "Inconsolata" "Iosevka" "JetBrainsMono" "Meslo" "Noto" "RobotoMono" "Ubuntu" "UbuntuMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "Inconsolata" "Iosevka" "JetBrainsMono" "Meslo" "RobotoMono" "Ubuntu" "UbuntuMono" ]; })
     fira-code
     fira-code-symbols
     inconsolata
