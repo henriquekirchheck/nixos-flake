@@ -87,7 +87,6 @@
       "gitlens.hovers.avatars" = false;
 
       "workbench.sideBar.location" = "right";
-      "workbench.iconTheme" = "catppuccin-mocha";
       "workbench.productIconTheme" = "material-product-icons";
       "workbench.colorTheme" = "Catppuccin Mocha";
 

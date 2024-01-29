@@ -2,6 +2,16 @@
 
 {
   home.packages = with pkgs; [
-      python3Full
+    (python3.withPackages (ps: with ps; [
+      pandas
+      numpy
+      scipy
+      matplotlib
+      requests
+      pillow
+      flask
+      librosa
+      pydub
+    ]))
   ];
 }
