@@ -39,9 +39,7 @@
       geequlim.godot-tools
       alfish.godot-files
     ];
-    extensionsVSCodeMarketplace = with pkgs.vscode-marketplace; [
-      ms-python.vscode-pylance
-    ];
+    extensionsVSCodeMarketplace = with pkgs.vscode-marketplace; [];
     extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace;
   in {
     enable = true;
