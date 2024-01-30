@@ -10,7 +10,6 @@
       requests
       pillow
       flask
-      librosa
       pydub
     ]))
   ];

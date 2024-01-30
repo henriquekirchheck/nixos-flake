@@ -44,7 +44,7 @@
     extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace;
   in {
     enable = true;
-    package = pkgs.vscodium-fhs;
+    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib openssl.dev pkg-config biome ]);
     inherit extensions;
     userSettings = {
       "editor.unicodeHighlight.nonBasicASCII" = false;
