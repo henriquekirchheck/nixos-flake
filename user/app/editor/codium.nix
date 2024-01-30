@@ -5,8 +5,7 @@ let
   codeExtensions = inputs.nix-vscode-extensions.extensions.${system};
 
   extensionsOpenVSX = with codeExtensions.open-vsx; [
-    # catppuccin.catppuccin-vsc-icons
-    pkief.material-product-icons
+    catppuccin.catppuccin-vsc-icons
     llvm-vs-code-extensions.vscode-clangd
     rust-lang.rust-analyzer
     vadimcn.vscode-lldb
@@ -64,6 +63,7 @@ in {
     enable = true;
     package = codePackage;
     inherit extensions;
+    mutableExtensionsDir = false;
     userSettings = {
       "editor.unicodeHighlight.nonBasicASCII" = false;
       "editor.bracketPairColorization.enabled" = true;
@@ -78,6 +78,7 @@ in {
       "diffEditor.ignoreTrimWhitespace" = false;
 
       "workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.iconTheme" = "catppuccin-mocha";
       "editor.semanticHighlighting.enabled" = true;
       "terminal.integrated.minimumContrastRatio" = 1;
       "gopls" = {
@@ -112,7 +113,6 @@ in {
       "gitlens.hovers.avatars" = false;
 
       "workbench.sideBar.location" = "right";
-      "workbench.productIconTheme" = "material-product-icons";
 
       "window.titleBarStyle" = "custom";
       "window.menuBarVisibility" = "visible";
