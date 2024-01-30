@@ -1,50 +1,68 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, system, ... }:
 
-{
+let
+  codePackage = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib openssl.dev pkg-config biome ruff nil ]);
+  codeExtensions = inputs.nix-vscode-extensions.extensions.${system};
+
+  extensionsOpenVSX = with codeExtensions.open-vsx; [
+    # catppuccin.catppuccin-vsc-icons
+    pkief.material-product-icons
+    llvm-vs-code-extensions.vscode-clangd
+    rust-lang.rust-analyzer
+    vadimcn.vscode-lldb
+    bungcip.better-toml
+    adpyke.codesnap
+    serayuzgur.crates
+    ms-azuretools.vscode-docker
+    irongeek.vscode-env
+    usernamehw.errorlens
+    dbaeumer.vscode-eslint
+    eamodio.gitlens
+    mhutchie.git-graph
+    ms-vscode.hexeditor
+    wix.vscode-import-cost
+    ms-vscode.makefile-tools
+    ms-vscode.cmake-tools
+    christian-kohler.path-intellisense
+    esbenp.prettier-vscode
+    svelte.svelte-vscode
+    ms-python.isort
+    ms-python.python
+    ms-pyright.pyright
+    charliermarsh.ruff
+    bradlc.vscode-tailwindcss
+    nvarner.typst-lsp
+    yoavbls.pretty-ts-errors
+    calebfiggers.typst-companion
+    christian-kohler.npm-intellisense
+    biomejs.biome
+    jeanp413.open-remote-ssh
+    geequlim.godot-tools
+    alfish.godot-files
+    jnoortheen.nix-ide
+  ];
+  extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace; [];
+  extensionsNix = [
+    (pkgs.catppuccin-vsc.override {
+      accent = "mauve";
+      boldKeywords = true;
+      italicComments = true;
+      italicKeywords = true;
+      extraBordersEnabled = false;
+      workbenchMode = "default";
+      bracketMode = "rainbow";
+      colorOverrides = {};
+      customUIColors = {};
+    })
+  ];
+
+  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNix;
+in {
   imports = [ ../utils/electron.nix ];
 
-  programs.vscode = let
-    extensionsOpenVSX = with pkgs.open-vsx; [
-      catppuccin.catppuccin-vsc
-      catppuccin.catppuccin-vsc-icons
-      pkief.material-product-icons
-      llvm-vs-code-extensions.vscode-clangd
-      rust-lang.rust-analyzer
-      vadimcn.vscode-lldb
-      bungcip.better-toml
-      adpyke.codesnap
-      serayuzgur.crates
-      ms-azuretools.vscode-docker
-      irongeek.vscode-env
-      usernamehw.errorlens
-      dbaeumer.vscode-eslint
-      eamodio.gitlens
-      mhutchie.git-graph
-      ms-vscode.hexeditor
-      wix.vscode-import-cost
-      ms-vscode.makefile-tools
-      ms-vscode.cmake-tools
-      christian-kohler.path-intellisense
-      esbenp.prettier-vscode
-      svelte.svelte-vscode
-      ms-python.isort
-      ms-python.python
-      ms-pyright.pyright
-      bradlc.vscode-tailwindcss
-      nvarner.typst-lsp
-      yoavbls.pretty-ts-errors
-      calebfiggers.typst-companion
-      christian-kohler.npm-intellisense
-      biomejs.biome
-      jeanp413.open-remote-ssh
-      geequlim.godot-tools
-      alfish.godot-files
-    ];
-    extensionsVSCodeMarketplace = with pkgs.vscode-marketplace; [];
-    extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace;
-  in {
+  programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib openssl.dev pkg-config biome ]);
+    package = codePackage;
     inherit extensions;
     userSettings = {
       "editor.unicodeHighlight.nonBasicASCII" = false;
@@ -58,6 +76,13 @@
       "editor.formatOnPaste" = false;
       "editor.formatOnSave" = true;
       "diffEditor.ignoreTrimWhitespace" = false;
+
+      "workbench.colorTheme" = "Catppuccin Mocha";
+      "editor.semanticHighlighting.enabled" = true;
+      "terminal.integrated.minimumContrastRatio" = 1;
+      "gopls" = {
+        "ui.semanticTokens" = true;
+      };
 
       "editor.fontLigatures" = true;
       "editor.fontFamily" = "JetBrainsMono Nerd Font";
@@ -88,7 +113,6 @@
 
       "workbench.sideBar.location" = "right";
       "workbench.productIconTheme" = "material-product-icons";
-      "workbench.colorTheme" = "Catppuccin Mocha";
 
       "window.titleBarStyle" = "custom";
       "window.menuBarVisibility" = "visible";
@@ -147,6 +171,13 @@
 
       "godot_tools.editor_path" = "${pkgs.godot_4}/bin/godot4";
       "godot_tools.gdscript_lsp_server_port" = 6005;
+
+      "codesnap.shutterAction" = "copy";
+      "codesnap.showLineNumbers" = true;
+      "codesnap.realLineNumbers" = false;
+      "codesnap.showWindowControls" = false;
+      "codesnap.roundedCorners" = true;
+      "codesnap.transparentBackground" = true;
     };
 
     keybindings = [

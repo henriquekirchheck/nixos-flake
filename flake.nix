@@ -1,7 +1,7 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, hyprland, ... } @ inputs :
+  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, hyprland, catppuccin-vsc, ... } @ inputs :
   let
     ### OPTIONS
     # System Options
@@ -24,6 +24,7 @@
 
     ### DERIVED ARGUMENTS
     someArgs = {
+      inherit system;
       inherit timeZone;
       inherit mainLocale;
       inherit extraLocale;
@@ -48,7 +49,10 @@
         allowUnfree = true;
         android_sdk.accept_license = true;
       };
-      overlays = [ rust-overlay.overlays.default nix-vscode-extensions.overlays.default ];
+      overlays = [
+        rust-overlay.overlays.default
+        catppuccin-vsc.overlays.default
+      ];
     };
   in {
     # NixOS System Configuration
@@ -75,6 +79,7 @@
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    catppuccin-vsc.url = "github:catppuccin/vscode";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
