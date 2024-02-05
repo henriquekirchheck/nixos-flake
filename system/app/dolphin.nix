@@ -1,5 +1,5 @@
 { pkgs, ... }: 
 {
-  environment.packages = [ pkgs.dolphin-emu ];
+  environment.systemPackages = [ pkgs.dolphin-emu ];
   services.udev.packages = [ pkgs.dolphinEmu ];
 }
