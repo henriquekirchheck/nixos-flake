@@ -15,6 +15,7 @@
       ../../system/app/zsh.nix
       ../../system/app/steam.nix
       ../../system/app/obs.nix
+      ../../system/app/dolphin.nix
       ../../system/security/privilege_escalation/doas.nix
       ../../system/security/firewall.nix
       ../../system/security/gpg.nix
