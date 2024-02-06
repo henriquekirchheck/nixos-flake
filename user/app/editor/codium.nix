@@ -39,6 +39,7 @@ let
     geequlim.godot-tools
     alfish.godot-files
     jnoortheen.nix-ide
+    mkhl.direnv
   ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace; [];
   extensionsNix = [
