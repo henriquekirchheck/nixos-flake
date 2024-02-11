@@ -21,6 +21,7 @@
     ../../user/app/development/js.nix
     ../../user/app/sandboxing/flatpak.nix
     ../../user/app/sandboxing/wine.nix
+    ../../user/app/sandboxing/distrobox.nix
     ../../user/app/chat/discord.nix
     ../../user/app/chat/thunderbird.nix
     ../../user/app/media/mpv.nix
