@@ -21,12 +21,10 @@ let
     ms-vscode.hexeditor
     wix.vscode-import-cost
     ms-vscode.makefile-tools
-    ms-vscode.cmake-tools
     christian-kohler.path-intellisense
     esbenp.prettier-vscode
     svelte.svelte-vscode
     ms-python.isort
-    ms-python.python
     ms-pyright.pyright
     charliermarsh.ruff
     bradlc.vscode-tailwindcss
