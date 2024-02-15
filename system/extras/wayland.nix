@@ -13,8 +13,10 @@
   # Configure xwayland
   services.xserver = {
     enable = true;
-    layout = "br";
-    xkbVariant = "";
+    xkb = {
+      layout = "br";
+      variant = "";
+    };
   };
 }
 
