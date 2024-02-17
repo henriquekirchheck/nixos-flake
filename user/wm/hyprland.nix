@@ -81,7 +81,7 @@ in {
       exec-once = /usr/lib/polkit-kde-authentication-agent-1
       exec-once = dunst
       exec-once = hyprctl setcursor ${config.gtk.cursorTheme.name} ${builtins.toString config.gtk.cursorTheme.size}
-      exec-once = discordcanary --start-minimized
+      exec-once = ${pkgs.vesktop}/bin/vencorddesktop --start-minimized
       exec-once = kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
 
       input {
