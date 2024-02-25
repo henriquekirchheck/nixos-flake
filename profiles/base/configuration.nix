@@ -66,7 +66,6 @@
     htop
     vim
     bash
-    home-manager
     mpv
     ffmpeg-full
     file
