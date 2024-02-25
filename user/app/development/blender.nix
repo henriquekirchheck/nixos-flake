@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    (blender.override {
-      cudaSupport = true;
-    })
+    blender_4_0
   ];
 }

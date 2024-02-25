@@ -1,7 +1,7 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, hyprland, catppuccin-vsc, nixvim, ... } @ inputs :
+  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, hyprland, catppuccin-vsc, nixvim, blender-bin, ... } @ inputs :
   let
     ### OPTIONS
     # System Options
@@ -52,6 +52,7 @@
       overlays = [
         rust-overlay.overlays.default
         catppuccin-vsc.overlays.default
+        blender-bin.overlays.default
       ];
     };
   in {
@@ -94,5 +95,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    blender-bin.url = "github:edolstra/nix-warez?dir=blender";
   };
 }
