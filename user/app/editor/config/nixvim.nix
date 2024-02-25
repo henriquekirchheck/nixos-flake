@@ -40,7 +40,7 @@
     enable = true;
     flavour = "mocha";
     terminalColors = true;
-    transparentBackground = true;
+    transparentBackground = false;
   };
 
   plugins = {

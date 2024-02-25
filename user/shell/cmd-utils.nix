@@ -15,6 +15,5 @@
     brightnessctl
     pandoc
     pciutils
-    neovim
   ];
 }
