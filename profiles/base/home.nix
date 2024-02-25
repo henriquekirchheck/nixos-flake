@@ -11,6 +11,7 @@
     ../../user/app/browser/${browser}.nix
     ../../user/app/terminal/${terminal}.nix
     ../../user/app/editor/${mainEditor}.nix
+    ../../user/app/editor/nvim.nix
     ../../user/shell/sh.nix
     ../../user/shell/cmd-utils.nix
     ../../user/app/development/git.nix

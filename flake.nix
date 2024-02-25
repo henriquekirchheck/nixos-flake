@@ -1,7 +1,7 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, hyprland, catppuccin-vsc, ... } @ inputs :
+  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions, hyprland, catppuccin-vsc, nixvim, ... } @ inputs :
   let
     ### OPTIONS
     # System Options
@@ -65,8 +65,16 @@
     # Home Manager Configuration
     homeConfigurations.system = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ hyprland.homeManagerModules.default (profilePath + "/home.nix") ];
+      modules = [ nixvim.homeManagerModules.nixvim hyprland.homeManagerModules.default (profilePath + "/home.nix") ];
       extraSpecialArgs = someArgs;
+    };
+
+    # Universal Packages
+    packages = {
+      neovim = nixvim.legacyPackages.${system}.makeNixvimWithModule {
+        inherit pkgs;
+        module = import ./user/app/editor/config/nixvim.nix;
+      };
     };
   };
 
@@ -84,6 +92,10 @@
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
