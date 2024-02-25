@@ -70,10 +70,10 @@
     };
 
     # Universal Packages
-    packages = {
+    packages.${system} = {
       neovim = nixvim.legacyPackages.${system}.makeNixvimWithModule {
         inherit pkgs;
-        module = import ./user/app/editor/config/nixvim.nix;
+        module = { imports = [ ./user/app/editor/config/nixvim.nix ]; };
       };
     };
   };

@@ -85,6 +85,8 @@
     pandoc
     jq
     ncdu
+    libqalculate
+    qalculate-gtk
   ];
 
   nix = {

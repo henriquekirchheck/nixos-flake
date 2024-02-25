@@ -1,13 +1,15 @@
+{ pkgs, ... }:
+
 {
   enableMan = true;
   viAlias = true;
   vimAlias = true;
 
-  options = {
-    number = true;
-    relativenumber = true;
-    shiftwidth = 2;
-  };
+  # options = {
+  #   number = true;
+  #   relativenumber = true;
+  #   shiftwidth = 2;
+  # };
 
   globals = {
     mapleader = " ";
@@ -17,6 +19,17 @@
     {
       action = "<cmd>Telescope live_grep<CR>";
       key = "<leader>g";
+      options.desc = "Grep Files";
+    }
+    {
+      action = "<cmd>Telescope find_files<CR>";
+      key = "<leader>s";
+      options.desc = "Open File";
+    }
+    {
+      action = "<cmd>Oil .<CR>";
+      key = "<leader>b";
+      options.desc = "Open File Editor";
     }
   ];
 
@@ -35,9 +48,8 @@
   plugins = {
     lualine.enable = true;
     neocord.enable = true;
-    auto-save.enable = true;
     noice.enable = true;
-    hardtime.enable = true;
+    # hardtime.enable = true;
     rainbow-delimiters.enable = true;
     rust-tools.enable = true;
     telescope.enable = true;
@@ -48,7 +60,22 @@
     nvim-colorizer.enable = true;
     nvim-autopairs.enable = true;
     nvim-lightbulb.enable = true;
-    nvim-ufo.enable = true;
+    # nvim-ufo.enable = true;
+    auto-save = {
+      enable = true;
+      condition = ''
+        function(buf)
+          local fn = vim.fn
+          local utils = require("auto-save.utils.data")
+          if
+              fn.getbufvar(buf, "&modifiable") == 1 and
+              utils.not_in(fn.getbufvar(buf, "&filetype"), { "oil" }) then
+            return true
+          end
+          return false
+        end
+      '';
+    };
     nvim-cmp = {
       enable = true;
       autoEnableSources = true;
@@ -57,6 +84,28 @@
         { name = "path"; }
         { name = "buffer"; }
       ];
+
+      mapping = {
+        "<CR>" = "cmp.mapping.confirm({ select = true })";
+        "<Tab>" = {
+          action = ''
+            function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              elseif luasnip.expandable() then
+                luasnip.expand()
+              elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+              elseif check_backspace() then
+                fallback()
+              else
+                fallback()
+              end
+            end
+          '';
+          modes = [ "i" "s" ];
+        };
+      };
     };
     none-ls = {
       enable = true;
@@ -77,7 +126,10 @@
           jq.enable = true;
           markdownlint.enable = true;
           nixfmt.enable = true;
-          prettier.enable = true;
+          prettier = {
+            enable = true;
+            disableTsServerFormatter = true;
+          };
           ruff.enable = true;
           ruff_format.enable = true;
           rustfmt.enable = true;
@@ -93,7 +145,11 @@
         typst-lsp.enable = true;
         tailwindcss.enable = true;
         svelte.enable = true;
-        rust-analyzer.enable = true;
+        rust-analyzer = {
+          enable = true;
+          installCargo = true;
+          installRustc = true;
+        };
         ruff-lsp.enable = true;
         pylyzer.enable = true;
         lua-ls.enable = true;
@@ -109,27 +165,6 @@
         biome.enable = true;
         bashls.enable = true;
         gopls.enable = true;
-      };
-    };
-    mapping = {
-      "<CR>" = "cmp.mapping.confirm({ select = true })";
-      "<Tab>" = {
-        action = ''
-          function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif check_backspace() then
-              fallback()
-            else
-              fallback()
-            end
-          end
-        '';
-        modes = [ "i" "s" ];
       };
     };
   };
