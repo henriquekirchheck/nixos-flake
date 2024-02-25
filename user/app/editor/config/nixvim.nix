@@ -1,15 +1,13 @@
-{ pkgs, ... }:
-
 {
   enableMan = true;
   viAlias = true;
   vimAlias = true;
 
-  # options = {
-  #   number = true;
-  #   relativenumber = true;
-  #   shiftwidth = 2;
-  # };
+  options = {
+    number = true;
+    relativenumber = true;
+    shiftwidth = 2;
+  };
 
   globals = {
     mapleader = " ";

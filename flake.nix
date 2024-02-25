@@ -58,23 +58,20 @@
     # NixOS System Configuration
     nixosConfigurations.system = lib.nixosSystem {
       inherit system;
-      modules = [ (profilePath + "/configuration.nix") ];
+      modules = [ nixvim.nixosModules.nixvim (profilePath + "/configuration.nix") ];
       specialArgs = (someArgs // { inherit lib; });
     };
 
     # Home Manager Configuration
     homeConfigurations.system = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ nixvim.homeManagerModules.nixvim hyprland.homeManagerModules.default (profilePath + "/home.nix") ];
+      modules = [ hyprland.homeManagerModules.default nixvim.homeManagerModules.nixvim (profilePath + "/home.nix") ];
       extraSpecialArgs = someArgs;
     };
 
     # Universal Packages
     packages.${system} = {
-      neovim = nixvim.legacyPackages.${system}.makeNixvimWithModule {
-        inherit pkgs;
-        module = { imports = [ ./user/app/editor/config/nixvim.nix ]; };
-      };
+      neovim = nixvim.legacyPackages.${system}.makeNixvim (import ./user/app/editor/config/nixvim.nix);
     };
   };
 
