@@ -9,4 +9,5 @@
     };
   };
   programs.yt-dlp.enable = true;
+  home.packages = [ pkgs.jellyfin-mpv-shim ];
 }
