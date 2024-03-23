@@ -76,38 +76,39 @@
         end
       '';
     };
-    nvim-cmp = {
+    cmp = {
       enable = true;
       autoEnableSources = true;
 
-      snippet.expand = "luasnip";
-
-      sources = [
-        { name = "nvim_lsp"; }
-        { name = "luasnip"; }
-        { name = "path"; }
-        { name = "buffer"; }
-      ];
-
-      mapping = {
-        "<C-Space>" = "cmp.mapping.complete()";
-        "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-        "<C-e>" = "cmp.mapping.close()";
-        "<C-f>" = "cmp.mapping.scroll_docs(4)";
-        "<CR>" = "cmp.mapping.confirm({ select = true })";
-        "<S-Tab>" = {
-          action = ''
-            function(fallback)
-              if cmp.visible() then
-                cmp.select_prev_item()
-              elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-              else
-                fallback()
+      settings = {
+        snippet.expand =
+          "function(args) require('luasnip').lsp_expand(args.body) end";
+        sources = [
+          { name = "nvim_lsp"; }
+          { name = "luasnip"; }
+          { name = "path"; }
+          { name = "buffer"; }
+        ];
+        mapping = {
+          "<C-Space>" = "cmp.mapping.complete()";
+          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-e>" = "cmp.mapping.close()";
+          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<S-Tab>" = {
+            action = ''
+              function(fallback)
+                if cmp.visible() then
+                  cmp.select_prev_item()
+                elseif luasnip.jumpable(-1) then
+                  luasnip.jump(-1)
+                else
+                  fallback()
+                end
               end
-            end
-          '';
-          modes = [ "i" "s" ];
+            '';
+            modes = [ "i" "s" ];
+          };
         };
       };
     };
@@ -116,12 +117,7 @@
       updateInInsert = true;
       enableLspFormat = true;
       sources = {
-        code_actions = { shellcheck.enable = true; };
-        diagnostics = {
-          ruff.enable = true;
-          shellcheck.enable = true;
-          stylelint.enable = true;
-        };
+        diagnostics = { stylelint.enable = true; };
         formatting = {
           gofmt.enable = true;
           goimports.enable = true;
@@ -134,9 +130,6 @@
                               return utils.has_file({ ".prettierrc", ".prettierrc.json", ".prettierrc.yml", ".prettierrc.yaml", ".prettierrc.json5", ".prettierrc.js", "prettier.config.js", ".prettierrc.mjs", "prettier.config.mjs", ".prettierrc.cjs", "prettier.config.cjs", ".prettierrc.toml", })
               	      end,}'';
           };
-          ruff.enable = true;
-          ruff_format.enable = true;
-          rustfmt.enable = true;
           shfmt.enable = true;
         };
       };

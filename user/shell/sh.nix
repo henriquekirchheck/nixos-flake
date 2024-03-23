@@ -2,10 +2,14 @@
 let
   myAliases = {
     # ls
-    ls = "eza -al --color=always --group-directories-first --icons=always"; # List of Hidden files and directories
-    la = "eza -a --color=always --group-directories-first --icons=always";  # All files and directories
-    ll = "eza -l --color=always --group-directories-first --icons=always";  # List of files and directories
-    lt = "eza -aT --color=always --group-directories-first --icons=always"; # Tree of all files and directories
+    ls =
+      "eza -al --color=always --group-directories-first --icons=always"; # List of Hidden files and directories
+    la =
+      "eza -a --color=always --group-directories-first --icons=always"; # All files and directories
+    ll =
+      "eza -l --color=always --group-directories-first --icons=always"; # List of files and directories
+    lt =
+      "eza -aT --color=always --group-directories-first --icons=always"; # Tree of all files and directories
 
     # grep
     grep = "grep --color=auto";
@@ -20,7 +24,7 @@ let
 in {
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     initExtra = "zstyle ':completion:*' menu select";
     shellAliases = myAliases;
@@ -28,14 +32,8 @@ in {
     autocd = true;
     historySubstringSearch = {
       enable = true;
-      searchUpKey = [
-        "^[[A"
-        "$terminfo[kcuu1]"
-      ];
-      searchDownKey = [
-        "^[[B"
-        "$terminfo[kcud1]"
-      ];
+      searchUpKey = [ "^[[A" "$terminfo[kcuu1]" ];
+      searchDownKey = [ "^[[B" "$terminfo[kcud1]" ];
     };
     history = {
       ignoreDups = true;
@@ -44,12 +42,10 @@ in {
       expireDuplicatesFirst = true;
     };
     # syntaxHighlighting.enable = true;
-    plugins = [
-      {
-	      name = "share/zsh/site-functions/fast-syntax-highlighting";
-        src = pkgs.zsh-fast-syntax-highlighting;
-      }
-    ];
+    plugins = [{
+      name = "share/zsh/site-functions/fast-syntax-highlighting";
+      src = pkgs.zsh-fast-syntax-highlighting;
+    }];
   };
 
   programs.bash = {
@@ -59,11 +55,20 @@ in {
   };
 
   home.packages = with pkgs; [
-    neofetch lolcat cowsay onefetch
-    gnugrep gnused
-    bat eza bottom fd
-    direnv nix-direnv
-    starship zoxide
+    neofetch
+    lolcat
+    cowsay
+    onefetch
+    gnugrep
+    gnused
+    bat
+    eza
+    bottom
+    fd
+    direnv
+    nix-direnv
+    starship
+    zoxide
     zsh-fast-syntax-highlighting
   ];
 
@@ -72,7 +77,17 @@ in {
     enableZshIntegration = true;
     enableBashIntegration = true;
     settings = {
-      format = lib.concatStrings ["󱄅 " "$directory" "($git_branch )" "($git_state )" "($rust )" "($deno )" "($nodejs )" "($python )" "$character"];
+      format = lib.concatStrings [
+        "󱄅 "
+        "$directory"
+        "($git_branch )"
+        "($git_state )"
+        "($rust )"
+        "($deno )"
+        "($nodejs )"
+        "($python )"
+        "$character"
+      ];
       right_format = lib.concatStrings [ "$cmd_duration" ];
       add_newline = false;
       line_break.disabled = true;
@@ -98,9 +113,7 @@ in {
         format = "[$symbol( $branch(:$remote_branch))]($style)";
         symbol = "";
       };
-      git_state = {
-        format = "[$progress_current/$progress_total]($style)";
-      };
+      git_state = { format = "[$progress_current/$progress_total]($style)"; };
       deno = {
         format = "[$symbol ($version)]($style)";
         symbol = "";
@@ -111,7 +124,8 @@ in {
       };
       python = {
         symbol = "";
-        format = ''[$symbol ($version)( ''${pyenv_prefix})( $virtualenv)]($style)'';
+        format =
+          "[$symbol ($version)( \${pyenv_prefix})( $virtualenv)]($style)";
       };
       rust = {
         symbol = "";
