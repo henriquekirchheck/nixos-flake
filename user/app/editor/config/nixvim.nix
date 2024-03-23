@@ -145,7 +145,6 @@
           installRustc = true;
         };
         ruff-lsp.enable = true;
-        pylyzer.enable = true;
         lua-ls.enable = true;
         nil_ls.enable = true;
         jsonls.enable = true;
