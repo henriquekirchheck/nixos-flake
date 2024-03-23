@@ -8,7 +8,7 @@ let
   '';
 in {
   home.packages = [
-    yuzu
-    (pkgs.writeScriptBin "xyuzu" xwrapper)
+    #yuzu
+    #(pkgs.writeScriptBin "xyuzu" xwrapper)
   ];
 }
