@@ -3,7 +3,7 @@
   viAlias = true;
   vimAlias = true;
 
-  options = {
+  opts = {
     number = true;
     relativenumber = true;
     shiftwidth = 2;
@@ -53,7 +53,7 @@
     which-key.enable = true;
     oil = {
       enable = true;
-      viewOptions.showHidden = true;
+      settings.view_options.show_hidden = true;
     };
     luasnip.enable = true;
     nvim-colorizer.enable = true;
