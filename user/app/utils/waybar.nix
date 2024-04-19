@@ -5,101 +5,83 @@
     enable = true;
     settings = {
       mainBar = {
-      "layer" = "top";
-      "modules-left" = [
-        "custom/launcher"
-        "tray"
-        "hyprland/workspaces"
-      ];
-      "modules-center" = ["hyprland/window"];
-      "modules-right" = [
-        (lib.mkIf (profile == "pc") "cpu")
-        (lib.mkIf (profile == "pc") "memory")
-        (lib.mkIf (profile == "laptop") "backlight")
-        (lib.mkIf (profile == "laptop") "battery")
-        "pulseaudio"
-        "clock"
-      ];
-      "pulseaudio" = {
-        "tooltip" = false;
-        "scroll-step" = if (lib.hasPrefix "laptop" profile) then 1 else 5;
-        "format" = "{icon} {volume}%";
-        "format-muted" = "{icon} {volume}%";
-        "on-click" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-        "format-icons" = {
-          "default" = [
-            ""
-            ""
-            ""
-          ];
+        "layer" = "top";
+        "modules-left" = [ "custom/launcher" "tray" "hyprland/workspaces" ];
+        "modules-center" = [ "hyprland/window" ];
+        "modules-right" = [
+          (lib.mkIf (profile == "pc") "cpu")
+          (lib.mkIf (profile == "pc") "memory")
+          (lib.mkIf (profile == "laptop") "backlight")
+          (lib.mkIf (profile == "laptop") "battery")
+          "pulseaudio"
+          "clock"
+        ];
+        "pulseaudio" = {
+          "tooltip" = false;
+          "scroll-step" = if (lib.hasPrefix "laptop" profile) then 1 else 5;
+          "format" = "{icon} {volume}%";
+          "format-muted" = "{icon} {volume}%";
+          "on-click" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "format-icons" = { "default" = [ "" "" "" ]; };
         };
-      };
-      "hyprland/workspaces" = {
-        "format" = "{icon}";
-        "on-scroll-up" = "hyprctl dispatch workspace e+1";
-        "on-scroll-down" = "hyprctl dispatch workspace e-1";
-        "on-click" = "activate";
-        "format-icons" = {
-          "1" = "󰆍";
-          "2" = "";
-          "3" = "󰉋";
-          "4" = "";
-          "5" = "";
-          "6" = "";
-          "7" = "󰌢";
-          "8" = "󰙯";
-          "9" = "";
-          "urgent" = "";
-          "focused" = "";
-          "default" = "";
+        "hyprland/workspaces" = {
+          "format" = "{icon}";
+          "on-scroll-up" = "hyprctl dispatch workspace e+1";
+          "on-scroll-down" = "hyprctl dispatch workspace e-1";
+          "on-click" = "activate";
+          "format-icons" = {
+            "1" = "󰆍";
+            "2" = "";
+            "3" = "󰉋";
+            "4" = "";
+            "5" = "";
+            "6" = "";
+            "7" = "󰌢";
+            "8" = "󰙯";
+            "9" = "";
+            "urgent" = "";
+            "focused" = "";
+            "default" = "";
+          };
         };
-      };
-      "backlight" = {
-        "tooltip" = false;
-        "format" = " {}%";
-        "interval" = 1;
-        "on-scroll-up" = "brightnessctl --min-value=1 set +1%";
-        "on-scroll-down" = "brightnessctl --min-value=1 set 1%-";
-      };
-      "battery" = {
-        "interval" = 10;
-        "states" = {
+        "backlight" = {
+          "tooltip" = false;
+          "format" = " {}%";
+          "interval" = 1;
+          "on-scroll-up" = "brightnessctl --min-value=1 set +1%";
+          "on-scroll-down" = "brightnessctl --min-value=1 set 1%-";
+        };
+        "battery" = {
+          "interval" = 10;
+          "states" = {
             "warning" = 30;
             "critical" = 15;
+          };
+          "format" = "  {icon}  {capacity}%";
+          "format-discharging" = "{icon}  {capacity}%";
+          "format-icons" = [ "" "" "" "" "" ];
+          "tooltip" = true;
         };
-        "format" = "  {icon}  {capacity}%";
-        "format-discharging" = "{icon}  {capacity}%";
-        "format-icons" = [
-            ""
-            ""
-            ""
-            ""
-            ""
-        ];
-        "tooltip" = true;
-      };
-      "tray" = {
-        "icon-size" = 18;
-        "spacing" = 10;
-      };
-      "clock" = {
-        "format" = "{: %I:%M %p  󰃶 %d/%m/%Y}";
-      };
-      "cpu" = {
-        "interval" = 10;
-        "format" = " {usage}%";
-        "max-length" = 10;
-      };
-      "memory" = {
-        "interval" = 10;
-        "format" = " {used} GiB";
-        "max-length" = 10;
-      };
-      "custom/launcher" = {
-        "format" = "󱄅 ";
-        "on-click" = "rofi -show drun";
-        "on-click-right" = "killall rofi";
-      };
+        "tray" = {
+          "icon-size" = 18;
+          "spacing" = 10;
+        };
+        "clock" = { "format" = " {0:%H:%M}  󰃶 {0:%d/%m/%Y}"; };
+        "cpu" = {
+          "interval" = 10;
+          "format" = " {usage}%";
+          "max-length" = 10;
+        };
+        "memory" = {
+          "interval" = 10;
+          "format" = " {used} GiB";
+          "max-length" = 10;
+        };
+        "custom/launcher" = {
+          "format" = "󱄅 ";
+          "on-click" = "rofi -show drun";
+          "on-click-right" = "killall rofi";
+        };
       };
     };
     style = ''
