@@ -68,7 +68,7 @@
       };
 
       # Home Manager Configuration
-      homeConfigurations.${hostName} =
+      homeConfigurations."${username}@${hostName}" =
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
