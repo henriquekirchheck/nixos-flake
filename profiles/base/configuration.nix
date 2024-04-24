@@ -23,6 +23,7 @@
     ../../system/security/privilege_escalation/doas.nix
     ../../system/security/firewall.nix
     ../../system/security/gpg.nix
+    ../../system/extras/nix-ld.nix
   ];
 
   networking.hostName = hostName; # Define your hostname.
