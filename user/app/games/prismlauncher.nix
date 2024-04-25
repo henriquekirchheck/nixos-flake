@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
-
-{
-  home.packages = [ pkgs.prismlauncher ];
-}
+let
+  launcher = (pkgs.prismlauncher.override {
+    glfw = pkgs.glfw-wayland-minecraft;
+    gamemodeSupport = true;
+  });
+in { home.packages = [ launcher ]; }
