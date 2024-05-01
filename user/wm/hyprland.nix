@@ -27,6 +27,7 @@ in {
     wl-clipboard
     (pkgs.writeScriptBin winWrapBinName winWrapBin)
     kitty
+    kdePackages.polkit-kde-agent-1
   ];
   xdg.configFile.${winWrapConfigFile}.text = winWrapConfig;
 
@@ -63,174 +64,160 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    systemd.variables = ["--all"];
     plugins = [ inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap ];
-    extraConfig = ''
-        env = LIBVA_DRIVER_NAME,nvidia
-        env = XDG_SESSION_TYPE,wayland
-        env = GBM_BACKEND,nvidia-drm
-        env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-        env = WLR_NO_HARDWARE_CURSORS,1
-        env = XCURSOR_SIZE,24
-        env = QT_QPA_PLATFORM,wayland
-        env = QT_QPA_PLATFORMTHEME,qt6ct
-        env = MOZ_ENABLE_WAYLAND,1
-        env = MOZ_DRM_DEVICE,/dev/dri/renderD128
-        env = HYPRCURSOR_THEME,${config.home.pointerCursor.name}
-        env = HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}
+    settings = {
+      env = [
+        # Nvidia fixes
+        "LIBVA_DRIVER_NAME,nvidia"
+        "XDG_SESSION_TYPE,wayland"
+        "GBM_BACKEND,nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "WLR_NO_HARDWARE_CURSORS,1"
 
-        exec-once = swww init
-        exec-once = waybar
-        exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once = dbus-launch --exit-with-session
-        exec-once = /usr/lib/polkit-kde-authentication-agent-1
-        exec-once = dunst
-        exec-once = ${pkgs.vesktop}/bin/vencorddesktop --start-minimized
-        exec-once = kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
+        # XDG Specifications
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_DESKTOP,Hyprland"
 
-        input {
-          kb_layout = br
-          kb_variant =
-          kb_model =
-          kb_options =
-          kb_rules =
+        # Use Wayland by default if possible
+        "GDK_BACKEND,wayland,x11,*"
+        "QT_QPA_PLATFORM,wayland;xcb"
+        "MOZ_ENABLE_WAYLAND,1"
+        "MOZ_DRM_DEVICE,/dev/dri/renderD128"
+        "SDL_VIDEODRIVER,wayland"
+        "CLUTTER_BACKEND,wayland"
 
-          follow_mouse = 1
+        # Qt specific configs
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        "QT_QPA_PLATFORMTHEME,qt6ct"
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
 
-          touchpad {
-            natural_scroll = false
-          }
-
-          numlock_by_default = true
-          sensitivity = 0
-
-          float_switch_override_focus=0
-        }
-
-        general {
-          gaps_in = 4
-          gaps_out = 4
-          border_size = 2
-          col.active_border = rgb(b48ead)
-          col.inactive_border = rgb(4c566a)
-
-          layout = dwindle
-        }
-
-        decoration {
-          rounding = 5
-
-          blur {
-            enabled = true
-            size = 3
-            passes = 2
-            new_optimizations = true
-          }
-
-          drop_shadow = true
-          shadow_range = 2
-          shadow_render_power = 3
-          col.shadow = rgba(1a1a1aee)
-        }
-
-        animations {
-          enabled = true
-
-          bezier = simple, 0.16, 1, 0.3, 1
-          bezier = tehtarik, 0.48, 1.05, 0.165, 1.35
-          bezier = overshot, 0.13, 0.99, 0.29, 1.1
-          bezier = smoothOut, 0.36, 0, 0.66, -0.56
-          bezier = smoothIn, 0.25, 1, 0.5, 1
-
-          animation = windows, 1, 5, overshot, slide
-          animation = border, 1, 10, default
-          animation = fade, 1, 10, default
-          animation = workspaces, 1, 5, overshot, slidevert
-        }
-
-        dwindle {
-          pseudotile = true # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-          preserve_split = true # you probably want this
-        }
-
-        master {
-          new_is_master = false
-        }
-
-        gestures {
-          workspace_swipe = false
-        }
-
-        misc {
-          vfr = true
-          enable_swallow = true
-          swallow_regex = ^(?:Alacritty|kitty)$
-        }
-
-        plugin {
-          hyprwinwrap {
-            class = ${winWrapClass}
-          }
-        }
-
-        windowrulev2 = float,class:^(firefox)$,title:^(Picture-in-Picture)$
-        windowrulev2 = float,title:^(ssh-askpass)$
-        windowrulev2 = float,class:^(org.kde.polkit-kde-authentication-agent-1)$,title:^(Picture-in-Picture)$
-        windowrulev2 = float,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$
-        windowrulev2 = move 931 1049,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$
-        windowrulev2 = opacity 0.98 0.95,class:^(?:Code|VSCodium|codium-url-handler|WebCord|code-url-handler|discord)$
-        windowrule = windowdance,title:^(Rhythm Doctor)$
-
-        $mainMod = SUPER
-
-        bind = $mainMod, Return, exec, ${terminal}
-        bind = $mainMod, B, exec, ${browser}
-        bind = $mainMod, V, exec, ${mainEditor}
-        bind = $mainMod SHIFT, C, killactive,
-        bind = $mainMod SHIFT, Q, exit,
-        bind = $mainMod, F, togglefloating,
-        bind = $mainMod SHIFT, F, fullscreen,
-        bind = $mainMod, P, exec, rofi -show run
-        bind = $mainMod, Space, exec, rofi -show drun
-        bind = ALT,Tab,cyclenext,
-        bind = ALT,Tab,bringactivetotop,
-        bind = , Print, exec, grimblast copy area
-        bind = $mainMod SHIFT, K, exec, hyprctl kill
-
-        # Move focus with mainMod + arrow keys
-        bind = $mainMod, left, movefocus, l
-        bind = $mainMod, right, movefocus, r
-        bind = $mainMod, up, movefocus, u
-        bind = $mainMod, down, movefocus, d
-
-        # Switch workspaces with mainMod + [0-9]
-        bind = $mainMod, 1, workspace, 1
-        bind = $mainMod, 2, workspace, 2
-        bind = $mainMod, 3, workspace, 3
-        bind = $mainMod, 4, workspace, 4
-        bind = $mainMod, 5, workspace, 5
-        bind = $mainMod, 6, workspace, 6
-        bind = $mainMod, 7, workspace, 7
-        bind = $mainMod, 8, workspace, 8
-        bind = $mainMod, 9, workspace, 9
-
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        bind = $mainMod SHIFT, 1, movetoworkspace, 1
-        bind = $mainMod SHIFT, 2, movetoworkspace, 2
-        bind = $mainMod SHIFT, 3, movetoworkspace, 3
-        bind = $mainMod SHIFT, 4, movetoworkspace, 4
-        bind = $mainMod SHIFT, 5, movetoworkspace, 5
-        bind = $mainMod SHIFT, 6, movetoworkspace, 6
-        bind = $mainMod SHIFT, 7, movetoworkspace, 7
-        bind = $mainMod SHIFT, 8, movetoworkspace, 8
-        bind = $mainMod SHIFT, 9, movetoworkspace, 9
-
+        # Hyprcursor config
+        "HYPRCURSOR_THEME,${config.home.pointerCursor.name}"
+        "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}"
+      ];
+      exec-once = [
+        "swww init"
+        "waybar"
+        "dbus-launch --exit-with-session"
+        "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
+        "dunst"
+        "vesktop --start-minimized"
+        "kitty -c \"$XDG_CONFIG_HOME/${winWrapConfigFile}\" --class=\"${winWrapClass}\" ${winWrapBinName}"
+      ];
+      input = {
+        kb_layout = "br";
+        kb_variant = "";
+        kb_model = "";
+        kb_options = "";
+        kb_rules = "";
+        touchpad = {
+          natural_scroll = false;
+        };
+        numlock_by_default = true;
+        sensitivity = 0;
+        follow_mouse = 1;
+        float_switch_override_focus = 0;
+      };
+      general = {
+        gaps_in = 4;
+        gaps_out = 4;
+        border_size = 2;
+        col = {
+          active_border = "rgb(b48ead)";
+          inactive_border = "rgb(4c566a)";
+        };
+        layout = "dwindle";
+      };
+      decoration = {
+        rounding = 5;
+        blur = {
+          enabled = true;
+          size = 3;
+          passes = 2;
+          new_optimizations = true;
+        };
+        drop_shadow = true;
+        shadow_range = 2;
+        shadow_render_power = 3;
+        col.shadow = "rgba(1a1a1aee)";
+      };
+      animations = {
+        enabled = true;
+        bezier = [
+          "simple, 0.16, 1, 0.3, 1"
+          "tehtarik, 0.48, 1.05, 0.165, 1.35"
+          "overshot, 0.13, 0.99, 0.29, 1.1"
+          "smoothOut, 0.36, 0, 0.66, -0.56"
+          "smoothIn, 0.25, 1, 0.5, 1"
+        ];
+        animation = [
+          "windows, 1, 5, overshot, slide"
+          "border, 1, 10, default"
+          "fade, 1, 10, default"
+          "workspaces, 1, 5, overshot, slidevert"
+        ];
+      };
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+      };
+      master.new_is_master = false;
+      gestures.workspace_swipe = false;
+      misc = {
+        vfr = true;
+        enable_swallow = true;
+        swallow_regex = "^(?:Alacritty|kitty)$";
+      };
+      plugin.hyprwinwrap.class = winWrapClass;
+      windowrulev2 = [
+        "float,class:^(firefox)$,title:^(Picture-in-Picture)$"
+        "float,title:^(ssh-askpass)$"
+        "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
+        "float,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$"
+        "move 931 1049,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$"
+        "opacity 0.98 0.95,class:^(?:Code|VSCodium|codium-url-handler|WebCord|code-url-handler|discord|vesktop)$"
+        "windowdance,title:^(Rhythm Doctor)$"
+      ];
+      "$mainMod" = "SUPER";
+      bind = [
+        # Custom Keybinds
+        "$mainMod, Return, exec, ${terminal}"
+        "$mainMod, B, exec, ${browser}"
+        "$mainMod, V, exec, ${mainEditor}"
+        "$mainMod SHIFT, C, killactive,"
+        "$mainMod SHIFT, Q, exit,"
+        "$mainMod, F, togglefloating,"
+        "$mainMod SHIFT, F, fullscreen,"
+        "$mainMod, P, exec, rofi -show run"
+        "$mainMod, Space, exec, rofi -show drun"
+        "ALT,Tab,cyclenext,"
+        "ALT,Tab,bringactivetotop,"
+        ", Print, exec, grimblast copy area"
+        "$mainMod SHIFT, K, exec, hyprctl kill"
+        # Move focus with arrow keys
+        "$mainMod, left, movefocus, l"
+        "$mainMod, right, movefocus, r"
+        "$mainMod, up, movefocus, u"
+        "$mainMod, down, movefocus, d"
         # Scroll through existing workspaces with mainMod + scroll
-        bind = $mainMod, mouse_down, workspace, e+1
-        bind = $mainMod, mouse_up, workspace, e-1
-
-        # Move/resize windows with mainMod + LMB/RMB and dragging
-        bindm = $mainMod, mouse:272, movewindow
-        bindm = $mainMod, mouse:273, resizewindow
-    '';
+        "$mainMod, mouse_down, workspace, e+1"
+        "$mainMod, mouse_up, workspace, e-1"
+      ] ++ (
+        builtins.concatLists (
+          builtins.genList (
+            x: [
+              "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
+              "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${toString(x + 1)}"
+            ]
+          ) 9
+        )
+      );
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
+    };
   };
 }
