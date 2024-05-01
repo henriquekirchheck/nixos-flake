@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     bun
-    nodejs_21
+    nodejs_latest
     nodePackages.pnpm
     biome
   ];
