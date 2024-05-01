@@ -3,6 +3,6 @@
 {
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
   };
 }

@@ -2,7 +2,8 @@
   description = "Flake for Henrique's system";
 
   outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
-    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, ... }@inputs:
+    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs
+    , hyprcursor-phinger, ... }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -75,6 +76,7 @@
           modules = [
             hyprland.homeManagerModules.default
             nixvim.homeManagerModules.nixvim
+            hyprcursor-phinger.homeManagerModules.default
             (profilePath + "/home.nix")
           ];
           extraSpecialArgs = someArgs;
@@ -100,6 +102,10 @@
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
+    };
+    hyprcursor-phinger = {
+      url = "github:Jappie3/hyprcursor-phinger";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
       url = "github:nix-community/nixvim";

@@ -18,11 +18,6 @@ in {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
     };
-    cursorTheme = {
-      package = pkgs.phinger-cursors;
-      name = "phinger-cursors-light";
-      size = 24;
-    };
   };
   xdg.configFile = {
     "gtk-4.0/assets".source =
