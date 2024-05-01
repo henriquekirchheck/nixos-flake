@@ -326,6 +326,26 @@
         "type": "github"
       }
     },
+    "hyprcursor-phinger": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1713908026,
+        "narHash": "sha256-+kUcqA2bCZjdIhpKlgqr2M8RDAqoXfVSs/rDgrPXhxo=",
+        "owner": "Jappie3",
+        "repo": "hyprcursor-phinger",
+        "rev": "d491e778bd9b961b9b42a96efdc713d4199f811f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Jappie3",
+        "repo": "hyprcursor-phinger",
+        "type": "github"
+      }
+    },
     "hyprland": {
       "inputs": {
         "hyprcursor": "hyprcursor",
@@ -668,6 +688,7 @@
         "blender-bin": "blender-bin",
         "catppuccin-vsc": "catppuccin-vsc",
         "home-manager": "home-manager",
+        "hyprcursor-phinger": "hyprcursor-phinger",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "nix-ld-rs": "nix-ld-rs",
