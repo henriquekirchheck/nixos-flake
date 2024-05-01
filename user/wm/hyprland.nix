@@ -61,11 +61,15 @@ in {
 
   home.file = {
     "phinger-cursors-light" = {
-      source = "${inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger}/cursors/theme_phinger-cursors-light";
+      source = "${
+          inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
+        }/cursors/theme_phinger-cursors-light";
       target = ".local/share/icons/phinger-hyprcursors-light";
     };
     "phinger-cursors-dark" = {
-      source = "${inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger}/cursors/theme_phinger-cursors-dark";
+      source = "${
+          inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
+        }/cursors/theme_phinger-cursors-dark";
       target = ".local/share/icons/phinger-hyprcursors-dark";
     };
   };
@@ -73,7 +77,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    systemd.variables = ["--all"];
+    systemd.variables = [ "--all" ];
     plugins = [ inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap ];
     settings = {
       env = [
@@ -112,7 +116,8 @@ in {
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "dunst"
         "vesktop --start-minimized"
-        "kitty -c \"$XDG_CONFIG_HOME/${winWrapConfigFile}\" --class=\"${winWrapClass}\" ${winWrapBinName}"
+        ''
+          kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}''
       ];
       input = {
         kb_layout = "br";
@@ -120,9 +125,7 @@ in {
         kb_model = "";
         kb_options = "";
         kb_rules = "";
-        touchpad = {
-          natural_scroll = false;
-        };
+        touchpad = { natural_scroll = false; };
         numlock_by_default = true;
         sensitivity = 0;
         follow_mouse = 1;
@@ -132,10 +135,8 @@ in {
         gaps_in = 4;
         gaps_out = 4;
         border_size = 2;
-        col = {
-          active_border = "rgb(b48ead)";
-          inactive_border = "rgb(4c566a)";
-        };
+        "col.active_border" = "rgb(b48ead)";
+        "col.inactive_border" = "rgb(4c566a)";
         layout = "dwindle";
       };
       decoration = {
@@ -149,7 +150,7 @@ in {
         drop_shadow = true;
         shadow_range = 2;
         shadow_render_power = 3;
-        col.shadow = "rgba(1a1a1aee)";
+        "col.shadow" = "rgba(1a1a1aee)";
       };
       animations = {
         enabled = true;
@@ -212,16 +213,12 @@ in {
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-      ] ++ (
-        builtins.concatLists (
-          builtins.genList (
-            x: [
-              "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
-              "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${toString(x + 1)}"
-            ]
-          ) 9
-        )
-      );
+      ] ++ (builtins.concatLists (builtins.genList (x: [
+        "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
+        "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${
+          toString (x + 1)
+        }"
+      ]) 9));
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = [
         "$mainMod, mouse:272, movewindow"
