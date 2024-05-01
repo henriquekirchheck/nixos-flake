@@ -59,7 +59,16 @@ in {
     };
   };
 
-  programs.hyprcursor-phinger.enable = true;
+  home.file = {
+    "phinger-cursors-light" = {
+      source = "${inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger}/cursors/theme_phinger-cursors-light";
+      target = ".local/share/icons/phinger-hyprcursors-light";
+    };
+    "phinger-cursors-dark" = {
+      source = "${inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger}/cursors/theme_phinger-cursors-dark";
+      target = ".local/share/icons/phinger-hyprcursors-dark";
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;

@@ -74,7 +74,7 @@
     mpv
     ffmpeg-full
     file
-    rustdesk
+    rustdesk-flutter
     zip
     unzip
     rar

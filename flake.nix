@@ -3,7 +3,7 @@
 
   outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
     , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs
-    , hyprcursor-phinger, ... }@inputs:
+    , ... }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -76,7 +76,6 @@
           modules = [
             hyprland.homeManagerModules.default
             nixvim.homeManagerModules.nixvim
-            hyprcursor-phinger.homeManagerModules.default
             (profilePath + "/home.nix")
           ];
           extraSpecialArgs = someArgs;
