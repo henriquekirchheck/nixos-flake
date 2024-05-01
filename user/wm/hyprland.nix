@@ -1,4 +1,4 @@
-{ config, pkgs, lib, terminal, browser, mainEditor, inputs, ... }:
+{ config, pkgs, terminal, browser, mainEditor, inputs, ... }:
 
 let
   winWrapClass = "terminal-background";

@@ -28,6 +28,7 @@
     ../../user/app/media/mpv.nix
     ../../user/styles/gtk.nix
     ../../user/styles/qt.nix
+    ../../user/styles/cursor.nix
     ../../user/hardware/sound.nix
   ];
 
