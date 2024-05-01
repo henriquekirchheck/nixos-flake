@@ -1,5 +1,5 @@
 {
-  enableMan = true;
+  enableMan = false;
   viAlias = true;
   vimAlias = true;
 
