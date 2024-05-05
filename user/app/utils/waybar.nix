@@ -3,7 +3,7 @@
 {
   programs.waybar = {
     enable = true;
-    package = inputs.waybar.packages.${system}.default;
+    #package = inputs.waybar.packages.${system}.default;
     settings = {
       mainBar = {
         "layer" = "top";

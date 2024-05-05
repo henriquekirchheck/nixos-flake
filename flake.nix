@@ -2,7 +2,8 @@
   description = "Flake for Henrique's system";
 
   outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
-    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, ... }@inputs:
+    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, waybar, ...
+    }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -57,6 +58,7 @@
           catppuccin-vsc.overlays.default
           blender-bin.overlays.default
           nix-ld-rs.overlays.default
+          waybar.overlays.default
         ];
       };
     in {
