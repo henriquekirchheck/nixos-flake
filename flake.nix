@@ -2,8 +2,7 @@
   description = "Flake for Henrique's system";
 
   outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
-    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs
-    , ... }@inputs:
+    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, ... }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -97,13 +96,17 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     catppuccin-vsc.url = "github:catppuccin/vscode";
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
     hyprcursor-phinger = {
       url = "github:Jappie3/hyprcursor-phinger";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    waybar = {
+      url = "github:Alexays/Waybar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
