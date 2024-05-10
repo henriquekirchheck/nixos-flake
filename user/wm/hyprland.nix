@@ -78,7 +78,9 @@ in {
     enable = true;
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
-    plugins = [ inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap ];
+    plugins = [
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
+    ];
     settings = {
       env = [
         # Nvidia fixes
@@ -115,8 +117,8 @@ in {
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "dunst"
         "vesktop --start-minimized"
-        ''
-          kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}''
+        # ''
+        #   kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}''
       ];
       input = {
         kb_layout = "br";
