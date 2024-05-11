@@ -2,12 +2,21 @@
 
 {
   home.packages = with pkgs; [
-    neofetch onefetch lolcat cowsay
+    fastfetch
+    onefetch
+    lolcat
+    cowsay
     cava
-    gnugrep gnused
+    gnugrep
+    gnused
     killall
     libnotify
-    bat eza fd bottom ripgrep fzf
+    bat
+    eza
+    fd
+    bottom
+    ripgrep
+    fzf
     rsync
     htop
     hwinfo
@@ -15,5 +24,6 @@
     brightnessctl
     pandoc
     pciutils
+    nix-output-monitor
   ];
 }
