@@ -150,8 +150,9 @@ in {
 
       "svelte.enable-ts-plugin" = true;
       "svelte.language-server.ls-path" =
-        "${pkgs.nodePackages.svelte-language-server}/bin/svelteserver";
-      "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
+        #  "${pkgs.nodePackages.svelte-language-server}/bin/svelteserver";
+        "node_modules/svelte-language-server/bin/server.js";
+      "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode-nightly";
       "files.associations"."*.env.*" = "env";
       "path-intellisense.absolutePathToWorkspace" = false;
       "prettier.jsxSingleQuote" = false;
