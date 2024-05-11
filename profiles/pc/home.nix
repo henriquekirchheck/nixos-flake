@@ -12,4 +12,6 @@
     ../../user/app/games/prismlauncher.nix
     #    ../../user/app/games/mcpelauncher.nix
   ];
+
+  home.packages = with pkgs; [ halloy ];
 }

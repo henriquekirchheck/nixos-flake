@@ -5,14 +5,14 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../base/configuration.nix
-      ../../system/hardware/nvidia.nix
-      ../../system/hardware/android.nix
-      ../../system/app/virtualization.nix
-      ../../system/app/obs.nix
-      ../../system/security/sshd.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../base/configuration.nix
+    ../../system/hardware/nvidia.nix
+    ../../system/hardware/android.nix
+    ../../system/app/virtualization.nix
+    ../../system/app/obs.nix
+    ../../system/app/deluge.nix
+    ../../system/security/sshd.nix
+  ];
 }
