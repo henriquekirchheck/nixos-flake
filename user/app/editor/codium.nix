@@ -5,41 +5,44 @@ let
     (ps: with ps; [ rustup zlib openssl.dev pkg-config biome ruff nil ]);
   codeExtensions = inputs.nix-vscode-extensions.extensions.${system};
 
-  extensionsOpenVSX = with codeExtensions.open-vsx; [
-    catppuccin.catppuccin-vsc-icons
-    llvm-vs-code-extensions.vscode-clangd
-    rust-lang.rust-analyzer
-    vadimcn.vscode-lldb
-    bungcip.better-toml
-    adpyke.codesnap
-    serayuzgur.crates
-    ms-azuretools.vscode-docker
-    irongeek.vscode-env
-    usernamehw.errorlens
-    dbaeumer.vscode-eslint
-    eamodio.gitlens
-    mhutchie.git-graph
-    ms-vscode.hexeditor
-    wix.vscode-import-cost
-    christian-kohler.path-intellisense
-    esbenp.prettier-vscode
-    svelte.svelte-vscode
-    ms-python.isort
-    ms-pyright.pyright
-    charliermarsh.ruff
-    bradlc.vscode-tailwindcss
-    nvarner.typst-lsp
-    yoavbls.pretty-ts-errors
-    calebfiggers.typst-companion
-    christian-kohler.npm-intellisense
-    biomejs.biome
-    jeanp413.open-remote-ssh
-    geequlim.godot-tools
-    alfish.godot-files
-    jnoortheen.nix-ide
-    mkhl.direnv
-  ];
-  extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace; [ ];
+  extensionsOpenVSX = with codeExtensions.open-vsx;
+    with codeExtensions.open-vsx-release; [
+      catppuccin.catppuccin-vsc-icons
+      llvm-vs-code-extensions.vscode-clangd
+      rust-lang.rust-analyzer
+      vadimcn.vscode-lldb
+      bungcip.better-toml
+      adpyke.codesnap
+      serayuzgur.crates
+      ms-azuretools.vscode-docker
+      irongeek.vscode-env
+      usernamehw.errorlens
+      dbaeumer.vscode-eslint
+      eamodio.gitlens
+      mhutchie.git-graph
+      ms-vscode.hexeditor
+      wix.vscode-import-cost
+      christian-kohler.path-intellisense
+      esbenp.prettier-vscode
+      svelte.svelte-vscode-nightly
+      ms-python.isort
+      ms-pyright.pyright
+      charliermarsh.ruff
+      bradlc.vscode-tailwindcss
+      nvarner.typst-lsp
+      yoavbls.pretty-ts-errors
+      calebfiggers.typst-companion
+      christian-kohler.npm-intellisense
+      biomejs.biome
+      jeanp413.open-remote-ssh
+      geequlim.godot-tools
+      alfish.godot-files
+      jnoortheen.nix-ide
+      mkhl.direnv
+    ];
+  extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
+    with codeExtensions.vscode-marketplace-release;
+    [ ];
   extensionsNix = [
     (pkgs.catppuccin-vsc.override {
       accent = "mauve";
