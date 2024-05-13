@@ -2,7 +2,8 @@
   description = "Flake for Henrique's system";
 
   outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
-    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, ... }@inputs:
+    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, nixos-wsl, ...
+    }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -67,6 +68,19 @@
           [ nixvim.nixosModules.nixvim (profilePath + "/configuration.nix") ];
         specialArgs = (someArgs // { inherit lib; });
       };
+      nixosConfigurations.wsl = lib.nixosSystem {
+        inherit system;
+        modules = [
+          nixos-wsl.nixosModules.default
+          {
+            wsl.enable = true;
+            wsl.defaultUser = username;
+          }
+          nixvim.nixosModules.nixvim
+          ./profiles/wsl/configuration.nix
+        ];
+        specialArgs = (someArgs // { inherit lib; });
+      };
 
       # Home Manager Configuration
       homeConfigurations."${username}@${hostName}" =
@@ -79,6 +93,15 @@
           ];
           extraSpecialArgs = someArgs;
         };
+      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          hyprland.homeManagerModules.default
+          nixvim.homeManagerModules.nixvim
+          ./profiles/wsl/home.nix
+        ];
+        extraSpecialArgs = someArgs;
+      };
 
       # Universal Packages
       packages.${system} = {
@@ -91,6 +114,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
