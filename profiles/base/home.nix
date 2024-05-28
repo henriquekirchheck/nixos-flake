@@ -1,4 +1,5 @@
-{ config, pkgs, lib, username, editor, terminal, browser, dotfilesDir, wm, mainEditor, ... }:
+{ config, pkgs, lib, username, editor, terminal, browser, dotfilesDir, wm
+, mainEditor, ... }:
 
 {
   home.username = username;
@@ -24,6 +25,7 @@
     ../../user/app/sandboxing/wine.nix
     ../../user/app/sandboxing/distrobox.nix
     ../../user/app/chat/discord.nix
+    ../../user/app/chat/element.nix
     ../../user/app/chat/thunderbird.nix
     ../../user/app/media/mpv.nix
     ../../user/styles/gtk.nix
@@ -32,11 +34,7 @@
     ../../user/hardware/sound.nix
   ];
 
-  home.packages = with pkgs; [
-    hello
-    nix-index
-    libreoffice-fresh
-  ];
+  home.packages = with pkgs; [ hello nix-index libreoffice-fresh ];
 
   home.stateVersion = "23.05";
 
