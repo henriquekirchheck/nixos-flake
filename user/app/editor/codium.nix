@@ -45,7 +45,7 @@ let
     [ ];
   extensionsNix = [
     (pkgs.catppuccin-vsc.override {
-      accent = "mauve";
+      accent = "sapphire";
       boldKeywords = true;
       italicComments = true;
       italicKeywords = true;
