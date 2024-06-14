@@ -52,14 +52,14 @@
       environment.etc."specialisation".text = "nvidia-beta";
       hardware.nvidia.package =
         config.boot.kernelPackages.nvidiaPackages.mkDriver {
-          version = "555.42.02";
-          sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
+          version = "555.52.04";
+          sha256_64bit = "sha256-nVOubb7zKulXhux9AruUTVBQwccFFuYGWrU1ZiakRAI=";
           sha256_aarch64 = "";
           openSha256 = "";
           settingsSha256 =
-            "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+            "sha256-PMh5efbSEq7iqEMBr2+VGQYkBG73TGUh6FuDHZhmwHk=";
           persistencedSha256 =
-            "sha256-3ae31/egyMKpqtGEqgtikWcwMwfcqMv2K4MVFa70Bqs=";
+            "sha256-KAYIvPjUVilQQcD04h163MHmKcQrn2a8oaXujL2Bxro=";
         };
     };
   };
