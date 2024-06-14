@@ -1,4 +1,4 @@
-{ config, lib, pkgs, name, email, ... }:
+{ config, lib, pkgs, name, email, dotfilesDir, ... }:
 
 {
   home.packages = with pkgs; [ git gh ];
@@ -8,6 +8,7 @@
     userEmail = email;
     extraConfig = {
       init.defaultBranch = "main";
+      safe.directory = [ "${config.home.homeDirectory}/${dotfilesDir}/.git" ];
     };
   };
   programs.gh = {
