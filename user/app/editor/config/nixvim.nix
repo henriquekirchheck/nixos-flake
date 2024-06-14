@@ -148,12 +148,12 @@
         };
         ruff-lsp.enable = true;
         lua-ls.enable = true;
-        nil_ls.enable = true;
+        nil-ls.enable = true;
         jsonls.enable = true;
         html.enable = true;
         gdscript.enable = true;
         eslint.enable = true;
-        emmet_ls.enable = true;
+        emmet-ls.enable = true;
         dockerls.enable = true;
         cssls.enable = true;
         clangd.enable = true;
