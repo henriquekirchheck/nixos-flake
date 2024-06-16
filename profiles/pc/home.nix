@@ -10,7 +10,7 @@
     ../../user/app/games/yuzu.nix
     ../../user/app/games/ryujinx.nix
     ../../user/app/games/prismlauncher.nix
-    #    ../../user/app/games/mcpelauncher.nix
+    ../../user/app/games/mcpelauncher.nix
   ];
 
   home.packages = with pkgs; [ halloy ];

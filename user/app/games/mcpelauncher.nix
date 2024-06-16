@@ -1,12 +1,14 @@
 { config, pkgs, ... }:
 let
-  version = "v0.14.1.304";
+  version = "v0.15.0";
+  revision = "795";
+  arch = "x86_64";
   mcpelauncher = pkgs.appimageTools.wrapType2 {
     name = "mcpelauncher";
     src = pkgs.fetchurl {
       url =
-        "https://github.com/minecraft-linux/mcpelauncher-manifest/releases/download/nightly/Minecraft_Bedrock_Launcher-x86_64-${version}.AppImage";
-      hash = "sha256-F8j4SVH7jFgBzscC6m5JjzmPlq3/OBic2zPW6RrteFs=";
+        "https://github.com/minecraft-linux/appimage-builder/releases/download/${version}-${revision}/Minecraft_Bedrock_Launcher-${arch}-${version}.${revision}.AppImage";
+      hash = "sha256-tp5+99kFspJ1XGtTw+FUhFFgW4EhiV4/+6ysQ91lqKY=";
     };
     extraPkgs = pkgs: with pkgs; [ ];
   };
