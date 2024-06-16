@@ -131,6 +131,7 @@ in {
         sensitivity = 0;
         follow_mouse = 1;
         float_switch_override_focus = 0;
+        accel_profile = "flat";
       };
       general = {
         gaps_in = 4;
@@ -173,7 +174,7 @@ in {
         pseudotile = true;
         preserve_split = true;
       };
-      master.new_is_master = false;
+      master.new_status = "master";
       gestures.workspace_swipe = false;
       misc = {
         vfr = true;
