@@ -158,7 +158,6 @@
         cssls.enable = true;
         clangd.enable = true;
         biome.enable = true;
-        bashls.enable = true;
         gopls.enable = true;
       };
     };
