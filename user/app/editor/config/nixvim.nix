@@ -63,21 +63,6 @@
     nvim-lightbulb.enable = true;
     lsp-format.enable = true;
     # nvim-ufo.enable = true;
-    auto-save = {
-      enable = true;
-      condition = ''
-        function(buf)
-          local fn = vim.fn
-          local utils = require("auto-save.utils.data")
-          if
-              fn.getbufvar(buf, "&modifiable") == 1 and
-              utils.not_in(fn.getbufvar(buf, "&filetype"), { "oil" }) then
-            return true
-          end
-          return false
-        end
-      '';
-    };
     cmp = {
       enable = true;
       autoEnableSources = true;
@@ -104,7 +89,7 @@
     };
     none-ls = {
       enable = true;
-      updateInInsert = true;
+      settings = { update_in_insert = true; };
       enableLspFormat = true;
       sources = {
         diagnostics = { stylelint.enable = true; };

@@ -20,6 +20,21 @@
         "type": "github"
       }
     },
+    "catppuccin": {
+      "locked": {
+        "lastModified": 1719735467,
+        "narHash": "sha256-mlebc8Ni/fqnGgrTqmnFiX6qOayKMAFD2Hd4QVEUxJg=",
+        "owner": "catppuccin",
+        "repo": "nix",
+        "rev": "65543d24023d9d5575c5c3e00a726291ad9358b7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "catppuccin-vsc": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -686,6 +701,7 @@
     "root": {
       "inputs": {
         "blender-bin": "blender-bin",
+        "catppuccin": "catppuccin",
         "catppuccin-vsc": "catppuccin-vsc",
         "home-manager": "home-manager",
         "hyprcursor-phinger": "hyprcursor-phinger",

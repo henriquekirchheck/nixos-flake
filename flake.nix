@@ -2,7 +2,7 @@
   description = "Flake for Henrique's system";
 
   outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
-    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, ... }@inputs:
+    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, catppuccin, ... }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -75,6 +75,7 @@
           modules = [
             hyprland.homeManagerModules.default
             nixvim.homeManagerModules.nixvim
+	    catppuccin.homeManagerModules.catppuccin
             (profilePath + "/home.nix")
           ];
           extraSpecialArgs = someArgs;
@@ -93,6 +94,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";

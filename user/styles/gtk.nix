@@ -1,12 +1,20 @@
 { config, pkgs, lib, ... }:
 let
-  themePackage = pkgs.catppuccin-gtk.override {
-    accents = [ "sapphire" ];
+  cfg = {
+    flavor = "mocha";
+    accent = "sapphire";
     size = "compact";
-    variant = "mocha";
     tweaks = [ "black" ];
   };
-  themeName = "Catppuccin-Mocha-Compact-Sapphire-Dark";
+  gtkTweaks = lib.concatStringsSep "," cfg.tweaks;
+  gtk4Dir =
+    "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0";
+  themePackage = pkgs.catppuccin-gtk.override {
+    accents = [ cfg.accent ];
+    inherit (cfg) size tweaks;
+    variant = cfg.flavor;
+  };
+  themeName = "catppuccin-${cfg.flavor}-${cfg.accent}-${cfg.size}+${gtkTweaks}";
 in {
   gtk = {
     enable = true;
@@ -20,11 +28,8 @@ in {
     };
   };
   xdg.configFile = {
-    "gtk-4.0/assets".source =
-      "${themePackage}/share/themes/${themeName}/gtk-4.0/assets";
-    "gtk-4.0/gtk.css".source =
-      "${themePackage}/share/themes/${themeName}/gtk-4.0/gtk.css";
-    "gtk-4.0/gtk-dark.css".source =
-      "${themePackage}/share/themes/${themeName}/gtk-4.0/gtk-dark.css";
+    "gtk-4.0/assets".source = "${gtk4Dir}/assets";
+    "gtk-4.0/gtk.css".source = "${gtk4Dir}/gtk.css";
+    "gtk-4.0/gtk-dark.css".source = "${gtk4Dir}/gtk-dark.css";
   };
 }
