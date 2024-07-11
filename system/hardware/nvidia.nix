@@ -5,6 +5,15 @@
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+    ];
+  };
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    MOZ_DISABLE_RDD_SANDBOX = 1;
+    NVD_BACKEND = "direct";
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -44,6 +53,11 @@
     "nvidia-beta".configuration = {
       environment.etc."specialisation".text = "nvidia-beta";
       hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+    };
+
+    "nvidia-vulkan-beta".configuration = {
+      environment.etc."specialisation".text = "nvidia-vulkan-beta";
+      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     };
   };
 }

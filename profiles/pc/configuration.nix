@@ -12,7 +12,6 @@
     ../../system/hardware/android.nix
     ../../system/app/virtualization.nix
     ../../system/app/obs.nix
-    ../../system/app/deluge.nix
     ../../system/security/sshd.nix
   ];
 }

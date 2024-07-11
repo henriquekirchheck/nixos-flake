@@ -1,8 +1,9 @@
 { config, pkgs, lib, inputs, system, ... }:
 
 let
-  codePackage = pkgs.vscodium.fhsWithPackages
-    (ps: with ps; [ rustup zlib openssl.dev pkg-config biome ruff nil ]);
+  #codePackage = pkgs.vscodium.fhsWithPackages
+  #  (ps: with ps; [ rustup zlib openssl.dev pkg-config biome ruff nil ]);
+  codePackage = pkgs.vscodium;
   codeExtensions = inputs.nix-vscode-extensions.extensions.${system};
 
   extensionsOpenVSX = with codeExtensions.open-vsx;
