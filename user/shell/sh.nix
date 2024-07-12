@@ -171,28 +171,6 @@ in {
         home_symbol = "~";
         truncation_length = 3;
       };
-      git_branch = {
-        format = "[$symbol( $branch(:$remote_branch))]($style)";
-        symbol = "";
-      };
-      git_state = { format = "[$progress_current/$progress_total]($style)"; };
-      deno = {
-        format = "[$symbol ($version)]($style)";
-        symbol = "";
-      };
-      nodejs = {
-        format = "[$symbol ($version)]($style)";
-        symbol = "";
-      };
-      python = {
-        symbol = "";
-        format =
-          "[$symbol ($version)( \${pyenv_prefix})( $virtualenv)]($style)";
-      };
-      rust = {
-        symbol = "";
-        format = "[$symbol ($version)]($style)";
-      };
     };
   };
 
