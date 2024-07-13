@@ -45,6 +45,8 @@ let
       vscjava.vscode-java-test
       vscjava.vscode-maven
       vscjava.vscode-java-dependency
+      redhat.vscode-xml
+
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
@@ -184,6 +186,10 @@ in {
       "codesnap.showWindowControls" = false;
       "codesnap.roundedCorners" = true;
       "codesnap.transparentBackground" = true;
+
+      "redhat.telemetry.enabled" = false;
+      "java.codeGeneration.toString.codeStyle" = "STRING_FORMAT";
+      "java.saveActions.organizeImports" = true;
     };
 
     keybindings = [
