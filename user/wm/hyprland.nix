@@ -189,7 +189,6 @@ in {
         "float,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$"
         "move 931 1049,class:^(firefox)$,title:^(?:Firefox — Sharing Indicator|Firefox — Indicador de compartilhamento)$"
         "opacity 0.98 0.95,class:^(?:Code|VSCodium|codium-url-handler|WebCord|code-url-handler|discord|vesktop)$"
-        "windowdance,title:^(Rhythm Doctor)$"
       ];
       "$mainMod" = "SUPER";
       bind = [
