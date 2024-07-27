@@ -49,7 +49,7 @@
   users.users.${username} = {
     isNormalUser = true;
     description = name;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "disk" "audio" ];
     packages = [ ];
     uid = 1000;
     initialPassword = "12345";
