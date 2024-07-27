@@ -2,7 +2,6 @@
 
 {
   # Pipewire
-  sound.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
