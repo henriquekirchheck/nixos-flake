@@ -9,6 +9,6 @@
   services.zerotierone.enable = true;
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = true;
+    useRoutingFeatures = "both";
   };
 }
