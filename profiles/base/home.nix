@@ -13,6 +13,7 @@
     ../../user/app/terminal/${terminal}.nix
     ../../user/app/editor/${mainEditor}.nix
     ../../user/app/editor/nvim.nix
+    ../../user/app/editor/zed.nix
     ../../user/shell/sh.nix
     ../../user/shell/cmd-utils.nix
     ../../user/app/development/git.nix
