@@ -100,7 +100,7 @@
           nixfmt.enable = true;
           prettierd = {
             enable = true;
-            withArgs = ''
+            settings = ''
               {condition = function(utils)
                               return utils.has_file({ ".prettierrc", ".prettierrc.json", ".prettierrc.yml", ".prettierrc.yaml", ".prettierrc.json5", ".prettierrc.js", "prettier.config.js", ".prettierrc.mjs", "prettier.config.mjs", ".prettierrc.cjs", "prettier.config.cjs", ".prettierrc.toml", })
               	      end,}'';
