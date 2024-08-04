@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
 
 {
-  home.packages = with pkgs; [ nil ];
+  home.packages = with pkgs; [ nixd ];
 }

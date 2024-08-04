@@ -175,7 +175,7 @@ in {
       "npm-intellisense.importES6" = true;
 
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nil";
+      "nix.serverPath" = "nixd";
 
       "godot_tools.editor_path" = "${pkgs.godot_4}/bin/godot4";
       "godot_tools.gdscript_lsp_server_port" = 6005;
