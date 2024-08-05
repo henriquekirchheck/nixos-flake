@@ -40,13 +40,12 @@ let
       alfish.godot-files
       jnoortheen.nix-ide
       mkhl.direnv
-      redhat.java
-      vscjava.vscode-java-debug
-      vscjava.vscode-java-test
-      vscjava.vscode-maven
-      vscjava.vscode-java-dependency
-      redhat.vscode-xml
-
+      #redhat.java
+      #vscjava.vscode-java-debug
+      #vscjava.vscode-java-test
+      #vscjava.vscode-maven
+      #vscjava.vscode-java-dependency
+      #redhat.vscode-xml
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
