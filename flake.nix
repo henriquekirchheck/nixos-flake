@@ -2,7 +2,8 @@
   description = "Flake for Henrique's system";
 
   outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
-    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, catppuccin, ... }@inputs:
+    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, catppuccin
+    , disko, ... }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -63,8 +64,12 @@
       # NixOS System Configuration
       nixosConfigurations.${hostName} = lib.nixosSystem {
         inherit system;
-        modules =
-          [ nixvim.nixosModules.nixvim (profilePath + "/configuration.nix") ];
+        modules = [
+          nixvim.nixosModules.nixvim
+          (profilePath + "/configuration.nix")
+          disko.nixosModules.disko
+          ./disko.nix
+        ];
         specialArgs = (someArgs // { inherit lib; });
       };
 
@@ -75,7 +80,7 @@
           modules = [
             hyprland.homeManagerModules.default
             nixvim.homeManagerModules.nixvim
-	    catppuccin.homeManagerModules.catppuccin
+            catppuccin.homeManagerModules.catppuccin
             (profilePath + "/home.nix")
           ];
           extraSpecialArgs = someArgs;
@@ -90,6 +95,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
