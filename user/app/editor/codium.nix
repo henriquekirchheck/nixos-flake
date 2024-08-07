@@ -176,8 +176,7 @@ in {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nixd";
 
-      "godot_tools.editor_path.godot4" = "${pkgs.godot_4}/bin/godot4";
-      "godot_tools.gdscript_lsp_server_port" = 6005;
+      "godotTools.editorPath.godot4" = "${pkgs.godot_4}/bin/godot4";
 
       "codesnap.shutterAction" = "copy";
       "codesnap.showLineNumbers" = true;
