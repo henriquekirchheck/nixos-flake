@@ -26,9 +26,8 @@ let
       christian-kohler.path-intellisense
       esbenp.prettier-vscode
       svelte.svelte-vscode-nightly
-      ms-python.isort
-      ms-pyright.pyright
-      charliermarsh.ruff
+      ms-python.mypy-type-checker
+      detachhead.basedpyright
       bradlc.vscode-tailwindcss
       nvarner.typst-lsp
       yoavbls.pretty-ts-errors
@@ -49,7 +48,7 @@ let
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
-    [ ];
+    [ charliermarsh.ruff ];
   extensionsNix = [
     (pkgs.catppuccin-vsc.override {
       accent = "sapphire";
