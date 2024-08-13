@@ -49,15 +49,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  environment.etc."specialisation".text = "nvidia";
   specialisation = {
-    "nvidia-beta".configuration = {
-      environment.etc."specialisation".text = "nvidia-beta";
+    "nvidiaBeta".configuration = {
+      environment.etc."specialisation".text = "nvidiaBeta";
       hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
-    };
-
-    "nvidia-vulkan-beta".configuration = {
-      environment.etc."specialisation".text = "nvidia-vulkan-beta";
-      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     };
   };
 }
