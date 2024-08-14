@@ -1,10 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.firefox.enable = true;
-  home.sessionVariables = {
-    DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+  programs.firefox = {
+    enable = true;
+    package = (pkgs.wrapFirefox
+      (pkgs.firefox-beta-unwrapped.override { pipewireSupport = true; }) { });
   };
+  home.sessionVariables = { DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox"; };
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
