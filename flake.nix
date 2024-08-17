@@ -1,7 +1,7 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, rust-overlay, nix-vscode-extensions
+  outputs = { nixpkgs, home-manager, nix-vscode-extensions
     , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, catppuccin
     , disko, ... }@inputs:
     let
@@ -54,7 +54,6 @@
           android_sdk.accept_license = true;
         };
         overlays = [
-          rust-overlay.overlays.default
           catppuccin-vsc.overlays.default
           blender-bin.overlays.default
           nix-ld-rs.overlays.default
@@ -104,7 +103,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
-    rust-overlay.url = "github:oxalica/rust-overlay";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";

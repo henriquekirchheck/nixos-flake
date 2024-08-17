@@ -402,11 +402,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1723824059,
-        "narHash": "sha256-3AebH/B40viTNVJpgiQkfptVe4aRTfyffa8rjUNB0pU=",
+        "lastModified": 1723915640,
+        "narHash": "sha256-Cd8A1pPmOJpqR54Ge4VZBVnbvIBpu1V6fvQ/lARtILs=",
         "ref": "refs/heads/main",
-        "rev": "c5feee1e357f3c3c59ebe406630601c627807963",
-        "revCount": 5098,
+        "rev": "912e7ba82defdb10efc892a5db578598c972fe4a",
+        "revCount": 5100,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -694,22 +694,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_6": {
-      "locked": {
-        "lastModified": 1718428119,
-        "narHash": "sha256-WdWDpNaq6u1IPtxtYHHWpl5BmabtpmLnMAx0RdJ/vo8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "e6cea36f83499eb4e9cd184c8a8e823296b50ad5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixvim": {
       "inputs": {
         "devshell": "devshell",
@@ -725,11 +709,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1723816538,
-        "narHash": "sha256-h37ltjdifkd7iLtMtBXSBBeYSTuBEKMW6ClFoC7nReQ=",
+        "lastModified": 1723923888,
+        "narHash": "sha256-w+/PG6KqB8en0x1JH5aMuf0QC78Nfei208EaaaRuYG4=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "00f32f0430f82c74919c72af84bc95bf5ae434e4",
+        "rev": "78fc4be6a830e8dc01f3e66ddbe3243b4bfe8560",
         "type": "github"
       },
       "original": {
@@ -773,26 +757,7 @@
         "nix-ld-rs": "nix-ld-rs",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs_5",
-        "nixvim": "nixvim",
-        "rust-overlay": "rust-overlay"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_6"
-      },
-      "locked": {
-        "lastModified": 1723861146,
-        "narHash": "sha256-tfPBU+fK6YYMZvNsOYHv6JzBa8XKuhtfu8Cb9lnri1w=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "07105b5f550665ff417487febcd6bf5dd071b931",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
+        "nixvim": "nixvim"
       }
     },
     "systems": {

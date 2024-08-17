@@ -96,10 +96,10 @@ in {
         # Use Wayland by default if possible
         "GDK_BACKEND,wayland,x11,*"
         "QT_QPA_PLATFORM,wayland;xcb"
-        "MOZ_ENABLE_WAYLAND,1"
         "MOZ_DRM_DEVICE,/dev/dri/renderD128"
         "SDL_VIDEODRIVER,wayland"
         "CLUTTER_BACKEND,wayland"
+        "MOZ_ENABLE_WAYLAND,0" # Except firefox, explicit sync breaks it
 
         # Qt specific configs
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
