@@ -102,7 +102,7 @@
       ];
     };
     optimise.automatic = true;
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.latest;
   };
 
   system.stateVersion = "23.05";
