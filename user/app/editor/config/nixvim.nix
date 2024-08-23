@@ -123,7 +123,6 @@
       servers = {
         tsserver.enable = true;
         yamlls.enable = true;
-        typst-lsp.enable = true;
         tailwindcss.enable = true;
         svelte.enable = true;
         rust-analyzer = {

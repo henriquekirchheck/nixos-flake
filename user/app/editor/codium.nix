@@ -29,9 +29,7 @@ let
       ms-python.mypy-type-checker
       detachhead.basedpyright
       bradlc.vscode-tailwindcss
-      nvarner.typst-lsp
       yoavbls.pretty-ts-errors
-      calebfiggers.typst-companion
       christian-kohler.npm-intellisense
       biomejs.biome
       jeanp413.open-remote-ssh
