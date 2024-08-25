@@ -1,9 +1,9 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, nix-vscode-extensions
-    , hyprland, catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, catppuccin
-    , disko, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nix-vscode-extensions, hyprland
+    , catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, catppuccin, disko, ...
+    }@inputs:
     let
       ### OPTIONS
       # System Options
@@ -102,13 +102,27 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     catppuccin.url = "github:catppuccin/nix";
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    catppuccin-vsc = {
+      url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+      inputs = {
+        hyprland.follows = "hyprland";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     hyprcursor-phinger = {
       url = "github:Jappie3/hyprcursor-phinger";
@@ -117,8 +131,12 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
-    blender-bin.url = "github:edolstra/nix-warez?dir=blender";
+    blender-bin = {
+      url = "github:edolstra/nix-warez?dir=blender";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-ld-rs = {
       url = "github:nix-community/nix-ld-rs";
       inputs.nixpkgs.follows = "nixpkgs";
