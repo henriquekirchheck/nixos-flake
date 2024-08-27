@@ -1,10 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   programs.firefox = {
     enable = true;
-    package = (pkgs.wrapFirefox
-      (pkgs.firefox-beta-unwrapped.override { pipewireSupport = true; }) { });
+    package = inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin;
   };
   home.sessionVariables = { DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox"; };
   xdg.mimeApps.defaultApplications = {

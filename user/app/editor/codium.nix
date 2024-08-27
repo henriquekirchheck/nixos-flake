@@ -21,7 +21,6 @@ let
       dbaeumer.vscode-eslint
       eamodio.gitlens
       mhutchie.git-graph
-      ms-vscode.hexeditor
       wix.vscode-import-cost
       christian-kohler.path-intellisense
       esbenp.prettier-vscode
@@ -45,8 +44,10 @@ let
       #redhat.vscode-xml
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
-    with codeExtensions.vscode-marketplace-release;
-    [ charliermarsh.ruff ];
+    with codeExtensions.vscode-marketplace-release; [
+      charliermarsh.ruff
+      # ms-vscode.hexeditor
+    ];
   extensionsNix = [
     (pkgs.catppuccin-vsc.override {
       accent = "sapphire";
