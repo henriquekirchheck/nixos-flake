@@ -4,7 +4,9 @@
   programs.mpv = {
     enable = true;
     config = {
-      vo = "gpu-next";
+      vo = "gpu";
+      hwdec = "auto";
+      profile = "gpu-hq";
       ytdl-format = "bestvideo+bestaudio";
     };
   };
