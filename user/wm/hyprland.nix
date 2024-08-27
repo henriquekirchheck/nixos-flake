@@ -101,6 +101,10 @@ in {
         "CLUTTER_BACKEND,wayland"
         "MOZ_ENABLE_WAYLAND,1"
 
+	# Firefox fixes
+	"NVD_BACKEND=direct"
+	"MOZ_DISABLE_RDD_SANDBOX=1"
+
         # Qt specific configs
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "QT_QPA_PLATFORMTHEME,qt6ct"
