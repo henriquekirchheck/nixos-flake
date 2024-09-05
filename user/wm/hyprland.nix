@@ -76,6 +76,7 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlataform.system}.hyprland;
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
     plugins = [
