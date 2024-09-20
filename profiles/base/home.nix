@@ -39,6 +39,7 @@
     ../../user/app/chat/element.nix
     ../../user/app/chat/thunderbird.nix
     ../../user/app/media/mpv.nix
+    ../../user/app/utils/nixos-update.nix
     ../../user/styles/gtk.nix
     ../../user/styles/qt.nix
     ../../user/styles/cursor.nix
