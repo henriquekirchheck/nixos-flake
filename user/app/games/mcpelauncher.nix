@@ -12,4 +12,5 @@ let
     };
     extraPkgs = pkgs: with pkgs; [ ];
   };
-in { home.packages = [ mcpelauncher ]; }
+in
+{ home.packages = [ mcpelauncher ]; }

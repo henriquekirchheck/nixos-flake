@@ -1,5 +1,15 @@
-{ config, pkgs, lib, username, editor, terminal, browser, dotfilesDir, wm
-, mainEditor, ... }:
+{ config
+, pkgs
+, lib
+, username
+, editor
+, terminal
+, browser
+, dotfilesDir
+, wm
+, mainEditor
+, ...
+}:
 
 {
   home.username = username;

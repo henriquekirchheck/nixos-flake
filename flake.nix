@@ -1,8 +1,18 @@
 {
   description = "Flake for Henrique's system";
 
-  outputs = { nixpkgs, home-manager, nix-vscode-extensions, hyprland
-    , catppuccin-vsc, nixvim, blender-bin, nix-ld-rs, catppuccin, disko, ...
+  outputs =
+    { nixpkgs
+    , home-manager
+    , nix-vscode-extensions
+    , hyprland
+    , catppuccin-vsc
+    , nixvim
+    , blender-bin
+    , nix-ld-rs
+    , catppuccin
+    , disko
+    , ...
     }@inputs:
     let
       ### OPTIONS
@@ -59,7 +69,8 @@
           nix-ld-rs.overlays.default
         ];
       };
-    in {
+    in
+    {
       # NixOS System Configuration
       nixosConfigurations.${hostName} = lib.nixosSystem {
         inherit system;

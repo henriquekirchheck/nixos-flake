@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
 
 {
-    home.packages = [ pkgs.pavucontrol ];
+  home.packages = [ pkgs.pavucontrol ];
 }

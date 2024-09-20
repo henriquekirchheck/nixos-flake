@@ -21,7 +21,8 @@ let
     # git
     gitfetch = "onefetch";
   };
-in {
+in
+{
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;

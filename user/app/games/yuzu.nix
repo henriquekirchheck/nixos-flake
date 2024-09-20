@@ -6,7 +6,8 @@ let
     #!/bin/sh
     QT_QPA_PLATFORM=xcb ${"${yuzu}/bin/yuzu"}
   '';
-in {
+in
+{
   home.packages = [
     #yuzu
     #(pkgs.writeScriptBin "xyuzu" xwrapper)

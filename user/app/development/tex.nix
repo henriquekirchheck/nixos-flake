@@ -4,8 +4,8 @@ let
     inherit (pkgs.texlive) scheme-full
       dvisvgm dvipng latexmk
       wrapfig amsmath ulem hyperref capt-of;
-      #(setq org-latex-compiler "lualatex")
-      #(setq org-preview-latex-default-process 'dvisvgm)
+    #(setq org-latex-compiler "lualatex")
+    #(setq org-preview-latex-default-process 'dvisvgm)
   });
 in
 {

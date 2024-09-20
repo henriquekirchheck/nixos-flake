@@ -1,12 +1,13 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ../hardware/sound.nix
-              ./dbus.nix
-              ./keyring.nix
-              ./fonts.nix
-              ./xdg.nix
-            ];
+  imports = [
+    ../hardware/sound.nix
+    ./dbus.nix
+    ./keyring.nix
+    ./fonts.nix
+    ./xdg.nix
+  ];
 
   environment.systemPackages = [ pkgs.wayland ];
 

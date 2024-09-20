@@ -25,7 +25,8 @@ let
     light_cyan = "#94e2d5";
     light_white = "#a6adc8";
   };
-in {
+in
+{
   programs.rio = {
     enable = true;
     settings = {

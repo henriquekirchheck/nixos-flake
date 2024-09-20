@@ -11,7 +11,8 @@ let
   winWrapConfig = ''
     background_opacity 0.0
   '';
-in {
+in
+{
   imports = [
     ../app/browser/${browser}.nix
     ../app/terminal/${terminal}.nix
@@ -102,9 +103,9 @@ in {
         "CLUTTER_BACKEND,wayland"
         "MOZ_ENABLE_WAYLAND,1"
 
-	# Firefox fixes
-	"NVD_BACKEND=direct"
-	"MOZ_DISABLE_RDD_SANDBOX=1"
+        # Firefox fixes
+        "NVD_BACKEND=direct"
+        "MOZ_DISABLE_RDD_SANDBOX=1"
 
         # Qt specific configs
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
@@ -219,12 +220,13 @@ in {
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-      ] ++ (builtins.concatLists (builtins.genList (x: [
-        "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
-        "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${
+      ] ++ (builtins.concatLists (builtins.genList
+        (x: [
+          "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
+          "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${
           toString (x + 1)
         }"
-      ]) 9));
+        ]) 9));
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = [
         "$mainMod, mouse:272, movewindow"

@@ -8,7 +8,8 @@ let
       -b 'Desligar' 'systemctl poweroff' \
       -b 'Reiniciar' 'systemctl reboot'
   '';
-in {
+in
+{
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager.gdm.enable = true;

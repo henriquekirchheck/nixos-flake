@@ -2,13 +2,14 @@
 
 {
   # Import wayland config
-  imports = [ ../extras/wayland.nix
-              ../extras/dbus.nix
-              ../extras/keyring.nix
-              ../extras/fonts.nix
-              ../extras/xdg.nix
-              ../extras/display-manager.nix
-            ];
+  imports = [
+    ../extras/wayland.nix
+    ../extras/dbus.nix
+    ../extras/keyring.nix
+    ../extras/fonts.nix
+    ../extras/xdg.nix
+    ../extras/display-manager.nix
+  ];
 
   # Security
   security = {

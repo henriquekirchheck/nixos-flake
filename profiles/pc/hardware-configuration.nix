@@ -5,17 +5,19 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  
+
 
   fileSystems."/vol/drive" =
-    { device = "/dev/disk/by-uuid/f2c7fa52-5b47-46e9-b95c-4c467175cdce";
+    {
+      device = "/dev/disk/by-uuid/f2c7fa52-5b47-46e9-b95c-4c467175cdce";
       fsType = "ext4";
     };
 

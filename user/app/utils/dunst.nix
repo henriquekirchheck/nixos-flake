@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 
 {
   services.dunst = {
@@ -66,9 +66,9 @@
         timeout = 10;
       };
       urgency_critical = {
-          background = "#11121D";
-          foreground = "#EE6D85";
-          timeout = 30;
+        background = "#11121D";
+        foreground = "#EE6D85";
+        timeout = 30;
       };
     };
   };

@@ -1,5 +1,15 @@
-{ config, pkgs, lib, wm, mainLocale, extraLocale, timeZone, username, name
-, hostName, ... }:
+{ config
+, pkgs
+, lib
+, wm
+, mainLocale
+, extraLocale
+, timeZone
+, username
+, name
+, hostName
+, ...
+}:
 
 {
   imports = [

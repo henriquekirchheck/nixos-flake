@@ -15,7 +15,8 @@ let
     variant = cfg.flavor;
   };
   themeName = "catppuccin-${cfg.flavor}-${cfg.accent}-${cfg.size}+${gtkTweaks}";
-in {
+in
+{
   gtk = {
     enable = true;
     theme = {

@@ -64,7 +64,8 @@ let
 
   extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace
     ++ extensionsNix;
-in {
+in
+{
   imports = [ ../utils/electron.nix ];
 
   programs.vscode = {
