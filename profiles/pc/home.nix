@@ -11,6 +11,7 @@
     #../../user/app/games/ryujinx.nix
     ../../user/app/games/prismlauncher.nix
     ../../user/app/games/mcpelauncher.nix
+    ../../user/app/games/heroic.nix
   ];
 
   home.packages = with pkgs; [ halloy ];
