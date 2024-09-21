@@ -7,8 +7,8 @@
     search = [ "example.ts.net" ];
   };
   services.zerotierone = { enable = true; package = pkgs.zerotierone; };
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "both";
-  };
+  #services.tailscale = {
+  #  enable = true;
+  #  useRoutingFeatures = "both";
+  #};
 }
