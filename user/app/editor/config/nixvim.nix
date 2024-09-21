@@ -121,7 +121,7 @@
         "<leader>f" = "format";
       };
       servers = {
-        tsserver.enable = true;
+        ts-ls.enable = true;
         yamlls.enable = true;
         tailwindcss.enable = true;
         svelte.enable = true;

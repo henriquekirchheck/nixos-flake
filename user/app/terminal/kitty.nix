@@ -7,7 +7,7 @@
       name = "JetBrainsMono Nerd Font";
       size = 12;
     };
-    theme = "Nord";
+    themeFile = "Catppuccin-Mocha";
     settings = {
       background_opacity = lib.mkForce "0.75";
       disable_ligatures = "cursor";
