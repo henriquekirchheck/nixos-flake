@@ -135,7 +135,10 @@
         nil-ls.enable = true;
         jsonls.enable = true;
         html.enable = true;
-        gdscript.enable = true;
+        gdscript = {
+	  enable = true;
+	  package = null;
+	};
         eslint.enable = true;
         emmet-ls.enable = true;
         dockerls.enable = true;
