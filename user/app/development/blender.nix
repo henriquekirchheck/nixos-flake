@@ -1,7 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   home.packages = with pkgs; [
-    blender_4_0
+    inputs.blender-bin.packages.${pkgs.system}.default
   ];
 }
