@@ -36,6 +36,9 @@ let
       alfish.godot-files
       jnoortheen.nix-ide
       mkhl.direnv
+      mtxr.sqltools
+      mtxr.sqltools-driver-pg
+      mtxr.sqltools-driver-mysql
       #redhat.java
       #vscjava.vscode-java-debug
       #vscjava.vscode-java-test
