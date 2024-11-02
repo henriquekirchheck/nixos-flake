@@ -15,4 +15,20 @@
     ../../system/app/obs.nix
     ../../system/security/sshd.nix
   ];
+
+  environment.systemPackages = with pkgs; [ cloudflared ];
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      "52ba507f-2e7c-4527-9010-aaa4ff579fa2" = {
+	credentialsFile = "/root/.cloudflared/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json";
+	ingress = {
+	  "jf.tunnel.henriquekh.dev.br" = "http://localhost:8096";
+	};
+	default = "http_status:404";
+      };
+    };
+    user = "root";
+    group = "root";
+  };
 }
