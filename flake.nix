@@ -2,17 +2,18 @@
   description = "Flake for Henrique's system";
 
   outputs =
-    { nixpkgs
-    , home-manager
-    , nix-vscode-extensions
-    , hyprland
-    , catppuccin-vsc
-    , nixvim
-    , blender-bin
-    , nix-ld-rs
-    , catppuccin
-    , disko
-    , ...
+    {
+      nixpkgs,
+      home-manager,
+      nix-vscode-extensions,
+      hyprland,
+      catppuccin-vsc,
+      nixvim,
+      blender-bin,
+      nix-ld-rs,
+      catppuccin,
+      disko,
+      ...
     }@inputs:
     let
       ### OPTIONS
@@ -84,22 +85,20 @@
       };
 
       # Home Manager Configuration
-      homeConfigurations."${username}@${hostName}" =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            hyprland.homeManagerModules.default
-            nixvim.homeManagerModules.nixvim
-            catppuccin.homeManagerModules.catppuccin
-            (profilePath + "/home.nix")
-          ];
-          extraSpecialArgs = someArgs;
-        };
+      homeConfigurations."${username}@${hostName}" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          hyprland.homeManagerModules.default
+          nixvim.homeManagerModules.nixvim
+          catppuccin.homeManagerModules.catppuccin
+          (profilePath + "/home.nix")
+        ];
+        extraSpecialArgs = someArgs;
+      };
 
       # Universal Packages
       packages.${system} = {
-        neovim = nixvim.legacyPackages.${system}.makeNixvim
-          (import ./user/app/editor/config/nixvim.nix);
+        neovim = nixvim.legacyPackages.${system}.makeNixvim (import ./user/app/editor/config/nixvim.nix);
       };
     };
 

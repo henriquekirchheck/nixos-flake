@@ -1,4 +1,12 @@
-{ config, pkgs, lib, profile, inputs, system, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  profile,
+  inputs,
+  system,
+  ...
+}:
 
 {
   programs.waybar = {
@@ -7,7 +15,11 @@
     settings = {
       mainBar = {
         "layer" = "top";
-        "modules-left" = [ "custom/launcher" "tray" "hyprland/workspaces" ];
+        "modules-left" = [
+          "custom/launcher"
+          "tray"
+          "hyprland/workspaces"
+        ];
         "modules-center" = [ "hyprland/window" ];
         "modules-right" = [
           (lib.mkIf (profile == "pc") "cpu")
@@ -23,7 +35,13 @@
           "format" = "{icon} {volume}%";
           "format-muted" = "{icon} {volume}%";
           "on-click" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          "format-icons" = { "default" = [ "" "" "" ]; };
+          "format-icons" = {
+            "default" = [
+              ""
+              ""
+              ""
+            ];
+          };
         };
         "hyprland/workspaces" = {
           "format" = "{icon}";
@@ -60,14 +78,22 @@
           };
           "format" = "  {icon}  {capacity}%";
           "format-discharging" = "{icon}  {capacity}%";
-          "format-icons" = [ "" "" "" "" "" ];
+          "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
           "tooltip" = true;
         };
         "tray" = {
           "icon-size" = 18;
           "spacing" = 10;
         };
-        "clock" = { "format" = " {0:%H:%M}  󰃶 {0:%d/%m/%Y}"; };
+        "clock" = {
+          "format" = " {0:%H:%M}  󰃶 {0:%d/%m/%Y}";
+        };
         "cpu" = {
           "interval" = 10;
           "format" = " {usage}%";

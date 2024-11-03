@@ -1,6 +1,13 @@
-{ pkgs, config, dotfilesDir, ... }:
+{
+  pkgs,
+  config,
+  dotfilesDir,
+  ...
+}:
 
-let dotfilesFullDir = "${config.home.homeDirectory}/${dotfilesDir}"; in
+let
+  dotfilesFullDir = "${config.home.homeDirectory}/${dotfilesDir}";
+in
 {
   home.packages = [
     (pkgs.writeScriptBin "nixos-update" ''

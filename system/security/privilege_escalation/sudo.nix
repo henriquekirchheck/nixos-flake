@@ -5,9 +5,11 @@
   security.sudo = {
     enable = true;
     wheelNeedsPassword = true;
-    extraRules = [{
-      groups = [ "wheel" ];
-      commands = [ "ALL" ];
-    }];
+    extraRules = [
+      {
+        groups = [ "wheel" ];
+        commands = [ "ALL" ];
+      }
+    ];
   };
 }

@@ -12,7 +12,11 @@
     protontricks.enable = true;
     remotePlay.openFirewall = true;
   };
-  environment.systemPackages = with pkgs; [ mangohud gamescope vulkan-tools ];
+  environment.systemPackages = with pkgs; [
+    mangohud
+    gamescope
+    vulkan-tools
+  ];
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
 }

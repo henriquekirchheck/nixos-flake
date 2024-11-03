@@ -1,14 +1,15 @@
-{ config
-, pkgs
-, lib
-, wm
-, mainLocale
-, extraLocale
-, timeZone
-, username
-, name
-, hostName
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  wm,
+  mainLocale,
+  extraLocale,
+  timeZone,
+  username,
+  name,
+  hostName,
+  ...
 }:
 
 {
@@ -23,7 +24,12 @@
     ../../system/app/flatpak.nix
     (import ../../system/app/docker.nix {
       storageDriver = "btrfs";
-      inherit username pkgs config lib;
+      inherit
+        username
+        pkgs
+        config
+        lib
+        ;
     })
     ../../system/app/zsh.nix
     ../../system/app/steam.nix
@@ -59,7 +65,13 @@
   users.users.${username} = {
     isNormalUser = true;
     description = name;
-    extraGroups = [ "networkmanager" "wheel" "video" "disk" "audio" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "disk"
+      "audio"
+    ];
     packages = [ ];
     uid = 1000;
     initialPassword = "12345";
@@ -105,7 +117,10 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       substituters = [ "https://hyprland.cachix.org" ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   cfg = {
     flavor = "mocha";
@@ -7,8 +12,7 @@ let
     tweaks = [ "black" ];
   };
   gtkTweaks = lib.concatStringsSep "," cfg.tweaks;
-  gtk4Dir =
-    "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0";
+  gtk4Dir = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0";
   themePackage = pkgs.catppuccin-gtk.override {
     accents = [ cfg.accent ];
     inherit (cfg) size tweaks;

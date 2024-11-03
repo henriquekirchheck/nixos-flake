@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   swayConfig = pkgs.writeText "greetd-sway-config" ''
     exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"

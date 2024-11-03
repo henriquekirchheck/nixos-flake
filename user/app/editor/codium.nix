@@ -1,4 +1,11 @@
-{ config, pkgs, lib, inputs, system, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  system,
+  ...
+}:
 
 let
   #codePackage = pkgs.vscodium.fhsWithPackages
@@ -6,8 +13,10 @@ let
   codePackage = pkgs.vscodium;
   codeExtensions = inputs.nix-vscode-extensions.extensions.${system};
 
-  extensionsOpenVSX = with codeExtensions.open-vsx;
-    with codeExtensions.open-vsx-release; [
+  extensionsOpenVSX =
+    with codeExtensions.open-vsx;
+    with codeExtensions.open-vsx-release;
+    [
       catppuccin.catppuccin-vsc-icons
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
@@ -46,8 +55,10 @@ let
       #vscjava.vscode-java-dependency
       #redhat.vscode-xml
     ];
-  extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
-    with codeExtensions.vscode-marketplace-release; [
+  extensionsVSCodeMarketplace =
+    with codeExtensions.vscode-marketplace;
+    with codeExtensions.vscode-marketplace-release;
+    [
       charliermarsh.ruff
       # ms-vscode.hexeditor
     ];
@@ -65,8 +76,7 @@ let
     })
   ];
 
-  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace
-    ++ extensionsNix;
+  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNix;
 in
 {
   imports = [ ../utils/electron.nix ];
@@ -81,7 +91,9 @@ in
       "editor.bracketPairColorization.enabled" = true;
       "editor.tabSize" = 2;
       "editor.inlineSuggest.enabled" = true;
-      "editor.codeActionsOnSave" = { "source.organizeImports" = "explicit"; };
+      "editor.codeActionsOnSave" = {
+        "source.organizeImports" = "explicit";
+      };
       "files.autoSave" = "afterDelay";
       "editor.formatOnPaste" = false;
       "editor.formatOnSave" = true;
@@ -91,7 +103,9 @@ in
       "workbench.iconTheme" = "catppuccin-mocha";
       "editor.semanticHighlighting.enabled" = true;
       "terminal.integrated.minimumContrastRatio" = 1;
-      "gopls" = { "ui.semanticTokens" = true; };
+      "gopls" = {
+        "ui.semanticTokens" = true;
+      };
 
       "editor.fontLigatures" = true;
       "editor.fontFamily" = "JetBrainsMono Nerd Font";
@@ -127,10 +141,9 @@ in
 
       "security.workspace.trust.untrustedFiles" = "open";
 
-      "[javascript][typescript][javascriptreact][typescriptreact][html][css][scss][jsonc][json]" =
-        {
-          "editor.defaultFormatter" = "esbenp.prettier-vscode";
-        };
+      "[javascript][typescript][javascriptreact][typescriptreact][html][css][scss][jsonc][json]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
       "javascript.suggest.paths" = false;
       "typescript.suggest.paths" = false;
       "javascript.updateImportsOnFileMove.enabled" = "always";
@@ -153,7 +166,9 @@ in
       "typescript.suggest.autoImports" = true;
       "typescript.suggest.includeCompletionsForImportStatements" = true;
       "typescript.validate.enable" = true;
-      "emmet.includeLanguages" = { "postcss" = "css"; };
+      "emmet.includeLanguages" = {
+        "postcss" = "css";
+      };
 
       "[rust][python]"."editor.tabSize" = 4;
 

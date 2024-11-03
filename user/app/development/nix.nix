@@ -1,5 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  home.packages = with pkgs; [ nixd nixpkgs-fmt ];
+  home.packages = with pkgs; [
+    nixd
+    nixpkgs-fmt
+  ];
 }

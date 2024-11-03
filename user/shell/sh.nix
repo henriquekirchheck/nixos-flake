@@ -1,15 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   myAliases = {
     # ls
-    ls =
-      "eza -al --color=always --group-directories-first --icons=always"; # List of Hidden files and directories
-    la =
-      "eza -a --color=always --group-directories-first --icons=always"; # All files and directories
-    ll =
-      "eza -l --color=always --group-directories-first --icons=always"; # List of files and directories
-    lt =
-      "eza -aT --color=always --group-directories-first --icons=always"; # Tree of all files and directories
+    ls = "eza -al --color=always --group-directories-first --icons=always"; # List of Hidden files and directories
+    la = "eza -a --color=always --group-directories-first --icons=always"; # All files and directories
+    ll = "eza -l --color=always --group-directories-first --icons=always"; # List of files and directories
+    lt = "eza -aT --color=always --group-directories-first --icons=always"; # Tree of all files and directories
 
     # grep
     grep = "grep --color=auto";
@@ -102,8 +103,14 @@ in
     autocd = true;
     historySubstringSearch = {
       enable = true;
-      searchUpKey = [ "^[[A" "$terminfo[kcuu1]" ];
-      searchDownKey = [ "^[[B" "$terminfo[kcud1]" ];
+      searchUpKey = [
+        "^[[A"
+        "$terminfo[kcuu1]"
+      ];
+      searchDownKey = [
+        "^[[B"
+        "$terminfo[kcud1]"
+      ];
     };
     history = {
       ignoreDups = true;
@@ -150,7 +157,12 @@ in
     enableZshIntegration = true;
     enableBashIntegration = true;
     settings = {
-      format = lib.concatStrings [ "󱄅 " "$directory" "$all" "$character" ];
+      format = lib.concatStrings [
+        "󱄅 "
+        "$directory"
+        "$all"
+        "$character"
+      ];
       right_format = lib.concatStrings [ "$cmd_duration" ];
       add_newline = false;
       line_break.disabled = true;

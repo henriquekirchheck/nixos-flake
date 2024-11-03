@@ -2,19 +2,24 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, terminal, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  terminal,
+  ...
+}:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../base/configuration.nix
-      ../../system/hardware/bluetooth.nix
-      ../../system/hardware/amd-gpu.nix
-      ../../system/hardware/backlight.nix
-      ../../system/wm/kde.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../base/configuration.nix
+    ../../system/hardware/bluetooth.nix
+    ../../system/hardware/amd-gpu.nix
+    ../../system/hardware/backlight.nix
+    ../../system/wm/kde.nix
+  ];
 
   # Force use of pt_BR on laptop
   i18n.defaultLocale = lib.mkForce "pt_BR.UTF-8";

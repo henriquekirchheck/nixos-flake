@@ -1,5 +1,7 @@
 { config, ... }:
 
 {
-  programs.nixvim = (import ./config/nixvim.nix) // { enable = true; };
+  programs.nixvim = (import ./config/nixvim.nix) // {
+    enable = true;
+  };
 }

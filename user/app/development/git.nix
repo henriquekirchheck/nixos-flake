@@ -1,7 +1,18 @@
-{ config, lib, pkgs, name, email, dotfilesDir, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  name,
+  email,
+  dotfilesDir,
+  ...
+}:
 
 {
-  home.packages = with pkgs; [ git gh ];
+  home.packages = with pkgs; [
+    git
+    gh
+  ];
   programs.git = {
     enable = true;
     userName = name;

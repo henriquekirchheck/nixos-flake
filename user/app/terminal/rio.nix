@@ -1,4 +1,10 @@
-{ config, pkgs, lib, editor, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  editor,
+  ...
+}:
 
 let
   theme = catppuccin-mocha;

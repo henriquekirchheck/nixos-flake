@@ -1,7 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
-  launcher = (pkgs.prismlauncher.override {
-    gamemodeSupport = true;
-  });
+  launcher = (
+    pkgs.prismlauncher.override {
+      gamemodeSupport = true;
+    }
+  );
 in
-{ home.packages = [ launcher ]; }
+{
+  home.packages = [ launcher ];
+}

@@ -1,14 +1,15 @@
-{ config
-, pkgs
-, lib
-, username
-, editor
-, terminal
-, browser
-, dotfilesDir
-, wm
-, mainEditor
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  editor,
+  terminal,
+  browser,
+  dotfilesDir,
+  wm,
+  mainEditor,
+  ...
 }:
 
 {
@@ -46,7 +47,11 @@
     ../../user/hardware/sound.nix
   ];
 
-  home.packages = with pkgs; [ hello nix-index libreoffice-fresh ];
+  home.packages = with pkgs; [
+    hello
+    nix-index
+    libreoffice-fresh
+  ];
 
   home.stateVersion = "23.05";
 

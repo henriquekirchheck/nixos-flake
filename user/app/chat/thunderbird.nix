@@ -1,4 +1,11 @@
-{ pkgs, config, lib, username, name, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  username,
+  name,
+  ...
+}:
 
 {
   programs.thunderbird = {

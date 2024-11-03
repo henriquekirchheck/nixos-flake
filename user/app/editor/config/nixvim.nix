@@ -9,7 +9,9 @@
     shiftwidth = 2;
   };
 
-  globals = { mapleader = " "; };
+  globals = {
+    mapleader = " ";
+  };
 
   keymaps = [
     {
@@ -68,8 +70,7 @@
       autoEnableSources = true;
 
       settings = {
-        snippet.expand =
-          "function(args) require('luasnip').lsp_expand(args.body) end";
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         sources = [
           { name = "nvim_lsp"; }
           { name = "luasnip"; }
@@ -89,10 +90,14 @@
     };
     none-ls = {
       enable = true;
-      settings = { update_in_insert = true; };
+      settings = {
+        update_in_insert = true;
+      };
       enableLspFormat = true;
       sources = {
-        diagnostics = { stylelint.enable = true; };
+        diagnostics = {
+          stylelint.enable = true;
+        };
         formatting = {
           gofmt.enable = true;
           goimports.enable = true;
@@ -136,9 +141,9 @@
         jsonls.enable = true;
         html.enable = true;
         gdscript = {
-	  enable = true;
-	  package = null;
-	};
+          enable = true;
+          package = null;
+        };
         eslint.enable = true;
         emmet-ls.enable = true;
         dockerls.enable = true;

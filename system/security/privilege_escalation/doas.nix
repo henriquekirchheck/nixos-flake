@@ -6,11 +6,13 @@
   security.doas = {
     enable = true;
     wheelNeedsPassword = true;
-    extraRules = [{
-      groups = [ "wheel" ];
-      keepEnv = true;
-      persist = true;
-    }];
+    extraRules = [
+      {
+        groups = [ "wheel" ];
+        keepEnv = true;
+        persist = true;
+      }
+    ];
   };
 
   environment.systemPackages = [

@@ -1,4 +1,11 @@
-{ config, lib, pkgs, username, storageDriver ? null, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  username,
+  storageDriver ? null,
+  ...
+}:
 assert lib.asserts.assertOneOf "storageDriver" storageDriver [
   null
   "aufs"

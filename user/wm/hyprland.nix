@@ -1,4 +1,12 @@
-{ config, pkgs, terminal, browser, mainEditor, inputs, ... }:
+{
+  config,
+  pkgs,
+  terminal,
+  browser,
+  mainEditor,
+  inputs,
+  ...
+}:
 
 let
   winWrapClass = "terminal-background";
@@ -63,14 +71,14 @@ in
   home.file = {
     "phinger-cursors-light" = {
       source = "${
-          inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
-        }/cursors/theme_phinger-cursors-light";
+        inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
+      }/cursors/theme_phinger-cursors-light";
       target = ".local/share/icons/phinger-hyprcursors-light";
     };
     "phinger-cursors-dark" = {
       source = "${
-          inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
-        }/cursors/theme_phinger-cursors-dark";
+        inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
+      }/cursors/theme_phinger-cursors-dark";
       target = ".local/share/icons/phinger-hyprcursors-dark";
     };
   };
@@ -132,7 +140,9 @@ in
         kb_model = "";
         kb_options = "";
         kb_rules = "";
-        touchpad = { natural_scroll = false; };
+        touchpad = {
+          natural_scroll = false;
+        };
         numlock_by_default = true;
         sensitivity = 0;
         follow_mouse = 1;
@@ -197,36 +207,37 @@ in
         "opacity 0.98 0.95,class:^(?:Code|VSCodium|codium-url-handler|WebCord|code-url-handler|discord|vesktop)$"
       ];
       "$mainMod" = "SUPER";
-      bind = [
-        # Custom Keybinds
-        "$mainMod, Return, exec, ${terminal}"
-        "$mainMod, B, exec, ${browser}"
-        "$mainMod, V, exec, ${mainEditor}"
-        "$mainMod SHIFT, C, killactive,"
-        "$mainMod SHIFT, Q, exit,"
-        "$mainMod, F, togglefloating,"
-        "$mainMod SHIFT, F, fullscreen,"
-        "$mainMod, P, exec, rofi -show run"
-        "$mainMod, Space, exec, rofi -show drun"
-        "ALT,Tab,cyclenext,"
-        "ALT,Tab,bringactivetotop,"
-        ", Print, exec, grimblast copy area"
-        "$mainMod SHIFT, K, exec, hyprctl kill"
-        # Move focus with arrow keys
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
-        # Scroll through existing workspaces with mainMod + scroll
-        "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1"
-      ] ++ (builtins.concatLists (builtins.genList
-        (x: [
-          "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
-          "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${
-          toString (x + 1)
-        }"
-        ]) 9));
+      bind =
+        [
+          # Custom Keybinds
+          "$mainMod, Return, exec, ${terminal}"
+          "$mainMod, B, exec, ${browser}"
+          "$mainMod, V, exec, ${mainEditor}"
+          "$mainMod SHIFT, C, killactive,"
+          "$mainMod SHIFT, Q, exit,"
+          "$mainMod, F, togglefloating,"
+          "$mainMod SHIFT, F, fullscreen,"
+          "$mainMod, P, exec, rofi -show run"
+          "$mainMod, Space, exec, rofi -show drun"
+          "ALT,Tab,cyclenext,"
+          "ALT,Tab,bringactivetotop,"
+          ", Print, exec, grimblast copy area"
+          "$mainMod SHIFT, K, exec, hyprctl kill"
+          # Move focus with arrow keys
+          "$mainMod, left, movefocus, l"
+          "$mainMod, right, movefocus, r"
+          "$mainMod, up, movefocus, u"
+          "$mainMod, down, movefocus, d"
+          # Scroll through existing workspaces with mainMod + scroll
+          "$mainMod, mouse_down, workspace, e+1"
+          "$mainMod, mouse_up, workspace, e-1"
+        ]
+        ++ (builtins.concatLists (
+          builtins.genList (x: [
+            "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
+            "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${toString (x + 1)}"
+          ]) 9
+        ));
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = [
         "$mainMod, mouse:272, movewindow"
