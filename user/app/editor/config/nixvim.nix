@@ -47,14 +47,13 @@
 
   plugins = {
     lualine.enable = true;
-    neocord.enable = true;
     noice.enable = true;
-    # hardtime.enable = true;
     rainbow-delimiters.enable = true;
-    rust-tools.enable = true;
+    rustaceanvim.enable = true;
     telescope.enable = true;
     treesitter.enable = true;
     which-key.enable = true;
+    web-devicons.enable = true;
     oil = {
       enable = true;
       settings.view_options.show_hidden = true;
@@ -126,18 +125,18 @@
         "<leader>f" = "format";
       };
       servers = {
-        ts-ls.enable = true;
+        ts_ls.enable = true;
         yamlls.enable = true;
         tailwindcss.enable = true;
         svelte.enable = true;
-        rust-analyzer = {
-          enable = true;
-          installCargo = true;
-          installRustc = true;
-        };
-        ruff-lsp.enable = true;
-        lua-ls.enable = true;
-        nil-ls.enable = true;
+        # rust_analyzer = {
+        #   enable = true;
+        #   installCargo = true;
+        #   installRustc = true;
+        # };
+        ruff_lsp.enable = true;
+        lua_ls.enable = true;
+        nil_ls.enable = true;
         jsonls.enable = true;
         html.enable = true;
         gdscript = {
@@ -145,7 +144,7 @@
           package = null;
         };
         eslint.enable = true;
-        emmet-ls.enable = true;
+        emmet_ls.enable = true;
         dockerls.enable = true;
         cssls.enable = true;
         clangd.enable = true;
