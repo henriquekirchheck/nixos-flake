@@ -48,6 +48,7 @@ let
       mtxr.sqltools
       mtxr.sqltools-driver-pg
       mtxr.sqltools-driver-mysql
+      myriad-dreamin.tinymist
       #redhat.java
       #vscjava.vscode-java-debug
       #vscjava.vscode-java-test
@@ -80,6 +81,11 @@ let
 in
 {
   imports = [ ../utils/electron.nix ];
+
+  home.packages = with pkgs; [
+    typst
+    typstyle
+  ];
 
   programs.vscode = {
     enable = true;
@@ -177,7 +183,10 @@ in
         #  "${pkgs.nodePackages.svelte-language-server}/bin/svelteserver";
         "node_modules/svelte-language-server/bin/server.js";
       "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode-nightly";
-      "files.associations"."*.env.*" = "env";
+      "files.associations" = {
+        "*.env.*" = "env";
+        "*.typst" = "typst";
+      };
       "path-intellisense.absolutePathToWorkspace" = false;
       "prettier.jsxSingleQuote" = false;
       "prettier.semi" = true;
@@ -205,6 +214,8 @@ in
       "redhat.telemetry.enabled" = false;
       "java.codeGeneration.toString.codeStyle" = "STRING_FORMAT";
       "java.saveActions.organizeImports" = true;
+
+      "tinymist.formatterMode" = "typstyle";
     };
 
     keybindings = [
