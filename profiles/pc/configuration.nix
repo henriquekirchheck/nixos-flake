@@ -2,12 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -19,6 +14,7 @@
     ../../system/app/virtualization.nix
     ../../system/app/obs.nix
     ../../system/security/sshd.nix
+    ../../system/extras/caddy/caddy.nix
   ];
 
   environment.systemPackages = with pkgs; [ cloudflared ];
@@ -26,10 +22,37 @@
     enable = true;
     tunnels = {
       "52ba507f-2e7c-4527-9010-aaa4ff579fa2" = {
-        credentialsFile = "/root/.cloudflared/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json";
-        ingress = {
-          "jf.tunnel.henriquekh.dev.br" = "http://localhost:8096";
-        };
+        credentialsFile =
+          "/root/.cloudflared/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json";
+        #ingress = let
+        #  bases = [
+        #    "files"
+        #    "jf"
+        #    "qbit"
+        #    "radarr"
+        #    "sonnar"
+        #    "lidarr"
+        #    "readarr"
+        #    "prowlarr"
+        #    "bazarr"
+        #  ];
+        #in (builtins.listToAttrs (map (base:
+        #  let host = "${base}.tunnel.henriquekh.dev.br";
+        #  in {
+        #    name = host;
+        #    value = {
+        #      service = "http://localhost";
+        #      originRequest = {
+        #        httpHostHeader = host;
+        #        originServerName = "henriquekh.dev.br";
+        #      };
+        #    };
+        #  }) bases)) // {
+        #    "ssh.tunnel.henriquekh.dev.br" = "ssh://localhost:22";
+        #  };
+	ingress = {
+	  "jf.tunnel.henriquekh.dev.br" = "http://localhost:8096";
+	};
         default = "http_status:404";
       };
     };
