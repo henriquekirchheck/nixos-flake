@@ -4,13 +4,12 @@
   networking = {
     networkmanager.enable = true;
     nameservers = [
-      "100.100.100.100"
       "1.1.1.1"
       "1.0.0.1"
       "8.8.8.8"
       "9.9.9.9"
     ];
-    search = [ "example.ts.net" ];
+    dhcpcd.extraConfig = "nohook resolve.conf";
   };
   services.zerotierone = {
     enable = true;
