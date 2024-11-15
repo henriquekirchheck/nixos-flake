@@ -1,12 +1,4 @@
-{
-  config,
-  pkgs,
-  terminal,
-  browser,
-  mainEditor,
-  inputs,
-  ...
-}:
+{ config, pkgs, terminal, browser, mainEditor, inputs, ... }:
 
 let
   winWrapClass = "terminal-background";
@@ -19,8 +11,7 @@ let
   winWrapConfig = ''
     background_opacity 0.0
   '';
-in
-{
+in {
   imports = [
     ../app/browser/${browser}.nix
     ../app/terminal/${terminal}.nix
@@ -71,26 +62,25 @@ in
   home.file = {
     "phinger-cursors-light" = {
       source = "${
-        inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
-      }/cursors/theme_phinger-cursors-light";
+          inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
+        }/cursors/theme_phinger-cursors-light";
       target = ".local/share/icons/phinger-hyprcursors-light";
     };
     "phinger-cursors-dark" = {
       source = "${
-        inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
-      }/cursors/theme_phinger-cursors-dark";
+          inputs.hyprcursor-phinger.packages.${pkgs.system}.hyprcursor-phinger
+        }/cursors/theme_phinger-cursors-dark";
       target = ".local/share/icons/phinger-hyprcursors-dark";
     };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    package =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
-    plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
-    ];
+    plugins = [ inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap ];
     settings = {
       env = [
         # Nvidia fixes
@@ -131,8 +121,9 @@ in
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "dunst"
         "vesktop --start-minimized"
-        # ''
-        #   kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}''
+        ''
+          KITTY_DISABLE_WAYLAND=1 kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
+        ''
       ];
       input = {
         kb_layout = "br";
@@ -140,9 +131,7 @@ in
         kb_model = "";
         kb_options = "";
         kb_rules = "";
-        touchpad = {
-          natural_scroll = false;
-        };
+        touchpad = { natural_scroll = false; };
         numlock_by_default = true;
         sensitivity = 0;
         follow_mouse = 1;
@@ -165,10 +154,12 @@ in
           passes = 2;
           new_optimizations = true;
         };
-        drop_shadow = true;
-        shadow_range = 2;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        shadow = {
+          enabled = true;
+          range = 2;
+          render_power = 3;
+          color = "rgba(1a1a1aee)";
+        };
       };
       animations = {
         enabled = true;
@@ -196,6 +187,7 @@ in
         vfr = true;
         enable_swallow = true;
         swallow_regex = "^(?:Alacritty|kitty)$";
+        force_default_wallpaper = 2;
       };
       plugin.hyprwinwrap.class = winWrapClass;
       windowrulev2 = [
@@ -207,37 +199,35 @@ in
         "opacity 0.98 0.95,class:^(?:Code|VSCodium|codium-url-handler|WebCord|code-url-handler|discord|vesktop)$"
       ];
       "$mainMod" = "SUPER";
-      bind =
-        [
-          # Custom Keybinds
-          "$mainMod, Return, exec, ${terminal}"
-          "$mainMod, B, exec, ${browser}"
-          "$mainMod, V, exec, ${mainEditor}"
-          "$mainMod SHIFT, C, killactive,"
-          "$mainMod SHIFT, Q, exit,"
-          "$mainMod, F, togglefloating,"
-          "$mainMod SHIFT, F, fullscreen,"
-          "$mainMod, P, exec, rofi -show run"
-          "$mainMod, Space, exec, rofi -show drun"
-          "ALT,Tab,cyclenext,"
-          "ALT,Tab,bringactivetotop,"
-          ", Print, exec, grimblast copy area"
-          "$mainMod SHIFT, K, exec, hyprctl kill"
-          # Move focus with arrow keys
-          "$mainMod, left, movefocus, l"
-          "$mainMod, right, movefocus, r"
-          "$mainMod, up, movefocus, u"
-          "$mainMod, down, movefocus, d"
-          # Scroll through existing workspaces with mainMod + scroll
-          "$mainMod, mouse_down, workspace, e+1"
-          "$mainMod, mouse_up, workspace, e-1"
-        ]
-        ++ (builtins.concatLists (
-          builtins.genList (x: [
-            "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
-            "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${toString (x + 1)}"
-          ]) 9
-        ));
+      bind = [
+        # Custom Keybinds
+        "$mainMod, Return, exec, ${terminal}"
+        "$mainMod, B, exec, ${browser}"
+        "$mainMod, V, exec, ${mainEditor}"
+        "$mainMod SHIFT, C, killactive,"
+        "$mainMod SHIFT, Q, exit,"
+        "$mainMod, F, togglefloating,"
+        "$mainMod SHIFT, F, fullscreen,"
+        "$mainMod, P, exec, rofi -show run"
+        "$mainMod, Space, exec, rofi -show drun"
+        "ALT,Tab,cyclenext,"
+        "ALT,Tab,bringactivetotop,"
+        ", Print, exec, grimblast copy area"
+        "$mainMod SHIFT, K, exec, hyprctl kill"
+        # Move focus with arrow keys
+        "$mainMod, left, movefocus, l"
+        "$mainMod, right, movefocus, r"
+        "$mainMod, up, movefocus, u"
+        "$mainMod, down, movefocus, d"
+        # Scroll through existing workspaces with mainMod + scroll
+        "$mainMod, mouse_down, workspace, e+1"
+        "$mainMod, mouse_up, workspace, e-1"
+      ] ++ (builtins.concatLists (builtins.genList (x: [
+        "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
+        "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${
+          toString (x + 1)
+        }"
+      ]) 9));
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = [
         "$mainMod, mouse:272, movewindow"
