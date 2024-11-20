@@ -41,7 +41,7 @@ let
       mtxr.sqltools-driver-mysql
       myriad-dreamin.tinymist
       llvm-vs-code-extensions.vscode-clangd
-      zhuangtongfa.Material-theme
+      zhuangtongfa.material-theme
       inlang.vs-code-extension
       charliermarsh.ruff
     ];
