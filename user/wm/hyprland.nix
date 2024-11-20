@@ -3,10 +3,7 @@
 let
   winWrapClass = "terminal-background";
   winWrapBinName = "cava-wrap";
-  winWrapBin = ''
-    #!/bin/sh
-    sleep 0.5 && cava
-  '';
+  winWrapBin = "sleep 0.5 && cava";
   winWrapConfigFile = "hypr/kitty-${winWrapClass}.conf";
   winWrapConfig = ''
     background_opacity 0.0
@@ -25,14 +22,14 @@ in {
     grimblast
     swww
     wl-clipboard
-    (pkgs.writeScriptBin winWrapBinName winWrapBin)
+    (pkgs.writeShellScriptBin winWrapBinName winWrapBin)
     kitty
     kdePackages.polkit-kde-agent-1
   ];
   xdg.configFile.${winWrapConfigFile}.text = winWrapConfig;
 
   programs.cava = {
-    enable = true;
+#    enable = true;
     settings = {
       general = {
         mode = "normal";
@@ -121,9 +118,9 @@ in {
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "dunst"
         "vesktop --start-minimized"
-        ''
-          KITTY_DISABLE_WAYLAND=1 kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
-        ''
+#        ''
+#          KITTY_DISABLE_WAYLAND=1 kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
+#        ''
       ];
       input = {
         kb_layout = "br";

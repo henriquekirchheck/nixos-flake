@@ -11,7 +11,6 @@
     onefetch
     lolcat
     cowsay
-    cava
     gnugrep
     gnused
     killall

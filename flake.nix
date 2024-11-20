@@ -7,7 +7,6 @@
       home-manager,
       nix-vscode-extensions,
       hyprland,
-      catppuccin-vsc,
       nixvim,
       blender-bin,
       nix-ld-rs,
@@ -65,7 +64,6 @@
           android_sdk.accept_license = true;
         };
         overlays = [
-          catppuccin-vsc.overlays.default
           blender-bin.overlays.default
           nix-ld-rs.overlays.default
         ];

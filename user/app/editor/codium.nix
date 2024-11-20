@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  system,
-  ...
-}:
+{ config, pkgs, lib, inputs, system, ... }:
 
 let
   #codePackage = pkgs.vscodium.fhsWithPackages
@@ -13,33 +6,31 @@ let
   codePackage = pkgs.vscodium;
   codeExtensions = inputs.nix-vscode-extensions.extensions.${system};
 
-  extensionsOpenVSX =
-    with codeExtensions.open-vsx;
-    with codeExtensions.open-vsx-release;
-    [
+  extensionsOpenVSX = with codeExtensions.open-vsx;
+    with codeExtensions.open-vsx-release; [
       catppuccin.catppuccin-vsc-icons
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
       vadimcn.vscode-lldb
-      bungcip.better-toml
+      tamasfe.even-better-toml
       adpyke.codesnap
       serayuzgur.crates
       ms-azuretools.vscode-docker
       irongeek.vscode-env
       usernamehw.errorlens
       dbaeumer.vscode-eslint
+      vitest.explorer
       eamodio.gitlens
       mhutchie.git-graph
       wix.vscode-import-cost
       christian-kohler.path-intellisense
       esbenp.prettier-vscode
-      svelte.svelte-vscode-nightly
+      svelte.svelte-vscode
       ms-python.mypy-type-checker
       detachhead.basedpyright
       bradlc.vscode-tailwindcss
       yoavbls.pretty-ts-errors
       christian-kohler.npm-intellisense
-      biomejs.biome
       jeanp413.open-remote-ssh
       geequlim.godot-tools
       alfish.godot-files
@@ -49,43 +40,34 @@ let
       mtxr.sqltools-driver-pg
       mtxr.sqltools-driver-mysql
       myriad-dreamin.tinymist
-      #redhat.java
-      #vscjava.vscode-java-debug
-      #vscjava.vscode-java-test
-      #vscjava.vscode-maven
-      #vscjava.vscode-java-dependency
-      #redhat.vscode-xml
-    ];
-  extensionsVSCodeMarketplace =
-    with codeExtensions.vscode-marketplace;
-    with codeExtensions.vscode-marketplace-release;
-    [
+      llvm-vs-code-extensions.vscode-clangd
+      zhuangtongfa.Material-theme
+      inlang.vs-code-extension
       charliermarsh.ruff
-      # ms-vscode.hexeditor
     ];
+  extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
+    with codeExtensions.vscode-marketplace-release;
+    [ ];
   extensionsNix = [
-    (pkgs.catppuccin-vsc.override {
-      accent = "sapphire";
-      boldKeywords = true;
-      italicComments = true;
-      italicKeywords = true;
-      extraBordersEnabled = false;
-      workbenchMode = "default";
-      bracketMode = "rainbow";
-      colorOverrides = { };
-      customUIColors = { };
-    })
+    #(inputs.catppuccin-vsc.packages.${pkgs.system}.default.override {
+    #  accent = "sapphire";
+    #  boldKeywords = true;
+    #  italicComments = true;
+    #  italicKeywords = true;
+    #  extraBordersEnabled = false;
+    #  workbenchMode = "default";
+    #  bracketMode = "rainbow";
+    #  colorOverrides = { };
+    #  customUIColors = { };
+    #})
   ];
 
-  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNix;
-in
-{
+  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace
+    ++ extensionsNix;
+in {
   imports = [ ../utils/electron.nix ];
 
-  home.packages = with pkgs; [
-    typst
-    typstyle
-  ];
+  home.packages = with pkgs; [ typst typstyle ];
 
   programs.vscode = {
     enable = true;
@@ -97,21 +79,18 @@ in
       "editor.bracketPairColorization.enabled" = true;
       "editor.tabSize" = 2;
       "editor.inlineSuggest.enabled" = true;
-      "editor.codeActionsOnSave" = {
-        "source.organizeImports" = "explicit";
-      };
+      "editor.codeActionsOnSave" = { "source.organizeImports" = "explicit"; };
       "files.autoSave" = "afterDelay";
       "editor.formatOnPaste" = false;
       "editor.formatOnSave" = true;
       "diffEditor.ignoreTrimWhitespace" = false;
 
-      "workbench.colorTheme" = "Catppuccin Mocha";
+      #"workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.colorTheme" = "One Dark Pro Darker";
       "workbench.iconTheme" = "catppuccin-mocha";
       "editor.semanticHighlighting.enabled" = true;
       "terminal.integrated.minimumContrastRatio" = 1;
-      "gopls" = {
-        "ui.semanticTokens" = true;
-      };
+      "gopls" = { "ui.semanticTokens" = true; };
 
       "editor.fontLigatures" = true;
       "editor.fontFamily" = "JetBrainsMono Nerd Font";
@@ -147,9 +126,10 @@ in
 
       "security.workspace.trust.untrustedFiles" = "open";
 
-      "[javascript][typescript][javascriptreact][typescriptreact][html][css][scss][jsonc][json]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
+      "[javascript][typescript][javascriptreact][typescriptreact][html][css][scss][jsonc][json]" =
+        {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
       "javascript.suggest.paths" = false;
       "typescript.suggest.paths" = false;
       "javascript.updateImportsOnFileMove.enabled" = "always";
@@ -172,9 +152,7 @@ in
       "typescript.suggest.autoImports" = true;
       "typescript.suggest.includeCompletionsForImportStatements" = true;
       "typescript.validate.enable" = true;
-      "emmet.includeLanguages" = {
-        "postcss" = "css";
-      };
+      "emmet.includeLanguages" = { "postcss" = "css"; };
 
       "[rust][python]"."editor.tabSize" = 4;
 
