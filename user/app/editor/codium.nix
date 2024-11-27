@@ -176,10 +176,7 @@ in
       "[rust][python]"."editor.tabSize" = 4;
 
       "svelte.enable-ts-plugin" = true;
-      "svelte.language-server.ls-path" =
-        #  "${pkgs.nodePackages.svelte-language-server}/bin/svelteserver";
-        "node_modules/svelte-language-server/bin/server.js";
-      "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode-nightly";
+      "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
       "files.associations" = {
         "*.env.*" = "env";
         "*.typst" = "typst";
