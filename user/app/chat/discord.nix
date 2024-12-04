@@ -4,8 +4,9 @@
   imports = [ ../utils/electron.nix ];
 
   home.packages = [
-    (pkgs.discord.override {
-
+    (pkgs.discord-canary.override {
+      # withOpenASAR = true;
+      withVencord = true;
     })
   ];
 }
