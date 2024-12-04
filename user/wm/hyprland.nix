@@ -29,7 +29,7 @@ in {
   xdg.configFile.${winWrapConfigFile}.text = winWrapConfig;
 
   programs.cava = {
-#    enable = true;
+    #    enable = true;
     settings = {
       general = {
         mode = "normal";
@@ -77,7 +77,9 @@ in {
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
-    plugins = [ inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap ];
+    plugins = [
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
+    ];
     settings = {
       env = [
         # Nvidia fixes
@@ -118,9 +120,9 @@ in {
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "dunst"
         "vesktop --start-minimized"
-#        ''
-#          KITTY_DISABLE_WAYLAND=1 kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
-#        ''
+        #        ''
+        #          KITTY_DISABLE_WAYLAND=1 kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
+        #        ''
       ];
       input = {
         kb_layout = "br";
