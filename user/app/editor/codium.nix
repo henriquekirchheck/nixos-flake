@@ -46,6 +46,7 @@ let
       charliermarsh.ruff
       editorconfig.editorconfig
       ziglang.vscode-zig
+      denoland.vscode-deno
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
@@ -204,6 +205,7 @@ in {
       "tinymist.formatterMode" = "typstyle";
 
       "sherlock.userId" = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
+      "deno.path" = "${pkgs.deno}/bin/deno";
     };
 
     keybindings = [
