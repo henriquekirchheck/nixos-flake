@@ -13,7 +13,7 @@ let
   };
 in
 {
-  home.packages = [ 
-  #mcpelauncher 
+  home.packages = [
+    #mcpelauncher
   ];
 }

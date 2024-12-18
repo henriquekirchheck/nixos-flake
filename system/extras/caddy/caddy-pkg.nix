@@ -1,13 +1,36 @@
-{ lib, buildGoModule, fetchFromGitHub, gnused, installShellFiles
-, externalPlugins ? [ ]
-, vendorHash ? "sha256-YNcQtjPGQ0XMSog+sWlH4lG/QdbdI0Lyh/fUGqQUFaY=" }:
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  gnused,
+  installShellFiles,
+  externalPlugins ? [ ],
+  vendorHash ? "sha256-YNcQtjPGQ0XMSog+sWlH4lG/QdbdI0Lyh/fUGqQUFaY=",
+}:
 
 let
-  attrsToModules = attrs:
-    builtins.map ({ name, repo, version }: "${repo}") attrs;
-  attrsToSources = attrs:
-    builtins.map ({ name, repo, version }: "${repo}@${version}") attrs;
-in buildGoModule rec {
+  attrsToModules =
+    attrs:
+    builtins.map (
+      {
+        name,
+        repo,
+        version,
+      }:
+      "${repo}"
+    ) attrs;
+  attrsToSources =
+    attrs:
+    builtins.map (
+      {
+        name,
+        repo,
+        version,
+      }:
+      "${repo}@${version}"
+    ) attrs;
+in
+buildGoModule rec {
   pname = "caddy";
   version = "2.8.4";
 
@@ -29,9 +52,15 @@ in buildGoModule rec {
 
   subPackages = [ "cmd/caddy" ];
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = [
+    "-s"
+    "-w"
+  ];
 
-  nativeBuildInputs = [ gnused installShellFiles ];
+  nativeBuildInputs = [
+    gnused
+    installShellFiles
+  ];
 
   modBuildPhase = ''
     for module in ${builtins.toString (attrsToModules externalPlugins)}; do
@@ -77,10 +106,13 @@ in buildGoModule rec {
 
   meta = with lib; {
     homepage = "https://caddyserver.com";
-    description =
-      "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS";
+    description = "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS";
     license = licenses.asl20;
     mainProgram = "caddy";
-    maintainers = with maintainers; [ Br1ght0ne emilylange techknowlogick ];
+    maintainers = with maintainers; [
+      Br1ght0ne
+      emilylange
+      techknowlogick
+    ];
   };
 }

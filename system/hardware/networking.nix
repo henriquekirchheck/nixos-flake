@@ -8,7 +8,12 @@
       enable = true;
       dns = "none";
     };
-    nameservers = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "9.9.9.9" ];
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "8.8.8.8"
+      "9.9.9.9"
+    ];
     dhcpcd = {
       enable = true;
       IPv6rs = true;

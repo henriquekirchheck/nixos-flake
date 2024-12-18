@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -22,8 +27,7 @@
     enable = true;
     tunnels = {
       "52ba507f-2e7c-4527-9010-aaa4ff579fa2" = {
-        credentialsFile =
-          "/root/.cloudflared/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json";
+        credentialsFile = "/root/.cloudflared/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json";
         #ingress = let
         #  bases = [
         #    "files"
@@ -50,10 +54,10 @@
         #  }) bases)) // {
         #    "ssh.tunnel.henriquekh.dev.br" = "ssh://localhost:22";
         #  };
-	ingress = {
-	  "jf.tunnel.henriquekh.dev.br" = "http://localhost:8096";
-	  "app.tunnel.henriquekh.dev.br" = "http://localhost:3000";
-	};
+        ingress = {
+          "jf.tunnel.henriquekh.dev.br" = "http://localhost:8096";
+          "app.tunnel.henriquekh.dev.br" = "http://localhost:3000";
+        };
         default = "http_status:404";
       };
     };
