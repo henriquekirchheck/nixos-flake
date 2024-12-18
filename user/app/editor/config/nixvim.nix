@@ -59,7 +59,7 @@
       settings.view_options.show_hidden = true;
     };
     luasnip.enable = true;
-    nvim-colorizer.enable = true;
+    colorizer.enable = true;
     nvim-autopairs.enable = true;
     nvim-lightbulb.enable = true;
     lsp-format.enable = true;
