@@ -61,6 +61,7 @@ let
       vscjava.vscode-maven
       vscjava.vscode-gradle
       vscjava.vscode-java-dependency
+      fwcd.kotlin
     ];
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;
@@ -233,6 +234,9 @@ in
 
       "sherlock.userId" = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
       "deno.path" = "${pkgs.deno}/bin/deno";
+
+      "kotlin.languageServer.enabled" = true;
+      "kotlin.languageServer.path" = "${pkgs.kotlin-language-server}/bin/kotlin-language-server";
     };
 
     keybindings = [
