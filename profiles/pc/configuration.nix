@@ -56,6 +56,7 @@
         #  };
         ingress = {
           "jf.tunnel.henriquekh.dev.br" = "http://localhost:8096";
+          "vault.henriquekh.dev.br" = "http://localhost:8179";
           "app.tunnel.henriquekh.dev.br" = "http://localhost:3000";
         };
         default = "http_status:404";

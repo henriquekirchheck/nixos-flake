@@ -8,7 +8,7 @@
 {
   home.packages = with pkgs; [
     wineWowPackages.staging
-    bottles
+    # bottles
     dosfstools
   ];
 }
