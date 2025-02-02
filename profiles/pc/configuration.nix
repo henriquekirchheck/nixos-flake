@@ -20,6 +20,7 @@
     ../../system/app/obs.nix
     ../../system/security/sshd.nix
     ../../system/extras/caddy/caddy.nix
+    ../../system/extras/ai.nix
   ];
 
   environment.systemPackages = with pkgs; [ cloudflared ];
