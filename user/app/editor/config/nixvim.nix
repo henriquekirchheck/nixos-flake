@@ -49,7 +49,7 @@
     lualine.enable = true;
     noice.enable = true;
     rainbow-delimiters.enable = true;
-    rustaceanvim.enable = true;
+    # rustaceanvim.enable = true;
     telescope.enable = true;
     treesitter.enable = true;
     which-key.enable = true;
