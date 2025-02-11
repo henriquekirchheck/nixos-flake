@@ -127,7 +127,7 @@ in
         "dbus-launch --exit-with-session"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
         "dunst"
-        "vesktop --start-minimized"
+        "discordcanary --start-minimized"
         #        ''
         #          KITTY_DISABLE_WAYLAND=1 kitty -c "$XDG_CONFIG_HOME/${winWrapConfigFile}" --class="${winWrapClass}" ${winWrapBinName}
         #        ''
@@ -198,6 +198,7 @@ in
         swallow_regex = "^(?:Alacritty|kitty)$";
         force_default_wallpaper = 2;
       };
+      render.allow_early_buffer_release = false;
       plugin.hyprwinwrap.class = winWrapClass;
       windowrulev2 = [
         "float,class:^(firefox)$,title:^(Picture-in-Picture)$"

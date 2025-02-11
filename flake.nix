@@ -122,14 +122,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:hyprwm/Hyprland";
     };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs = {
         hyprland.follows = "hyprland";
-        nixpkgs.follows = "nixpkgs";
       };
     };
     hyprcursor-phinger = {
