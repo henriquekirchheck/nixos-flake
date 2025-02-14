@@ -198,7 +198,8 @@ in
         swallow_regex = "^(?:Alacritty|kitty)$";
         force_default_wallpaper = 2;
       };
-      render.allow_early_buffer_release = false;
+      # render.allow_early_buffer_release = false;
+      render.explicit_sync = 0;
       plugin.hyprwinwrap.class = winWrapClass;
       windowrulev2 = [
         "float,class:^(firefox)$,title:^(Picture-in-Picture)$"
