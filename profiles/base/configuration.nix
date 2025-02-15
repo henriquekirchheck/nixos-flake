@@ -71,14 +71,12 @@
       "video"
       "disk"
       "audio"
+      "kvm"
     ];
     packages = [ ];
     uid = 1000;
     initialPassword = "12345";
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # System Packages
   environment.systemPackages = with pkgs; [

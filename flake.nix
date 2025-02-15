@@ -61,7 +61,7 @@
         inherit system;
         config = {
           allowUnfree = true;
-          android_sdk.accept_license = true;
+	  android_sdk.accept_license = true;
         };
         overlays = [
           blender-bin.overlays.default
@@ -72,6 +72,7 @@
     {
       # NixOS System Configuration
       nixosConfigurations.${hostName} = lib.nixosSystem {
+	inherit pkgs;
         inherit system;
         modules = [
           nixvim.nixosModules.nixvim
