@@ -9,7 +9,6 @@
       hyprland,
       nixvim,
       blender-bin,
-      nix-ld-rs,
       catppuccin,
       disko,
       ...
@@ -65,7 +64,6 @@
         };
         overlays = [
           blender-bin.overlays.default
-          nix-ld-rs.overlays.default
         ];
       };
     in
@@ -142,10 +140,6 @@
     };
     blender-bin = {
       url = "github:edolstra/nix-warez?dir=blender";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-ld-rs = {
-      url = "github:nix-community/nix-ld-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox = {
