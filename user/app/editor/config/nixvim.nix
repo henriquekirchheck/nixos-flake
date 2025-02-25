@@ -149,7 +149,6 @@
         dockerls.enable = true;
         cssls.enable = true;
         clangd.enable = true;
-        biome.enable = true;
         gopls.enable = true;
       };
     };

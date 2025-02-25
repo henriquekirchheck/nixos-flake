@@ -11,6 +11,5 @@
     deno
     nodejs_latest
     nodePackages.pnpm
-    biome
   ];
 }
