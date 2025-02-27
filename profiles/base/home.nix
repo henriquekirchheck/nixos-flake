@@ -25,6 +25,7 @@
     ../../user/app/editor/${mainEditor}.nix
     ../../user/app/editor/nvim.nix
     ../../user/app/editor/zed.nix
+    ../../user/app/editor/emacs.nix
     ../../user/shell/sh.nix
     ../../user/shell/cmd-utils.nix
     ../../user/app/development/git.nix
