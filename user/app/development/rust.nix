@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -6,6 +6,7 @@
     cargo
     gcc
     rustfmt
+    rust-analyzer
     clippy
   ];
   home.sessionVariables = {
