@@ -52,6 +52,14 @@
                       "noatime"
                     ];
                   };
+                  "/docker" = {
+                    mountpoint = "/var/lib/docker";
+                    mountOptions = [
+                      "subvol=docker"
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
                   "/swap" = {
                     mountpoint = "/swap";
                     swap.swapfile.size = "6G";
