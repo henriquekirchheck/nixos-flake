@@ -1,4 +1,10 @@
-{ config, lib, pkgs, username, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  username,
+  ...
+}:
 
 {
   virtualisation = {
@@ -11,12 +17,17 @@
     };
     spiceUSBRedirection.enable = true;
   };
-  environment.systemPackages = [ pkgs.qemu pkgs.quickemu ];
+  environment.systemPackages = [
+    pkgs.qemu
+    pkgs.quickemu
+  ];
   programs.virt-manager.enable = true;
   programs.dconf.enable = true;
-  users.users.${username}.extraGroups = [ "libvirtd" "kvm" ];
-  systemd.tmpfiles.rules =
-    [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
+  users.users.${username}.extraGroups = [
+    "libvirtd"
+    "kvm"
+  ];
+  systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
   # boot.extraModulePackages = with config.boot.kernelPackages; [ virtualbox ];
   # environment.systemPackages = with pkgs; [ virtualbox ];
 }

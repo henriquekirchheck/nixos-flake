@@ -14,5 +14,8 @@
     autoPrune.enable = true;
   };
   users.users.${username}.extraGroups = [ "podman" ];
-  environment.systemPackages = [pkgs.podman-compose pkgs.podman-desktop];
+  environment.systemPackages = [
+    pkgs.podman-compose
+    pkgs.podman-desktop
+  ];
 }

@@ -60,7 +60,7 @@
         inherit system;
         config = {
           allowUnfree = true;
-	  android_sdk.accept_license = true;
+          android_sdk.accept_license = true;
         };
         overlays = [
           blender-bin.overlays.default
@@ -70,7 +70,7 @@
     {
       # NixOS System Configuration
       nixosConfigurations.${hostName} = lib.nixosSystem {
-	inherit pkgs;
+        inherit pkgs;
         inherit system;
         modules = [
           nixvim.nixosModules.nixvim
@@ -136,7 +136,6 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
     blender-bin = {
       url = "github:edolstra/nix-warez?dir=blender";

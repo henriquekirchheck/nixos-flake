@@ -1,4 +1,10 @@
-{ config, pkgs, lib, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 
 {
   programs.adb.enable = true;
