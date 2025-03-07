@@ -28,7 +28,6 @@ let
       dbaeumer.vscode-eslint
       vitest.explorer
       eamodio.gitlens
-      mhutchie.git-graph
       wix.vscode-import-cost
       christian-kohler.path-intellisense
       esbenp.prettier-vscode
