@@ -93,7 +93,6 @@ in
         # Nvidia fixes
         "LIBVA_DRIVER_NAME,nvidia"
         "XDG_SESSION_TYPE,wayland"
-        "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
 
         # XDG Specifications
@@ -104,7 +103,7 @@ in
         "GDK_BACKEND,wayland,x11,*"
         "QT_QPA_PLATFORM,wayland;xcb"
         "MOZ_DRM_DEVICE,/dev/dri/renderD128"
-        "SDL_VIDEODRIVER,wayland"
+        "SDL_VIDEODRIVER,wayland,x11"
         "CLUTTER_BACKEND,wayland"
         "MOZ_ENABLE_WAYLAND,1"
 
@@ -122,7 +121,6 @@ in
         "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}"
       ];
       exec-once = [
-        "swww init"
         "waybar"
         "dbus-launch --exit-with-session"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
@@ -193,13 +191,16 @@ in
       master.new_status = "master";
       gestures.workspace_swipe = false;
       misc = {
-        vfr = true;
         enable_swallow = true;
         swallow_regex = "^(?:Alacritty|kitty)$";
         force_default_wallpaper = 2;
+        vfr = false;
       };
-      # render.allow_early_buffer_release = false;
-      render.explicit_sync = 0;
+      opengl.nvidia_anti_flicker = false;
+      render = {
+	explicit_sync = 2;
+	explicit_sync_kms = 0;
+      };
       plugin.hyprwinwrap.class = winWrapClass;
       windowrulev2 = [
         "float,class:^(firefox)$,title:^(Picture-in-Picture)$"
