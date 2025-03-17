@@ -68,6 +68,7 @@
       show_whitespaces = "selection";
       autosave.after_delay.milliseconds = 100;
       buffer_font_family = "JetBrainsMono Nerd Font";
+      buffer_line_height = "standard";
       tabs = {
         file_icons = false;
         git_status = false;
@@ -92,7 +93,7 @@
       };
       show_call_status_icon = false;
       tab_size = 2;
-      current_line_highlight = false;
+      current_line_highlight = "none";
       project_panel = {
         dock = "right";
         entry_spacing = "standard";

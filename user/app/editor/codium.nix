@@ -61,6 +61,7 @@ let
       vscjava.vscode-gradle
       vscjava.vscode-java-dependency
       fwcd.kotlin
+      ms-vscode.hexeditor
     ];
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;

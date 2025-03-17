@@ -62,7 +62,5 @@
         default = "http_status:404";
       };
     };
-    user = "root";
-    group = "root";
   };
 }

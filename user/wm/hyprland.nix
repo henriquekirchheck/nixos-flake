@@ -195,6 +195,7 @@ in
         swallow_regex = "^(?:Alacritty|kitty)$";
         force_default_wallpaper = 2;
         vfr = false;
+	enable_anr_dialog = false;
       };
       opengl.nvidia_anti_flicker = false;
       render = {
