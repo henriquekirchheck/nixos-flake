@@ -33,6 +33,7 @@ let
       esbenp.prettier-vscode
       svelte.svelte-vscode
       ms-python.mypy-type-checker
+      ms-python.python
       detachhead.basedpyright
       bradlc.vscode-tailwindcss
       yoavbls.pretty-ts-errors
