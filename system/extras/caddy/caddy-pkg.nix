@@ -32,7 +32,7 @@ let
 in
 buildGoModule rec {
   pname = "caddy";
-  version = "2.8.4";
+  version = "2.9.1";
 
   dist = fetchFromGitHub {
     owner = "caddyserver";

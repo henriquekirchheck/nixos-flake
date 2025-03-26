@@ -23,6 +23,12 @@ jf.henriquekh.dev.br {
   reverse_proxy :8096
 }
 
+search.localhost,
+search.tunnel.henriquekh.dev.br,
+search.zt.henriquekh.dev.br,
+search.henriquekh.dev.br {
+  reverse_proxy :5947
+}
 
 qbit.localhost,
 qbit.tunnel.henriquekh.dev.br,
