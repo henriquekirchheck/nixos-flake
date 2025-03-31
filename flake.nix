@@ -87,7 +87,7 @@
         modules = [
           hyprland.homeManagerModules.default
           nixvim.homeManagerModules.nixvim
-          catppuccin.homeManagerModules.catppuccin
+          catppuccin.homeModules.catppuccin
           (profilePath + "/home.nix")
         ];
         extraSpecialArgs = someArgs;
@@ -111,10 +111,6 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
-    catppuccin-vsc = {
-      url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";

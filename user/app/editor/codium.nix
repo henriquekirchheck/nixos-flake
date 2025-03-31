@@ -1,9 +1,4 @@
-{
-  pkgs,
-  inputs,
-  system,
-  ...
-}:
+{ pkgs, inputs, system, ... }:
 
 let
   #codePackage = pkgs.vscodium.fhsWithPackages
@@ -11,10 +6,8 @@ let
   codePackage = pkgs.vscodium;
   codeExtensions = inputs.nix-vscode-extensions.extensions.${system};
 
-  extensionsOpenVSX =
-    with codeExtensions.open-vsx;
-    with codeExtensions.open-vsx-release;
-    [
+  extensionsOpenVSX = with codeExtensions.open-vsx;
+    with codeExtensions.open-vsx-release; [
       catppuccin.catppuccin-vsc-icons
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
@@ -64,13 +57,18 @@ let
       fwcd.kotlin
       ms-vscode.hexeditor
     ];
-  extensionsVSCodeMarketplace =
-    with codeExtensions.vscode-marketplace;
+  extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
     [ shader-slang.slang-language-extension ];
-  extensionsNix = [
-    (inputs.catppuccin-vsc.packages.${pkgs.system}.default.override {
-      accent = "sapphire";
+
+  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace;
+in {
+  imports = [ ../utils/electron.nix ];
+
+  catppuccin.vscode = {
+    enable = true;
+    accent = "sapphire";
+    settings = {
       boldKeywords = true;
       italicComments = true;
       italicKeywords = true;
@@ -79,18 +77,10 @@ let
       bracketMode = "rainbow";
       colorOverrides = { };
       customUIColors = { };
-    })
-  ];
+    };
+  };
 
-  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNix;
-in
-{
-  imports = [ ../utils/electron.nix ];
-
-  home.packages = with pkgs; [
-    typst
-    typstyle
-  ];
+  home.packages = with pkgs; [ typst typstyle ];
 
   programs.vscode = {
     enable = true;
@@ -103,22 +93,14 @@ in
         "editor.bracketPairColorization.enabled" = true;
         "editor.tabSize" = 2;
         "editor.inlineSuggest.enabled" = true;
-        "editor.codeActionsOnSave" = {
-          "source.organizeImports" = "explicit";
-        };
+        "editor.codeActionsOnSave" = { "source.organizeImports" = "explicit"; };
         "files.autoSave" = "afterDelay";
         "editor.formatOnPaste" = false;
         "editor.formatOnSave" = true;
         "diffEditor.ignoreTrimWhitespace" = false;
 
-        "workbench.colorTheme" = "Catppuccin Mocha";
-        #"workbench.colorTheme" = "One Dark Pro Darker";
         "workbench.iconTheme" = "catppuccin-mocha";
-        "editor.semanticHighlighting.enabled" = true;
-        "terminal.integrated.minimumContrastRatio" = 1;
-        "gopls" = {
-          "ui.semanticTokens" = true;
-        };
+        "gopls" = { "ui.semanticTokens" = true; };
 
         "editor.fontLigatures" = true;
         "editor.fontFamily" = "JetBrainsMono Nerd Font";
@@ -158,9 +140,10 @@ in
 
         "security.workspace.trust.untrustedFiles" = "open";
 
-        "[javascript][typescript][javascriptreact][typescriptreact][html][css][scss][jsonc][json]" = {
-          "editor.defaultFormatter" = "esbenp.prettier-vscode";
-        };
+        "[javascript][typescript][javascriptreact][typescriptreact][html][css][scss][jsonc][json]" =
+          {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
         "javascript.suggest.paths" = false;
         "typescript.suggest.paths" = false;
         "javascript.updateImportsOnFileMove.enabled" = "always";
@@ -183,9 +166,7 @@ in
         "typescript.suggest.autoImports" = true;
         "typescript.suggest.includeCompletionsForImportStatements" = true;
         "typescript.validate.enable" = true;
-        "emmet.includeLanguages" = {
-          "postcss" = "css";
-        };
+        "emmet.includeLanguages" = { "postcss" = "css"; };
 
         "[rust][python]"."editor.tabSize" = 4;
 
@@ -238,7 +219,8 @@ in
         "deno.path" = "${pkgs.deno}/bin/deno";
 
         "kotlin.languageServer.enabled" = true;
-        "kotlin.languageServer.path" = "${pkgs.kotlin-language-server}/bin/kotlin-language-server";
+        "kotlin.languageServer.path" =
+          "${pkgs.kotlin-language-server}/bin/kotlin-language-server";
       };
 
       keybindings = [
