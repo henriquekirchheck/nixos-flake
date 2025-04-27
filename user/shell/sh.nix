@@ -28,7 +28,7 @@ in
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
-    initExtra = ''
+    initContent = ''
       # disable sort when completing `git checkout`
       zstyle ':completion:*:git-checkout:*' sort false
       # set descriptions format to enable group support
