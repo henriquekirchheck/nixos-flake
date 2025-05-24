@@ -48,13 +48,13 @@ let
       ziglang.vscode-zig
       denoland.vscode-deno
       # Java
-      redhat.java
-      vscjava.vscode-java-debug
-      vscjava.vscode-java-test
-      vscjava.vscode-maven
-      vscjava.vscode-gradle
-      vscjava.vscode-java-dependency
-      fwcd.kotlin
+      #redhat.java
+      #vscjava.vscode-java-debug
+      #vscjava.vscode-java-test
+      #vscjava.vscode-maven
+      #vscjava.vscode-gradle
+      #vscjava.vscode-java-dependency
+      #fwcd.kotlin
       ms-vscode.hexeditor
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
