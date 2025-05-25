@@ -55,11 +55,12 @@
       profilePath = ./profiles/${profile};
       hostName = "${username}-${profile}";
 
-      lib = nixpkgs.lib;
+      lib = pkgs.lib;
       pkgs = import nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;
+	  allowUnfreePredicate = _: true;
           android_sdk.accept_license = true;
         };
         overlays = [

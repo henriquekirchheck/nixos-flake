@@ -14,7 +14,7 @@ let
       vadimcn.vscode-lldb
       tamasfe.even-better-toml
       adpyke.codesnap
-      fill-labs.dependi
+      # fill-labs.dependi
       ms-azuretools.vscode-docker
       irongeek.vscode-env
       usernamehw.errorlens
