@@ -14,7 +14,7 @@ let
       vadimcn.vscode-lldb
       tamasfe.even-better-toml
       adpyke.codesnap
-      serayuzgur.crates
+      fill-labs.dependi
       ms-azuretools.vscode-docker
       irongeek.vscode-env
       usernamehw.errorlens
@@ -56,6 +56,7 @@ let
       #vscjava.vscode-java-dependency
       #fwcd.kotlin
       ms-vscode.hexeditor
+      hashicorp.terraform
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
