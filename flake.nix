@@ -70,7 +70,7 @@
     in
     {
       # NixOS System Configuration
-      nixosConfigurations.${hostName} = lib.nixosSystem {
+      nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
         inherit pkgs;
         inherit system;
         modules = [
