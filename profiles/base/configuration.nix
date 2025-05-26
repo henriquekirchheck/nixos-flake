@@ -99,7 +99,7 @@
     rar
     unrar
     dos2unix
-    gimp
+    gimp3-with-plugins
     krita
     rename
     imv
