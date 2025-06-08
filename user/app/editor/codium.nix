@@ -11,7 +11,7 @@ let
       catppuccin.catppuccin-vsc-icons
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
-      vadimcn.vscode-lldb
+      # vadimcn.vscode-lldb
       tamasfe.even-better-toml
       adpyke.codesnap
       # fill-labs.dependi
