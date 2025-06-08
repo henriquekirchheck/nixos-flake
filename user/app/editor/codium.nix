@@ -57,6 +57,12 @@ let
       #fwcd.kotlin
       ms-vscode.hexeditor
       hashicorp.terraform
+
+      # Qt
+      theqtcompany.qt-core
+      theqtcompany.qt-cpp
+      theqtcompany.qt-qml
+      theqtcompany.qt-ui
     ];
   extensionsVSCodeMarketplace = with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
