@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   isNormalUser = true;
   description = "Henrique Kirch Heck";

@@ -11,12 +11,13 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-utils.url = "github:numtide/flake-utils";
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    flake-utils.url = "github:numtide/flake-utils";
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -33,7 +34,6 @@
       nixpkgs,
       home-manager,
       disko,
-      sops-nix,
       ...
     }:
     let
@@ -62,7 +62,6 @@
             ./hosts/${host}/configuration.nix
             disko.nixosModules.disko
             ./hosts/${host}/disko.nix
-            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -79,8 +78,8 @@
                 );
               in
               {
-                users.users = import (builtins.mapAttrs (n: v: v + /account.nix) users) pkgs;
-                home-manager.users = import (builtins.mapAttrs (n: v: v + /home.nix) users);
+                users.users = builtins.mapAttrs (_: v: import (v + /account.nix) pkgs) users;
+                home-manager.users = builtins.mapAttrs (_: v: import (v + /home.nix)) users;
               }
             )
           ];

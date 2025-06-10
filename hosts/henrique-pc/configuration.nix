@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 
 {
   imports = [
@@ -16,9 +16,11 @@
     ../../modules/services/cloudflared
     ../../modules/games/steam
     ../../modules/programs/obs
+    ../../modules/programs/shell/zsh
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix
     ../../modules/wm/hyprland
+    inputs.sops-nix.nixosModules.sops
   ];
 
   # System Specific
@@ -45,6 +47,9 @@
       };
     };
   system.stateVersion = "25.05";
+
+  ## Sops
+  sops.age.sshKeyPaths = "/home/henrique/.ssh/id_ed25519";
 
   ## Cloudflare Tunnels
   sops.secrets."tunnel-52ba507f-2e7c-4527-9010-aaa4ff579fa2" = {
