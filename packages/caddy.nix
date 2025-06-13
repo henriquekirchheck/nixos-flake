@@ -9,21 +9,11 @@
 }:
 
 let
-  attrsToModules =
-    attrs:
-    builtins.map (
-      {
-        name,
-        repo,
-        version,
-      }:
-      "${repo}"
-    ) attrs;
+  attrsToModules = attrs: builtins.map ({ repo }: "${repo}") attrs;
   attrsToSources =
     attrs:
     builtins.map (
       {
-        name,
         repo,
         version,
       }:
