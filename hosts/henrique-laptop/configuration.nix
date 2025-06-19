@@ -13,9 +13,11 @@
     ../../modules/system/virtualisation/containers/podman.nix
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
+    ../../modules/services/ssh/openssh.nix
     ../../modules/games/steam
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh
+    ../../modules/programs/utilities
     ../../modules/hardware/android
     ../../modules/hardware/gpu/amdgpu.nix
     ../../modules/wm/hyprland

@@ -21,6 +21,7 @@
     ../../modules/games/steam
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh
+    ../../modules/programs/utilities
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix
     ../../modules/wm/hyprland
