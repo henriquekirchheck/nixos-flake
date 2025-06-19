@@ -201,7 +201,7 @@
         renamed = "[◎◦](italic bright-blue)";
         deleted = "[✕](italic red)";
       };
-      
+
       deno = {
         format = " [deno](italic) [∫ $version](green bold)";
         version_format = "$raw";

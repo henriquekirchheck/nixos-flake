@@ -1,0 +1,3 @@
+{
+  quickshell = import ./quickshell.nix;
+}

@@ -31,8 +31,12 @@
     ../../modules/games/prismlauncher
 
     ../../modules/wm/hyprland/home.nix
+    # TODO: change to quickshell
     ../../modules/programs/notification/dunst.nix
+    ../../modules/programs/rofi
+    ../../modules/programs/waybar
 
+    ../../modules/styles/fonts/home.nix
     ../../modules/styles/cursor
     ../../modules/styles/gtk
     ../../modules/styles/qt
@@ -61,10 +65,43 @@
     BROWSER = "firefox";
   };
 
+  ## SOPS
+  sops = {
+    age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets.yaml;
+  };
+
+  ## SSH
+  sops.secrets.private = {
+    sopsFile = ./secrets/sshkey.yaml;
+    path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+  };
+  sops.secrets.public = {
+    sopsFile = ./secrets/sshkey.yaml;
+    path = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+  };
+
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = true;
+    matchBlocks = {
+      "git" = {
+        host = "github.com";
+        identitiesOnly = true;
+        identityFile = [ config.sops.secrets.private.path ];
+      };
+    };
+  };
+
   ## Git
   programs.git = {
     userName = "Henrique Kirch Heck";
-    userEmail = "86362827+henriquekirchheck@users.noreply.github.com";
+    userEmail = "me@henriquekh.dev.br";
+    signing = {
+      signByDefault = true;
+      key = config.sops.secrets.public.path;
+    };
+    extraConfig.gpg.format = "ssh";
   };
 
   # XDG Dirs

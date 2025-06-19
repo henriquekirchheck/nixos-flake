@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  inputs,
   ...
 }:
 
@@ -25,7 +24,7 @@
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix
     ../../modules/wm/hyprland
-    inputs.sops-nix.nixosModules.sops
+    ../../modules/styles/fonts
   ];
 
   # System Specific
@@ -54,18 +53,25 @@
   system.stateVersion = "25.05";
 
   ## Sops
-  sops.age.sshKeyPaths = "/home/henrique/.ssh/id_ed25519";
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+  };
 
   ## Cloudflare Tunnels
   sops.secrets."tunnel-52ba507f-2e7c-4527-9010-aaa4ff579fa2" = {
-    sopsFile = ../../../secrets/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json;
+    sopsFile = ./secrets/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json;
     format = "json";
     key = "";
     owner = config.services.cloudflared.user;
   };
   services.cloudflared.tunnels = {
     "52ba507f-2e7c-4527-9010-aaa4ff579fa2" = {
-      credentialsFile = config.sops.secrets."tunnel-52ba507f-2e7c-4527-9010-aaa4ff579fa2".path;
+      credentialsFile = "${config.sops.secrets."tunnel-52ba507f-2e7c-4527-9010-aaa4ff579fa2".path}";
       ingress = {
         "jelly.henriquekh.dev.br" = "http://localhost:8096";
         "vault.henriquekh.dev.br" = "http://localhost:8179";
@@ -78,11 +84,12 @@
 
   ## Caddy
   sops.secrets.caddy_env = {
-    sopsFile = ../../../secrets/caddy.env;
+    sopsFile = ./secrets/caddy.env;
     format = "dotenv";
-    owner = config.systemd.services.caddy.serviceConfig.User;
+    key = "";
+    owner = config.services.caddy.user;
   };
-  systemd.services.caddy.serviceConfig.EnvironmentFile = [ config.sops.secrets.caddy_env.path ];
+  services.caddy.environmentFile = [ "${config.sops.secrets.caddy_env.path}" ];
 
   ## Network configuration
   systemd.network = {

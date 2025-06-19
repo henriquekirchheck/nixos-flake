@@ -6,6 +6,8 @@
   ...
 }:
 {
+  imports = [ inputs.hyprland.homeManagerModules.default ];
+
   wayland.windowManager.hyprland = {
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
@@ -19,6 +21,8 @@
         "[workspace 8 silent] vesktop"
         "[workspace 2 silent] firefox"
         "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
+        
+        "waybar"
       ];
       env =
         [

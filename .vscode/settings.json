@@ -1,0 +1,6 @@
+{
+  "qt-qml.qmlls.useQmlImportPathEnvVar": true,
+  "[qml]": {
+    "editor.defaultFormatter": "theqtcompany.qt-qml"
+  }
+}

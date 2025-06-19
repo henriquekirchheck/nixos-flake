@@ -11,7 +11,6 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     flake-utils.url = "github:numtide/flake-utils";
 
     nur = {
@@ -34,6 +33,11 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -41,56 +45,104 @@
       nixpkgs,
       home-manager,
       disko,
+      flake-utils,
+      sops-nix,
       ...
     }:
     let
-      hosts = nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./hosts);
+      mkPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = (import ./overlays) {
+            inherit inputs;
+            inherit (nixpkgs) lib;
+          };
+          config = {
+            allowUnfree = true;
+            allowUnfreePredicate = _: true;
+            android_sdk.accept_license = true;
+          };
+        };
     in
     {
-      nixosConfigurations = builtins.mapAttrs (
-        host: _:
-        nixpkgs.lib.nixosSystem rec {
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = (import ./overlays) {
-              inherit inputs;
-              inherit (nixpkgs) lib;
-            };
-            config = {
-              allowUnfree = true;
-              allowUnfreePredicate = _: true;
-              android_sdk.accept_license = true;
-            };
-          };
-          system = import ./hosts/${host}/system.nix;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/${host}/hardware-configuration.nix
-            ./hosts/${host}/configuration.nix
-            disko.nixosModules.disko
-            ./hosts/${host}/disko.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-            (
-              let
-                users = builtins.listToAttrs (
-                  map (user: {
-                    name = user;
-                    value = ./users/${user};
-                  }) (import ./hosts/${host}/users.nix)
-                );
-              in
+      nixosConfigurations =
+        let
+          hosts = nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./hosts);
+        in
+        builtins.mapAttrs (
+          host: _:
+          nixpkgs.lib.nixosSystem rec {
+            pkgs = mkPkgs system;
+            system = import ./hosts/${host}/system.nix;
+            specialArgs = { inherit inputs; };
+            modules = [
+              ./hosts/${host}/hardware-configuration.nix
+              ./hosts/${host}/configuration.nix
+              disko.nixosModules.disko
+              ./hosts/${host}/disko.nix
+              sops-nix.nixosModules.sops
+              home-manager.nixosModules.home-manager
               {
-                users.users = builtins.mapAttrs (_: v: import (v + /account.nix) pkgs) users;
-                home-manager.users = builtins.mapAttrs (_: v: import (v + /home.nix)) users;
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = specialArgs;
+                  sharedModules = [ sops-nix.homeManagerModules.sops ];
+                };
               }
-            )
+              (
+                let
+                  users = builtins.listToAttrs (
+                    map (user: {
+                      name = user;
+                      value = ./users/${user};
+                    }) (import ./hosts/${host}/users.nix)
+                  );
+                in
+                {
+                  users.users = builtins.mapAttrs (_: v: import (v + /account.nix) pkgs) users;
+                  home-manager.users = builtins.mapAttrs (_: v: import (v + /home.nix)) users;
+                }
+              )
+            ];
+          }
+        ) hosts;
+    }
+    // (flake-utils.lib.eachDefaultSystemPassThrough (system: {
+      homeConfigurations =
+        let
+          users = nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./users);
+        in
+        builtins.mapAttrs (
+          user: _:
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs system;
+            modules = [ ./users/${user}/home.nix ];
+            extraSpecialArgs = { inherit inputs; };
+          }
+        ) users;
+    }))
+    // (flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = mkPkgs system;
+      in
+      {
+        formatter = pkgs.nixfmt-tree;
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [ inputs.quickshell.packages.${system}.default ];
+          buildInputs = [
+            inputs.quickshell.packages.${system}.default
+            pkgs.qt6.full
           ];
-        }
-      ) hosts;
-    };
+          shellHook = ''
+            export QML2_IMPORT_PATH="${
+              inputs.quickshell.packages.${system}.default
+            }/${pkgs.qt6.qtbase.qtQmlPrefix}:${pkgs.qt6.full}/${pkgs.qt6.qtbase.qtQmlPrefix}:$QML2_IMPORT_PATH"
+            export QT_PLUGIN_PATH="${pkgs.qt6.full}/${pkgs.qt6.qtbase.qtPluginPrefix}:$QT_PLUGIN_PATH"
+          '';
+        };
+      }
+    ));
 }

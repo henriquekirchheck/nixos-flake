@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
   catppuccinOptions = {
-    accents = ["sapphire"];
-    flavour = ["mocha"];
+    accents = [ "sapphire" ];
+    flavour = [ "mocha" ];
   };
   catppuccinName = "catppuccin-${builtins.elemAt catppuccinOptions.flavour 0}-${builtins.elemAt catppuccinOptions.accents 0}";
   catppuccinTheme = pkgs.catppuccin-discord.override catppuccinOptions;

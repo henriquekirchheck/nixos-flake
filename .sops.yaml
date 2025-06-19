@@ -1,7 +1,20 @@
 keys:
-  - &primary age1xtpngqd688cerdes0k37p40wd8j0c4wzvcy30wgnzzjctkgst3xsehnsde
+  - &users:
+    - &henrique age1cmx764yuualp623t3urnuan747kpxpyacr7ghtsy5huwdqv6ps4qdw3xs6
+  - &hosts:
+    - &henrique-pc age189jem67f5uc8hwsrmc0ac2x3fxugucdclmhe4usjmjnydw03vufsx38w9c
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets\.yaml$
     key_groups:
     - age:
-      - *primary
+      - *henrique
+      - *henrique-pc
+  - path_regex: hosts/henrique-pc/secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *henrique
+      - *henrique-pc
+  - path_regex: users/henrique/secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *henrique
