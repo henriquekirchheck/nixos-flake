@@ -19,6 +19,7 @@
     ../../modules/programs/shell/zsh
     ../../modules/programs/utilities
     ../../modules/hardware/android
+    ../../modules/hardware/bluetooth
     ../../modules/hardware/gpu/amdgpu.nix
     ../../modules/wm/hyprland
     ../../modules/styles/fonts
