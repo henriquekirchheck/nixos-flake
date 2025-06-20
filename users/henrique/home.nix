@@ -83,7 +83,7 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = true;
+    addKeysToAgent = "4h";
     matchBlocks = {
       "git" = {
         host = "github.com";
