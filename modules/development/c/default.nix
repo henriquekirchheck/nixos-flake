@@ -8,7 +8,7 @@
     autoconf
     automake
     libtool
-    clang
+    # clang
     clang-tools
   ];
 }
