@@ -1,7 +1,7 @@
 { config, ... }:
 {
   imports = [
-    ../../modules/programs/shell/zsh
+    ../../modules/programs/shell/zsh/home.nix
     ../../modules/programs/shell/extras/direnv
     ../../modules/programs/shell/extras/fzf
     ../../modules/programs/shell/extras/starship
