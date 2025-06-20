@@ -102,7 +102,7 @@
                 in
                 {
                   users.users = builtins.mapAttrs (_: v: import (v + /account.nix) pkgs) users;
-                  home-manager.users = builtins.mapAttrs (_: v: import (v + /home.nix)) users;
+                  home-manager.users = builtins.mapAttrs (_: v: v + /home.nix) users;
                 }
               )
             ];
