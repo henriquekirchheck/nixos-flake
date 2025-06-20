@@ -5,7 +5,7 @@
   pkg-config,
   cmake,
   aubio,
-  pipewire
+  pipewire,
 }:
 
 stdenv.mkDerivation {

@@ -21,7 +21,7 @@
         "[workspace 8 silent] vesktop"
         "[workspace 2 silent] firefox"
         "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
-        
+
         "waybar"
       ];
       env =
