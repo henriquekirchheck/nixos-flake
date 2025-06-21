@@ -5,5 +5,5 @@
     powerOnBoot = true;
     settings.General.Experimental = true;
   };
-  environment.defaultPackages = [ pkgs.overskride ];
+  services.blueman.enable = true;
 }

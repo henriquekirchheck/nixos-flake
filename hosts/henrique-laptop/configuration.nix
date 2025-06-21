@@ -11,6 +11,7 @@
     ../../modules/system/firewall
     ../../modules/system/audio/pipewire.nix
     ../../modules/system/virtualisation/containers/podman.nix
+    ../../modules/system/virtualisation/hypervisors/qemu.nix
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
     ../../modules/services/ssh/openssh.nix

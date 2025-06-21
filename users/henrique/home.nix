@@ -18,6 +18,8 @@
     ../../modules/development/javascript
     ../../modules/development/tex
 
+    ../../modules/hardware/bluetooth/home.nix
+
     ../../modules/compatibility/wine
     ../../modules/compatibility/bottles
     ../../modules/system/virtualisation/containers/distrobox.nix
