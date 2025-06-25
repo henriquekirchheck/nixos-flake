@@ -25,3 +25,5 @@ creation_rules:
     key_groups:
     - age:
       - *henrique
+      - *henrique-pc
+      - *henrique-laptop

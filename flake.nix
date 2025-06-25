@@ -101,8 +101,8 @@
                     }) (import ./hosts/${host}/users.nix)
                   );
                 in
-                args: {
-                  users.users = builtins.mapAttrs (_: v: import (v + /account.nix) args) users;
+                {
+                  imports = map (v: v + /account.nix) (builtins.attrValues users);
                   home-manager.users = builtins.mapAttrs (_: v: v + /home.nix) users;
                 }
               )
