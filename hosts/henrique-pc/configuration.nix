@@ -18,6 +18,7 @@
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/caddy
     ../../modules/services/cloudflared
+    ../../modules/services/zerotier
     ../../modules/games/steam
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh

@@ -15,6 +15,7 @@
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
     ../../modules/services/ssh/openssh.nix
+    ../../modules/services/zerotier
     ../../modules/games/steam
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh
@@ -50,6 +51,16 @@
       };
     };
   system.stateVersion = "25.05";
+
+  ## Sops
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+  };
 
   ## Nix Config
   nix = {
