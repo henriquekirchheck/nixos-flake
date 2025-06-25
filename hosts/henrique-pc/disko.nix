@@ -121,7 +121,7 @@
     umount /btrfs_tmp
   '';
 
-  environment.persistence."/persistent" = {
+  environment.persistence."/persist" = {
     enable = true; # NB: Defaults to true, not needed
     hideMounts = true;
     directories = [
