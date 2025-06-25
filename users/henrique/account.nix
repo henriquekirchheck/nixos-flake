@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   isNormalUser = true;
   description = "Henrique Kirch Heck";
@@ -11,7 +11,7 @@
     "kvm"
     "adbusers"
   ];
-  initialPassword = "changeme";
+  hashedPasswordFile = config.sops.secrets."password/henrique".path;
   shell = pkgs.zsh;
   openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG9uweW1W6G+NXidKR6FRq0BJVcSxkto04D8woERojKM u0_a336@phone"

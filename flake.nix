@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    impermanence.url = "github:nix-community/impermanence";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -100,8 +101,8 @@
                     }) (import ./hosts/${host}/users.nix)
                   );
                 in
-                {
-                  users.users = builtins.mapAttrs (_: v: import (v + /account.nix) pkgs) users;
+                args: {
+                  users.users = builtins.mapAttrs (_: v: import (v + /account.nix) args) users;
                   home-manager.users = builtins.mapAttrs (_: v: v + /home.nix) users;
                 }
               )
