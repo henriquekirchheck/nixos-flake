@@ -69,7 +69,6 @@
     sopsFile = ./secrets/52ba507f-2e7c-4527-9010-aaa4ff579fa2.json;
     format = "json";
     key = "";
-    owner = config.services.cloudflared.user;
   };
   services.cloudflared.tunnels = {
     "52ba507f-2e7c-4527-9010-aaa4ff579fa2" = {
@@ -91,7 +90,7 @@
     key = "";
     owner = config.services.caddy.user;
   };
-  services.caddy.environmentFile = [ "${config.sops.secrets.caddy_env.path}" ];
+  systemd.services.caddy.serviceConfig.EnvironmentFile = [ "${config.sops.secrets.caddy_env.path}" ];
 
   ## Network configuration
   systemd.network = {
