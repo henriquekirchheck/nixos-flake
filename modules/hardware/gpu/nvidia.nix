@@ -13,7 +13,7 @@
     nvidiaSettings = true;
     nvidiaPersistenced = true;
     open = false;
-    modesetting.enable = false;
+    modesetting.enable = true;
     videoAcceleration = true;
   };
 

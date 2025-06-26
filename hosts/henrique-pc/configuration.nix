@@ -27,6 +27,8 @@
     ../../modules/hardware/gpu/nvidia.nix
     ../../modules/wm/hyprland
     ../../modules/styles/fonts
+
+    ../../containers/bitwarden
   ];
 
   # System Specific
@@ -58,7 +60,7 @@
   sops = {
     defaultSopsFile = ../../secrets.yaml;
     age = {
-      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
@@ -99,13 +101,22 @@
         matchConfig.Name = "enp0s31f6";
         networkConfig = {
           DHCP = "ipv6";
-          Address = "10.0.0.10";
+          Address = "10.0.0.10/24";
           Gateway = "10.0.0.1";
 
           IPv6AcceptRA = "yes";
           LinkLocalAddressing = "ipv6";
 
-          DNS = "2620:fe::fe 2620:fe::9 2606:4700:4700::1111 2606:4700:4700::1001 9.9.9.9 149.112.112.112 1.1.1.1 1.0.0.1";
+          DNS = [
+            "2620:fe::fe"
+            "2620:fe::9"
+            "2606:4700:4700::1111"
+            "2606:4700:4700::1001"
+            "9.9.9.9"
+            "149.112.112.112"
+            "1.1.1.1"
+            "1.0.0.1"
+          ];
           DNSSEC = "allow-downgrade";
           DNSOverTLS = "yes";
         };

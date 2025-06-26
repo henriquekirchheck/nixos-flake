@@ -34,10 +34,15 @@
           "QT_AUTO_SCREEN_SCALE_FACTOR,1"
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         ]
-        ++ (if osConfig.hardware.nvidia.enabled then [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        ] else []);
+        ++ (
+          if osConfig.hardware.nvidia.enabled then
+            [
+              "LIBVA_DRIVER_NAME,nvidia"
+              "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+            ]
+          else
+            [ ]
+        );
 
       monitor = [
         ", preferred, auto, 1"

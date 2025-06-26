@@ -11,6 +11,11 @@ creation_rules:
       - *henrique
       - *henrique-pc
       - *henrique-laptop
+  - path_regex: containers/[^/]+/secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *henrique
+      - *henrique-pc
   - path_regex: hosts/henrique-pc/secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
