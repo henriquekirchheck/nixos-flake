@@ -29,6 +29,8 @@
     ../../modules/styles/fonts
 
     ../../containers/bitwarden
+    ../../containers/searxng
+    ../../containers/media
   ];
 
   # System Specific

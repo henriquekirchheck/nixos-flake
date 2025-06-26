@@ -1,6 +1,12 @@
 { config, ... }:
 {
-  virtualisation.containers.enable = true;
+  virtualisation.containers = {
+    enable = true;
+    containersConf.settings.engine.cdi_spec_dirs = [
+      "/etc/cdi"
+      "/run/cdi"
+    ];
+  };
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
