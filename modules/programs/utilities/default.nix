@@ -1,0 +1,44 @@
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    neovim
+    wget
+    aria2
+    eza
+    git
+    fd
+    ripgrep
+    btop
+    htop
+    mpv
+    file
+    zip
+    unzip
+    unrar
+    rar
+    dos2unix
+    rename
+    appimage-run
+    jq
+    ncdu
+    pandoc
+    dua
+    rsync
+    sops
+    age
+    ssh-to-age
+    fastfetch
+    onefetch
+    lolcat
+    cowsay
+    gnugrep
+    gnused
+    killall
+    libnotify
+    bat
+    fzf
+    hwinfo
+    pciutils
+    nix-output-monitor
+  ];
+}
