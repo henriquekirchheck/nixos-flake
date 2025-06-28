@@ -41,6 +41,7 @@
       };
       settings = {
         force = true;
+	"general.autoScroll" = true;
         "browser.link.open_newwindow" = 3;
         "browser.tabs.hoverPreview.showThumbnails" = true;
         "sidebar.verticalTabs" = false;
@@ -66,6 +67,22 @@
         default = "SearXNG";
         privateDefault = "SearXNG";
         engines = {
+          "SearXNG" = {
+            urls = [
+              {
+                template = "https://search.henriquekh.dev.br/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+
+            icon = "https://search.henriquekh.dev.br/static/themes/simple/img/favicon.png";
+            definedAliases = [ "@sxng" "@search" "@xng" ];
+          };
           "Nix Packages" = {
             urls = [
               {
