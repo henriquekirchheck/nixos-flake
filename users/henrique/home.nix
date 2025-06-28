@@ -10,6 +10,7 @@
     ../../modules/programs/git/gh.nix
     ../../modules/programs/discord/vesktop.nix
     ../../modules/programs/mpv
+    ../../modules/programs/nh
 
     ../../modules/development/c
     ../../modules/development/python
@@ -65,6 +66,11 @@
     VISUAL = "codium";
     TERMINAL = "kitty";
     BROWSER = "firefox";
+  };
+
+  ## nh
+  home.sessionVariables = {
+    NH_FLAKE = "${config.home.homeDirectory}/src/dotfiles";
   };
 
   ## SOPS
