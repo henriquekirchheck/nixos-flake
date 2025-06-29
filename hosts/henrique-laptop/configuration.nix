@@ -14,17 +14,25 @@
     ../../modules/system/virtualisation/hypervisors/qemu.nix
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
+
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/zerotier
+
     ../../modules/games/steam
+
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh
     ../../modules/programs/utilities
+
     ../../modules/hardware/android
     ../../modules/hardware/bluetooth
     ../../modules/hardware/gpu/amdgpu.nix
+
     ../../modules/wm/hyprland
+
     ../../modules/styles/fonts
+
+    ../../modules/cachix/henriquekh
   ];
 
   # System Specific

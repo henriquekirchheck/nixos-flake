@@ -15,22 +15,30 @@
     ../../modules/system/virtualisation/hypervisors/qemu.nix
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
+
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/caddy
     ../../modules/services/cloudflared
     ../../modules/services/zerotier
+
     ../../modules/games/steam
+
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh
     ../../modules/programs/utilities
+
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix
+
     ../../modules/wm/hyprland
+
     ../../modules/styles/fonts
 
     ../../containers/bitwarden
     ../../containers/searxng
     ../../containers/media
+
+    ../../modules/cachix/henriquekh
   ];
 
   # System Specific
