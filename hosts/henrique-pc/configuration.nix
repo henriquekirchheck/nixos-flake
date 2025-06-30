@@ -39,6 +39,8 @@
     ../../containers/media
 
     ../../modules/cachix/henriquekh
+    ../../modules/cachix/hyprland
+    ../../modules/cachix/nix-community
   ];
 
   # System Specific
