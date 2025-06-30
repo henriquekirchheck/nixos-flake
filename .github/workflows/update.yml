@@ -39,15 +39,15 @@ jobs:
         name: ${{ matrix.cachixName }}
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - name: Install NixCI
-      uses: yaxitech/nix-install-pkgs-action@v6
-      with:
-        packages: "nixpkgs#nixci"
     - name: Build all outputs
-      run: "nixci build > result"
+      run: |
+        nix build github:srid/devour-flake \
+          -L --no-link --print-out-paths \
+          --override-input flake . \
+          > result
     - name: Cache results
       if: ${{ matrix.cachixName != '<YOUR_CACHIX_NAME>' }}
-      run: "cachix push ${{ matrix.cachixName }} < result"
+      run: cachix push ${{ matrix.cachixName }} < result
     - name: Push new flake.lock
       run: |
         git config user.name "github-actions[bot]"
