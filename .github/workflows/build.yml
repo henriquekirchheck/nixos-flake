@@ -5,6 +5,12 @@ on:
       - main
       - master
   workflow_dispatch:
+    inputs:
+        debug_enabled:
+          type: boolean
+          description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+          required: false
+          default: false
 jobs:
   build:
     strategy:
@@ -25,6 +31,9 @@ jobs:
         remove-codeql: 'true'
     - name: Checkout repository
       uses: actions/checkout@v4
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
     - name: Install nix
       uses: cachix/install-nix-action@v31
       with:
