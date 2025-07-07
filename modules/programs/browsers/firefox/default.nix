@@ -41,7 +41,7 @@
       };
       settings = {
         force = true;
-	"general.autoScroll" = true;
+        "general.autoScroll" = true;
         "browser.link.open_newwindow" = 3;
         "browser.tabs.hoverPreview.showThumbnails" = true;
         "sidebar.verticalTabs" = false;
@@ -81,7 +81,11 @@
             ];
 
             icon = "https://search.henriquekh.dev.br/static/themes/simple/img/favicon.png";
-            definedAliases = [ "@sxng" "@search" "@xng" ];
+            definedAliases = [
+              "@sxng"
+              "@search"
+              "@xng"
+            ];
           };
           "Nix Packages" = {
             urls = [
