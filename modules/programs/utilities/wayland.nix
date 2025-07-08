@@ -1,4 +1,7 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
-  environment.systemPackages = [pkgs.wl-clipboard];
+  environment.systemPackages = with pkgs; [
+    wl-clipboard
+    grimblast
+  ];
 }

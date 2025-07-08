@@ -127,7 +127,7 @@ in
         "files.trimTrailingWhitespace" = true;
         "files.readonlyInclude" = {
           "**/.cargo/registry/src/**/*.rs" = true;
-	  "**/.cargo/git/checkouts/**/*.rs" = true;
+          "**/.cargo/git/checkouts/**/*.rs" = true;
           "**/lib/rustlib/src/rust/library/**/*.rs" = true;
         };
         "explorer.confirmDelete" = false;

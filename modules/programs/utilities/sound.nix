@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
-  environment.systemPackages = [pkgs.pavucontrol];
+  environment.systemPackages = [ pkgs.pavucontrol ];
 }
