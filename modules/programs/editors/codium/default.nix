@@ -56,6 +56,7 @@ let
       #fwcd.kotlin
       ms-vscode.hexeditor
       hashicorp.terraform
+      firefox-devtools.vscode-firefox-debug
 
       # Qt
       theqtcompany.qt-core

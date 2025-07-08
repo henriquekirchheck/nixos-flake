@@ -14,6 +14,7 @@
       DisableSetDesktopBackground = true;
       DisableTelemetry = true;
       DontCheckDefaultBrowser = true;
+      OfferToSaveLogins = false;
     };
     profiles.user = {
       extensions = {
@@ -53,7 +54,7 @@
         "signon.rememberSignons" = false;
         "extensions.autoDisableScopes" = 14;
 
-        "widget.use-xdg-desktop-portal.file-picker" = 1;
+        # "widget.use-xdg-desktop-portal.file-picker" = 1;
         "media.ffmpeg.vaapi.enabled" = true;
         "media.hardware-video-decoding.force-enabled" = true;
         "media.rdd-ffmpeg.enabled" = true;
