@@ -25,7 +25,9 @@
 
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh
-    ../../modules/programs/utilities
+    ../../modules/programs/utilities/cli.nix
+    ../../modules/programs/utilities/sound.nix
+    ../../modules/programs/utilities/wayland.nix
 
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix
