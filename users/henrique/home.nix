@@ -6,6 +6,7 @@
     ../../modules/programs/shell/extras/fzf
     ../../modules/programs/shell/extras/starship
     ../../modules/programs/shell/extras/zoxide
+    ../../modules/programs/jujutsu
     ../../modules/programs/git
     ../../modules/programs/git/gh.nix
     ../../modules/programs/discord/vesktop.nix
@@ -110,6 +111,12 @@
       key = config.sops.secrets.public.path;
     };
     extraConfig.gpg.format = "ssh";
+  };
+
+  ## Git
+  programs.jujutsu.settings = {
+    user.name = "Henrique Kirch Heck";
+    user.email = "me@henriquekh.dev.br";
   };
 
   # XDG Dirs
