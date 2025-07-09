@@ -24,6 +24,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };

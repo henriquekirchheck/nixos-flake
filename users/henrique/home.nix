@@ -30,6 +30,7 @@
     ../../modules/programs/terminal/kitty
     ../../modules/programs/editors/codium
     ../../modules/programs/editors/neovim
+    ../../modules/programs/editors/emacs
 
     ../../modules/games/godot
     ../../modules/games/prismlauncher
@@ -50,6 +51,9 @@
   home.username = "henrique";
   home.homeDirectory = "/home/henrique";
   home.stateVersion = "25.05";
+
+  ## Integration
+  home.shell.enableShellIntegration = true;
 
   ## Prefer wayland
   home.sessionVariables = {
