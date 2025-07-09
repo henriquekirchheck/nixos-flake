@@ -34,6 +34,7 @@
         roboto-mono
         ubuntu
         ubuntu-mono
+	symbols-only
         ;
     });
 }
