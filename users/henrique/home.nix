@@ -12,6 +12,9 @@
     ../../modules/programs/discord/vesktop.nix
     ../../modules/programs/mpv
     ../../modules/programs/nh
+    ../../modules/programs/gimp
+    ../../modules/programs/ardour
+    ../../modules/programs/libreoffice
 
     ../../modules/development/c
     ../../modules/development/python
