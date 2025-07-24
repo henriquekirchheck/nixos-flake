@@ -20,10 +20,13 @@
       fuse3
       gdk-pixbuf
       glib
+      glibc
       gtk3
       harfbuzz
       icu
+      libcap
       libGL
+      libva
       libappindicator-gtk3
       libdrm
       libglvnd
@@ -32,8 +35,12 @@
       libunwind
       libusb1
       libuuid
+      libxcrypt
       libxkbcommon
       libxml2
+      libgbm
+      libudev0-shim
+      udev
       mesa
       nspr
       nss
@@ -58,6 +65,8 @@
       xorg.libxkbfile
       xorg.libxshmfence
       zlib
+      vlc
+      stdenv.cc.cc.lib
     ];
   };
 }
