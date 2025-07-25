@@ -67,6 +67,7 @@
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
+    GTK_USE_PORTAL = "1";
   };
 
   ## Defaults
