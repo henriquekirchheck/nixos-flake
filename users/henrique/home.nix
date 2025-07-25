@@ -73,7 +73,7 @@
   ## Defaults
   home.sessionVariables = {
     EDITOR = "nvim";
-    VISUAL = "codium";
+    VISUAL = "codium -w";
     TERMINAL = "kitty";
     BROWSER = "firefox";
   };

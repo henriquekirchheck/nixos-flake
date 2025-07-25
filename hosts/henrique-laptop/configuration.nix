@@ -64,6 +64,15 @@
     };
   system.stateVersion = "25.05";
 
+  ## Hardware Video Acceleration
+  hardware.graphics = {
+    extraPackages = [
+      pkgs.intel-media-driver
+      pkgs.intel-vaapi-driver
+    ];
+    extraPackages32 = [ pkgs.pkgsi686Linux.intel-vaapi-driver ];
+  };
+
   ## Sops
   sops = {
     defaultSopsFile = ../../secrets.yaml;
