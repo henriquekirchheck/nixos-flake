@@ -39,7 +39,7 @@ in
         autoUpdateNotification = false;
         enableReactDevtools = true;
         plugins = {
-	  AlwaysExpandRoles.enabled = true;
+          AlwaysExpandRoles.enabled = true;
           BadgeAPI.enabled = true;
           BetterFolders.enabled = true;
           BetterGifPicker.enabled = true;
@@ -92,9 +92,9 @@ in
             disableAnalytics = true;
             enabled = true;
           };
-	  PermissionFreeWill.enabled = true;
-	  PermissionsViewer.enabled = true;
-	  PinDMs.enabled = true;
+          PermissionFreeWill.enabled = true;
+          PermissionsViewer.enabled = true;
+          PinDMs.enabled = true;
           PlatformIndicators.enabled = true;
           ReadAllNotificationsButton.enabled = true;
           RelationshipNotifier.enabled = true;
@@ -116,24 +116,24 @@ in
           StickerPaste.enabled = true;
           Translate.enabled = true;
           TypingIndicator.enabled = true;
-	  TypingTweaks.enabled = true;
+          TypingTweaks.enabled = true;
           UserMessagesPronouns = {
             enabled = true;
             pronounsFormat = "LOWERCASE";
             showSelf = true;
           };
-	  UserVoiceShow.enabled = true;
+          UserVoiceShow.enabled = true;
           UserSettingsAPI.enabled = true;
-	  ValidReply.enabled = true;
-	  ValidUser.enabled = true;
-	  ViewRaw.enabled = true;
-	  VoiceDownload.enabled = true;
+          ValidReply.enabled = true;
+          ValidUser.enabled = true;
+          ViewRaw.enabled = true;
+          VoiceDownload.enabled = true;
           VoiceMessages = {
             echoCancellation = false;
             enabled = true;
             noiseSuppression = false;
           };
-	  VolumeBooster.enabled = true;
+          VolumeBooster.enabled = true;
           WebContextMenus.enabled = true;
           WebKeybinds.enabled = true;
           "WebRichPresence (arRPC)".enabled = false;

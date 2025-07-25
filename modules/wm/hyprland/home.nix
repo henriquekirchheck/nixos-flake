@@ -25,58 +25,56 @@
 
         "waybar"
       ];
-      env =
-        [
-          "XDG_CURRENT_DESKTOP,Hyprland"
-          "XDG_SESSION_TYPE,wayland"
-          "XDG_SESSION_DESKTOP,Hyprland"
+      env = [
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
 
-          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-        ]
-        ++ (
-          if osConfig.hardware.nvidia.enabled then
-            [
-              "LIBVA_DRIVER_NAME,nvidia"
-              "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-            ]
-          else
-            [ ]
-        );
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      ]
+      ++ (
+        if osConfig.hardware.nvidia.enabled then
+          [
+            "LIBVA_DRIVER_NAME,nvidia"
+            "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          ]
+        else
+          [ ]
+      );
 
       monitor = [
         ", preferred, auto, 1"
       ];
 
       "$mainMod" = "SUPER";
-      bind =
-        [
-          "$mainMod, Return, exec, kitty"
-          "$mainMod, B, exec, firefox"
-          "$mainMod, V, exec, codium"
-          "$mainMod SHIFT, C, killactive,"
-          "$mainMod SHIFT, Q, exit,"
-          "$mainMod, F, togglefloating,"
-          "$mainMod SHIFT, F, fullscreen,"
-          "$mainMod, P, exec, rofi -show run"
-          "$mainMod, Space, exec, rofi -show drun"
-          "ALT,Tab,cyclenext,"
-          "ALT,Tab,bringactivetotop,"
-          ", Print, exec, grimblast copy area"
-          "$mainMod SHIFT, K, exec, hyprctl kill"
-          "$mainMod, left, movefocus, l"
-          "$mainMod, right, movefocus, r"
-          "$mainMod, up, movefocus, u"
-          "$mainMod, down, movefocus, d"
-          "$mainMod, mouse_down, workspace, e+1"
-          "$mainMod, mouse_up, workspace, e-1"
-        ]
-        ++ (builtins.concatLists (
-          builtins.genList (x: [
-            "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
-            "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${toString (x + 1)}"
-          ]) 9
-        ));
+      bind = [
+        "$mainMod, Return, exec, kitty"
+        "$mainMod, B, exec, firefox"
+        "$mainMod, V, exec, codium"
+        "$mainMod SHIFT, C, killactive,"
+        "$mainMod SHIFT, Q, exit,"
+        "$mainMod, F, togglefloating,"
+        "$mainMod SHIFT, F, fullscreen,"
+        "$mainMod, P, exec, rofi -show run"
+        "$mainMod, Space, exec, rofi -show drun"
+        "ALT,Tab,cyclenext,"
+        "ALT,Tab,bringactivetotop,"
+        ", Print, exec, grimblast copy area"
+        "$mainMod SHIFT, K, exec, hyprctl kill"
+        "$mainMod, left, movefocus, l"
+        "$mainMod, right, movefocus, r"
+        "$mainMod, up, movefocus, u"
+        "$mainMod, down, movefocus, d"
+        "$mainMod, mouse_down, workspace, e+1"
+        "$mainMod, mouse_up, workspace, e-1"
+      ]
+      ++ (builtins.concatLists (
+        builtins.genList (x: [
+          "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
+          "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${toString (x + 1)}"
+        ]) 9
+      ));
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
