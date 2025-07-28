@@ -8,13 +8,13 @@ let
     with codeExtensions.open-vsx;
     with codeExtensions.open-vsx-release;
     [
+      pkgs.vscode-extensions.vadimcn.vscode-lldb
+
       catppuccin.catppuccin-vsc-icons
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
-      # vadimcn.vscode-lldb
       tamasfe.even-better-toml
       adpyke.codesnap
-      # fill-labs.dependi
       ms-azuretools.vscode-docker
       irongeek.vscode-env
       usernamehw.errorlens
