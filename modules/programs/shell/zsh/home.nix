@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   programs.zsh = {
@@ -82,7 +82,7 @@
       zstyle ':fzf-tab:complete:docker-container:argument-1' fzf-preview 'nix help $word | bat -lhelp'
     '';
     shellAliases = import ../aliases.nix;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     autocd = true;
     historySubstringSearch = {
       enable = true;
