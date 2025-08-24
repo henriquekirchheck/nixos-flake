@@ -40,6 +40,7 @@
       libxml2
       libgbm
       libudev0-shim
+      icu
       udev
       mesa
       nspr
