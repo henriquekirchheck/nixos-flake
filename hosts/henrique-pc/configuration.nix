@@ -39,6 +39,7 @@
     ../../containers/bitwarden
     ../../containers/searxng
     ../../containers/media
+    ../../containers/copyparty
 
     ../../modules/cachix/henriquekh
     ../../modules/cachix/hyprland
@@ -93,6 +94,7 @@
         "jelly.henriquekh.dev.br" = "http://localhost:8096";
         "vault.henriquekh.dev.br" = "http://localhost:8179";
         "search.henriquekh.dev.br" = "http://localhost:5947";
+        "files.henriquekh.dev.br" = "http://localhost:3923";
         "app.tunnel.henriquekh.dev.br" = "http://localhost:3000";
       };
       default = "http_status:404";
