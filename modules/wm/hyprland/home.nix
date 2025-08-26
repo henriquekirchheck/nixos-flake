@@ -6,12 +6,10 @@
   ...
 }:
 {
-  imports = [ inputs.hyprland.homeManagerModules.default ];
-
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage =
+    package = if osConfig.programs.hyprland.enable then null else inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage =if osConfig.programs.hyprland.enable then null else
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     xwayland.enable = true;
