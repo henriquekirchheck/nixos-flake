@@ -31,6 +31,8 @@
     ../../modules/hardware/gpu/amdgpu.nix
 
     ../../modules/wm/hyprland
+    ../../modules/wm/kde
+    ../../modules/dm/greetd
 
     ../../modules/styles/fonts
 
