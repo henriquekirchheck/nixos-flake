@@ -22,6 +22,7 @@
 
     ../../modules/programs/obs
     ../../modules/programs/shell/zsh
+    ../../modules/programs/browsers/chromium
     ../../modules/programs/utilities/cli.nix
     ../../modules/programs/utilities/sound.nix
     ../../modules/programs/utilities/wayland.nix
@@ -32,7 +33,7 @@
 
     ../../modules/wm/hyprland
     ../../modules/wm/kde
-    ../../modules/dm/greetd
+    ../../modules/dm/sddm
 
     ../../modules/styles/fonts
 

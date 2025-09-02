@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ../../modules/programs/browsers/chromium
+    ../../modules/programs/browsers/chromium/home.nix
     ../../modules/programs/mpv
     ../../modules/programs/gimp
     ../../modules/programs/ffmpeg

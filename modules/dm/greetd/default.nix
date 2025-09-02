@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   swayConfig = pkgs.writeText "greetd-sway-config" ''
-    exec "${pkgs.cosmic-greeter}/bin/cosmic-greeter; swaymsg exit"
+    exec "${pkgs.nwg-hello}/bin/nwg-hello; swaymsg exit"
     bindsym Mod4+shift+e exec swaynag \
       -t warning \
       -m 'What do you want to do?' \
@@ -18,10 +18,4 @@ in
       };
     };
   };
-
-  environment.etc."greetd/environments".text = ''
-    startplasma-wayland
-    Hyprland
-    zsh
-  '';
 }

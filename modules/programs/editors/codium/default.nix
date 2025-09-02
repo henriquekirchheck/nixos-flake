@@ -63,13 +63,21 @@ let
       theqtcompany.qt-cpp
       theqtcompany.qt-qml
       theqtcompany.qt-ui
+
+      shader-slang.slang-language-extension
     ];
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
-    [ shader-slang.slang-language-extension ];
+    [  ];
 
-  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace;
+  extensionsNixpkgs = with pkgs.vscode-extensions; [
+      # PHP
+      xdebug.php-debug
+      bmewburn.vscode-intelephense-client
+  ];
+
+  extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNixpkgs;
 in
 {
   imports = [
