@@ -101,8 +101,10 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "4h";
     matchBlocks = {
+      "*" = {
+        addKeysToAgent = "4h";
+      };
       "git" = {
         host = "github.com";
         identitiesOnly = true;
