@@ -4,12 +4,11 @@
   programs.mpv = {
     enable = true;
     config = {
-      vo = "gpu";
-      hwdec = "auto";
+      vo = "gpu-next";
+      hwdec = "auto-safe";
       profile = "gpu-hq";
       ytdl-format = "bestvideo+bestaudio";
     };
   };
   programs.yt-dlp.enable = true;
-  home.packages = [ pkgs.jellyfin-mpv-shim ];
 }
