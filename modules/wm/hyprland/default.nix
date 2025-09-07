@@ -10,7 +10,10 @@
   xdg.portal = {
     enable = true;
     config.common = {
-      default = [ "gtk" "hyprland" ];
+      default = [
+        "gtk"
+        "hyprland"
+      ];
       "org.freedesktop.impl.portal.FileChooser" = "gtk";
     };
     extraPortals = [

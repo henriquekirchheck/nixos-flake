@@ -8,9 +8,16 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = if osConfig.programs.hyprland.enable then null else inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage =if osConfig.programs.hyprland.enable then null else
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package =
+      if osConfig.programs.hyprland.enable then
+        null
+      else
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage =
+      if osConfig.programs.hyprland.enable then
+        null
+      else
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     xwayland.enable = true;
     systemd.variables = [ "--all" ];

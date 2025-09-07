@@ -69,12 +69,12 @@ let
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
-    [  ];
+    [ ];
 
   extensionsNixpkgs = with pkgs.vscode-extensions; [
-      # PHP
-      xdebug.php-debug
-      bmewburn.vscode-intelephense-client
+    # PHP
+    xdebug.php-debug
+    bmewburn.vscode-intelephense-client
   ];
 
   extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNixpkgs;

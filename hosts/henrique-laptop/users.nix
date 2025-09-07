@@ -1,1 +1,4 @@
-[ "henrique" "maria" ]
+[
+  "henrique"
+  "maria"
+]
