@@ -147,7 +147,6 @@
         preserve_split = true;
       };
       master.new_status = "master";
-      gestures.workspace_swipe = false;
       misc = {
         enable_swallow = true;
         swallow_regex = "^(?:Alacritty|kitty)$";

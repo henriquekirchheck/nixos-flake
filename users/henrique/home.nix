@@ -101,6 +101,7 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
         addKeysToAgent = "4h";
