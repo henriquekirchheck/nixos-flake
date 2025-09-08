@@ -55,6 +55,7 @@ let
       ms-vscode.hexeditor
       hashicorp.terraform
       firefox-devtools.vscode-firefox-debug
+      a5huynh.vscode-ron
 
       # Qt
       theqtcompany.qt-core
