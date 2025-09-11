@@ -8,8 +8,6 @@ let
     with codeExtensions.open-vsx;
     with codeExtensions.open-vsx-release;
     [
-      pkgs.vscode-extensions.vadimcn.vscode-lldb
-
       catppuccin.catppuccin-vsc-icons
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
@@ -65,6 +63,8 @@ let
       theqtcompany.qt-ui
 
       shader-slang.slang-language-extension
+
+      angular.ng-template
     ];
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;
@@ -75,6 +75,8 @@ let
     # PHP
     xdebug.php-debug
     bmewburn.vscode-intelephense-client
+
+    vadimcn.vscode-lldb
   ];
 
   extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNixpkgs;
