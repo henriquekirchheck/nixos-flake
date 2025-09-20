@@ -15,6 +15,7 @@
     ../../modules/programs/gimp
     ../../modules/programs/ardour
     ../../modules/programs/ffmpeg
+    ../../modules/programs/aegisub
     ../../modules/programs/libreoffice
 
     ../../modules/development/c
