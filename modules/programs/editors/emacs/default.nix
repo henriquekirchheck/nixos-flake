@@ -16,6 +16,9 @@ in
     ripgrep
     gnutls
 
+    perl
+    wget
+
     fd
     imagemagick
     zstd
