@@ -16,6 +16,7 @@
       "libvirtd"
       "kvm"
       "adbusers"
+      "dialout"
     ];
     hashedPasswordFile = config.sops.secrets.password.path;
     shell = pkgs.zsh;
