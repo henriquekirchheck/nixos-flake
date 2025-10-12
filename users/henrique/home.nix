@@ -9,7 +9,7 @@
     ../../modules/programs/jujutsu
     ../../modules/programs/git
     ../../modules/programs/git/gh.nix
-    ../../modules/programs/discord/vesktop.nix
+    ../../modules/programs/discord/canary.nix
     ../../modules/programs/mpv
     ../../modules/programs/nh
     ../../modules/programs/gimp

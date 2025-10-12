@@ -24,7 +24,7 @@
 
     settings = {
       exec-once = [
-        "[workspace 8 silent] vesktop"
+        "[workspace 8 silent] DiscordCanary"
         "[workspace 2 silent] firefox"
         "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
 
