@@ -18,6 +18,7 @@
       streamerModeDetection = true;
       sysTray = true;
       updateNotify = false;
+      rpcServer = true;
     };
     openASAR.enable = true;
     config = {
