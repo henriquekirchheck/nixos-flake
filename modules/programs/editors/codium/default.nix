@@ -41,6 +41,7 @@ let
       llvm-vs-code-extensions.vscode-clangd
       inlang.vs-code-extension
       charliermarsh.ruff
+      jeanp413.open-remote-ssh
       #editorconfig.editorconfig
       ziglang.vscode-zig
       denoland.vscode-deno
