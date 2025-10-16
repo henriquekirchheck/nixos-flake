@@ -1,3 +1,3 @@
 { niri, ... }:
 
-niri.overlays.default
+niri.overlays.niri
