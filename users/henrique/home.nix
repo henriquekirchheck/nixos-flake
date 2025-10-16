@@ -40,8 +40,7 @@
     ../../modules/games/godot
     ../../modules/games/prismlauncher
 
-    ../../modules/wm/hyprland/home.nix
-    # TODO: change to quickshell
+    ../../modules/wm/niri/home.nix
     ../../modules/programs/notification/dunst.nix
     ../../modules/programs/rofi
     ../../modules/programs/waybar

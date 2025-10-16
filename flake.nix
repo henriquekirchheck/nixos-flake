@@ -37,6 +37,7 @@
         systems.follows = "systems";
       };
     };
+    niri.url = "https://github.com/sodiboo/niri-flake";
 
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";

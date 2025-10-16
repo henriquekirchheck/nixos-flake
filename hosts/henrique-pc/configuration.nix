@@ -41,9 +41,7 @@
     ../../containers/media
     ../../containers/copyparty
 
-    ../../modules/cachix/henriquekh
-    ../../modules/cachix/hyprland
-    ../../modules/cachix/nix-community
+    ../../modules/cachix
   ];
 
   # System Specific

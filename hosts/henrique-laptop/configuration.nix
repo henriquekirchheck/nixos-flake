@@ -31,15 +31,13 @@
     ../../modules/hardware/bluetooth
     ../../modules/hardware/gpu/amdgpu.nix
 
-    ../../modules/wm/hyprland
+    ../../modules/wm/niri
     ../../modules/wm/kde
     ../../modules/dm/sddm
 
     ../../modules/styles/fonts
 
-    ../../modules/cachix/henriquekh
-    ../../modules/cachix/hyprland
-    ../../modules/cachix/nix-community
+    ../../modules/cachix
   ];
 
   # System Specific
