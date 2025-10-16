@@ -44,6 +44,7 @@
     ../../modules/programs/notification/dunst.nix
     ../../modules/programs/rofi
     ../../modules/programs/waybar
+    ../../modules/programs/wallpaper/swww.nix
 
     ../../modules/styles/fonts/home.nix
     ../../modules/styles/cursor
