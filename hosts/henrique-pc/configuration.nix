@@ -32,7 +32,7 @@
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix
 
-    ../../modules/wm/hyprland
+    ../../modules/wm/niri
 
     ../../modules/styles/fonts
 

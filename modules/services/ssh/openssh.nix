@@ -9,5 +9,5 @@
     };
   };
   services.fail2ban.enable = true;
-  programs.ssh.startAgent = true;
+  # programs.ssh.startAgent = true;
 }
