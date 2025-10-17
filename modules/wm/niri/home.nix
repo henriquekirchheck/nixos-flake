@@ -1,5 +1,4 @@
 {
-  osConfig,
   config,
   inputs,
   pkgs,
@@ -8,9 +7,9 @@
 }:
 
 {
+  # imports = [inputs.niri.homeModules.config];
   home.packages = with pkgs; [ xwayland-run openbox ];
   programs.niri = {
-    enable = true;
     package = pkgs.niri-unstable;
     settings = {
       prefer-no-csd = true;
