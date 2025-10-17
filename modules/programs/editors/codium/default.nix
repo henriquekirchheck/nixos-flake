@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   codePackage = pkgs.vscodium;
@@ -63,7 +68,6 @@ let
       theqtcompany.qt-cpp
       theqtcompany.qt-qml
       theqtcompany.qt-ui
-      twxs.cmake
 
       shader-slang.slang-language-extension
 
@@ -132,6 +136,7 @@ in
         "diffEditor.ignoreTrimWhitespace" = false;
 
         "workbench.iconTheme" = "catppuccin-mocha";
+        "workbench.secondarySideBar.defaultVisibility" = "hidden";
         "gopls" = {
           "ui.semanticTokens" = true;
         };
@@ -255,7 +260,10 @@ in
         "deno.path" = "${pkgs.deno}/bin/deno";
 
         "kotlin.languageServer.enabled" = true;
-        "kotlin.languageServer.path" = "${pkgs.kotlin-language-server}/bin/kotlin-language-server";
+        "kotlin.languageServer.path" = lib.getExe pkgs.kotlin-language-server;
+
+        "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
+        "qt-qml.qmlls.customExePath" = lib.getExe' pkgs.kdePackages.qtdeclarative "qmlls";
       };
 
       keybindings = [

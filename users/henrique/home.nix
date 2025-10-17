@@ -43,7 +43,7 @@
     ../../modules/wm/niri/home.nix
     ../../modules/programs/notification/dunst.nix
     ../../modules/programs/rofi
-    ../../modules/programs/waybar
+    ../../modules/programs/quickshell
     ../../modules/programs/wallpaper/swww.nix
 
     ../../modules/styles/fonts/home.nix

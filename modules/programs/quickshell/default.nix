@@ -1,13 +1,15 @@
-{ pkgs, inputs, ... }:
 {
-  imports = [
-    pkgs.nur.repos.henriquekh.hmModules.quickshell
-  ];
+  inputs,
+  system,
+  ...
+}:
 
+{
   programs.quickshell = {
     enable = true;
-    package = inputs.quickshell.packages.${pkgs.system}.default;
-    extraPackages = [ ];
-    config = ./config;
+    package = inputs.quickshell.packages.${system}.default;
+    configs.shell = ./config;
+    activeConfig = "shell";
+    systemd.enable = true;
   };
 }

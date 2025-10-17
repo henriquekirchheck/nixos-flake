@@ -98,7 +98,7 @@
           nixpkgs.lib.nixosSystem rec {
             pkgs = mkPkgs system;
             system = import ./hosts/${host}/system.nix;
-            specialArgs = { inherit inputs; };
+            specialArgs = { inherit inputs system; };
             modules = [
               ./hosts/${host}/hardware-configuration.nix
               ./hosts/${host}/configuration.nix
@@ -142,7 +142,7 @@
           home-manager.lib.homeManagerConfiguration {
             pkgs = mkPkgs system;
             modules = [ ./users/${user}/home.nix ];
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = { inherit inputs system; };
           }
         ) users;
     }))
