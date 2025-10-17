@@ -1,3 +1,0 @@
-{
-  quickshell = import ./quickshell.nix;
-}

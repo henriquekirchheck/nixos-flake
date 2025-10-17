@@ -1,17 +1,13 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ../../../packages/hmModules/quickshell.nix
+    pkgs.nur.repos.henriquekh.hmModules.quickshell
   ];
 
   programs.quickshell = {
     enable = true;
     package = inputs.quickshell.packages.${pkgs.system}.default;
-    extraPackages = [
-      (import ../../../packages).beat-detector
-      pkgs.fish
-      pkgs.cava
-    ];
+    extraPackages = [ ];
     config = ./config;
   };
 }

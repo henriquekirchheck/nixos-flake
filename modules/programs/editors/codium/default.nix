@@ -63,6 +63,7 @@ let
       theqtcompany.qt-cpp
       theqtcompany.qt-qml
       theqtcompany.qt-ui
+      twxs.cmake
 
       shader-slang.slang-language-extension
 
@@ -71,7 +72,9 @@ let
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;
     with codeExtensions.vscode-marketplace-release;
-    [ ];
+    [
+      ms-vscode.cmake-tools
+    ];
 
   extensionsNixpkgs = with pkgs.vscode-extensions; [
     # PHP

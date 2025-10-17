@@ -8,7 +8,10 @@
 
 {
   # imports = [inputs.niri.homeModules.config];
-  home.packages = with pkgs; [ xwayland-run openbox ];
+  home.packages = with pkgs; [
+    xwayland-run
+    openbox
+  ];
   programs.niri = {
     package = pkgs.niri-unstable;
     settings = {
