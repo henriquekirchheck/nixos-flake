@@ -44,6 +44,19 @@
           opacity = 0.92;
         }
         {
+          matches = [
+            {
+              app-id = "steam";
+              title = ''^notificationtoasts_\d+_desktop$'';
+            }
+          ];
+          default-floating-position = {
+            x = 10;
+            y = 10;
+            relative-to = "bottom-right";
+          };
+        }
+        {
           matches = [ { is-window-cast-target = true; } ];
           border = {
             inactive.color = "#eba0ac";
@@ -81,6 +94,7 @@
           click-method = "clickfinger";
           drag = true;
           tap-button-map = "left-right-middle";
+	  natural-scroll = false;
         };
         power-key-handling.enable = false;
         focus-follows-mouse.enable = true;
