@@ -44,6 +44,18 @@
         }
         {
           matches = [
+            { app-id = "xwaylandvideobridge"; }
+          ];
+          opacity = 0.0;
+          open-focused = false;
+          max-width = 1;
+          max-height = 1;
+          shadow.enable = false;
+          border.enable = false;
+          focus-ring.enable = false;
+        }
+        {
+          matches = [
             {
               app-id = "steam";
               title = ''^notificationtoasts_\d+_desktop$'';
