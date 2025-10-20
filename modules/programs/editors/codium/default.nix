@@ -264,6 +264,8 @@ in
 
         "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
         "qt-qml.qmlls.customExePath" = lib.getExe' pkgs.kdePackages.qtdeclarative "qmlls";
+        "qt-qml.doNotAskForQmllsDownload" = true;
+
         "qt-core.additionalQtPaths" =
           let
             qtBase = pkgs.kdePackages.qtbase;
