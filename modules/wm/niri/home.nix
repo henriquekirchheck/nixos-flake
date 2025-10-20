@@ -105,7 +105,7 @@
           click-method = "clickfinger";
           drag = true;
           tap-button-map = "left-right-middle";
-	  natural-scroll = false;
+          natural-scroll = false;
         };
         power-key-handling.enable = false;
         focus-follows-mouse.enable = true;
@@ -143,9 +143,13 @@
           "Mod+V".action = spawn "codium";
           "Mod+P".action = spawn "rofi" "-show" "run";
           "Mod+Space".action = spawn "rofi" "-show" "drun";
-          "Print".action = screenshot { };
-          # "Shift+Print".action = screenshot-screen { write-to-disk = false; };
-          "Ctrl+Print".action = screenshot-window { write-to-disk = false; };
+          "Print".action.screenshot = { };
+          "Shift+Print".action.screenshot-screen = {
+            write-to-disk = false;
+          };
+          "Ctrl+Print".action.screenshot-window = {
+            write-to-disk = false;
+          };
           "Mod+Shift+C".action = close-window;
           "Mod+Shift+Q".action = quit { skip-confirmation = true; };
           "Mod+F".action = toggle-window-floating;

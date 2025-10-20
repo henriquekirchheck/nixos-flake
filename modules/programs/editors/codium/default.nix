@@ -264,6 +264,16 @@ in
 
         "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
         "qt-qml.qmlls.customExePath" = lib.getExe' pkgs.kdePackages.qtdeclarative "qmlls";
+        "qt-core.additionalQtPaths" =
+          let
+            qtBase = pkgs.kdePackages.qtbase;
+          in
+          [
+            {
+              "name" = "${qtBase.name}-nixpkgs";
+              "path" = lib.getExe' qtBase "qtpaths";
+            }
+          ];
       };
 
       keybindings = [
