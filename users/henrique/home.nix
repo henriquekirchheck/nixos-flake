@@ -117,13 +117,15 @@
 
   ## Git
   programs.git = {
-    userName = "Henrique Kirch Heck";
-    userEmail = "me@henriquekh.dev.br";
+    settings = {
+      user.name = "Henrique Kirch Heck";
+      user.email = "me@henriquekh.dev.br";
+      gpg.format = "ssh";
+    };
     signing = {
       signByDefault = true;
       key = config.sops.secrets.public.path;
     };
-    extraConfig.gpg.format = "ssh";
   };
 
   ## Git

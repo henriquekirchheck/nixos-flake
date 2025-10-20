@@ -5,6 +5,7 @@
   ...
 }:
 {
+  home.packages = [ pkgs.grimblast ];
   wayland.windowManager.hyprland = {
     enable = true;
     package =
