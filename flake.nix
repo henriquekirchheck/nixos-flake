@@ -153,7 +153,7 @@
       in
       {
         formatter = pkgs.nixfmt-tree;
-        devShells.default = pkgs.mkShell {
+        devShells.quickshell = pkgs.mkShell {
           inputsFrom = [ inputs.quickshell.packages.${system}.default ];
           buildInputs = [
             inputs.quickshell.packages.${system}.default
