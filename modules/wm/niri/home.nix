@@ -11,6 +11,12 @@
     xwayland-run
     openbox
   ];
+
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
   programs.niri = {
     package = pkgs.niri-unstable;
     settings = {
