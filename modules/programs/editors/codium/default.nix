@@ -13,7 +13,6 @@ let
     with codeExtensions.open-vsx;
     with codeExtensions.open-vsx-release;
     [
-      catppuccin.catppuccin-vsc-icons
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
       tamasfe.even-better-toml
@@ -99,6 +98,8 @@ in
   catppuccin.vscode.profiles.default = {
     enable = true;
     accent = "sapphire";
+    flavor = "mocha";
+    icons.enable = true;
     settings = {
       boldKeywords = true;
       italicComments = true;

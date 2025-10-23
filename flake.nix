@@ -154,13 +154,12 @@
           inputsFrom = [ inputs.quickshell.packages.${system}.default ];
           buildInputs = [
             inputs.quickshell.packages.${system}.default
-            pkgs.qt6.full
           ];
           shellHook = ''
             export QML2_IMPORT_PATH="${
               inputs.quickshell.packages.${system}.default
-            }/${pkgs.qt6.qtbase.qtQmlPrefix}:${pkgs.qt6.full}/${pkgs.qt6.qtbase.qtQmlPrefix}:$QML2_IMPORT_PATH"
-            export QT_PLUGIN_PATH="${pkgs.qt6.full}/${pkgs.qt6.qtbase.qtPluginPrefix}:$QT_PLUGIN_PATH"
+            }/${pkgs.qt6.qtbase.qtQmlPrefix}:$QML2_IMPORT_PATH"
+            export QT_PLUGIN_PATH="$QT_PLUGIN_PATH"
           '';
         };
       }
