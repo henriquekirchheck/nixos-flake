@@ -6,8 +6,8 @@
     configFile = ./Caddyfile;
     package = (
       pkgs.caddy.withPlugins {
-        plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
-        hash = "sha256-AcWko5513hO8I0lvbCLqVbM1eWegAhoM0J0qXoWL/vI=";
+        plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
+        hash = "sha256-4qUWhrv3/8BtNCi48kk4ZvbMckh/cGRL7k+MFvXKbTw=";
       }
     );
   };
