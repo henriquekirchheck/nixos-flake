@@ -17,6 +17,7 @@
     ../../modules/programs/ffmpeg
     ../../modules/programs/aegisub
     ../../modules/programs/libreoffice
+    ../../modules/programs/zathura
 
     ../../modules/development/c
     ../../modules/development/python

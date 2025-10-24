@@ -16,6 +16,8 @@
     unzip
     unrar
     rar
+    p7zip
+    ouch
     dos2unix
     rename
     appimage-run
@@ -40,5 +42,6 @@
     hwinfo
     pciutils
     nix-output-monitor
+    tldr
   ];
 }
