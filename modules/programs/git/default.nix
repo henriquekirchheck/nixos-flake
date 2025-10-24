@@ -6,4 +6,8 @@
       pull.rebase = true;
     };
   };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 }
