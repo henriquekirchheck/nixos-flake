@@ -12,6 +12,7 @@
     htop
     mpv
     file
+    pv
     zip
     unzip
     unrar
@@ -22,7 +23,10 @@
     rename
     appimage-run
     jq
+    procs
     ncdu
+    dust
+    hyperfine
     pandoc
     dua
     rsync
@@ -42,6 +46,8 @@
     hwinfo
     pciutils
     nix-output-monitor
-    tldr
+    tealdeer
+    httpie
+    libqalculate
   ];
 }
