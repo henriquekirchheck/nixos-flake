@@ -140,6 +140,8 @@
           bottom = 4;
         };
       };
+      
+      debug.honor-xdg-activation-with-invalid-serial = true;
 
       binds =
         with config.lib.niri.actions;
