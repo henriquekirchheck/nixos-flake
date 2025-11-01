@@ -8,7 +8,7 @@
         pkgs.jdk21
         pkgs.jdk17
         pkgs.jdk8
-        pkgs.graalvmPackages.graalvm-oracle
+        pkgs.graalvmPackages.graalvm-ce
       ];
       additionalPrograms = [ pkgs.kdePackages.kdialog ];
     })

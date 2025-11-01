@@ -7,7 +7,7 @@
     [
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       roboto
       roboto-serif
       liberation_ttf
@@ -20,7 +20,7 @@
       iosevka
       jetbrains-mono
       meslo-lg
-      ubuntu_font_family
+      ubuntu-classic
       ibm-plex
       material-symbols
     ]

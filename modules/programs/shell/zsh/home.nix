@@ -103,12 +103,14 @@
     };
     plugins = [
       {
-        name = "share/fzf-tab/fzf-tab";
+        name = "fzf-tab";
         src = pkgs.zsh-fzf-tab;
+	file = "share/fzf-tab/fzf-tab.plugin.zsh";
       }
       {
-        name = "share/zsh/site-functions/fast-syntax-highlighting";
+        name = "fast-syntax-highlighting";
         src = pkgs.zsh-fast-syntax-highlighting;
+	file = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
       }
     ];
   };

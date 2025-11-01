@@ -24,5 +24,8 @@
 
   virtualisation.oci-containers.backend = "podman";
 
-  environment.systemPackages = [ pkgs.podman-compose pkgs.compose2nix ];
+  environment.systemPackages = [
+    pkgs.podman-compose
+    pkgs.compose2nix
+  ];
 }

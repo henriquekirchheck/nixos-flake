@@ -11,7 +11,10 @@
       enable = true;
       branch = "canary";
     };
-    vesktop.enable = true;
+    vesktop = {
+      enable = true;
+      useSystemVencord = false;
+    };
     dorion = {
       enable = true;
       desktopNotifications = true;
