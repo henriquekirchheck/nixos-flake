@@ -14,6 +14,7 @@
     ../../modules/programs/nh
     ../../modules/programs/gimp
     ../../modules/programs/ardour
+    ../../modules/programs/reaper
     ../../modules/programs/ffmpeg
     ../../modules/programs/aegisub
     ../../modules/programs/libreoffice
