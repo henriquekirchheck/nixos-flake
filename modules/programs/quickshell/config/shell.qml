@@ -1,3 +1,6 @@
 import Quickshell
+import qs.panels.Bar
 
-ShellRoot {}
+ShellRoot {
+  Bar {}
+}
