@@ -16,6 +16,7 @@
       DontCheckDefaultBrowser = true;
       OfferToSaveLogins = false;
     };
+    # nativeMessagingHosts = [];
     profiles.user = {
       extensions = {
         force = true;
@@ -36,8 +37,9 @@
           pronoundb
           shinigami-eyes
           bitwarden
-          iina-open-in-mpv
+          ff2mpv
           firefox-color
+	  chameleon-ext
         ];
       };
       settings = {
