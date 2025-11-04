@@ -114,7 +114,6 @@
     sopsFile = ./secrets/ddclient.json;
     format = "json";
     key = "password";
-    owner = config.systemd.services.ddclient.serviceConfig.User;
   };
   services.ddclient.passwordFile = config.sops.secrets.ddclient.path;
 
