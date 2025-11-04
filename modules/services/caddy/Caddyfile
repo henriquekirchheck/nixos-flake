@@ -3,6 +3,13 @@
   default_sni henriquekh.dev.br
 }
 
+localhost,
+henriquekh.dev.br,
+zt.henriquekh.dev.br {
+  root * /vol/drive/website
+  file_server
+}
+
 files.localhost,
 files.tunnel.henriquekh.dev.br,
 files.zt.henriquekh.dev.br,
