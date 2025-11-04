@@ -18,6 +18,7 @@
 
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/caddy
+    ../../modules/services/ddclient
     ../../modules/services/cloudflared
     ../../modules/services/zerotier
 
@@ -107,6 +108,15 @@
     owner = config.services.caddy.user;
   };
   systemd.services.caddy.serviceConfig.EnvironmentFile = [ "${config.sops.secrets.caddy_env.path}" ];
+
+  ## ddclient
+  sops.secrets.ddclient = {
+    sopsFile = ./secrets/ddclient.json;
+    format = "json";
+    key = "password";
+    owner = config.systemd.services.ddclient.serviceConfig.User;
+  };
+  services.ddclient.passwordFile = config.sops.secrets.ddclient.path;
 
   ## Network configuration
   systemd.network = {
