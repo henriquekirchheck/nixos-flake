@@ -8,7 +8,7 @@
   imports = [
     ../../modules/system/bootloader/systemd-boot.nix
     ../../modules/system/kernel/xanmod.nix
-    ../../modules/system/networking/systemd-networkd.nix
+    ../../modules/system/networking/network-manager.nix
     ../../modules/system/firewall
     ../../modules/system/audio/pipewire.nix
     ../../modules/system/virtualisation/containers/podman.nix
