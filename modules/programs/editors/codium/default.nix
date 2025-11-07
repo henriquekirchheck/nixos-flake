@@ -27,8 +27,9 @@ let
       christian-kohler.path-intellisense
       esbenp.prettier-vscode
       svelte.svelte-vscode
-      ms-python.mypy-type-checker
       ms-python.python
+      ms-python.debugpy
+      ms-python.vscode-python-envs
       detachhead.basedpyright
       bradlc.vscode-tailwindcss
       yoavbls.pretty-ts-errors
