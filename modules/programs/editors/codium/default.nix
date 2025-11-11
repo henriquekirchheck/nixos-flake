@@ -50,13 +50,12 @@ let
       ziglang.vscode-zig
       denoland.vscode-deno
       # Java
-      #redhat.java
-      #vscjava.vscode-java-debug
-      #vscjava.vscode-java-test
-      #vscjava.vscode-maven
-      #vscjava.vscode-gradle
-      #vscjava.vscode-java-dependency
-      #fwcd.kotlin
+      redhat.java
+      vscjava.vscode-java-debug
+      vscjava.vscode-java-test
+      vscjava.vscode-maven
+      vscjava.vscode-gradle
+      vscjava.vscode-java-dependency
       ms-vscode.hexeditor
       hashicorp.terraform
       firefox-devtools.vscode-firefox-debug
@@ -71,6 +70,11 @@ let
       shader-slang.slang-language-extension
 
       angular.ng-template
+
+      antfu.slidev
+      antfu.unocss
+      nuxt.mdc
+      johnsoncodehk.volar
     ];
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;
