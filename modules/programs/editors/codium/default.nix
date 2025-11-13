@@ -75,6 +75,9 @@ let
       antfu.unocss
       nuxt.mdc
       johnsoncodehk.volar
+
+      muhammad-sammy.csharp
+      nrwl.angular-console
     ];
   extensionsVSCodeMarketplace =
     with codeExtensions.vscode-marketplace;
