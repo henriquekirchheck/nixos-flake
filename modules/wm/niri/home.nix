@@ -122,6 +122,13 @@
         gaps = 4;
         # center-focused-column = "on-overflow";
         always-center-single-column = true;
+	preset-column-widths = [
+          { proportion = 1. / 4.; }
+          { proportion = 1. / 3.; }
+          { proportion = 1. / 2.; }
+          { proportion = 2. / 3.; }
+          { proportion = 1. / 1.; }
+	];
         focus-ring.enable = false;
         border = {
           enable = true;
@@ -163,7 +170,7 @@
           "Mod+Shift+Q".action = quit { skip-confirmation = true; };
           "Mod+F".action = toggle-window-floating;
           "Mod+Shift+F".action = fullscreen-window;
-          "Mod+S".action = maximize-column;
+          "Mod+S".action = switch-preset-column-width;
           "Mod+A".action = toggle-overview;
 
           "Mod+Up".action = focus-window-or-workspace-up;
