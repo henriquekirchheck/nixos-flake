@@ -1,10 +1,4 @@
-# Auto-generated using compose2nix v0.3.2-pre.
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ pkgs, lib, config, ... }:
 
 {
   sops.secrets.searxng_env = {
@@ -13,63 +7,13 @@
   };
 
   # Containers
-  virtualisation.oci-containers.containers."searxng-redis" = {
-    image = "docker.io/valkey/valkey:8-alpine";
-    volumes = [
-      "searxng_valkey-data2:/data:rw"
-    ];
-    cmd = [
-      "valkey-server"
-      "--save"
-      "30"
-      "1"
-      "--loglevel"
-      "warning"
-    ];
-    labels = {
-      "io.containers.autoupdate" = "registry";
-    };
-    log-driver = "journald";
-    extraOptions = [
-      "--cap-add=DAC_OVERRIDE"
-      "--cap-add=SETGID"
-      "--cap-add=SETUID"
-      "--cap-drop=ALL"
-      "--network-alias=redis"
-      "--network=searxng_searxng"
-    ];
-  };
-  systemd.services."podman-searxng-redis" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "always";
-    };
-    after = [
-      "podman-network-searxng_searxng.service"
-      "podman-volume-searxng_valkey-data2.service"
-    ];
-    requires = [
-      "podman-network-searxng_searxng.service"
-      "podman-volume-searxng_valkey-data2.service"
-    ];
-    partOf = [
-      "podman-compose-searxng-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-searxng-root.target"
-    ];
-  };
-  virtualisation.oci-containers.containers."searxng-searxng" = {
+  virtualisation.oci-containers.containers."searxng" = {
     image = "docker.io/searxng/searxng:latest";
-    environment = {
-      "UWSGI_THREADS" = "4";
-      "UWSGI_WORKERS" = "4";
-    };
-    environmentFiles = [
-      config.sops.secrets.searxng_env.path
-    ];
     volumes = [
       "/vol/drive/containers/searxng/searxng:/etc/searxng:rw"
+      "searxng_searxng-data:/var/cache/searxng:rw"
     ];
+    environmentFiles = [ config.sops.secrets.searxng_env.path ];
     ports = [
       "5947:8080/tcp"
     ];
@@ -77,30 +21,71 @@
       "io.containers.autoupdate" = "registry";
     };
     dependsOn = [
-      "searxng-redis"
+      "searxng-valkey"
     ];
     log-driver = "journald";
     extraOptions = [
-      "--cap-add=CHOWN"
-      "--cap-add=SETGID"
-      "--cap-add=SETUID"
-      "--cap-drop=ALL"
       "--network-alias=searxng"
       "--network=searxng_searxng"
     ];
   };
-  systemd.services."podman-searxng-searxng" = {
+  systemd.services."podman-searxng" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
     };
     after = [
       "podman-network-searxng_searxng.service"
+      "podman-volume-searxng_searxng-data.service"
     ];
     requires = [
       "podman-network-searxng_searxng.service"
+      "podman-volume-searxng_searxng-data.service"
     ];
     partOf = [
       "podman-compose-searxng-root.target"
+    ];
+    upheldBy = [
+      "podman-network-searxng_searxng.service"
+      "podman-searxng-valkey.service"
+      "podman-volume-searxng_searxng-data.service"
+    ];
+    wantedBy = [
+      "podman-compose-searxng-root.target"
+    ];
+  };
+  virtualisation.oci-containers.containers."searxng-valkey" = {
+    image = "docker.io/valkey/valkey:8-alpine";
+    volumes = [
+      "searxng_valkey-data:/data:rw"
+    ];
+    cmd = [ "valkey-server" "--save" "30" "1" "--loglevel" "warning" ];
+    labels = {
+      "io.containers.autoupdate" = "registry";
+    };
+    log-driver = "journald";
+    extraOptions = [
+      "--network-alias=valkey"
+      "--network=searxng_searxng"
+    ];
+  };
+  systemd.services."podman-searxng-valkey" = {
+    serviceConfig = {
+      Restart = lib.mkOverride 90 "always";
+    };
+    after = [
+      "podman-network-searxng_searxng.service"
+      "podman-volume-searxng_valkey-data.service"
+    ];
+    requires = [
+      "podman-network-searxng_searxng.service"
+      "podman-volume-searxng_valkey-data.service"
+    ];
+    partOf = [
+      "podman-compose-searxng-root.target"
+    ];
+    upheldBy = [
+      "podman-network-searxng_searxng.service"
+      "podman-volume-searxng_valkey-data.service"
     ];
     wantedBy = [
       "podman-compose-searxng-root.target"
@@ -123,14 +108,26 @@
   };
 
   # Volumes
-  systemd.services."podman-volume-searxng_valkey-data2" = {
+  systemd.services."podman-volume-searxng_searxng-data" = {
     path = [ pkgs.podman ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
     };
     script = ''
-      podman volume inspect searxng_valkey-data2 || podman volume create searxng_valkey-data2
+      podman volume inspect searxng_searxng-data || podman volume create searxng_searxng-data
+    '';
+    partOf = [ "podman-compose-searxng-root.target" ];
+    wantedBy = [ "podman-compose-searxng-root.target" ];
+  };
+  systemd.services."podman-volume-searxng_valkey-data" = {
+    path = [ pkgs.podman ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      podman volume inspect searxng_valkey-data || podman volume create searxng_valkey-data
     '';
     partOf = [ "podman-compose-searxng-root.target" ];
     wantedBy = [ "podman-compose-searxng-root.target" ];
