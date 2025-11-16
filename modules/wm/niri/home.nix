@@ -72,6 +72,7 @@
             y = 10;
             relative-to = "bottom-right";
           };
+	  open-focused = false;
         }
         {
           matches = [ { is-window-cast-target = true; } ];
