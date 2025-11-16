@@ -14,7 +14,7 @@
       obs-livesplit-one
       obs-backgroundremoval
       input-overlay
-      droidcam-obs
+      # droidcam-obs
     ];
     enableVirtualCamera = true;
   };
