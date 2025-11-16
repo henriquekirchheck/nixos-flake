@@ -42,7 +42,7 @@
     ../../modules/games/prismlauncher
 
     ../../modules/wm/niri/home.nix
-    ../../modules/programs/notification/dunst.nix
+    ../../modules/programs/notification/mako.nix
     ../../modules/programs/rofi
     ../../modules/programs/quickshell
     ../../modules/programs/wallpaper/swww.nix
