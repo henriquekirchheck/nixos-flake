@@ -37,7 +37,7 @@
 
     ../../modules/styles/fonts
 
-    ../../modules/cachix
+    ../../modules/cache/nixos.nix
   ];
 
   # System Specific

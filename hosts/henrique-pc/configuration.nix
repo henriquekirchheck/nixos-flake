@@ -42,7 +42,7 @@
     ../../containers/media
     ../../containers/copyparty
 
-    ../../modules/cachix
+    ../../modules/cache/nixos.nix
   ];
 
   # System Specific

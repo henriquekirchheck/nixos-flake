@@ -1,0 +1,3 @@
+{
+  nix.settings = import ./.;
+}
