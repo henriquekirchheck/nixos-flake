@@ -20,13 +20,13 @@ jobs:
       id-token: write
       issues: write
       pull-requests: write
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
       with:
         swap-size-mb: 1024
-        root-reserve-mb: 4096
+        root-reserve-mb: 1024
         build-mount-path: /nix/store
         remove-dotnet: 'true'
         remove-android: 'true'
