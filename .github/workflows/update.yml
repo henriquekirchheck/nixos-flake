@@ -1,43 +1,18 @@
-name: "Update flake"
+name: "update flake"
+
 on:
   schedule:
     - cron: "15 4 * * *"
   workflow_dispatch:
-    inputs:
-      debug_enabled:
-        type: boolean
-        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
-        required: false
-        default: false
+
 jobs:
   update:
-    strategy:
-      matrix:
-        cachixName:
-          - henriquekh
-    permissions:
-      contents: write
-      id-token: write
-      issues: write
-      pull-requests: write
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    outputs:
+      outputs: ${{ steps.gen_output.outputs.outputs }}
     steps:
-    - name: Maximize build space
-      uses: easimon/maximize-build-space@master
-      with:
-        swap-size-mb: 1024
-        root-reserve-mb: 1024
-        build-mount-path: /nix/store
-        remove-dotnet: 'true'
-        remove-android: 'true'
-        remove-haskell: 'true'
-        remove-codeql: 'true'
-        remove-docker-images: 'true'
     - name: Checkout repository
       uses: actions/checkout@v5
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
     - name: Install nix
       uses: cachix/install-nix-action@v31
       with:
@@ -45,33 +20,28 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-    - name: Show nixpkgs version
-      run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
     - name: Update flake.lock
       run: nix flake update
     - name: Add flake.lock
       run: git add flake.lock
-    - name: Setup cachix
-      uses: cachix/cachix-action@v16
-      # Don't replace <YOUR_CACHIX_NAME> here!
-      if: ${{ matrix.cachixName != '<YOUR_CACHIX_NAME>' }}
-      with:
-        name: ${{ matrix.cachixName }}
-        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-        extraPullNames: nix-community,hyprland,niri
-    - name: Build all outputs
-      run: |
-        nix build github:srid/devour-flake \
-          -L --no-link --print-out-paths \
-          --override-input flake . \
-          > result
-    - name: Cache results
-      if: ${{ matrix.cachixName != '<YOUR_CACHIX_NAME>' }}
-      run: cachix push ${{ matrix.cachixName }} < result
+    - name: Check updated flake
+      run: nix flake check --all-systems
     - name: Push new flake.lock
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git commit -m "Update Flake Inputs: $(date +%F)"
         git push
+    - name: Get outputs
+      id: gen_output
+      run: echo "outputs=$(nix flake show --json | jq -c '.nixosConfigurations | keys | map("nixosConfigurations.\(.).config.system.build.toplevel")')" >> "$GITHUB_OUTPUT"
+
+  cache:
+    needs: update
+    strategy:
+      matrix:
+        output: ${{fromJson(needs.update.outputs.outputs)}}
+    uses: ./.github/workflows/cache.yml
+    with:
+      output: ${{ matrix.output }}
+    secrets: inherit
