@@ -39,7 +39,7 @@
           bitwarden
           ff2mpv
           firefox-color
-	  chameleon-ext
+          chameleon-ext
         ];
       };
       settings = {

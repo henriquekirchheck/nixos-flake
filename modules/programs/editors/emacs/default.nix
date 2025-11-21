@@ -12,7 +12,6 @@ in
     binutils
     emacs
 
-    git
     ripgrep
     gnutls
 

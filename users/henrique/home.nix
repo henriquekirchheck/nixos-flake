@@ -18,6 +18,7 @@
     ../../modules/programs/aegisub
     ../../modules/programs/libreoffice
     ../../modules/programs/zathura
+    ../../modules/programs/comma
 
     ../../modules/development/c
     ../../modules/development/python
@@ -37,6 +38,7 @@
     ../../modules/programs/editors/codium
     ../../modules/programs/editors/neovim
     ../../modules/programs/editors/emacs
+    ../../modules/programs/blender
 
     ../../modules/games/godot
     ../../modules/games/prismlauncher

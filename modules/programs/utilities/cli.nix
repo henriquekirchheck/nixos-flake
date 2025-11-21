@@ -5,7 +5,6 @@
     wget
     aria2
     eza
-    git
     fd
     ripgrep
     btop

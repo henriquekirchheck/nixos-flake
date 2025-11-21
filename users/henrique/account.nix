@@ -17,6 +17,8 @@
       "kvm"
       "adbusers"
       "dialout"
+      "audio"
+      "realtime"
     ];
     hashedPasswordFile = config.sops.secrets.password.path;
     shell = pkgs.zsh;

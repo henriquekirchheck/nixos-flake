@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   sops.secrets.searxng_env = {
@@ -58,7 +63,14 @@
     volumes = [
       "searxng_valkey-data:/data:rw"
     ];
-    cmd = [ "valkey-server" "--save" "30" "1" "--loglevel" "warning" ];
+    cmd = [
+      "valkey-server"
+      "--save"
+      "30"
+      "1"
+      "--loglevel"
+      "warning"
+    ];
     labels = {
       "io.containers.autoupdate" = "registry";
     };

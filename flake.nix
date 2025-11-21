@@ -30,6 +30,11 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
+    musnix = {
+      url = "github:musnix/musnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs = {
@@ -38,6 +43,11 @@
       };
     };
     niri.url = "github:sodiboo/niri-flake";
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
@@ -56,6 +66,11 @@
 
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    blender-bin = {
+      url = "github:edolstra/nix-warez?dir=blender";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

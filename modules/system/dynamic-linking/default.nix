@@ -4,70 +4,136 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      alsa-lib
-      at-spi2-atk
-      at-spi2-core
-      libxcrypt
-      atk
-      cairo
-      cups
+      # List by default
+      zlib
+      zstd
+      stdenv.cc.cc
       curl
-      dbus
-      expat
-      fontconfig
-      freetype
-      fuse
-      fuse3
-      gdk-pixbuf
-      glib
-      glibc
-      gtk3
-      harfbuzz
-      icu
-      libcap
+      openssl
+      attr
+      libssh
+      bzip2
+      libxml2
+      acl
+      libsodium
+      util-linux
+      xz
+      systemd
+
+      # My own additions
+      xorg.libXcomposite
+      xorg.libXtst
+      xorg.libXrandr
+      xorg.libXext
+      xorg.libX11
+      xorg.libXfixes
       libGL
       libva
-      libappindicator-gtk3
-      libdrm
-      libglvnd
-      libnotify
-      libpulseaudio
-      libunwind
-      libusb1
-      libuuid
-      libxcrypt
-      libxkbcommon
-      libxml2
+      pipewire
+      xorg.libxcb
+      xorg.libXdamage
+      xorg.libxshmfence
+      xorg.libXxf86vm
+      libelf
+
+      # Required
+      glib
+      gtk2
+      gtk3
+      gtk4
+
+      # Inspired by steam
+      vulkan-loader
       libgbm
-      libudev0-shim
-      icu
-      udev
-      mesa
+      libdrm
+      libxcrypt
+      coreutils
+      pciutils
+      zenity
+
+      # # Without these it silently fails
+      xorg.libXinerama
+      xorg.libXcursor
+      xorg.libXrender
+      xorg.libXScrnSaver
+      xorg.libXi
+      xorg.libSM
+      xorg.libICE
+      gnome2.GConf
       nspr
       nss
-      openssl
+      cups
+      libcap
+      SDL2
+      libusb1
+      dbus-glib
+      ffmpeg
+      libudev0-shim
+
+      # needed to run unity
+      gtk3
+      icu
+      libnotify
+      gsettings-desktop-schemas
+
+      # Verified games requirements
+      xorg.libXt
+      xorg.libXmu
+      libogg
+      libvorbis
+      SDL
+      SDL2_image
+      glew110
+      libidn
+      tbb
+
+      # Other things from runtime
+      flac
+      freeglut
+      libjpeg
+      libpng
+      libpng12
+      libsamplerate
+      libmikmod
+      libtheora
+      libtiff
+      pixman
+      speex
+      SDL_image
+      SDL_ttf
+      SDL_mixer
+      SDL2_ttf
+      SDL2_mixer
+      libappindicator-gtk2
+      libdbusmenu-gtk2
+      libindicator-gtk2
+      libcaca
+      libcanberra
+      libgcrypt
+      libvpx
+      librsvg
+      xorg.libXft
+      libvdpau
+
+      # Some more libraries that I needed to run programs
       pango
-      pipewire
-      stdenv.cc.cc
-      systemd
-      vulkan-loader
-      xorg.libX11
-      xorg.libXScrnSaver
-      xorg.libXcomposite
-      xorg.libXcursor
-      xorg.libXdamage
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libXi
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXtst
-      xorg.libxcb
-      xorg.libxkbfile
-      xorg.libxshmfence
-      zlib
+      cairo
+      atk
+      gdk-pixbuf
+      fontconfig
+      freetype
+      dbus
+      alsa-lib
+      expat
       vlc
-      stdenv.cc.cc.lib
+      libxkbcommon
+
+      libxcrypt-legacy # For natron
+      libGLU # For natron
+
+      # Appimages need fuse
+      fuse
+      e2fsprogs
     ];
   };
 }

@@ -11,6 +11,7 @@
     ../../modules/system/networking/network-manager.nix
     ../../modules/system/firewall
     ../../modules/system/audio/pipewire.nix
+    ../../modules/system/pro-audio
     ../../modules/system/virtualisation/containers/podman.nix
     ../../modules/system/virtualisation/hypervisors/qemu.nix
     ../../modules/system/permission/doas.nix

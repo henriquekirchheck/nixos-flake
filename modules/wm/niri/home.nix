@@ -72,7 +72,7 @@
             y = 10;
             relative-to = "bottom-right";
           };
-	  open-focused = false;
+          open-focused = false;
         }
         {
           matches = [ { is-window-cast-target = true; } ];
@@ -122,13 +122,13 @@
         gaps = 4;
         # center-focused-column = "on-overflow";
         always-center-single-column = true;
-	preset-column-widths = [
+        preset-column-widths = [
           { proportion = 1. / 4.; }
           { proportion = 1. / 3.; }
           { proportion = 1. / 2.; }
           { proportion = 2. / 3.; }
           { proportion = 1. / 1.; }
-	];
+        ];
         focus-ring.enable = false;
         border = {
           enable = true;
