@@ -29,7 +29,7 @@
       frameless = true;
       transparent = true;
       plugins = {
-        USRBG.enable = true;
+        usrbg.enable = true;
         alwaysAnimate.enable = true;
         alwaysExpandRoles.enable = true;
         betterFolders.enable = true;
@@ -41,7 +41,7 @@
         betterSettings.enable = true;
         biggerStreamPreview.enable = true;
         callTimer.enable = true;
-        clearURLs.enable = true;
+        clearUrLs.enable = true;
         copyFileContents.enable = true;
         disableCallIdle.enable = true;
         experiments = {
@@ -78,14 +78,12 @@
         messageLinkEmbeds.enable = true;
         messageLogger.enable = true;
         mutualGroupDMs.enable = true;
-        noDeepLinks.enable = true;
         noDevtoolsWarning.enable = true;
         noF1.enable = true;
         noOnboardingDelay.enable = true;
         noPendingCount = {
           enable = true;
           hideFriendRequestsCount = false;
-          hideMessageRequestCount = false;
           hidePremiumOffersCount = true;
         };
         noUnblockToJump.enable = true;
