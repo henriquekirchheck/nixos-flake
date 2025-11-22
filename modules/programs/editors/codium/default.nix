@@ -70,7 +70,6 @@ let
 
       shader-slang.slang-language-extension
 
-      angular.ng-template
 
       antfu.slidev
       antfu.unocss
@@ -85,6 +84,7 @@ let
     with codeExtensions.vscode-marketplace-release;
     [
       ms-vscode.cmake-tools
+      angular.ng-template
     ];
 
   extensionsNixpkgs = with pkgs.vscode-extensions; [

@@ -8,6 +8,8 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      content: write
     outputs:
       outputs: ${{ steps.gen_output.outputs.outputs }}
     steps:
