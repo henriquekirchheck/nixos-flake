@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  emacs = (pkgs.emacsPackagesFor pkgs.emacs-unstable-pgtk).emacsWithPackages (
+  emacs = (pkgs.emacsPackagesFor pkgs.emacs-git-pgtk).emacsWithPackages (
     epkgs: with epkgs; [
       treesit-grammars.with-all-grammars
       vterm
@@ -34,12 +34,14 @@ in
     sqlite
     clang-tools
     age
+    emacs-lsp-booster
   ];
 
   services.emacs = {
     enable = true;
     package = emacs;
     client.enable = true;
+    socketActivation.enable = true;
   };
 
   home.sessionPath = [

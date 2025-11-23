@@ -71,6 +71,13 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri-caelestia-shell = {
+      url = "github:jutraim/niri-caelestia-shell";
+      inputs = {
+	nixpkgs.follows = "nixpkgs";
+	quickshell.follows = "quickshell";
+      };
+    };
 
     blender-bin = {
       url = "github:edolstra/nix-warez?dir=blender";
@@ -113,7 +120,7 @@
           nixpkgs.lib.nixosSystem rec {
             pkgs = mkPkgs system;
             system = import ./hosts/${host}/system.nix;
-            specialArgs = { inherit inputs system; };
+            specialArgs = { inherit inputs; };
             modules = [
               ./hosts/${host}/hardware-configuration.nix
               ./hosts/${host}/configuration.nix
@@ -157,7 +164,7 @@
           home-manager.lib.homeManagerConfiguration {
             pkgs = mkPkgs system;
             modules = [ ./users/${user}/home.nix ];
-            extraSpecialArgs = { inherit inputs system; };
+            extraSpecialArgs = { inherit inputs; };
           }
         ) users;
     }))
@@ -169,13 +176,13 @@
       {
         formatter = pkgs.nixfmt-tree;
         devShells.quickshell = pkgs.mkShell {
-          inputsFrom = [ inputs.quickshell.packages.${system}.default ];
+          inputsFrom = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
           buildInputs = [
-            inputs.quickshell.packages.${system}.default
+            inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
           ];
           shellHook = ''
             export QML2_IMPORT_PATH="${
-              inputs.quickshell.packages.${system}.default
+              inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
             }/${pkgs.qt6.qtbase.qtQmlPrefix}:$QML2_IMPORT_PATH"
             export QT_PLUGIN_PATH="$QT_PLUGIN_PATH"
           '';

@@ -55,6 +55,30 @@
         "type": "github"
       }
     },
+    "caelestia-cli": {
+      "inputs": {
+        "caelestia-shell": [
+          "niri-caelestia-shell"
+        ],
+        "nixpkgs": [
+          "niri-caelestia-shell",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763172111,
+        "narHash": "sha256-QseFQKZgMq/kbHlrhfaNlwEyQ1H3J+UhnbgpAIEGpvA=",
+        "owner": "caelestia-dots",
+        "repo": "cli",
+        "rev": "d89c438284311e99148ece61054cd6f9bc8e8cb7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "caelestia-dots",
+        "repo": "cli",
+        "type": "github"
+      }
+    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": [
@@ -599,6 +623,30 @@
         "type": "github"
       }
     },
+    "niri-caelestia-shell": {
+      "inputs": {
+        "caelestia-cli": "caelestia-cli",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "quickshell": [
+          "quickshell"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763257636,
+        "narHash": "sha256-kFnjPuJjRf1y1R/htrPrU6oHyAhU4wdm/+SRGDP9k6Q=",
+        "owner": "jutraim",
+        "repo": "niri-caelestia-shell",
+        "rev": "07dac62798b8bf0965c43ce13a6c72d91a143930",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jutraim",
+        "repo": "niri-caelestia-shell",
+        "type": "github"
+      }
+    },
     "niri-stable": {
       "flake": false,
       "locked": {
@@ -849,6 +897,7 @@
         "impermanence": "impermanence",
         "musnix": "musnix",
         "niri": "niri",
+        "niri-caelestia-shell": "niri-caelestia-shell",
         "nix-index-database": "nix-index-database",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixcord": "nixcord",
