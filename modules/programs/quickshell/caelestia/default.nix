@@ -1,8 +1,8 @@
 { inputs, config, ... }:
 
 {
-  imports = [inputs.niri-caelestia-shell.homeManagerModules.default];
-  
+  imports = [ inputs.niri-caelestia-shell.homeManagerModules.default ];
+
   programs.caelestia = {
     enable = true;
     systemd.enable = true;

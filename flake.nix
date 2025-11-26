@@ -16,6 +16,10 @@
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     impermanence.url = "github:nix-community/impermanence";
 
     nur = {
@@ -52,6 +56,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-ld = {
+      url = "github:nix-community/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,8 +83,8 @@
     niri-caelestia-shell = {
       url = "github:jutraim/niri-caelestia-shell";
       inputs = {
-	nixpkgs.follows = "nixpkgs";
-	quickshell.follows = "quickshell";
+        nixpkgs.follows = "nixpkgs";
+        quickshell.follows = "quickshell";
       };
     };
 
@@ -87,10 +96,12 @@
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
       home-manager,
       disko,
       flake-utils,
+      treefmt-nix,
       sops-nix,
       ...
     }:
@@ -172,9 +183,12 @@
       system:
       let
         pkgs = mkPkgs system;
+        treefmt' = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
       in
       {
-        formatter = pkgs.nixfmt-tree;
+        formatter = treefmt'.config.build.wrapper;
+        check.formatting = treefmt'.config.build.check self;
+
         devShells.quickshell = pkgs.mkShell {
           inputsFrom = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
           buildInputs = [

@@ -16,6 +16,7 @@
     ../../modules/system/virtualisation/hypervisors/qemu.nix
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
+    ../../modules/system/nix
 
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/caddy
@@ -170,14 +171,5 @@
         linkConfig.RequiredForOnline = "routable";
       };
     };
-  };
-
-  ## Nix Config
-  nix = {
-    package = pkgs.lix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
   };
 }

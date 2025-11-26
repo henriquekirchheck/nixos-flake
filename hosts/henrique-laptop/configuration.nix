@@ -14,6 +14,7 @@
     ../../modules/system/virtualisation/hypervisors/qemu.nix
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
+    ../../modules/system/nix
 
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/zerotier
@@ -82,14 +83,5 @@
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
-  };
-
-  ## Nix Config
-  nix = {
-    package = pkgs.lix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
   };
 }

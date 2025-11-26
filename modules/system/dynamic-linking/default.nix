@@ -1,9 +1,13 @@
-{ pkgs, ... }:
-
 {
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
+
+let
+  buildPkgList =
+    pkgs: with pkgs; [
       # List by default
       zlib
       zstd
@@ -64,7 +68,6 @@
       nss
       cups
       libcap
-      SDL2
       libusb1
       dbus-glib
       ffmpeg
@@ -81,11 +84,27 @@
       xorg.libXmu
       libogg
       libvorbis
-      SDL
-      SDL2_image
+
+      sdl3
+      sdl3-image
+      sdl3-ttf
+      SDL_compat
+      SDL_gfx
+      SDL_image
+      SDL_mixer
+      SDL_net
+      SDL_sound
+      SDL_ttf
+      sdl2-compat
+      SDL2
+      SDL2_gfx
+      SDL2_mixer
+      SDL2_net
+      SDL2_sound
+      SDL2_ttf
+
       glew110
       libidn
-      tbb
 
       # Other things from runtime
       flac
@@ -99,11 +118,6 @@
       libtiff
       pixman
       speex
-      SDL_image
-      SDL_ttf
-      SDL_mixer
-      SDL2_ttf
-      SDL2_mixer
       libappindicator-gtk2
       libdbusmenu-gtk2
       libindicator-gtk2
@@ -114,6 +128,9 @@
       librsvg
       xorg.libXft
       libvdpau
+      openal
+      libgcrypt
+      libgpg-error
 
       # Some more libraries that I needed to run programs
       pango
@@ -125,15 +142,45 @@
       dbus
       alsa-lib
       expat
-      vlc
       libxkbcommon
+      goldberg-emu
 
       libxcrypt-legacy # For natron
       libGLU # For natron
-
-      # Appimages need fuse
-      fuse
-      e2fsprogs
     ];
-  };
+
+  buildSystemSet =
+    pkgsList:
+    builtins.listToAttrs (
+      map (
+        { ldso, pkgs }:
+        {
+          name = pkgs.stdenv.buildPlatform.system;
+          value = {
+            package = inputs.nix-ld.packages.${pkgs.stdenv.hostPlatform.system}.default;
+            pkgs = pkgs;
+            libraries = buildPkgList pkgs;
+            inherit ldso;
+          };
+        }
+      ) pkgsList
+    );
+in
+{
+  imports = [ ./module.nix ];
+  # programs.nix-ld = {
+  #   enable = true;
+  #   libraries = buildPkgList pkgs;
+  # };
+
+  programs.nix-ld-local.systems = buildSystemSet [
+    {
+      ldso = "ldso";
+      pkgs = pkgs;
+    }
+    {
+      ldso = "ldso32";
+      pkgs = pkgs.pkgsi686Linux;
+    }
+  ];
 }

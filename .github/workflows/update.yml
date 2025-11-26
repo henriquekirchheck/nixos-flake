@@ -1,49 +1,49 @@
 name: "update flake"
 
 on:
-  schedule:
-    - cron: "15 4 * * *"
-  workflow_dispatch:
+    schedule:
+        - cron: "15 4 * * *"
+    workflow_dispatch:
 
 jobs:
-  update:
-    runs-on: ubuntu-latest
-    permissions:
-      content: write
-    outputs:
-      outputs: ${{ steps.gen_output.outputs.outputs }}
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
-    - name: Install nix
-      uses: cachix/install-nix-action@v31
-      with:
-        nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
-        extra_nix_config: |
-          experimental-features = nix-command flakes
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-    - name: Update flake.lock
-      run: nix flake update
-    - name: Add flake.lock
-      run: git add flake.lock
-    - name: Check updated flake
-      run: nix flake check --all-systems
-    - name: Push new flake.lock
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git commit -m "Update Flake Inputs: $(date +%F)"
-        git push
-    - name: Get outputs
-      id: gen_output
-      run: echo "outputs=$(nix flake show --json | jq -c '.nixosConfigurations | keys | map("nixosConfigurations.\(.).config.system.build.toplevel")')" >> "$GITHUB_OUTPUT"
+    update:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        outputs:
+            outputs: ${{ steps.gen_output.outputs.outputs }}
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v5
+            - name: Install nix
+              uses: cachix/install-nix-action@v31
+              with:
+                  nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
+                  extra_nix_config: |
+                      experimental-features = nix-command flakes
+                      access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            - name: Update flake.lock
+              run: nix flake update
+            - name: Add flake.lock
+              run: git add flake.lock
+            - name: Check updated flake
+              run: nix flake check --all-systems
+            - name: Push new flake.lock
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git commit -m "Update Flake Inputs: $(date +%F)"
+                  git push
+            - name: Get outputs
+              id: gen_output
+              run: echo "outputs=$(nix flake show --json | jq -c '.nixosConfigurations | keys | map("nixosConfigurations.\(.).config.system.build.toplevel")')" >> "$GITHUB_OUTPUT"
 
-  cache:
-    needs: update
-    strategy:
-      matrix:
-        output: ${{fromJson(needs.update.outputs.outputs)}}
-    uses: ./.github/workflows/cache.yml
-    with:
-      output: ${{ matrix.output }}
-    secrets: inherit
+    cache:
+        needs: update
+        strategy:
+            matrix:
+                output: ${{fromJson(needs.update.outputs.outputs)}}
+        uses: ./.github/workflows/cache.yml
+        with:
+            output: ${{ matrix.output }}
+        secrets: inherit

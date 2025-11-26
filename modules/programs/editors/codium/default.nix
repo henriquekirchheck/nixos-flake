@@ -70,7 +70,6 @@ let
 
       shader-slang.slang-language-extension
 
-
       antfu.slidev
       antfu.unocss
       nuxt.mdc
