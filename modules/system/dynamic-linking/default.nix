@@ -42,7 +42,6 @@ let
 
       # Required
       glib
-      gtk2
       gtk3
       gtk4
 
@@ -63,7 +62,6 @@ let
       xorg.libXi
       xorg.libSM
       xorg.libICE
-      gnome2.GConf
       nspr
       nss
       cups
@@ -74,7 +72,6 @@ let
       libudev0-shim
 
       # needed to run unity
-      gtk3
       icu
       libnotify
       gsettings-desktop-schemas
@@ -118,9 +115,6 @@ let
       libtiff
       pixman
       speex
-      libappindicator-gtk2
-      libdbusmenu-gtk2
-      libindicator-gtk2
       libcaca
       libcanberra
       libgcrypt
@@ -143,7 +137,6 @@ let
       alsa-lib
       expat
       libxkbcommon
-      goldberg-emu
 
       libxcrypt-legacy # For natron
       libGLU # For natron

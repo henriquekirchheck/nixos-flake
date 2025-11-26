@@ -7,10 +7,13 @@
 {
   nix = {
     package = pkgs.lix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
       home-manager.flake = inputs.home-manager;
@@ -23,6 +26,11 @@
       "nixos-config=${inputs.self}"
       "${inputs.nixpkgs}"
     ];
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
   environment.shellAliases.nixrepl = "nix repl --expr 'builtins.getFlake \"${inputs.self}\"'";
 }
