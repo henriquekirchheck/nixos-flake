@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 
@@ -18,6 +19,7 @@
 
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/zerotier
+    ../../modules/services/syncthing
 
     ../../modules/games/steam
 
@@ -82,6 +84,34 @@
       sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
+    };
+  };
+
+  ## syncthing
+  sops.secrets.syncthing-key = {
+    sopsFile = ./secrets/syncthing/key.pem;
+    format = "binary";
+  };
+  sops.secrets.syncthing-cert = {
+    sopsFile = ./secrets/syncthing/cert.pem;
+    format = "binary";
+  };
+
+  services.syncthing = {
+    key = config.sops.secrets.syncthing-key.path;
+    cert = config.sops.secrets.syncthing-cert.path;
+    settings = {
+      folders."/home/henrique/org/".devices = [ "henrique-pc" ];
+      devices = {
+        "henrique-pc" = {
+	  addresses = [
+	    "tcp://192.168.192.69:22000"
+	    "dynamic"
+	  ];
+          name = "PC";
+          id = "4IC6S6I-CSQYWOU-RKPYC6R-5IXWDIV-ZNT2354-2FAE555-JFRTHAA-SXXB7QT";
+        };
+      };
     };
   };
 }

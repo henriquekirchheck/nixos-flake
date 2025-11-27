@@ -23,6 +23,7 @@
     ../../modules/services/ddclient
     ../../modules/services/cloudflared
     ../../modules/services/zerotier
+    ../../modules/services/syncthing
 
     ../../modules/games/steam
 
@@ -118,6 +119,34 @@
     key = "password";
   };
   services.ddclient.passwordFile = config.sops.secrets.ddclient.path;
+
+  ## syncthing
+  sops.secrets.syncthing-key = {
+    sopsFile = ./secrets/syncthing/key.pem;
+    format = "binary";
+  };
+  sops.secrets.syncthing-cert = {
+    sopsFile = ./secrets/syncthing/cert.pem;
+    format = "binary";
+  };
+
+  services.syncthing = {
+    key = config.sops.secrets.syncthing-key.path;
+    cert = config.sops.secrets.syncthing-cert.path;
+    settings = {
+      folders."/home/henrique/org/".devices = [ "henrique-laptop" ];
+      devices = {
+        "henrique-laptop" = {
+	  addresses = [
+	    "tcp://192.168.192.70:22000"
+	    "dynamic"
+	  ];
+          name = "Laptop";
+          id = "XOTEBRB-4CF7OS3-SK326Z2-ZNUW72H-GWC2LNU-ANXLSFM-2SWPVTK-OF7YIA7";
+        };
+      };
+    };
+  };
 
   ## Network configuration
   systemd.network = {
