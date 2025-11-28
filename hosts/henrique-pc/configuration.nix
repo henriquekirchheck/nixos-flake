@@ -8,7 +8,7 @@
   imports = [
     ../../modules/system/bootloader/systemd-boot.nix
     ../../modules/system/kernel/xanmod.nix
-    ../../modules/system/networking/network-manager.nix
+    ../../modules/system/networking/systemd-networkd.nix
     ../../modules/system/firewall
     ../../modules/system/audio/pipewire.nix
     ../../modules/system/pro-audio
@@ -137,10 +137,10 @@
       folders."/home/henrique/org/".devices = [ "henrique-laptop" ];
       devices = {
         "henrique-laptop" = {
-	  addresses = [
-	    "tcp://192.168.192.70:22000"
-	    "dynamic"
-	  ];
+          addresses = [
+            "tcp://192.168.192.70:22000"
+            "dynamic"
+          ];
           name = "Laptop";
           id = "XOTEBRB-4CF7OS3-SK326Z2-ZNUW72H-GWC2LNU-ANXLSFM-2SWPVTK-OF7YIA7";
         };
@@ -151,53 +151,23 @@
   ## Network configuration
   systemd.network = {
     networks = {
-      "10-enp0s31f6" = {
-        matchConfig.Name = "enp0s31f6";
+      "10-wired" = {
+        matchConfig.Name = "enp*";
         networkConfig = {
           DHCP = "ipv6";
-          Address = "10.0.0.10/24";
-          Gateway = "10.0.0.1";
+          Address = [ "10.0.0.10/24" ];
+          Gateway = [ "10.0.0.1" ];
 
-          IPv6AcceptRA = "yes";
-          LinkLocalAddressing = "ipv6";
+          IPv6AcceptRA = true;
+          IPv6PrivacyExtensions = "prefer-public";
 
-          DNS = [
-            "2620:fe::fe"
-            "2620:fe::9"
-            "2606:4700:4700::1111"
-            "2606:4700:4700::1001"
-            "9.9.9.9"
-            "149.112.112.112"
-            "1.1.1.1"
-            "1.0.0.1"
-          ];
-          DNSSEC = "allow-downgrade";
-          DNSOverTLS = "yes";
+          DNSSEC = true;
+          DNSOverTLS = true;
+          MulticastDNS = true;
         };
-
-        dhcpV4Config = {
-          UseHostname = "no";
-          UseDNS = "no";
-          UseNTP = "no";
-          UseSIP = "no";
-          UseRoutes = "no";
-          UseGateway = "yes";
-        };
-
-        ipv6AcceptRAConfig = {
-          UseDNS = "no";
-          DHCPv6Client = "yes";
-        };
-
-        dhcpV6Config = {
-          WithoutRA = "solicit";
-          UseDelegatedPrefix = true;
-          UseHostname = "no";
-          UseDNS = "no";
-          UseNTP = "no";
-        };
-
-        linkConfig.RequiredForOnline = "routable";
+        dhcpV4Config.UseDNS = false;
+        dhcpV6Config.UseDNS = false;
+        ipv6AcceptRAConfig.UseDNS = false;
       };
     };
   };
