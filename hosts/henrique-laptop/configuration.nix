@@ -104,10 +104,10 @@
       folders."/home/henrique/org/".devices = [ "henrique-pc" ];
       devices = {
         "henrique-pc" = {
-	  addresses = [
-	    "tcp://192.168.192.69:22000"
-	    "dynamic"
-	  ];
+          addresses = [
+            "tcp://192.168.192.69:22000"
+            "dynamic"
+          ];
           name = "PC";
           id = "4IC6S6I-CSQYWOU-RKPYC6R-5IXWDIV-ZNT2354-2FAE555-JFRTHAA-SXXB7QT";
         };
