@@ -46,7 +46,7 @@
             { app-id = "discord"; }
             { app-id = "vesktop"; }
           ];
-          opacity = 0.92;
+          opacity = 0.85;
         }
         {
           matches = [
@@ -59,6 +59,15 @@
           shadow.enable = false;
           border.enable = false;
           focus-ring.enable = false;
+        }
+        {
+          matches = [
+            {
+              title = "Extension:.*Bitwarden.*";
+              app-id = "firefox";
+            }
+          ];
+          open-floating = true;
         }
         {
           matches = [
@@ -154,11 +163,14 @@
       binds =
         with config.lib.niri.actions;
         {
+          # Apps
           "Mod+Return".action = spawn "kitty";
           "Mod+B".action = spawn "firefox";
           "Mod+V".action = spawn "codium";
           "Mod+P".action = spawn "rofi" "-show" "run";
           "Mod+Space".action = spawn "rofi" "-show" "drun";
+
+          # Screenshot
           "Print".action.screenshot = { };
           "Shift+Print".action.screenshot-screen = {
             write-to-disk = false;
@@ -166,6 +178,13 @@
           "Ctrl+Print".action.screenshot-window = {
             write-to-disk = false;
           };
+
+          # Screencast
+          "Shift+R".action.screenshot-screen = { };
+          "Ctrl+R".action.set-dynamic-cast-window = { };
+          "Ctrl+Shift+R".action.clear-dynamic-cast-target = { };
+
+          # WM keybinds
           "Mod+Shift+C".action = close-window;
           "Mod+Shift+Q".action = quit { skip-confirmation = true; };
           "Mod+F".action = toggle-window-floating;
@@ -173,6 +192,7 @@
           "Mod+S".action = switch-preset-column-width;
           "Mod+A".action = toggle-overview;
 
+          # Move Windows
           "Mod+Up".action = focus-window-or-workspace-up;
           "Mod+Down".action = focus-window-or-workspace-down;
           "Mod+Left".action = focus-column-left;
@@ -182,6 +202,7 @@
           "Mod+Shift+Left".action = move-column-left;
           "Mod+Shift+Right".action = move-column-right;
 
+          # Volume control
           "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";
           "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";
           "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
@@ -193,6 +214,7 @@
               n = x + 1;
             in
             {
+              # Focus workspace N
               "Mod+${toString n}".action = focus-workspace n;
             }
           ) 9
