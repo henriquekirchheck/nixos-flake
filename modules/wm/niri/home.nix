@@ -180,9 +180,9 @@
           };
 
           # Screencast
-          "Shift+R".action.screenshot-screen = { };
-          "Ctrl+R".action.set-dynamic-cast-window = { };
-          "Ctrl+Shift+R".action.clear-dynamic-cast-target = { };
+          "Mod+Shift+R".action.set-dynamic-cast-monitor = { };
+          "Mod+Ctrl+R".action.set-dynamic-cast-window = { };
+          "Mod+R".action.clear-dynamic-cast-target = { };
 
           # WM keybinds
           "Mod+Shift+C".action = close-window;
