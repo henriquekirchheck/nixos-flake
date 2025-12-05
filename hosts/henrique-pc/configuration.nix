@@ -17,6 +17,7 @@
     ../../modules/system/permission/doas.nix
     ../../modules/system/dynamic-linking
     ../../modules/system/nix
+    ../../modules/system/zram
 
     ../../modules/services/ssh/openssh.nix
     ../../modules/services/caddy
