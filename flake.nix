@@ -11,6 +11,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     systems.url = "github:nix-systems/default-linux";
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -99,6 +104,7 @@
       self,
       nixpkgs,
       home-manager,
+      nix-on-droid,
       disko,
       flake-utils,
       treefmt-nix,
@@ -107,13 +113,18 @@
     }:
     let
       mkPkgs =
-        system:
+        {
+          system,
+          extraOverlays ? [ ],
+        }:
         import nixpkgs {
           inherit system;
-          overlays = (import ./overlays) {
-            inherit inputs;
-            inherit (nixpkgs) lib;
-          };
+          overlays =
+            ((import ./overlays) {
+              inherit inputs;
+              inherit (nixpkgs) lib;
+            })
+            ++ extraOverlays;
           config = {
             allowUnfree = true;
             allowUnfreePredicate = _: true;
@@ -129,7 +140,7 @@
         builtins.mapAttrs (
           host: _:
           nixpkgs.lib.nixosSystem rec {
-            pkgs = mkPkgs system;
+            pkgs = mkPkgs { inherit system; };
             system = import ./hosts/${host}/system.nix;
             specialArgs = { inherit inputs; };
             modules = [
@@ -173,16 +184,27 @@
         builtins.mapAttrs (
           user: _:
           home-manager.lib.homeManagerConfiguration {
-            pkgs = mkPkgs system;
+            pkgs = mkPkgs { inherit system; };
             modules = [ ./users/${user}/home.nix ];
             extraSpecialArgs = { inherit inputs; };
           }
         ) users;
     }))
+    // (flake-utils.lib.eachDefaultSystemPassThrough (system: {
+      nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+        modules = [ ];
+        extraSpecialArgs = { inherit inputs; };
+        pkgs = mkPkgs {
+          inherit system;
+          extraOverlays = [ nix-on-droid.overlays.default ];
+        };
+        home-manager-path = home-manager.outPath;
+      };
+    }))
     // (flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = mkPkgs system;
+        pkgs = mkPkgs { inherit system; };
         treefmt' = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
       in
       {
