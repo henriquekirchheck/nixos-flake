@@ -29,6 +29,9 @@
       frameless = true;
       transparent = true;
       plugins = {
+        # Fix for upstream
+	urlHighlighter.patterns = "";
+
         usrbg.enable = true;
         alwaysAnimate.enable = true;
         alwaysExpandRoles.enable = true;
