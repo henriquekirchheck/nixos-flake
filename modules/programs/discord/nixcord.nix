@@ -1,5 +1,13 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
+let
+  catppuccinOptions = {
+    accents = [ "sapphire" ];
+    flavour = [ "mocha" ];
+  };
+  catppuccinName = "catppuccin-${builtins.elemAt catppuccinOptions.flavour 0}-${builtins.elemAt catppuccinOptions.accents 0}";
+  catppuccinTheme = pkgs.catppuccin-discord.override catppuccinOptions;
+in
 {
   imports = [
     inputs.nixcord.homeModules.nixcord
@@ -28,6 +36,10 @@
       enableReactDevtools = true;
       frameless = true;
       transparent = true;
+      themes = {
+        ${catppuccinName} = ${catppuccinTheme}/share/${catppuccinName}.theme.css;
+      };
+      enabledThemes = [ "${catppuccinName}.css" ];
       plugins = {
         usrbg.enable = true;
         alwaysAnimate.enable = true;

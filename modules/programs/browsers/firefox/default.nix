@@ -16,7 +16,7 @@
       DontCheckDefaultBrowser = true;
       OfferToSaveLogins = false;
     };
-    nativeMessagingHosts = with pkgs; [ff2mpv-rust];
+    nativeMessagingHosts = with pkgs; [ ff2mpv-rust ];
     profiles.user = {
       extensions = {
         force = true;
