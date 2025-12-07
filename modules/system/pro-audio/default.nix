@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [ inputs.musnix.nixosModules.musnix ];
@@ -6,4 +6,6 @@
     enable = true;
     rtcqs.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [ yabridge yabridgectl ];
 }
