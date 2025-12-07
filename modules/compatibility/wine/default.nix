@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    wineWowPackages.stagingFull
+    wineWowPackages.full
     winetricks
   ];
 }
