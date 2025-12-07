@@ -192,7 +192,15 @@
     }))
     // (flake-utils.lib.eachDefaultSystemPassThrough (system: {
       nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-        modules = [ ];
+        modules = [
+          ./android/configuration.nix
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              #config = import ./android/home.nix;
+            };
+          }
+        ];
         extraSpecialArgs = { inherit inputs; };
         pkgs = mkPkgs {
           inherit system;

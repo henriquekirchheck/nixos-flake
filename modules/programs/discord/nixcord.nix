@@ -1,13 +1,5 @@
 { inputs, pkgs, ... }:
 
-let
-  catppuccinOptions = {
-    accents = [ "sapphire" ];
-    flavour = [ "mocha" ];
-  };
-  catppuccinName = "catppuccin-${builtins.elemAt catppuccinOptions.flavour 0}-${builtins.elemAt catppuccinOptions.accents 0}";
-  catppuccinTheme = pkgs.catppuccin-discord.override catppuccinOptions;
-in
 {
   imports = [
     inputs.nixcord.homeModules.nixcord
@@ -36,10 +28,8 @@ in
       enableReactDevtools = true;
       frameless = true;
       transparent = true;
-      themes = {
-        ${catppuccinName} = ${catppuccinTheme}/share/${catppuccinName}.theme.css;
-      };
-      enabledThemes = [ "${catppuccinName}.css" ];
+      themeLinks = ["https://catppuccin.github.io/discord/dist/catppuccin-mocha-sapphire.theme.css"];
+      enabledThemes = [ "catppuccin-mocha-sapphire.theme.css" ];
       plugins = {
         usrbg.enable = true;
         alwaysAnimate.enable = true;

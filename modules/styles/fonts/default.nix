@@ -15,6 +15,7 @@
       dejavu_fonts
       unifont
       fira-code
+      fira-sans
       fira-code-symbols
       inconsolata
       iosevka

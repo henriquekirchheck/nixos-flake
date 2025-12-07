@@ -24,7 +24,7 @@
     ../../modules/programs/editors/emacs
   ];
 
-  home.stateVersion = "26.05";
+  home.stateVersion = "24.05";
 
   home.shell.enableShellIntegration = true;
 
