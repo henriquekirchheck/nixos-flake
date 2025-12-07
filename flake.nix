@@ -92,6 +92,15 @@
         quickshell.follows = "quickshell";
       };
     };
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dankMaterialShell = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.dgop.follows = "dgop";
+    };
 
     blender-bin = {
       url = "github:edolstra/nix-warez?dir=blender";

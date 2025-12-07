@@ -44,8 +44,7 @@
     ../../modules/games/prismlauncher
 
     ../../modules/wm/niri/home.nix
-    ../../modules/programs/notification/mako.nix
-    ../../modules/programs/rofi
+    ../../modules/programs/quickshell/dms
     ../../modules/programs/wallpaper/swww.nix
 
     ../../modules/styles/fonts/home.nix

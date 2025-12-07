@@ -47,7 +47,25 @@
             { app-id = "vesktop"; }
           ];
           opacity = 0.85;
+          draw-border-with-background = false;
         }
+        {
+          matches = [
+            { is-active = false; }
+          ];
+          opacity = 0.9;
+        }
+        {
+          matches = [
+            { app-id = "^org\.wezfurlong\.wezterm$"; }
+            { app-id = "Alacritty"; }
+            { app-id = "zen"; }
+            { app-id = "com.mitchellh.ghostty"; }
+            { app-id = "kitty"; }
+          ];
+          draw-border-with-background = false;
+        }
+
         {
           matches = [
             { app-id = "xwaylandvideobridge"; }
@@ -84,6 +102,14 @@
           open-focused = false;
         }
         {
+          matches = [
+            {
+              app-id = "org.quickshell$";
+            }
+          ];
+          open-floating = true;
+        }
+        {
           matches = [ { is-window-cast-target = true; } ];
           border = {
             inactive.color = "#eba0ac";
@@ -97,10 +123,10 @@
         }
         {
           geometry-corner-radius = {
-            bottom-left = 8.0;
-            bottom-right = 8.0;
-            top-right = 8.0;
-            top-left = 8.0;
+            bottom-left = 12.0;
+            bottom-right = 12.0;
+            top-right = 12.0;
+            top-left = 12.0;
           };
           clip-to-geometry = true;
         }
@@ -166,9 +192,8 @@
           # Apps
           "Mod+Return".action = spawn "kitty";
           "Mod+B".action = spawn "firefox";
-          "Mod+V".action = spawn "codium";
-          "Mod+P".action = spawn "rofi" "-show" "run";
-          "Mod+Space".action = spawn "rofi" "-show" "drun";
+          "Mod+P".action = lib.mkForce (spawn "rofi" "-show" "run");
+          "Mod+Space".action = lib.mkDefault (spawn "rofi" "-show" "drun");
 
           # Screenshot
           "Print".action.screenshot = { };
@@ -203,9 +228,13 @@
           "Mod+Shift+Right".action = move-column-right;
 
           # Volume control
-          "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";
-          "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";
-          "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+          "XF86AudioRaiseVolume".action = lib.mkDefault (
+            spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"
+          );
+          "XF86AudioLowerVolume".action = lib.mkDefault (
+            spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"
+          );
+          "XF86AudioMute".action = lib.mkDefault (spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle");
         }
         // lib.mergeAttrsList (
           builtins.genList (

@@ -67,6 +67,7 @@
       };
     };
   system.stateVersion = "25.05";
+  systemd.user.services.niri-flake-polkit.enable = false;
 
   ## Hardware Video Acceleration
   hardware.graphics = {
