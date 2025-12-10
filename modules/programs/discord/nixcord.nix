@@ -28,7 +28,7 @@
       enableReactDevtools = true;
       frameless = true;
       transparent = true;
-      themeLinks = ["https://catppuccin.github.io/discord/dist/catppuccin-mocha-sapphire.theme.css"];
+      themeLinks = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha-sapphire.theme.css" ];
       enabledThemes = [ "catppuccin-mocha-sapphire.theme.css" ];
       plugins = {
         usrbg.enable = true;

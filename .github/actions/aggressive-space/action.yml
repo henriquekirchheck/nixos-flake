@@ -1,232 +1,224 @@
 name: "Agressivly Maximize Space"
 description: "Maximize the available disk space for your build job"
 branding:
-    icon: "crop"
-    color: "orange"
+  icon: "crop"
+  color: "orange"
 inputs:
-    root-reserve-mb:
-        description: "Space to be left free on the root filesystem, in Megabytes."
-        required: false
-        default: "1024"
-    swap-size-mb:
-        description: "Swap space to create, in Megabytes."
-        required: false
-        default: "4096"
-    build-mount-path:
-        description: "Absolute path to the mount point where the build space will be available, defaults to $GITHUB_WORKSPACE if unset."
-        required: false
-    build-mount-path-ownership:
-        description: 'Ownership of the mount point path, defaults to standard "runner" user and group.'
-        required: false
-        default: "runner:runner"
-    pv-loop-path:
-        description: "Absolute file path for the LVM image created on the root filesystem, the default is usually fine."
-        required: false
-        default: "/pv.img"
-    tmp-pv-loop-path:
-        description: "Absolute file path for the LVM image created on the temp filesystem, the default is usually fine. Must reside on /mnt"
-        required: false
-        default: "/mnt/tmp-pv.img"
-    boot-pv-loop-path:
-        description: "Absolute file path for the LVM image created on the boot filesystem, the default is usually fine. Must reside on /boot"
-        required: false
-        default: "/boot/boot-pv.img"
-
+  root-reserve-mb:
+    description: "Space to be left free on the root filesystem, in Megabytes."
+    required: false
+    default: "1024"
+  swap-size-mb:
+    description: "Swap space to create, in Megabytes."
+    required: false
+    default: "4096"
+  build-mount-path:
+    description: "Absolute path to the mount point where the build space will be available, defaults to $GITHUB_WORKSPACE if unset."
+    required: false
+  build-mount-path-ownership:
+    description: 'Ownership of the mount point path, defaults to standard "runner" user and group.'
+    required: false
+    default: "runner:runner"
+  pv-loop-path:
+    description: "Absolute file path for the LVM image created on the root filesystem, the default is usually fine."
+    required: false
+    default: "/pv.img"
+  tmp-pv-loop-path:
+    description: "Absolute file path for the LVM image created on the temp filesystem, the default is usually fine. Must reside on /mnt"
+    required: false
+    default: "/mnt/tmp-pv.img"
+  boot-pv-loop-path:
+    description: "Absolute file path for the LVM image created on the boot filesystem, the default is usually fine. Must reside on /boot"
+    required: false
+    default: "/boot/boot-pv.img"
 runs:
-    using: "composite"
-    steps:
-        - name: Disk space report before modification
-          shell: bash
-          run: |
-              echo "Memory and swap:"
-              sudo free -h
-              echo
-              sudo swapon --show
-              echo
+  using: "composite"
+  steps:
+    - name: Disk space report before modification
+      shell: bash
+      run: |
+        echo "Memory and swap:"
+        sudo free -h
+        echo
+        sudo swapon --show
+        echo
 
-              echo "Available storage:"
-              sudo df -h
-              echo
+        echo "Available storage:"
+        sudo df -h
+        echo
+    - name: Show info
+      shell: bash
+      run: |
+        set -euo pipefail
 
-        - name: Show info
-          shell: bash
-          run: |
-              set -euo pipefail
+        BUILD_MOUNT_PATH="${{ inputs.build-mount-path }}"
+        if [[ -z "${BUILD_MOUNT_PATH}" ]]; then
+          BUILD_MOUNT_PATH="${GITHUB_WORKSPACE}"
+        fi
 
-              BUILD_MOUNT_PATH="${{ inputs.build-mount-path }}"
-              if [[ -z "${BUILD_MOUNT_PATH}" ]]; then
-                BUILD_MOUNT_PATH="${GITHUB_WORKSPACE}"
-              fi
+        echo "Arguments:"
+        echo
+        echo "  Root reserve:      ${{ inputs.root-reserve-mb }} MiB"
+        echo "  Swap space:        ${{ inputs.swap-size-mb }} MiB"
+        echo "  Mount path:        ${BUILD_MOUNT_PATH}"
+        echo "  Root PV loop path: ${{ inputs.pv-loop-path }}"
+        echo "  Temp PV loop path: ${{ inputs.tmp-pv-loop-path }}"
+        echo "  Boot PV loop path: ${{ inputs.boot-pv-loop-path }}"
+        echo "  EFI  PV loop path: ${{ inputs.efi-pv-loop-path }}"
 
-              echo "Arguments:"
-              echo
-              echo "  Root reserve:      ${{ inputs.root-reserve-mb }} MiB"
-              echo "  Swap space:        ${{ inputs.swap-size-mb }} MiB"
-              echo "  Mount path:        ${BUILD_MOUNT_PATH}"
-              echo "  Root PV loop path: ${{ inputs.pv-loop-path }}"
-              echo "  Temp PV loop path: ${{ inputs.tmp-pv-loop-path }}"
-              echo "  Boot PV loop path: ${{ inputs.boot-pv-loop-path }}"
-              echo "  EFI  PV loop path: ${{ inputs.efi-pv-loop-path }}"
+        # ensure mount path exists before the action
+        sudo mkdir -p "${BUILD_MOUNT_PATH}"
+        sudo find "${BUILD_MOUNT_PATH}" -maxdepth 0 ! -empty -exec echo 'WARNING: directory [{}] is not empty, data loss might occur. Content:' \; -exec ls -al "{}" \;
+    - name: Prune Docker
+      shell: bash
+      run: sudo docker image prune --all --force
+    - name: Remove apt packages
+      shell: bash
+      run: |
+        echo "Removing packages from apt"
+        PACKAGES=(
+          'microsoft-edge-stable'
+          'azure-cli'
+          '^google.*'
+          '^temurin.*'
+          'powershell'
+          '^llvm.*'
+          'snapd'
+          'python-.*'
+          'python3-.*'
+          'containerd.io'
+          '^docker-ce.*'
+          'podman'
+          'kubectl'
+          '^clang.*'
+          '^cpp.*'
+          '.*postgres.*'
+          '.*mysql.*'
+          '.*sqlite.*'
+          'mecab-ipadic'
+          '.*gfortran.*'
+          'apache2-bin'
+          'shellcheck'
+          'git-lfs'
+          'mercurial'
+          'adwaita-icon-theme'
+          '^php.*'
+          'ant'
+          'shim-signed'
+        )
+        sudo apt-get remove --purge -y --allow-remove-essential ${PACKAGES[@]}
+        sudo apt-get autoremove -y
+        sudo apt-get clean -y
+    - name: Remove biggest directories
+      shell: bash
+      run: |
+        echo "Removing directories"
+        DIRS=(
+          '/usr/local/lib/android'
+          '/usr/local/.ghcup'
+          '/opt/hostedtoolcache'
+          '/usr/share/dotnet'
+          '/usr/share/swift'
+          '/usr/local/share/powershell'
+          '/usr/share/miniconda'
+          /usr/share/gradle*
+          /usr/local/julia*
+          '/home/runner/.rustup'
+          '/home/runner/.cargo'
+          '/home/runner/.dotnet'
+          '/home/runner/.nvm'
+          '/usr/local/share/chromium'
+          '/opt/pipx'
+          '/usr/local/aws-cli'
+          '/home/packer'
+          /root/*
+          '/etc/skel'
+          '/usr/local/aws-sam-cli'
+          '/usr/libexec/docker'
+          '/home/linuxbrew'
+          '/usr/share/kotlinc'
+          /usr/share/apache-maven*
+          /boot/efi/*
+          /boot/initrd*
+          /boot/vmlinuz*
+        )
+        sudo rm -rf ${DIRS[@]}
+    - name: Remove Swap
+      shell: bash
+      run: |
+        echo 'Removing Swap'
+        sudo swapoff -a
+        sudo rm -f /mnt/swapfile
+    - name: Create LVM Volume
+      shell: bash
+      run: |
+        set -euo pipefail
 
-              # ensure mount path exists before the action
-              sudo mkdir -p "${BUILD_MOUNT_PATH}"
-              sudo find "${BUILD_MOUNT_PATH}" -maxdepth 0 ! -empty -exec echo 'WARNING: directory [{}] is not empty, data loss might occur. Content:' \; -exec ls -al "{}" \;
+        BUILD_MOUNT_PATH="${{ inputs.build-mount-path }}"
+        if [[ -z "${BUILD_MOUNT_PATH}" ]]; then
+          BUILD_MOUNT_PATH="${GITHUB_WORKSPACE}"
+        fi
 
-        - name: Prune Docker
-          shell: bash
-          run: sudo docker image prune --all --force
+        VG_NAME=buildvg
 
-        - name: Remove apt packages
-          shell: bash
-          run: |
-              echo "Removing packages from apt"
-              PACKAGES=(
-                'microsoft-edge-stable'
-                'azure-cli'
-                '^google.*'
-                '^temurin.*'
-                'powershell'
-                '^llvm.*'
-                'snapd'
-                'python-.*'
-                'python3-.*'
-                'containerd.io'
-                '^docker-ce.*'
-                'podman'
-                'kubectl'
-                '^clang.*'
-                '^cpp.*'
-                '.*postgres.*'
-                '.*mysql.*'
-                '.*sqlite.*'
-                'mecab-ipadic'
-                '.*gfortran.*'
-                'apache2-bin'
-                'shellcheck'
-                'git-lfs'
-                'mercurial'
-                'adwaita-icon-theme'
-                '^php.*'
-                'ant'
-                'shim-signed'
-              )
-              sudo apt-get remove --purge -y --allow-remove-essential ${PACKAGES[@]}
-              sudo apt-get autoremove -y
-              sudo apt-get clean -y
+        echo "Creating LVM Volume."
+        echo "  Creating LVM PV on root fs."
+        # create loop pv image on root fs
+        ROOT_RESERVE_KB=$(expr ${{ inputs.root-reserve-mb }} \* 1024)
+        ROOT_FREE_KB=$(df --block-size=1024 --output=avail / | tail -1)
+        ROOT_LVM_SIZE_KB=$(expr $ROOT_FREE_KB - $ROOT_RESERVE_KB)
+        ROOT_LVM_SIZE_BYTES=$(expr $ROOT_LVM_SIZE_KB \* 1024)
+        sudo touch "${{ inputs.pv-loop-path }}" && sudo fallocate -z -l "${ROOT_LVM_SIZE_BYTES}" "${{ inputs.pv-loop-path }}"
+        export ROOT_LOOP_DEV=$(sudo losetup --find --show "${{ inputs.pv-loop-path }}")
+        sudo pvcreate -f "${ROOT_LOOP_DEV}"
 
-        - name: Remove biggest directories
-          shell: bash
-          run: |
-              echo "Removing directories"
-              DIRS=(
-                '/usr/local/lib/android'
-                '/usr/local/.ghcup'
-                '/opt/hostedtoolcache'
-                '/usr/share/dotnet'
-                '/usr/share/swift'
-                '/usr/local/share/powershell'
-                '/usr/share/miniconda'
-                /usr/share/gradle*
-                /usr/local/julia*
-                '/home/runner/.rustup'
-                '/home/runner/.cargo'
-                '/home/runner/.dotnet'
-                '/home/runner/.nvm'
-                '/usr/local/share/chromium'
-                '/opt/pipx'
-                '/usr/local/aws-cli'
-                '/home/packer'
-                /root/*
-                '/etc/skel'
-                '/usr/local/aws-sam-cli'
-                '/usr/libexec/docker'
-                '/home/linuxbrew'
-                '/usr/share/kotlinc'
-                /usr/share/apache-maven*
-                /boot/efi/*
-                /boot/initrd*
-                /boot/vmlinuz*
-              )
-              sudo rm -rf ${DIRS[@]}
+        # create pv on temp disk
+        echo "  Creating LVM PV on temp fs."
+        TMP_FREE_KB=$(df --block-size=1024 --output=avail /mnt | tail -1)
+        TMP_LVM_SIZE_KB=$TMP_FREE_KB
+        TMP_LVM_SIZE_BYTES=$(expr $TMP_LVM_SIZE_KB \* 1024)
+        sudo touch "${{ inputs.tmp-pv-loop-path }}" && sudo fallocate -z -l "${TMP_LVM_SIZE_BYTES}" "${{ inputs.tmp-pv-loop-path }}"
+        export TMP_LOOP_DEV=$(sudo losetup --find --show "${{ inputs.tmp-pv-loop-path }}")
+        sudo pvcreate -f "${TMP_LOOP_DEV}"
 
-        - name: Remove Swap
-          shell: bash
-          run: |
-              echo 'Removing Swap'
-              sudo swapoff -a
-              sudo rm -f /mnt/swapfile
+        # create pv on boot disk
+        echo "  Creating LVM PV on boot fs."
+        BOOT_FREE_KB=$(df --block-size=1024 --output=avail /boot | tail -1)
+        BOOT_LVM_SIZE_KB=$BOOT_FREE_KB
+        BOOT_LVM_SIZE_BYTES=$(expr $BOOT_LVM_SIZE_KB \* 1024)
+        sudo touch "${{ inputs.boot-pv-loop-path }}" && sudo fallocate -z -l "${BOOT_LVM_SIZE_BYTES}" "${{ inputs.boot-pv-loop-path }}"
+        export BOOT_LOOP_DEV=$(sudo losetup --find --show "${{ inputs.boot-pv-loop-path }}")
+        sudo pvcreate -f "${BOOT_LOOP_DEV}"
 
-        - name: Create LVM Volume
-          shell: bash
-          run: |
-              set -euo pipefail
+        # create volume group from these pvs
+        sudo vgcreate "${VG_NAME}" "${TMP_LOOP_DEV}" "${ROOT_LOOP_DEV}" "${BOOT_LOOP_DEV}"
 
-              BUILD_MOUNT_PATH="${{ inputs.build-mount-path }}"
-              if [[ -z "${BUILD_MOUNT_PATH}" ]]; then
-                BUILD_MOUNT_PATH="${GITHUB_WORKSPACE}"
-              fi
+        echo "Recreating swap"
+        # create and activate swap
+        sudo lvcreate -L "${{ inputs.swap-size-mb }}M" -n swap "${VG_NAME}"
+        sudo mkswap "/dev/mapper/${VG_NAME}-swap"
+        sudo swapon "/dev/mapper/${VG_NAME}-swap"
 
-              VG_NAME=buildvg
+        echo "Creating build volume"
+        # create and mount build volume
+        sudo lvcreate -l 100%FREE -n buildlv "${VG_NAME}"
+        sudo mkfs.btrfs -K "/dev/mapper/${VG_NAME}-buildlv"
+        sudo mount -o compress=zstd,noatime,nodiscard "/dev/mapper/${VG_NAME}-buildlv" "${BUILD_MOUNT_PATH}"
+        sudo chown -R "${{ inputs.build-mount-path-ownership }}" "${BUILD_MOUNT_PATH}"
 
-              echo "Creating LVM Volume."
-              echo "  Creating LVM PV on root fs."
-              # create loop pv image on root fs
-              ROOT_RESERVE_KB=$(expr ${{ inputs.root-reserve-mb }} \* 1024)
-              ROOT_FREE_KB=$(df --block-size=1024 --output=avail / | tail -1)
-              ROOT_LVM_SIZE_KB=$(expr $ROOT_FREE_KB - $ROOT_RESERVE_KB)
-              ROOT_LVM_SIZE_BYTES=$(expr $ROOT_LVM_SIZE_KB \* 1024)
-              sudo touch "${{ inputs.pv-loop-path }}" && sudo fallocate -z -l "${ROOT_LVM_SIZE_BYTES}" "${{ inputs.pv-loop-path }}"
-              export ROOT_LOOP_DEV=$(sudo losetup --find --show "${{ inputs.pv-loop-path }}")
-              sudo pvcreate -f "${ROOT_LOOP_DEV}"
+        # if build mount path is a parent of $GITHUB_WORKSPACE, and has been deleted, recreate it
+        if [[ ! -d "${GITHUB_WORKSPACE}" ]]; then
+          sudo mkdir -p "${GITHUB_WORKSPACE}"
+          sudo chown -R "${WORKSPACE_OWNER}" "${GITHUB_WORKSPACE}"
+        fi
+    - name: Disk space report after modification
+      shell: bash
+      run: |
+        echo "Memory and swap:"
+        sudo free -h
+        echo
+        sudo swapon --show
+        echo
 
-              # create pv on temp disk
-              echo "  Creating LVM PV on temp fs."
-              TMP_FREE_KB=$(df --block-size=1024 --output=avail /mnt | tail -1)
-              TMP_LVM_SIZE_KB=$TMP_FREE_KB
-              TMP_LVM_SIZE_BYTES=$(expr $TMP_LVM_SIZE_KB \* 1024)
-              sudo touch "${{ inputs.tmp-pv-loop-path }}" && sudo fallocate -z -l "${TMP_LVM_SIZE_BYTES}" "${{ inputs.tmp-pv-loop-path }}"
-              export TMP_LOOP_DEV=$(sudo losetup --find --show "${{ inputs.tmp-pv-loop-path }}")
-              sudo pvcreate -f "${TMP_LOOP_DEV}"
-
-              # create pv on boot disk
-              echo "  Creating LVM PV on boot fs."
-              BOOT_FREE_KB=$(df --block-size=1024 --output=avail /boot | tail -1)
-              BOOT_LVM_SIZE_KB=$BOOT_FREE_KB
-              BOOT_LVM_SIZE_BYTES=$(expr $BOOT_LVM_SIZE_KB \* 1024)
-              sudo touch "${{ inputs.boot-pv-loop-path }}" && sudo fallocate -z -l "${BOOT_LVM_SIZE_BYTES}" "${{ inputs.boot-pv-loop-path }}"
-              export BOOT_LOOP_DEV=$(sudo losetup --find --show "${{ inputs.boot-pv-loop-path }}")
-              sudo pvcreate -f "${BOOT_LOOP_DEV}"
-
-              # create volume group from these pvs
-              sudo vgcreate "${VG_NAME}" "${TMP_LOOP_DEV}" "${ROOT_LOOP_DEV}" "${BOOT_LOOP_DEV}"
-
-              echo "Recreating swap"
-              # create and activate swap
-              sudo lvcreate -L "${{ inputs.swap-size-mb }}M" -n swap "${VG_NAME}"
-              sudo mkswap "/dev/mapper/${VG_NAME}-swap"
-              sudo swapon "/dev/mapper/${VG_NAME}-swap"
-
-              echo "Creating build volume"
-              # create and mount build volume
-              sudo lvcreate -l 100%FREE -n buildlv "${VG_NAME}"
-              sudo mkfs.btrfs -K "/dev/mapper/${VG_NAME}-buildlv"
-              sudo mount -o compress=zstd,noatime,nodiscard "/dev/mapper/${VG_NAME}-buildlv" "${BUILD_MOUNT_PATH}"
-              sudo chown -R "${{ inputs.build-mount-path-ownership }}" "${BUILD_MOUNT_PATH}"
-
-              # if build mount path is a parent of $GITHUB_WORKSPACE, and has been deleted, recreate it
-              if [[ ! -d "${GITHUB_WORKSPACE}" ]]; then
-                sudo mkdir -p "${GITHUB_WORKSPACE}"
-                sudo chown -R "${WORKSPACE_OWNER}" "${GITHUB_WORKSPACE}"
-              fi
-
-        - name: Disk space report after modification
-          shell: bash
-          run: |
-              echo "Memory and swap:"
-              sudo free -h
-              echo
-              sudo swapon --show
-              echo
-
-              echo "Available storage:"
-              sudo df -h
+        echo "Available storage:"
+        sudo df -h

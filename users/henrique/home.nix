@@ -19,6 +19,7 @@
     ../../modules/programs/libreoffice
     ../../modules/programs/zathura
     ../../modules/programs/comma
+    ../../modules/programs/thunderbird
 
     ../../modules/development/c
     ../../modules/development/python
@@ -129,11 +130,46 @@
     };
   };
 
-  ## Git
+  ## Jujutsu
   programs.jujutsu.settings = {
     user.name = "Henrique Kirch Heck";
     user.email = "me@henriquekh.dev.br";
   };
+
+  ## Accounts
+  sops.secrets.personal = {
+    sopsFile = ./secrets/accounts.yaml;
+  };
+  sops.secrets.games = {
+    sopsFile = ./secrets/accounts.yaml;
+  };
+  accounts.email.accounts =
+    let
+      shared = {
+        flavor = "gmail.com";
+        thunderbird.enable = true;
+        smtp.tls.useStartTls = true;
+      };
+    in
+    {
+      personal = {
+        primary = true;
+        realName = "Henrique Kirch Heck";
+        address = "henriquekirchheck@gmail.com";
+        passwordCommand = "cat ${config.sops.secrets.personal.path}";
+      }
+      // shared;
+      games = {
+        realName = "GamesRevolution";
+        address = "henrique.gamesrev@gmail.com";
+        passwordCommand = "cat ${config.sops.secrets.games.path}";
+      }
+      // shared;
+    };
+  programs.thunderbird.profiles.user.accountsOrder = [
+    "personal"
+    "games"
+  ];
 
   # XDG Dirs
   xdg = {

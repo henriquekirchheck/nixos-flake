@@ -1,11 +1,9 @@
 name: "check flake"
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +19,6 @@ jobs:
       - name: Get outputs
         id: gen_output
         run: echo "outputs=$(nix flake show --json | jq -c '.nixosConfigurations | keys | map("nixosConfigurations.\(.).config.system.build.toplevel")')" >> "$GITHUB_OUTPUT"
-
   cache:
     needs: build
     strategy:
