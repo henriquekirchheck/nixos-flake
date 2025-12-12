@@ -10,11 +10,14 @@
     discord = {
       enable = true;
       branch = "canary";
+      equicord.enable = true;
+      vencord.enable = false;
     };
-    vesktop = {
-      enable = true;
-      useSystemVencord = false;
-    };
+    # vesktop = {
+    #   enable = true;
+    #   useSystemVencord = false;
+    # };
+    equibop.enable = true;
     dorion = {
       enable = true;
       desktopNotifications = true;

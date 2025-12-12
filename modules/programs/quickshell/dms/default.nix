@@ -23,13 +23,9 @@
     niri.enableKeybinds = true;
 
     enableSystemMonitoring = true;
-    enableClipboard = true;
     enableVPN = false;
-    enableBrightnessControl = osConfig.networking.hostName == "henrique-laptop";
-    enableColorPicker = true;
     enableDynamicTheming = false;
     enableAudioWavelength = true;
     enableCalendarEvents = false;
-    enableSystemSound = false;
   };
 }
