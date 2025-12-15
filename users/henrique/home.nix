@@ -35,7 +35,7 @@
     ../../modules/system/virtualisation/containers/distrobox.nix
 
     ../../modules/programs/browsers/firefox
-    ../../modules/programs/terminal/kitty
+    ../../modules/programs/terminal/alacritty
     ../../modules/programs/editors/codium
     ../../modules/programs/editors/neovim
     ../../modules/programs/editors/emacs
@@ -75,9 +75,9 @@
 
   ## Defaults
   home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "codium -w";
-    TERMINAL = "kitty";
+    EDITOR = "emacsclient -nw -c";
+    VISUAL = "emacsclient -c";
+    TERMINAL = "alacritty";
     BROWSER = "firefox";
   };
 

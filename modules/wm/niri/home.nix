@@ -190,7 +190,7 @@
         with config.lib.niri.actions;
         {
           # Apps
-          "Mod+Return".action = spawn "kitty";
+          "Mod+Return".action = spawn-sh "alacritty msg create-window || alacritty";
           "Mod+B".action = spawn "firefox";
           "Mod+P".action = lib.mkForce (spawn "rofi" "-show" "run");
           "Mod+Space".action = lib.mkDefault (spawn "rofi" "-show" "drun");
