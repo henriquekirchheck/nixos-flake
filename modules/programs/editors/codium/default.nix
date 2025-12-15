@@ -13,6 +13,7 @@ let
     with codeExtensions.open-vsx;
     with codeExtensions.open-vsx-release;
     [
+      mesonbuild.mesonbuild
       llvm-vs-code-extensions.vscode-clangd
       rust-lang.rust-analyzer
       tamasfe.even-better-toml
