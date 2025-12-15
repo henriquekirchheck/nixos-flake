@@ -63,6 +63,8 @@ let
       firefox-devtools.vscode-firefox-debug
       a5huynh.vscode-ron
 
+      redhat.vscode-yaml
+
       # Qt
       theqtcompany.qt-core
       theqtcompany.qt-cpp
