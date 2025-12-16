@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }:
 
@@ -13,6 +14,9 @@
         "nix-command"
         "flakes"
       ];
+      use-xdg-base-directories = true;
+      diff-hook = lib.getExe pkgs.dix;
+      run-diff-hook = true;
     };
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
