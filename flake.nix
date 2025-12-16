@@ -138,6 +138,7 @@
             allowUnfree = true;
             allowUnfreePredicate = _: true;
             android_sdk.accept_license = true;
+microsoftVisualStudioLicenseAccepted = true;
           };
         };
     in
