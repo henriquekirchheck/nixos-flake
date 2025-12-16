@@ -27,4 +27,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBHzo1AzCHMwR6sctkN8hxilkKvjnr96xWPotO3eTcxR me@henriquekh.dev.br"
     ];
   };
+
+  nix.settings.trusted-users = [ "henrique" ];
 }
