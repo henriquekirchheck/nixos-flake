@@ -140,6 +140,8 @@ let
 
       libxcrypt-legacy # For natron
       libGLU # For natron
+
+      libnotify
     ];
 
   buildSystemSet =

@@ -28,6 +28,8 @@
     ../../modules/development/javascript
     ../../modules/development/tex
 
+    ../../modules/services/mpd
+
     ../../modules/hardware/bluetooth/home.nix
 
     ../../modules/compatibility/wine
@@ -170,6 +172,13 @@
     "personal"
     "games"
   ];
+
+  ## Scrobble
+  sops.secrets.mpdasrc = {
+    sopsFile = ./secrets/mpdasrc;
+    format = "binary";
+    path = "${config.home.homeDirectory}/.config/mpdasrc";
+  };
 
   # XDG Dirs
   xdg = {
