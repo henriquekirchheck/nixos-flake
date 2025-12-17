@@ -41,6 +41,7 @@
     ../../modules/programs/editors/codium
     ../../modules/programs/editors/neovim
     ../../modules/programs/editors/emacs
+    ../../modules/programs/editors/zed
     ../../modules/programs/blender
 
     ../../modules/games/godot
