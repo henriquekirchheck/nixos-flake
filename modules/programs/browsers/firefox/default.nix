@@ -1,4 +1,28 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
+
+let
+  moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
+  mozExtensions =
+    f:
+    builtins.foldl' lib.attrsets.recursiveUpdate { } (
+      f (
+        short: id: {
+          ${id} = {
+            install_url = moz short;
+            installation_mode = "force_installed";
+            updates_disabled = true;
+          };
+        }
+      )
+    );
+  extensions = mozExtensions (ext: [
+    (ext "vidiq-vision-youtube" "firefox@vid.io")
+  ]);
+in
 {
   programs.firefox = {
     enable = true;
@@ -7,21 +31,60 @@
       "pt-BR"
     ];
     policies = {
+      AppAutoUpdate = false;
+      BackgroundAppUpdate = false;
+      DisableProfileImport = true;
+      DisableProfileRefresh = true;
       Certificates.ImportEnterpriseRoots = true;
       DisableFirefoxAcounts = true;
       DisableFirefoxStudies = true;
+      DisableAppUpdate = true;
       DisablePocket = true;
       DisableSetDesktopBackground = true;
       DisableTelemetry = true;
       DontCheckDefaultBrowser = true;
       OfferToSaveLogins = false;
+      FirefoxHome = {
+        Search = true;
+        TopSites = true;
+        SponsoredTopSites = false; # Fuck you
+        Highlights = true;
+        Pocket = false;
+        SponsoredPocket = false; # Fuck you
+        Snippets = false;
+        Locked = true;
+      };
+      FirefoxSuggest = {
+        WebSuggestions = true;
+        SponsoredSuggestions = false; # Fuck you
+        ImproveSuggest = false;
+        Locked = true;
+      };
+      EnableTrackingProtection = {
+        Value = true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+        EmailTracking = true;
+      };
+      PasswordManagerEnabled = false;
+      GenerativeAI = {
+        Enabled = false;
+        ChatBot = false;
+        LinkPreviews = false;
+        TabGroups = false;
+        Locked = true;
+      };
+      ExtensionUpdate = false;
+      ExtensionSettings = extensions;
     };
     nativeMessagingHosts = with pkgs; [ ff2mpv-rust ];
     profiles.user = {
       extensions = {
         force = true;
         packages = with pkgs.nur.repos.rycee.firefox-addons; [
-          decentraleyes
+          localcdn
+          darkreader
           ublock-origin
           sponsorblock
           privacy-badger
@@ -40,6 +103,7 @@
           ff2mpv
           firefox-color
           chameleon-ext
+          youtube-recommended-videos
         ];
       };
       settings = {
@@ -154,4 +218,5 @@
     MOZ_USE_XINPUT2 = "1";
     MOZ_DISABLE_RDD_SANDBOX = "1";
   };
+
 }

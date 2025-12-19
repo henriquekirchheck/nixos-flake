@@ -20,6 +20,7 @@
     ../../modules/programs/zathura
     ../../modules/programs/comma
     ../../modules/programs/thunderbird
+    ../../modules/programs/aria2
 
     ../../modules/development/c
     ../../modules/development/python

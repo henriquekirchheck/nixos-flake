@@ -3,7 +3,6 @@
   environment.systemPackages = with pkgs; [
     neovim
     wget
-    aria2
     eza
     fd
     ripgrep
