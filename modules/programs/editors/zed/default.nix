@@ -63,32 +63,56 @@
     # Everything inside of these brackets are Zed options
     userSettings = {
       lsp = {
-        angular.binary.path = lib.getExe pkgs.angular-language-server;
-        dockerfile-language-server.binary.path = lib.getExe pkgs.dockerfile-language-server;
+        angular.binary = {
+          path = lib.getExe pkgs.angular-language-server;
+          arguments = [ "--stdio" ];
+        };
+        dockerfile-language-server.binary = {
+          path = lib.getExe pkgs.dockerfile-language-server;
+          arguments = [ "--stdio" ];
+        };
         compose-language-service.binary.path = lib.getExe pkgs.docker-compose-language-service;
-        vscode-css-language-server.binary.path = lib.getExe pkgs.vscode-css-languageserver;
-        vscode-html-language-server.binary.path = lib.getExe' pkgs.vscode-langservers-extracted "vscode-html-language-server";
-        json-language-server.binary.path = lib.getExe pkgs.vscode-json-languageserver;
+        vscode-css-language-server.binary = {
+          path = lib.getExe pkgs.vscode-css-languageserver;
+          arguments = [ "--stdio" ];
+        };
+        json-language-server.binary = {
+          path = lib.getExe pkgs.vscode-json-languageserver;
+          arguments = [ "--stdio" ];
+        };
         tailwindcss-language-server = {
           binary.path = lib.getExe pkgs.tailwindcss-language-server;
           settings.tailwindCSS.emmetCompletions = true;
         };
-        emmet-language-server.binary.path = lib.getExe pkgs.emmet-language-server;
-        phpactor.binary.path = lib.getExe pkgs.phpactor;
+        emmet-language-server.binary = {
+          path = lib.getExe pkgs.emmet-language-server;
+          arguments = [ "--stdio" ];
+        };
+        phpactor.binary = {
+          path = lib.getExe pkgs.phpactor;
+          arguments = [ "language-server" ];
+        };
         jdtls.binary.path = lib.getExe pkgs.jdt-language-server;
         kotlin-language-server.binary.path = lib.getExe pkgs.kotlin-language-server;
         neocmakelsp.binary.path = lib.getExe pkgs.neocmakelsp;
         just-lsp.binary.path = lib.getExe pkgs.just-lsp;
-        haskell-language-server.binary.path = lib.getExe pkgs.haskell-language-server;
+        haskell-language-server.binary.path = lib.getExe' pkgs.haskell-language-server "haskell-language-server-wrapper";
         qmlls.binary.path = lib.getExe' pkgs.qt6.qtdeclarative "qmlls";
-        yaml-language-server.binary.path = lib.getExe pkgs.yaml-language-server;
+        yaml-language-server.binary = {
+          path = lib.getExe pkgs.yaml-language-server;
+          arguments = [ "--stdio" ];
+        };
         wgsl-analyzer.binary.path = lib.getExe pkgs.wgsl-analyzer;
         tofu-ls.binary.path = lib.getExe pkgs.tofu-ls;
         slangd.binary.path = lib.getExe' pkgs.shader-slang "slangd";
         mesonlsp.binary.path = lib.getExe pkgs.mesonlsp;
         bash-language-server.binary.path = lib.getExe pkgs.bash-language-server;
         marksman.binary.path = lib.getExe pkgs.marksman;
-        tombi.binary.path = lib.getExe pkgs.tombi;
+        tombi.binary = {
+          path = lib.getExe pkgs.tombi;
+          arguments = [ "lsp" ];
+        };
+        cargo-tom.initialization_options.hide_docs_info_message = true;
         nixd = {
           initialization_options.formatting.command = [
             (lib.getExe pkgs.nixfmt)
@@ -96,12 +120,27 @@
           ];
           binary.path = lib.getExe pkgs.nixd;
         };
-        biome.binary.path = lib.getExe pkgs.biome;
-        deno.binary.path = lib.getExe pkgs.deno;
-        vtsls.binary.path = lib.getExe pkgs.vtsls;
+        biome.binary = {
+          path = lib.getExe pkgs.biome;
+          arguments = [ "lsp-proxy" ];
+        };
+        deno.binary = {
+          path = lib.getExe pkgs.deno;
+          arguments = [ "lsp" ];
+        };
+        vtsls.binary = {
+          path = lib.getExe pkgs.vtsls;
+          arguments = [ "--stdio" ];
+        };
         basedpyright.binary.path = lib.getExe pkgs.basedpyright;
-        ruff.binary.path = lib.getExe pkgs.ruff;
-        ty.binary.path = lib.getExe pkgs.ty;
+        ruff.binary = {
+          path = lib.getExe pkgs.ruff;
+          arguments = [ "server" ];
+        };
+        ty.binary = {
+          path = lib.getExe pkgs.ty;
+          arguments = [ "server" ];
+        };
         rust-analizer = {
           binary.path = lib.getExe pkgs.rust-analyzer;
           initialization_options.check.command = "clippy";
@@ -116,6 +155,10 @@
       languages = {
         "JavaScript".formatter.code_action = "source.fixAll.eslint";
         "TypeScript".formatter.code_action = "source.fixAll.eslint";
+        "Nix".language_servers = [
+          "nixd"
+          "!nil"
+        ];
       };
 
       auto_indent_on_paste = false;
@@ -164,7 +207,7 @@
         auto_fold_dirs = false;
         dock = "right";
         hide_gitignore = false;
-        hide_hidden = true;
+        hide_hidden = false;
         hide_root = true;
       };
       search = {
@@ -221,6 +264,38 @@
 
       load_direnv = "shell_hook";
     };
+
+    userKeymaps = [
+      {
+        bindings.ctrl-q = null;
+      }
+      {
+        bindings.ctrl-q = "editor::ToggleComments";
+        context = "Editor";
+      }
+      {
+        bindings.ctrl-alt-shift-down = [
+          "editor::AddSelectionBelow"
+          { skip_soft_wrap = true; }
+        ];
+        context = "Editor";
+      }
+      {
+        bindings.alt-shift-down = "editor::DuplicateLineDown";
+        context = "Editor";
+      }
+      {
+        bindings.ctrl-alt-shift-up = [
+          "editor::AddSelectionAbove"
+          { skip_soft_wrap = true; }
+        ];
+        context = "Editor";
+      }
+      {
+        bindings.alt-shift-up = "editor::DuplicateLineUp";
+        context = "Editor";
+      }
+    ];
   };
 
 }
