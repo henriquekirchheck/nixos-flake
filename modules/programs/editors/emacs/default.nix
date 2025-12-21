@@ -2,7 +2,7 @@
 let
   emacs = (pkgs.emacsPackagesFor pkgs.emacs-git-pgtk).emacsWithPackages (
     epkgs: with epkgs; [
-      treesit-grammars.with-all-grammars
+      # treesit-grammars.with-all-grammars
       vterm
     ]
   );
