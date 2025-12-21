@@ -21,6 +21,7 @@
     ../../modules/programs/comma
     ../../modules/programs/thunderbird
     ../../modules/programs/aria2
+    ../../modules/programs/mpris-scrobbler
 
     ../../modules/development/c
     ../../modules/development/python
@@ -176,11 +177,31 @@
   ];
 
   ## Scrobble
-  sops.secrets.mpdasrc = {
-    sopsFile = ./secrets/mpdasrc;
-    format = "binary";
-    path = "${config.home.homeDirectory}/.config/mpdasrc";
-  };
+  # sops.secrets."lastfm/token" = {
+  #   sopsFile = ./secrets/scrobblers.yaml;
+  # };
+  # sops.secrets."lastfm/session" = {
+  #   sopsFile = ./secrets/scrobblers.yaml;
+  # };
+  # sops.secrets."librefm/token" = {
+  #   sopsFile = ./secrets/scrobblers.yaml;
+  # };
+  # sops.secrets."librefm/session" = {
+  #   sopsFile = ./secrets/scrobblers.yaml;
+  # };
+
+  # programs.mpris-scrobbler.credentials = {
+  #   librefm = {
+  #     username = "henriquekh";
+  #     tokenFile = config.sops.secrets."lastfm/token".path;
+  #     sessionFile = config.sops.secrets."lastfm/session".path;
+  #   };
+  #   lastfm = {
+  #     username = "henriquekh";
+  #     tokenFile = config.sops.secrets."librefm/token".path;
+  #     sessionFile = config.sops.secrets."librefm/session".path;
+  #   };
+  # };
 
   # XDG Dirs
   xdg = {
