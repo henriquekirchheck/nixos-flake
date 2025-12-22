@@ -36,7 +36,7 @@
 
     ../../modules/wm/niri
     ../../modules/wm/kde
-    ../../modules/dm/sddm
+    ../../modules/dm/cosmic-greeter
 
     ../../modules/styles/fonts
 
