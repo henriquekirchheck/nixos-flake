@@ -153,7 +153,7 @@ let
           name = pkgs.stdenv.buildPlatform.system;
           value = {
             package = inputs.nix-ld.packages.${pkgs.stdenv.hostPlatform.system}.default;
-            pkgs = pkgs;
+            inherit pkgs;
             libraries = buildPkgList pkgs;
             inherit ldso;
           };
@@ -171,7 +171,7 @@ in
   programs.nix-ld-local.systems = buildSystemSet [
     {
       ldso = "ldso";
-      pkgs = pkgs;
+      inherit pkgs;
     }
     {
       ldso = "ldso32";

@@ -1,0 +1,25 @@
+name: "populate cache"
+on:
+  workflow_call:
+jobs:
+  cache:
+    runs-on: nixos-unstable
+    steps:
+      - name: Install node
+        run: nix profile install nixpkgs#nodejs_latest
+      - name: Checkout repository
+        uses: https://data.forgejo.org/actions/checkout@v6
+      - name: Setup cachix
+        uses: cachix/cachix-action@v16
+        with:
+          name: henriquekh
+          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          extraPullNames: nix-community,hyprland,niri,nix-on-droid
+          skipPush: true
+      - name: Install omnix
+        run: nix profile install nixpkgs#omnix github:juspay/cachix-push
+      - name: Build output
+        run: om ci run --results=/om.json
+      - name: Push to cache
+        run: cachix-push-om-outputs -c henriquekh --subflake ROOT --prefix "$(git rev-parse --short HEAD)" < /om.json

@@ -176,33 +176,6 @@
     "games"
   ];
 
-  ## Scrobble
-  # sops.secrets."lastfm/token" = {
-  #   sopsFile = ./secrets/scrobblers.yaml;
-  # };
-  # sops.secrets."lastfm/session" = {
-  #   sopsFile = ./secrets/scrobblers.yaml;
-  # };
-  # sops.secrets."librefm/token" = {
-  #   sopsFile = ./secrets/scrobblers.yaml;
-  # };
-  # sops.secrets."librefm/session" = {
-  #   sopsFile = ./secrets/scrobblers.yaml;
-  # };
-
-  # programs.mpris-scrobbler.credentials = {
-  #   librefm = {
-  #     username = "henriquekh";
-  #     tokenFile = config.sops.secrets."lastfm/token".path;
-  #     sessionFile = config.sops.secrets."lastfm/session".path;
-  #   };
-  #   lastfm = {
-  #     username = "henriquekh";
-  #     tokenFile = config.sops.secrets."librefm/token".path;
-  #     sessionFile = config.sops.secrets."librefm/session".path;
-  #   };
-  # };
-
   # XDG Dirs
   xdg = {
     enable = true;

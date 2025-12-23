@@ -1,0 +1,27 @@
+name: "update flake"
+on:
+  schedule:
+    - cron: "15 4 * * *"
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: nixos-unstable
+    steps:
+      - name: Install node
+        run: nix profile install nixpkgs#nodejs_latest
+      - name: Checkout repository
+        uses: https://data.forgejo.org/actions/checkout@v6
+      - name: Update flake.lock
+        run: nix flake update
+      - name: Add flake.lock
+        run: git add flake.lock
+      - name: Check flake
+        run: nix flake check --all-systems
+      - name: Push new flake.lock
+        run: |
+          git commit -m "Update Flake Inputs: $(date +%F)" --author "flake-update[bot] <>"
+          git push
+  cache:
+    needs: build
+    uses: ./.forgejo/workflows/cache.yml
+    secrets: inherit

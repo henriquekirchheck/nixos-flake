@@ -40,7 +40,7 @@ in
     let
       # For generating the documentation, we don't have access to the system,
       # and it also reads better
-      system = pkgs.stdenv.hostPlatform.system;
+      inherit (pkgs.stdenv.hostPlatform) system;
     in
     [
       (mkAliasOptionModule

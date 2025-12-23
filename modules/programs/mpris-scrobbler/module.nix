@@ -129,8 +129,8 @@ in
     #   }
     # ];
 
-    home.packages = [cfg.package];
-    
+    home.packages = [ cfg.package ];
+
     systemd.user.services.mpris-scrobbler = {
       Install.WantedBy = [ "multi-user.target" ];
       Unit = {
