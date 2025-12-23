@@ -18,6 +18,7 @@ jobs:
         run: nix flake check --all-systems
   cache:
     runs-on: alpine-latest
-    needs: check
+    needs:
+      - check
     uses: ./.forgejo/workflows/cache.yml
     secrets: inherit

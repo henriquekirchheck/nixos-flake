@@ -23,6 +23,7 @@ jobs:
           git push
   cache:
     runs-on: alpine-latest
-    needs: update
+    needs:
+      - update
     uses: ./.forgejo/workflows/cache.yml
     secrets: inherit

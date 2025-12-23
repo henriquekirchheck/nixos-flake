@@ -10,7 +10,7 @@ jobs:
       - name: Checkout repository
         uses: https://data.forgejo.org/actions/checkout@v6
       - name: Setup cachix
-        uses: cachix/cachix-action@v16
+        uses: https://github.com/cachix/cachix-action@v16
         with:
           name: henriquekh
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
