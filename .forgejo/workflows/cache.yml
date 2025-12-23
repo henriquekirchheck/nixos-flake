@@ -1,6 +1,8 @@
 name: "populate cache"
 on:
   workflow_call:
+env:
+  CACHIX_AUTH_TOKEN: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 jobs:
   cache:
     runs-on: nixos-unstable
@@ -9,16 +11,20 @@ jobs:
         run: nix profile add nixpkgs#nodejs_latest
       - name: Checkout repository
         uses: https://data.forgejo.org/actions/checkout@v6
+      - name: Install needed packages
+        run: nix profile add github:juspay/omnix github:juspay/cachix-push nixpkgs#cachix
       - name: Setup cachix
-        uses: https://github.com/cachix/cachix-action@v16
-        with:
-          name: henriquekh
-          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-          extraPullNames: nix-community,hyprland,niri,nix-on-droid
-          skipPush: true
-      - name: Install omnix
-        run: nix profile add nixpkgs#omnix github:juspay/cachix-push
+        run: |
+          CACHES=(
+            'henriquekh'
+            'nix-community'
+            'hyprland'
+            'niri'
+            'nix-on-droid'
+          )
+          for cache in ${CACHES[@]}; do
+            cachix use $cache
+          done
       - name: Build output
         run: om ci run --results=/om.json
       - name: Push to cache
