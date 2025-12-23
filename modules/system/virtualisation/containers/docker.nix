@@ -1,6 +1,6 @@
 { config }:
-
 {
+  imports = [ ./base.nix ];
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;

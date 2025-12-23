@@ -12,6 +12,8 @@
       name = config.networking.hostName;
       url = "https://codeberg.org";
       labels = [
+        "docker:docker://node:22-bookworm"
+
         "debian-latest:docker://debian:bookworm"
         "debian-bookworm:docker://debian:bookworm"
         "debian-sid:docker://debian:sid"
@@ -28,8 +30,8 @@
 
         "archlinux:docker://archlinux:base-devel"
 
-        "nixos-unstable:docker://docker.nix-community.org/nixpkgs/nix-flakes:nixos-unstable"
-        "nixos-25.11:docker://docker.nix-community.org/nixpkgs/nix-flakes:nixos-25.11"
+        "nixos-unstable:docker://docker.nix-community.org/nixpkgs/nix-flakes:latest-x86_64-linux"
+        "nixos-25.11:docker://docker.nix-community.org/nixpkgs/nix-flakes:nixos-25.11-x86_64-linux"
       ];
     };
   };
