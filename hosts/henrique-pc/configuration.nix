@@ -25,6 +25,7 @@
     ../../modules/services/cloudflared
     ../../modules/services/zerotier
     ../../modules/services/syncthing
+    ../../modules/services/forgejo-runner
 
     ../../modules/games/steam
 
@@ -149,6 +150,24 @@
         };
       };
     };
+  };
+
+  ## Caddy
+  sops.secrets.forgejo-runner_env = {
+    sopsFile = ./secrets/forgejo-runner.env;
+    format = "dotenv";
+    key = "";
+  };
+  services.gitea-actions-runner.instances.default.tokenFile =
+    config.sops.secrets.forgejo-runner_env.path;
+
+  disko.devices.disk.other.content.partitions.volume.content.subvolumes."/forgejo-runner" = {
+    mountpoint = "/var/lib/private/gitea-runner";
+    mountOptions = [
+      "subvol=forgejo-runner"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   ## Network configuration

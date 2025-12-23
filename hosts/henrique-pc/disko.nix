@@ -85,6 +85,25 @@
           };
         };
       };
+
+      other = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-KINGSTON_SA400S37120G_50026B738010441A";
+        content = {
+          type = "gpt";
+          partitions.volume = {
+            size = "100%";
+            content = {
+              type = "btrfs";
+              extraArgs = [
+                "-L"
+                "other"
+                "-f"
+              ];
+            };
+          };
+        };
+      };
     };
   };
 
