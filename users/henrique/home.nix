@@ -9,6 +9,7 @@
     ../../modules/programs/jujutsu
     ../../modules/programs/git
     ../../modules/programs/git/gh.nix
+    ../../modules/programs/git/fj.nix
     ../../modules/programs/discord/nixcord.nix
     ../../modules/programs/mpv
     ../../modules/programs/nh
@@ -134,6 +135,11 @@
       key = config.sops.secrets.public.path;
     };
   };
+
+  sops.secrets.codeberg-token = {
+    sopsFile = ./secrets/forgejo.yaml;
+  };
+  programs.forgejo-cli.hosts."codeberg.org".tokenFile = config.sops.secrets.codeberg-token.path;
 
   ## Jujutsu
   programs.jujutsu.settings = {
