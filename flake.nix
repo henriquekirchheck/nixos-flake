@@ -18,10 +18,6 @@
     };
 
     systems.url = "github:nix-systems/default-linux";
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -116,7 +112,7 @@
       home-manager,
       nix-on-droid,
       disko,
-      flake-utils,
+      systems,
       treefmt-nix,
       sops-nix,
       ...
@@ -142,6 +138,18 @@
             microsoftVisualStudioLicenseAccepted = true;
           };
         };
+
+      inherit (nixpkgs) lib;
+      forAllSystems =
+        f:
+        lib.genAttrs (import systems) (
+          system:
+          f (mkPkgs {
+            inherit system;
+          })
+        );
+
+      treefmt' = forAllSystems (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
     in
     {
       nixosConfigurations =
@@ -186,8 +194,7 @@
             ];
           }
         ) hosts;
-    }
-    // (flake-utils.lib.eachDefaultSystemPassThrough (system: {
+
       homeConfigurations =
         let
           users = nixpkgs.lib.attrsets.filterAttrs (n: v: v == "directory") (builtins.readDir ./users);
@@ -195,13 +202,12 @@
         builtins.mapAttrs (
           user: _:
           home-manager.lib.homeManagerConfiguration {
-            pkgs = mkPkgs { inherit system; };
+            pkgs = mkPkgs { system = builtins.currentSystem; };
             modules = [ ./users/${user}/home.nix ];
             extraSpecialArgs = { inherit inputs; };
           }
         ) users;
-    }))
-    // (flake-utils.lib.eachDefaultSystemPassThrough (system: {
+
       nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
         modules = [
           ./android/configuration.nix
@@ -214,21 +220,15 @@
         ];
         extraSpecialArgs = { inherit inputs; };
         pkgs = mkPkgs {
-          inherit system;
+          system = builtins.currentSystem;
           extraOverlays = [ nix-on-droid.overlays.default ];
         };
         home-manager-path = home-manager.outPath;
       };
-    }))
-    // (flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = mkPkgs { inherit system; };
-        treefmt' = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-      in
-      {
-        formatter = treefmt'.config.build.wrapper;
-        checks.formatting = treefmt'.config.build.check self;
-      }
-    ));
+
+      formatter = forAllSystems (pkgs: treefmt'.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
+      checks = forAllSystems (pkgs: {
+        formatting = treefmt'.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
+      });
+    };
 }

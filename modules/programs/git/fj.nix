@@ -8,7 +8,7 @@
       "codeberg.org"
     ];
   };
-  
+
   home.shellAliases = {
     "fjc" = "fj --host codeberg.org";
   };

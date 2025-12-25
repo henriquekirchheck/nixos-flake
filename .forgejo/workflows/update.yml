@@ -19,7 +19,9 @@ jobs:
         run: nix flake check --all-systems
       - name: Push new flake.lock
         run: |
-          git commit -m "Update Flake Inputs: $(date +%F)" --author "flake-update[bot] <>"
+          git config --global user.name "flake-update[bot]"
+          git config --global user.email "<>"
+          git commit -m "Update Flake Inputs: $(date +%F)"
           git push
   cache:
     runs-on: alpine-latest
