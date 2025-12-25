@@ -121,7 +121,7 @@ in
     # };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     # assertions = [
     #   {
     #     assertion = (lib.lists.subtractLists validServices (lib.attrsets.attrNames cfg.credentials)) == [ ];

@@ -12,8 +12,6 @@ jobs:
         run: nix profile add nixpkgs#nodejs_latest
       - name: Checkout repository
         uses: https://data.forgejo.org/actions/checkout@v6
-      - name: Check code
-        run: nix fmt -- --ci
       - name: Check flake
         run: nix flake check --all-systems
   cache:

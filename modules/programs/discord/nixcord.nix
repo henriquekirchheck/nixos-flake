@@ -34,7 +34,7 @@
       themeLinks = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha-sapphire.theme.css" ];
       enabledThemes = [ "catppuccin-mocha-sapphire.theme.css" ];
       plugins = {
-        usrbg.enable = true;
+        USRBG.enable = true;
         alwaysAnimate.enable = true;
         alwaysExpandRoles.enable = true;
         betterFolders.enable = true;
@@ -46,7 +46,7 @@
         betterSettings.enable = true;
         biggerStreamPreview.enable = true;
         callTimer.enable = true;
-        clearUrLs.enable = true;
+        ClearURLs.enable = true;
         copyFileContents.enable = true;
         disableCallIdle.enable = true;
         experiments = {
@@ -82,7 +82,7 @@
         messageLatency.enable = true;
         messageLinkEmbeds.enable = true;
         messageLogger.enable = true;
-        mutualGroupDMs.enable = true;
+        MutualGroupDMs.enable = true;
         noDevtoolsWarning.enable = true;
         noF1.enable = true;
         noOnboardingDelay.enable = true;
@@ -96,7 +96,7 @@
         permissionFreeWill.enable = true;
         permissionsViewer.enable = true;
         petpet.enable = true;
-        pinDMs.enable = true;
+        PinDMs.enable = true;
         platformIndicators.enable = true;
         previewMessage.enable = true;
         reactErrorDecoder.enable = true;

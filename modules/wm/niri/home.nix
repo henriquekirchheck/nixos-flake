@@ -1,10 +1,16 @@
 {
   config,
+  osConfig,
   pkgs,
   lib,
   ...
 }:
 
+# let
+#   match =
+#     v: matches:
+#     lib.mkMerge (map ({ name, value }: lib.mkIf (name == v) value) (lib.attrsToList matches));
+# in
 {
   # imports = [inputs.niri.homeModules.config];
   home.packages = with pkgs; [
@@ -20,6 +26,12 @@
   programs.niri = {
     package = pkgs.niri-unstable;
     settings = {
+      # outputs = match osConfig.networking.hostName {
+      #   henrique-pc = {
+      #     HDMI-A-1.enable = false;
+      #   };
+      # };
+
       prefer-no-csd = true;
       environment = { };
       hotkey-overlay.skip-at-startup = true;

@@ -228,20 +228,7 @@
       in
       {
         formatter = treefmt'.config.build.wrapper;
-        check.formatting = treefmt'.config.build.check self;
-
-        devShells.quickshell = pkgs.mkShell {
-          inputsFrom = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
-          buildInputs = [
-            inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
-          ];
-          shellHook = ''
-            export QML2_IMPORT_PATH="${
-              inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
-            }/${pkgs.qt6.qtbase.qtQmlPrefix}:$QML2_IMPORT_PATH"
-            export QT_PLUGIN_PATH="$QT_PLUGIN_PATH"
-          '';
-        };
+        checks.formatting = treefmt'.config.build.check self;
       }
     ));
 }
