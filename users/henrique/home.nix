@@ -6,52 +6,66 @@
     ../../modules/programs/shell/extras/fzf
     ../../modules/programs/shell/extras/starship
     ../../modules/programs/shell/extras/zoxide
-    ../../modules/programs/jujutsu
-    ../../modules/programs/git
-    ../../modules/programs/git/gh.nix
-    ../../modules/programs/git/fj.nix
-    ../../modules/programs/discord/nixcord.nix
-    ../../modules/programs/mpv
-    ../../modules/programs/nh
-    ../../modules/programs/gimp
-    ../../modules/programs/reaper
-    ../../modules/programs/ffmpeg
-    ../../modules/programs/aegisub
-    ../../modules/programs/libreoffice
-    ../../modules/programs/zathura
-    ../../modules/programs/comma
-    ../../modules/programs/thunderbird
-    ../../modules/programs/aria2
-    ../../modules/programs/mpris-scrobbler
 
-    ../../modules/development/c
-    ../../modules/development/python
-    ../../modules/development/rust
-    ../../modules/development/nix
-    ../../modules/development/javascript
-    ../../modules/development/tex
+    ../../modules/programs/development/vcs/jujutsu
+    ../../modules/programs/development/vcs/git
+    ../../modules/programs/development/vcs/git/gh.nix
+    ../../modules/programs/development/vcs/git/fj.nix
 
-    ../../modules/services/mpd
+    ../../modules/programs/development/language/c
+    ../../modules/programs/development/language/python
+    ../../modules/programs/development/language/rust
+    ../../modules/programs/development/language/nix
+    ../../modules/programs/development/language/javascript
+    ../../modules/programs/development/language/tex
+    ../../modules/programs/development/language/godot
+
+    ../../modules/programs/development/editor/codium
+    ../../modules/programs/development/editor/neovim
+    ../../modules/programs/development/editor/emacs
+    ../../modules/programs/development/editor/zed
+
+    ../../modules/programs/communication/discord/nixcord.nix
+    ../../modules/programs/communication/thunderbird
+
+    ../../modules/programs/utility/nh
+    ../../modules/programs/utility/comma
+
+    ../../modules/programs/media/common/ffmpeg
+    ../../modules/programs/media/common/mpv
+
+    ../../modules/programs/media/image/gimp
+    ../../modules/programs/media/image/oculante
+    ../../modules/programs/media/image/swayimg
+
+    ../../modules/programs/media/audio/reaper
+    ../../modules/programs/media/audio/mpd
+    ../../modules/programs/media/audio/mpris-scrobbler
+    ../../modules/programs/media/audio/tidal-hifi
+
+    ../../modules/programs/media/subtitle/aegisub
+
+    ../../modules/programs/media/model/blender
+
+    ../../modules/programs/document/libreoffice
+    ../../modules/programs/document/zathura
+
+    ../../modules/programs/web/aria2
+    ../../modules/programs/web/firefox
+
+    ../../modules/programs/game/prismlauncher
+
+    ../../modules/programs/compatibility/wine
+    ../../modules/programs/compatibility/bottles
+
+    ../../modules/programs/terminal/alacritty
 
     ../../modules/hardware/bluetooth/home.nix
 
-    ../../modules/compatibility/wine
-    ../../modules/compatibility/bottles
     ../../modules/system/virtualisation/containers/distrobox.nix
 
-    ../../modules/programs/browsers/firefox
-    ../../modules/programs/terminal/alacritty
-    ../../modules/programs/editors/codium
-    ../../modules/programs/editors/neovim
-    ../../modules/programs/editors/emacs
-    ../../modules/programs/editors/zed
-    ../../modules/programs/blender
-
-    ../../modules/games/godot
-    ../../modules/games/prismlauncher
-
     ../../modules/wm/niri/home.nix
-    ../../modules/programs/quickshell/dms
+    ../../modules/programs/bar/quickshell/dms
     ../../modules/programs/wallpaper/swww.nix
 
     ../../modules/styles/fonts/home.nix
@@ -88,9 +102,7 @@
   };
 
   ## nh
-  home.sessionVariables = {
-    NH_FLAKE = "${config.home.homeDirectory}/src/dotfiles";
-  };
+  programs.nh.flake = "${config.home.homeDirectory}/src/dotfiles";
 
   ## SOPS
   sops = {

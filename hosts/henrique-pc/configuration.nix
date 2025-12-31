@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   ...
 }:
@@ -27,13 +26,12 @@
     ../../modules/services/syncthing
     ../../modules/services/forgejo-runner
 
-    ../../modules/games/steam
-
-    ../../modules/programs/obs
+    ../../modules/programs/media/video/obs
+    ../../modules/programs/game/steam
     ../../modules/programs/shell/zsh
-    ../../modules/programs/utilities/cli.nix
-    ../../modules/programs/utilities/sound.nix
-    ../../modules/programs/utilities/wayland.nix
+    ../../modules/programs/utility/cli.nix
+    ../../modules/programs/utility/sound.nix
+    ../../modules/programs/utility/wayland.nix
 
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix
@@ -42,10 +40,10 @@
 
     ../../modules/styles/fonts
 
-    ../../containers/bitwarden
-    ../../containers/searxng
-    ../../containers/media
-    ../../containers/copyparty
+    ../../modules/containers/bitwarden
+    ../../modules/containers/searxng
+    ../../modules/containers/media
+    ../../modules/containers/copyparty
 
     ../../modules/cache/nixos.nix
   ];

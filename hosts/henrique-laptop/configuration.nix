@@ -21,16 +21,17 @@
     ../../modules/services/zerotier
     ../../modules/services/syncthing
 
-    ../../modules/games/steam
+    ../../modules/programs/game/steam
 
-    ../../modules/programs/obs
+    ../../modules/programs/media/video/obs
     ../../modules/programs/shell/zsh
-    ../../modules/programs/browsers/chromium
-    ../../modules/programs/utilities/cli.nix
-    ../../modules/programs/utilities/sound.nix
-    ../../modules/programs/utilities/wayland.nix
+    ../../modules/programs/web/chromium
+    ../../modules/programs/utility/cli.nix
+    ../../modules/programs/utility/sound.nix
+    ../../modules/programs/utility/wayland.nix
 
     ../../modules/hardware/android
+    ../../modules/hardware/printing
     ../../modules/hardware/bluetooth
     ../../modules/hardware/gpu/amdgpu.nix
 

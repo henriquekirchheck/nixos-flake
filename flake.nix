@@ -11,11 +11,6 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
 
     systems.url = "github:nix-systems/default-linux";
     treefmt-nix = {
@@ -41,13 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,21 +70,12 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-caelestia-shell = {
-      url = "github:jutraim/niri-caelestia-shell";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         quickshell.follows = "quickshell";
       };
-    };
-    dgop = {
-      url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dankMaterialShell = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.dgop.follows = "dgop";
     };
 
     blender-bin = {
@@ -110,7 +89,6 @@
       self,
       nixpkgs,
       home-manager,
-      nix-on-droid,
       disko,
       systems,
       treefmt-nix,
@@ -207,24 +185,6 @@
             extraSpecialArgs = { inherit inputs; };
           }
         ) users;
-
-      nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-        modules = [
-          ./android/configuration.nix
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              #config = import ./android/home.nix;
-            };
-          }
-        ];
-        extraSpecialArgs = { inherit inputs; };
-        pkgs = mkPkgs {
-          system = builtins.currentSystem;
-          extraOverlays = [ nix-on-droid.overlays.default ];
-        };
-        home-manager-path = home-manager.outPath;
-      };
 
       formatter = forAllSystems (pkgs: treefmt'.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
       checks = forAllSystems (pkgs: {

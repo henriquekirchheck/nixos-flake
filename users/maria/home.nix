@@ -1,19 +1,17 @@
 { ... }:
 {
   imports = [
-    ../../modules/programs/browsers/chromium/home.nix
-    ../../modules/programs/mpv
-    ../../modules/programs/gimp
-    ../../modules/programs/ffmpeg
-    ../../modules/programs/libreoffice
+    ../../modules/programs/web/chromium/home.nix
+    ../../modules/programs/media/common/mpv
+    ../../modules/programs/media/common/ffmpeg
+    ../../modules/programs/media/image/gimp
+    ../../modules/programs/document/libreoffice
 
-    ../../modules/hardware/bluetooth/home.nix
-
-    ../../modules/compatibility/wine
-    ../../modules/compatibility/bottles
+    ../../modules/programs/compatibility/wine
+    ../../modules/programs/compatibility/bottles
     ../../modules/system/virtualisation/containers/distrobox.nix
 
-    ../../modules/programs/terminal/kitty
+    ../../modules/programs/terminal/alacritty
   ];
 
   # Home Specific

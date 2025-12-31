@@ -19,6 +19,8 @@
       "dialout"
       "audio"
       "realtime"
+      "scanner"
+      "lp"
     ];
     hashedPasswordFile = config.sops.secrets.password.path;
     shell = pkgs.zsh;

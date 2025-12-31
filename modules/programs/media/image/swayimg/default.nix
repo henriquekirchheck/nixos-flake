@@ -1,0 +1,3 @@
+{
+  programs.swayimg.enable = true;
+}
