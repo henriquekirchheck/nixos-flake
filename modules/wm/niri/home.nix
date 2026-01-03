@@ -58,14 +58,14 @@
             { app-id = "discord"; }
             { app-id = "vesktop"; }
           ];
-          opacity = 0.85;
+          opacity = 0.98;
           draw-border-with-background = false;
         }
         {
           matches = [
             { is-active = false; }
           ];
-          opacity = 0.9;
+          opacity = 0.92;
         }
         {
           matches = [
@@ -74,6 +74,7 @@
             { app-id = "zen"; }
             { app-id = "com.mitchellh.ghostty"; }
             { app-id = "kitty"; }
+            { app-id = "swayimg"; }
           ];
           draw-border-with-background = false;
         }

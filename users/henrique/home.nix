@@ -127,8 +127,13 @@
       "*" = {
         addKeysToAgent = "4h";
       };
-      "git" = {
+      "github" = {
         host = "github.com";
+        identitiesOnly = true;
+        identityFile = [ config.sops.secrets.private.path ];
+      };
+      "codeberg" = {
+        host = "codeberg.org";
         identitiesOnly = true;
         identityFile = [ config.sops.secrets.private.path ];
       };
