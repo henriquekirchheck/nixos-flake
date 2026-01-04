@@ -19,7 +19,10 @@
       restartIfChanged = true; # Auto-restart dms.service when dankMaterialShell changes
     };
 
-    niri.enableKeybinds = true;
+    niri = {
+      includes.enable = false;
+      enableKeybinds = true;
+    };
 
     enableSystemMonitoring = true;
     enableVPN = false;
