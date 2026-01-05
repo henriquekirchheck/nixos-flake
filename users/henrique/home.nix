@@ -35,7 +35,6 @@
     ../../modules/programs/media/common/mpv
 
     ../../modules/programs/media/image/gimp
-    ../../modules/programs/media/image/oculante
     ../../modules/programs/media/image/swayimg
 
     ../../modules/programs/media/audio/reaper

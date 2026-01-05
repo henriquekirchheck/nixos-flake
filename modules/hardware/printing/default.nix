@@ -13,7 +13,7 @@
     enable = true;
     extraBackends = with pkgs; [
       sane-airscan
-      epkowa
+      # epkowa
       utsushi
     ];
     disabledDefaultBackends = [ "escl" ];

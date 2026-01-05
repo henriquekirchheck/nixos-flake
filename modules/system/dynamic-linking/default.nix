@@ -82,23 +82,15 @@ let
       libogg
       libvorbis
 
-      sdl3
-      sdl3-image
-      sdl3-ttf
-      SDL_compat
-      SDL_gfx
-      SDL_image
-      SDL_mixer
-      SDL_net
-      SDL_sound
-      SDL_ttf
-      sdl2-compat
-      SDL2
-      SDL2_gfx
-      SDL2_mixer
-      SDL2_net
-      SDL2_sound
-      SDL2_ttf
+      # sdl3
+      # sdl3-image
+      # sdl3-ttf
+      # sdl2-compat
+      # SDL2_gfx
+      # SDL2_mixer
+      # SDL2_net
+      # SDL2_sound
+      # SDL2_ttf
 
       glew110
       libidn
