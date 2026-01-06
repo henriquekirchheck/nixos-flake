@@ -10,7 +10,7 @@
     ../../modules/system/networking/systemd-networkd.nix
     ../../modules/system/firewall
     ../../modules/system/audio/pipewire.nix
-    ../../modules/system/pro-audio
+    # ../../modules/system/pro-audio
     ../../modules/system/virtualisation/containers/podman.nix
     ../../modules/system/virtualisation/hypervisors/qemu.nix
     ../../modules/system/permission/doas.nix
@@ -43,7 +43,6 @@
     ../../modules/containers/bitwarden
     ../../modules/containers/searxng
     ../../modules/containers/media
-    ../../modules/containers/copyparty
 
     ../../modules/cache/nixos.nix
   ];

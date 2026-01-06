@@ -132,47 +132,6 @@
       "podman-compose-media-root.target"
     ];
   };
-  virtualisation.oci-containers.containers."media-lidarr" = {
-    image = "ghcr.io/hotio/lidarr:latest";
-    environment = {
-      "PGID" = "100";
-      "PUID" = "1000";
-      "TZ" = "America/Sao_Paulo";
-    };
-    volumes = [
-      "/etc/localtime:/etc/localtime:ro"
-      "/vol/drive/containers/media/appdata/lidarr:/config:rw"
-      "/vol/drive/containers/media/data:/data:rw"
-    ];
-    ports = [
-      "8686:8686/tcp"
-    ];
-    labels = {
-      "io.containers.autoupdate" = "registry";
-    };
-    log-driver = "journald";
-    extraOptions = [
-      "--network-alias=lidarr"
-      "--network=media_default"
-    ];
-  };
-  systemd.services."podman-media-lidarr" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "always";
-    };
-    after = [
-      "podman-network-media_default.service"
-    ];
-    requires = [
-      "podman-network-media_default.service"
-    ];
-    partOf = [
-      "podman-compose-media-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-media-root.target"
-    ];
-  };
   virtualisation.oci-containers.containers."media-prowlarr" = {
     image = "ghcr.io/hotio/prowlarr:latest";
     environment = {
@@ -280,47 +239,6 @@
     ];
   };
   systemd.services."podman-media-radarr" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "always";
-    };
-    after = [
-      "podman-network-media_default.service"
-    ];
-    requires = [
-      "podman-network-media_default.service"
-    ];
-    partOf = [
-      "podman-compose-media-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-media-root.target"
-    ];
-  };
-  virtualisation.oci-containers.containers."media-readarr" = {
-    image = "ghcr.io/hotio/readarr:latest";
-    environment = {
-      "PGID" = "100";
-      "PUID" = "1000";
-      "TZ" = "America/Sao_Paulo";
-    };
-    volumes = [
-      "/etc/localtime:/etc/localtime:ro"
-      "/vol/drive/containers/media/appdata/readarr:/config:rw"
-      "/vol/drive/containers/media/data:/data:rw"
-    ];
-    ports = [
-      "8787:8787/tcp"
-    ];
-    labels = {
-      "io.containers.autoupdate" = "registry";
-    };
-    log-driver = "journald";
-    extraOptions = [
-      "--network-alias=readarr"
-      "--network=media_default"
-    ];
-  };
-  systemd.services."podman-media-readarr" = {
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
     };

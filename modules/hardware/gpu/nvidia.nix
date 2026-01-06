@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   hardware.graphics = {
@@ -18,4 +18,18 @@
   };
 
   hardware.nvidia-container-toolkit.enable = true;
+
+  specialisation.nouveau.configuration = {
+    environment.etc."specialisation".text = "nouveau";
+    system.nixos.tags = [ "nouveau" ];
+    services.xserver.videoDrivers = lib.mkForce [ ];
+    hardware.nvidia = {
+      nvidiaSettings = lib.mkForce false;
+      nvidiaPersistenced = lib.mkForce false;
+      modesetting.enable = lib.mkForce false;
+      videoAcceleration = lib.mkForce false;
+    };
+
+    hardware.nvidia-container-toolkit.enable = lib.mkForce false;
+  };
 }
