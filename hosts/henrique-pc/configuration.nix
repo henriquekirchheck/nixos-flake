@@ -27,11 +27,13 @@
     ../../modules/services/forgejo-runner
 
     ../../modules/programs/media/video/obs
-    ../../modules/programs/game/steam
     ../../modules/programs/shell/zsh
     ../../modules/programs/utility/cli.nix
     ../../modules/programs/utility/sound.nix
     ../../modules/programs/utility/wayland.nix
+    
+    ../../modules/programs/game/steam
+    ../../modules/programs/game/minecraft/servers/ports.nix
 
     ../../modules/hardware/android
     ../../modules/hardware/gpu/nvidia.nix

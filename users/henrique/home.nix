@@ -52,7 +52,7 @@
     ../../modules/programs/web/aria2
     ../../modules/programs/web/firefox
 
-    ../../modules/programs/game/prismlauncher
+    ../../modules/programs/game/minecraft/launchers/prismlauncher.nix
 
     ../../modules/programs/compatibility/wine
     ../../modules/programs/compatibility/bottles
