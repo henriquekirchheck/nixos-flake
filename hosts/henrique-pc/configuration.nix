@@ -31,7 +31,7 @@
     ../../modules/programs/utility/cli.nix
     ../../modules/programs/utility/sound.nix
     ../../modules/programs/utility/wayland.nix
-    
+
     ../../modules/programs/game/steam
     ../../modules/programs/game/minecraft/servers/ports.nix
 

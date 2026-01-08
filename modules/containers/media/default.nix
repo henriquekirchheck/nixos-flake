@@ -109,7 +109,7 @@
     };
     log-driver = "journald";
     extraOptions = [
-      (lib.mkIf (config.hardware.nvidia.enabled) "--device=nvidia.com/gpu=all")
+      (lib.mkIf config.hardware.nvidia.enabled "--device=nvidia.com/gpu=all")
       (lib.mkIf (!config.hardware.nvidia.enabled) "--device=/dev/dri:/dev/dri")
       "--network-alias=jellyfin"
       "--network=media_default"
