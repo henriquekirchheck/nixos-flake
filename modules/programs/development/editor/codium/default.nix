@@ -26,7 +26,7 @@ let
       eamodio.gitlens
       wix.vscode-import-cost
       christian-kohler.path-intellisense
-      prettier.prettier-vscode
+      # prettier.prettier-vscode
       svelte.svelte-vscode
       ms-python.python
       ms-python.debugpy
