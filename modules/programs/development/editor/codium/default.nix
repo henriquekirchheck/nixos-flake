@@ -102,28 +102,6 @@ let
   extensions = extensionsOpenVSX ++ extensionsVSCodeMarketplace ++ extensionsNixpkgs;
 in
 {
-  imports = [
-    inputs.catppuccin.homeModules.catppuccin
-  ];
-
-  catppuccin.flavor = "mocha";
-  catppuccin.vscode.profiles.default = {
-    enable = true;
-    accent = "sapphire";
-    flavor = "mocha";
-    icons.enable = true;
-    settings = {
-      boldKeywords = true;
-      italicComments = true;
-      italicKeywords = true;
-      extraBordersEnabled = false;
-      workbenchMode = "default";
-      bracketMode = "rainbow";
-      colorOverrides = { };
-      customUIColors = { };
-    };
-  };
-
   home.packages = with pkgs; [
     typst
     typstyle
