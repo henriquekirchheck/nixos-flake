@@ -103,9 +103,9 @@ in
       Unit.Description = "forgejo-cli credentials";
 
       Service = {
-        ExecStartPre = ''${pkgs.writeShellScript "forgejo-cli-credentials-prestart" preStart}'';
-        ExecStart = ''${pkgs.writeShellScript "forgejo-cli-credentials-start" start}'';
-        ExecStopPost = ''${pkgs.writeShellScript "forgejo-cli-credentials-poststop" postStop}'';
+        ExecStartPre = "${pkgs.writeShellScript "forgejo-cli-credentials-prestart" preStart}";
+        ExecStart = "${pkgs.writeShellScript "forgejo-cli-credentials-start" start}";
+        ExecStopPost = "${pkgs.writeShellScript "forgejo-cli-credentials-poststop" postStop}";
       };
     };
   };
