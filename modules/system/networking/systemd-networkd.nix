@@ -16,8 +16,10 @@
   };
   services.resolved = {
     enable = true;
-    domains = [ "~." ];
-    dnssec = "true";
-    dnsovertls = "true";
+    settings.Resolve = {
+      Domains = [ "~." ];
+      DNSSEC = true;
+      DNSOverTLS = true;
+    };
   };
 }

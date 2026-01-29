@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 
 {
   imports = [
@@ -10,16 +10,14 @@
     discord = {
       enable = true;
       branch = "canary";
-      equicord.enable = true;
       vencord.enable = false;
     };
-    # vesktop = {
-    #   enable = true;
-    #   useSystemVencord = false;
-    # };
-    equibop.enable = true;
-    dorion = {
+    vesktop = {
       enable = true;
+      useSystemVencord = true;
+    };
+    dorion = {
+      enable = false;
       desktopNotifications = true;
       streamerModeDetection = true;
       sysTray = true;
@@ -33,6 +31,9 @@
       transparent = true;
       themeLinks = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha-sapphire.theme.css" ];
       enabledThemes = [ "catppuccin-mocha-sapphire.theme.css" ];
+      autoUpdate = false;
+      autoUpdateNotification = false;
+      notifyAboutUpdates = false;
       plugins = {
         USRBG.enable = true;
         alwaysAnimate.enable = true;
@@ -76,7 +77,6 @@
           nearestNeighbour = true;
         };
         implicitRelationships.enable = true;
-        invisibleChat.enable = true;
         memberCount.enable = true;
         mentionAvatars.enable = true;
         messageLatency.enable = true;
