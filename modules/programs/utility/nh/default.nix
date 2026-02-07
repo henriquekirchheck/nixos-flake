@@ -1,3 +1,0 @@
-{
-  programs.nh.enable = true;
-}

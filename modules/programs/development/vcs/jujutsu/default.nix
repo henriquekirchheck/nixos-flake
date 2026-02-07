@@ -1,3 +1,0 @@
-{
-  programs.jujutsu.enable = true;
-}

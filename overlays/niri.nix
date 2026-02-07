@@ -1,3 +1,0 @@
-{ niri, ... }:
-
-niri.overlays.niri
