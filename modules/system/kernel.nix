@@ -10,7 +10,7 @@ let
       includes ? [ ],
     }:
     {
-      includes = [ den.aspects.system._.kernel ] + includes;
+      includes = [ den.aspects.system._.kernel ] ++ includes;
       nixos =
         { pkgs, ... }:
         {
@@ -29,7 +29,7 @@ in
 
     nixos.boot = {
       kernel.sysctl."kernel.sysrq" = 1;
-      boot.kernelParams = [ "psi=1" ];
+      kernelParams = [ "psi=1" ];
     };
 
     provides = {
@@ -42,7 +42,7 @@ in
             substituter = "https://attic.xuyh0120.win/lantian";
             public-key = "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=";
           })
-          (den.aspects.utils._.nixpkgs._.overlay inputs.nix-cachyos-kernel.overlays.pinned)
+          (den.aspects.utils._.nixpkgs._.add-overlay inputs.nix-cachyos-kernel.overlays.pinned)
         ];
         provides = {
           stable = kernelDef {

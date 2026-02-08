@@ -3,8 +3,6 @@
   den.aspects.apps.provides.containers = {
     description = "Containers";
 
-    includes = [ den.aspects.apps._.containers._.permission ];
-
     nixos =
       { pkgs, ... }:
       {
@@ -20,7 +18,11 @@
 
     provides = {
       docker = {
-        includes = [ den.aspects.apps._.containers ];
+        includes = [
+          den.aspects.apps._.containers
+          # TODO: Fix when https://github.com/vic/den/issues/145 resolved
+          # den.aspects.apps._.containers._.docker._.permission
+        ];
         nixos =
           { config, ... }:
           {
@@ -33,6 +35,11 @@
               };
               oci-containers.backend = "docker";
             };
+          };
+        provides.permission =
+          { user, ... }:
+          {
+            nixos.users.users.${user.userName}.extraGroups = [ "libvirtd" ];
           };
       };
       podman = {
@@ -60,12 +67,6 @@
             environment.systemPackages = [ pkgs.podman-compose ];
           };
       };
-
-      permission =
-        { user, ... }:
-        {
-          nixos.users.users.${user.userName}.extraGroups = [ "libvirtd" ];
-        };
     };
   };
 }

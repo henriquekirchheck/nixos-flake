@@ -12,8 +12,8 @@
           };
         in
         {
-          nixos.nix.config = nixConfig;
-          homeManager.nix.config = nixConfig;
+          nixos.nix.settings = nixConfig;
+          homeManager.nix.settings = nixConfig;
         };
       add-overlay = overlay: {
         nixos.nixpkgs.overlays = [ overlay ];

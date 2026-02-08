@@ -3,7 +3,8 @@
   den.aspects.hardware.provides.printer = {
     includes = [
       den.aspects.hardware._.networking._.avahi
-      den.aspects.hardware._.printer._.permission
+      # TODO: Fix when https://github.com/vic/den/issues/145 resolved  
+      # den.aspects.hardware._.printer._.permission
     ];
     nixos =
       { pkgs, ... }:

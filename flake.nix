@@ -7,6 +7,10 @@
 
   inputs = {
     den.url = "github:vic/den";
+    disko = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/disko";
+    };
     flake-aspects.url = "github:vic/flake-aspects";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
@@ -16,6 +20,13 @@
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
+    };
+    impermanence = {
+      inputs = {
+        home-manager.follows = "";
+        nixpkgs.follows = "";
+      };
+      url = "github:nix-community/impermanence";
     };
     import-tree.url = "github:vic/import-tree";
     musnix = {

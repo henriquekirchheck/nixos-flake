@@ -11,11 +11,11 @@
         substituter = "https://niri.cachix.org";
         public-key = "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=";
       })
-      (den.aspects.utils._.nixpkgs._.overlay inputs.niri.overlays.niri)
+      (den.aspects.utils._.nixpkgs._.add-overlay inputs.niri.overlays.niri)
     ];
     description = "Niri";
     nixos =
-      { pkgs }:
+      { pkgs, ... }:
       {
         imports = [ inputs.niri.nixosModules.niri ];
         niri-flake.cache.enable = false;

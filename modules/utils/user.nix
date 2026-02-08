@@ -66,7 +66,7 @@
                   desktop = appendHome desktop;
                   publicShare = appendHome publicShare;
                   extraConfig = {
-                    XDG_DOTFILES_DIR = appendHome dotfiles;
+                    DOTFILES = appendHome dotfiles;
                   };
                 };
               };

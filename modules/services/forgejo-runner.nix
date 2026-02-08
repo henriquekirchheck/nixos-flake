@@ -4,12 +4,9 @@
     description = "Forgejo Actions Runner";
 
     nixos =
-      { config, pkgs, ... }:
+      { pkgs, ... }:
       {
-        services.gitea-actions-runner = {
-          package = pkgs.forgejo-runner;
-          instances = map (instance: { enable = true; }) config.services.gitea-actions-runner.instances;
-        };
+        services.gitea-actions-runner.package = pkgs.forgejo-runner;
       };
 
     provides = {
@@ -42,6 +39,7 @@
             "native:host"
           ],
           sopsFile,
+          enable ? true,
         }:
         let
           secret = "forgejo_runner_env-${name}";
@@ -50,11 +48,16 @@
           description = "Add a new forgejo runner instance with a secret";
           includes = [ den.aspects.apps._.sops ];
           nixos =
-            { config }:
+            { config, ... }:
             {
               services.gitea-actions-runner = {
                 instances.${name} = {
-                  inherit name url labels;
+                  inherit
+                    name
+                    url
+                    labels
+                    enable
+                    ;
                   tokenFile = config.sops.secrets.${secret}.path;
                 };
               };

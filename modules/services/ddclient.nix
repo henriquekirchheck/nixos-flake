@@ -12,8 +12,9 @@
       includes = [ den.aspects.apps._.sops ];
       nixos =
         { config, ... }:
+        let secret = "ddclient-token"; in
         {
-          sops.secrets.ddclient-token = {
+          sops.secrets.${secret} = {
             sopsFile = sopsFile;
             key = "password";
           };
@@ -21,7 +22,7 @@
             enable = true;
             inherit protocol domains zone;
             username = "token";
-            passwordFile = config.sops.secrets.ddclient.path;
+            passwordFile = config.sops.secrets.${secret}.path;
           };
         };
     };

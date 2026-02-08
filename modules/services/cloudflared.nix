@@ -18,7 +18,7 @@
           description = "Add new tunnel to cloudflared using a secret";
           includes = [ den.aspects.apps._.sops ];
           nixos =
-            { config }:
+            { config, ... }:
             {
               sops.secrets.${secret} = {
                 sopsFile = sopsFile;

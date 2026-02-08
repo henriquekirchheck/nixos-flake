@@ -9,7 +9,7 @@
       {
         security.sudo.enable = lib.mkDefault false;
         security.sudo-rs.enable = lib.mkDefault false;
-        security.sudo-doas.enable = lib.mkDefault false;
+        security.doas.enable = lib.mkDefault false;
       };
 
     provides =

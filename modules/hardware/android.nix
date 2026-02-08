@@ -1,12 +1,15 @@
 { den, ... }:
 {
   den.aspects.hardware.provides.android = {
-    includes = [ den.aspects.hardware._.scanner._.permission ];
+    # TODO: Fix when https://github.com/vic/den/issues/145 resolved
+    # includes = [ den.aspects.hardware._.android._.permission ];
     nixos =
       { pkgs, ... }:
       {
-        programs.adb.enable = true;
-        environment.defaultPackages = [ pkgs.jmtpfs ];
+        environment.systemPackages = [
+          pkgs.jmtpfs
+          pkgs.android-tools
+        ];
       };
     provides.permission =
       { user, ... }:
