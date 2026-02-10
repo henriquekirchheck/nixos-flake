@@ -199,6 +199,7 @@
           TERMINAL = "alacritty";
           BROWSER = "firefox";
         };
+        stylix.targets.qt.platform = "qtct";
         xdg = {
           enable = true;
           mime.enable = true;

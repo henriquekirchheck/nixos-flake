@@ -37,16 +37,17 @@
         description = "Include global configuration";
         nixos.services.caddy.globalConfig = global;
       };
-      addVirtualHost =
-        vhosts: config:
-        { lib, ... }:
-        {
-          description = "Add Virtual Host configuration to Caddy";
-          nixos.services.caddy.virtualHosts.${builtins.elemAt vhosts 0} = {
-            serverAliases = lib.sublist 1 ((lib.length vhosts) - 1) vhosts;
-            extraConfig = config;
+      addVirtualHost = vhosts: config: {
+        description = "Add Virtual Host configuration to Caddy";
+        nixos =
+          { lib, ... }:
+          {
+            services.caddy.virtualHosts.${builtins.elemAt vhosts 0} = {
+              serverAliases = lib.sublist 1 ((lib.length vhosts) - 1) vhosts;
+              extraConfig = config;
+            };
           };
-        };
+      };
     };
   };
 }

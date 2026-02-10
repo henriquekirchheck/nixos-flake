@@ -83,15 +83,35 @@ in
         sopsFile = ./secrets/tunnel-52ba507f-2e7c-4527-9010-aaa4ff579fa2.json;
       })
 
-      den.aspects.services.provides.vaultwarden
-      (den.aspects.services.provides.vaultwarden._.includeEnvironment ./secrets/vaultwarden.env)
-      (den.aspects.services.provides.vaultwarden._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "vault.henriquekh.dev.br")
+      den.aspects.services._.vaultwarden
+      (den.aspects.services._.vaultwarden._.includeEnvironment ./secrets/vaultwarden.env)
+      (den.aspects.services._.vaultwarden._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "vault.henriquekh.dev.br")
 
-      (den.aspects.services.provides.bitwarden-sync ./secrets/bitwarden-sync)
+      (den.aspects.services._.bitwarden-sync ./secrets/bitwarden-sync)
 
-      den.aspects.services.provides.searxng
-      (den.aspects.services.provides.searxng._.includeEnvironment ./secrets/searxng.env)
-      (den.aspects.services.provides.searxng._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "search.henriquekh.dev.br")
+      den.aspects.services._.searxng
+      (den.aspects.services._.searxng._.includeEnvironment ./secrets/searxng.env)
+      (den.aspects.services._.searxng._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "search.henriquekh.dev.br")
+
+      den.aspects.services._.media
+      (den.aspects.services._.media._.setupCaddy (
+        let
+          domain = service: [
+            "${service}.localhost"
+            "${service}.zt.henriquekh.dev.br"
+            "${service}.henriquekh.dev.br"
+          ];
+        in
+        {
+          jelly = domain "jelly";
+          qbit = domain "qbit";
+          radarr = domain "radarr";
+          sonarr = domain "sonarr";
+          bazarr = domain "bazarr";
+          prowlarr = domain "prowlarr";
+        }
+      ))
+      (den.aspects.services._.media._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "jelly.henriquekh.dev.br")
 
       (den.aspects.services._.ddclient {
         protocol = "cloudflare";

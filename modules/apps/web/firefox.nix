@@ -19,10 +19,7 @@
               }
             )
           );
-        extensions = mozExtensions (ext: [
-          (ext "vidiq-vision-youtube" "firefox@vid.io")
-          (ext "surge" "surge@surge-downloader.com")
-        ]);
+        extensions = mozExtensions (ext: [ (ext "vidiq-vision-youtube" "firefox@vid.io") ]);
       in
       {
         programs.firefox = {
