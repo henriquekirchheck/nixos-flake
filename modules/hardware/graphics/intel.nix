@@ -3,7 +3,7 @@
   den.aspects.hardware.provides.graphics.provides.intel = {
     includes = [ den.aspects.hardware._.graphics ];
     nixos =
-      { pkgs }:
+      { pkgs, ... }:
       {
         services.xserver.videoDrivers = [ "modesetting" ];
 

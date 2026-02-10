@@ -153,6 +153,8 @@
 
       den.aspects.apps._.terminals._.alacritty
 
+      den.aspects.services._.zerotier
+
       (den.aspects.utils._.user._.password {
         key = "password";
         sopsFile = ./secrets/password.yaml;
@@ -189,7 +191,8 @@
       { config, ... }:
       {
         programs.nh.flake = "${config.home.homeDirectory}/src/dotfiles";
-        stylix.targets.firefox.profileNames = [ "user" ];
+        # TODO: Unfree battery broken https://github.com/vic/den/issues/150
+        # stylix.targets.firefox.profileNames = [ "user" ];
         home.sessionVariables = {
           EDITOR = "nvim";
           VISUAL = "zeditor";

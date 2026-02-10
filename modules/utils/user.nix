@@ -46,7 +46,7 @@
 
         {
           homeManager =
-            { config, ... }:
+            { config, lib, ... }:
             let
               appendHome = dir: if dir != null then "${config.home.homeDirectory}/${dir}" else null;
             in
@@ -65,7 +65,7 @@
                   documents = appendHome documents;
                   desktop = appendHome desktop;
                   publicShare = appendHome publicShare;
-                  extraConfig = {
+                  extraConfig = lib.mkIf (dotfiles != null) {
                     DOTFILES = appendHome dotfiles;
                   };
                 };

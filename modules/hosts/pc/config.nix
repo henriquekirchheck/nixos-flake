@@ -17,7 +17,6 @@ in
 
       den.aspects.apps._.sops
       den.aspects.apps._.nix-ld
-      den.aspects.apps._.comma
       den.aspects.apps._.media._.audio._.mpd
 
       (den.aspects.hardware._.networking._.systemd._.networkd._.static-config {
