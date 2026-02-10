@@ -5,8 +5,6 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   den.aspects.hardware.provides.audio.provides.professional = {
-    includes = [ den.aspects.hardware._.audio._.professional._.permission ];
-
     nixos =
       { pkgs, ... }:
       {

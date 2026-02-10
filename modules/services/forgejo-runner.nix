@@ -62,7 +62,7 @@
                 };
               };
               sops.secrets.${secret} = {
-                sopsFile = sopsFile;
+                inherit sopsFile;
                 format = "dotenv";
                 key = "";
               };

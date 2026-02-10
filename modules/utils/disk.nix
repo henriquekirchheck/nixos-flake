@@ -11,7 +11,7 @@ in
           description = "Create a new disk with the specified name on the specified device";
           disko.disko.devices.disk.${name} = {
             type = "disk";
-            device = device;
+            inherit device;
             content = {
               type = "gpt";
               partitions.${partitionName} = {

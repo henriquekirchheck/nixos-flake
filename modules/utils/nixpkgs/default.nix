@@ -1,4 +1,5 @@
 {
+  # TODO: make more generic like unfree battery
   den.aspects.utils.provides.nixpkgs = {
     description = "nixpkgs Utilities";
     provides = {

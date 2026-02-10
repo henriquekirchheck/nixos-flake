@@ -33,9 +33,9 @@ in
     };
 
     provides = {
-      stable = kernelDef { kernel = (pkgs: pkgs.linuxPackages_latest); };
-      xanmod = kernelDef { kernel = (pkgs: pkgs.linuxPackages_xanmod_latest); };
-      zen = kernelDef { kernel = (pkgs: pkgs.linuxPackages_zen); };
+      stable = kernelDef { kernel = pkgs: pkgs.linuxPackages_latest; };
+      xanmod = kernelDef { kernel = pkgs: pkgs.linuxPackages_xanmod_latest; };
+      zen = kernelDef { kernel = pkgs: pkgs.linuxPackages_zen; };
       cachy = {
         includes = [
           (den.aspects.utils._.nixpkgs._.add-substituter {
@@ -47,19 +47,19 @@ in
         provides = {
           stable = kernelDef {
             includes = [ den.aspects.system._.kernel._.cachy ];
-            kernel = (pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto);
+            kernel = pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
           };
           stable-v3 = kernelDef {
             includes = [ den.aspects.system._.kernel._.cachy ];
-            kernel = (pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3);
+            kernel = pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
           };
           bore = kernelDef {
             includes = [ den.aspects.system._.kernel._.cachy ];
-            kernel = (pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto);
+            kernel = pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
           };
           realtime = kernelDef {
             includes = [ den.aspects.system._.kernel._.cachy ];
-            kernel = (pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-rt-bore-lto);
+            kernel = pkgs: pkgs.cachyosKernels.linuxPackages-cachyos-rt-bore-lto;
           };
         };
       };

@@ -16,17 +16,25 @@ in
       })
 
       den.aspects.apps._.sops
+      den.aspects.apps._.nix-ld
+      den.aspects.apps._.comma
+      den.aspects.apps._.media._.audio._.mpd
 
       (den.aspects.hardware._.networking._.systemd._.networkd._.static-config {
         address = "10.0.0.10/24";
         gateway = "10.0.0.1";
       })
+      den.aspects.hardware._.audio._.pipewire
+      den.aspects.hardware._.graphics._.nvidia
 
       den.aspects.services._.zerotier
+      den.aspects.services._.ssh._.server
 
       den.aspects.system._.bootloader._.systemd-boot
       den.aspects.system._.kernel._.cachy._.stable-v3
       den.aspects.system._.oom._.systemd-oomd
+
+      den.aspects.apps._.games._.minecraft._.server._.setup-ports
 
       (den.aspects.system._.impermanence._.addPersistance "/persist")
       (den.aspects.system._.impermanence._.setupBtrfs { partlabel = "disk-system-nixos"; })
@@ -37,6 +45,7 @@ in
           "/var/lib/nixos"
           "/var/lib/docker"
           "/var/lib/containers"
+          "/var/lib/postgresql"
           "/var/lib/systemd/coredump"
           "/var/lib/systemd/timers"
           "/etc/NetworkManager/system-connections"
@@ -57,6 +66,8 @@ in
       })
 
       den.aspects.apps._.containers._.podman
+      den.aspects.apps._.virtualisation._.qemu
+      den.aspects.apps._.virtualisation._.virt-manager
 
       (den.aspects.services._.caddy._.withPlugins {
         plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
@@ -72,6 +83,16 @@ in
         id = "52ba507f-2e7c-4527-9010-aaa4ff579fa2";
         sopsFile = ./secrets/tunnel-52ba507f-2e7c-4527-9010-aaa4ff579fa2.json;
       })
+
+      den.aspects.services.provides.vaultwarden
+      (den.aspects.services.provides.vaultwarden._.includeEnvironment ./secrets/vaultwarden.env)
+      (den.aspects.services.provides.vaultwarden._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "vault.henriquekh.dev.br")
+
+      (den.aspects.services.provides.bitwarden-sync ./secrets/bitwarden-sync)
+
+      den.aspects.services.provides.searxng
+      (den.aspects.services.provides.searxng._.includeEnvironment ./secrets/searxng.env)
+      (den.aspects.services.provides.searxng._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "search.henriquekh.dev.br")
 
       (den.aspects.services._.ddclient {
         protocol = "cloudflare";
@@ -173,15 +194,83 @@ in
         };
       };
     };
-    nixos = {
-      fileSystems = {
-        "/persist".neededForBoot = true;
-        "/var/log".neededForBoot = true;
-        "/vol/drive" = {
-          device = "/dev/disk/by-uuid/f2c7fa52-5b47-46e9-b95c-4c467175cdce";
-          fsType = "ext4";
+
+    stylix =
+      { pkgs, ... }:
+      {
+        stylix = {
+          enable = true;
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+          polarity = "dark";
+          cursor = {
+            package = pkgs.phinger-cursors;
+            name = "phinger-cursors-light";
+            size = 24;
+          };
+          opacity = {
+            terminal = 0.75;
+            applications = 0.98;
+          };
+          icons = {
+            enable = true;
+            package = pkgs.papirus-icon-theme;
+            dark = "Papirus-Dark";
+            light = "Papirus-Light";
+          };
+          fonts = {
+            serif = {
+              package = pkgs.roboto;
+              name = "Roboto";
+            };
+            sansSerif = {
+              package = pkgs.roboto-serif;
+              name = "Roboto Serif";
+            };
+            monospace = {
+              package = pkgs.nerd-fonts.jetbrains-mono;
+              name = "JetBrainsMono Nerd Font";
+            };
+            emoji = {
+              package = pkgs.noto-fonts-color-emoji;
+              name = "Noto Color Emoji";
+            };
+          };
         };
       };
-    };
+
+    nixos =
+      {
+        config,
+        lib,
+        modulesPath,
+        ...
+      }:
+
+      {
+        imports = [
+          (modulesPath + "/installer/scan/not-detected.nix")
+        ];
+
+        boot.initrd.availableKernelModules = [
+          "xhci_pci"
+          "ahci"
+          "usb_storage"
+          "usbhid"
+          "sd_mod"
+        ];
+        boot.initrd.kernelModules = [ ];
+        boot.kernelModules = [ "kvm-intel" ];
+        boot.extraModulePackages = [ ];
+        hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+        fileSystems = {
+          "/persist".neededForBoot = true;
+          "/var/log".neededForBoot = true;
+          "/vol/drive" = {
+            device = "/dev/disk/by-uuid/f2c7fa52-5b47-46e9-b95c-4c467175cdce";
+            fsType = "ext4";
+          };
+        };
+      };
   };
 }

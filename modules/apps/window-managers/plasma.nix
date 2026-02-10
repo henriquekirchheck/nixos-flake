@@ -1,5 +1,5 @@
 {
-  den.aspects.window-managers.provides.plasma.nixos =
+  den.aspects.apps.provides.window-managers.provides.plasma.nixos =
     { pkgs, ... }:
     {
       services.desktopManager.plasma6.enable = true;

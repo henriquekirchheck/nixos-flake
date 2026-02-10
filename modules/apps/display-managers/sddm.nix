@@ -1,5 +1,5 @@
 {
-  den.aspects.display-managers.provides.sddm.nixos = {
+  den.aspects.apps.provides.display-managers.provides.sddm.nixos = {
     services.displayManager.sddm = {
       enable = true;
       wayland.enable = true;

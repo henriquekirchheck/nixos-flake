@@ -51,12 +51,38 @@
                 { config, ... }:
                 {
                   sops.secrets.private = {
-                    sopsFile = sopsFile;
+                    inherit sopsFile;
                     path = "${config.home.homeDirectory}/${keyPath}";
                   };
                   sops.secrets.public = {
-                    sopsFile = sopsFile;
+                    inherit sopsFile;
                     path = "${config.home.homeDirectory}/${keyPath}.pub";
+                  };
+                };
+            };
+          add-host =
+            {
+              sopsFile,
+              secretKey,
+              domain,
+            }:
+            {
+              description = "Add host";
+              includes = [ den.aspects.apps._.sops ];
+              homeManager =
+                { config, ... }:
+                let
+                  secret = "${domain}-ssh";
+                in
+                {
+                  sops.secrets.${secret} = {
+                    inherit sopsFile;
+                    key = secretKey;
+                  };
+                  programs.ssh.matchBlocks.${domain} = {
+                    host = domain;
+                    identitiesOnly = true;
+                    identityFile = [ config.sops.secrets.${secret}.path ];
                   };
                 };
             };

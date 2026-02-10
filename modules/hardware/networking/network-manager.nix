@@ -1,10 +1,7 @@
 { den, ... }:
 {
   den.aspects.hardware.provides.networking.provides.network-manager = {
-    includes = [
-      den.aspects.hardware._.networking
-      den.aspects.hardware._.networking._.network-manager._.permission
-    ];
+    includes = [ den.aspects.hardware._.networking ];
     nixos.networking.networkmanager = {
       enable = true;
       dns = "none";

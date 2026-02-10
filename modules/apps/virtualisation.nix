@@ -3,8 +3,6 @@
   den.aspects.apps.provides.virtualisation = {
     description = "Virtualisation";
 
-    includes = [ den.aspects.apps._.virtualisation._.permission ];
-
     nixos =
       { pkgs, ... }:
       {

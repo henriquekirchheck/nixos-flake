@@ -21,7 +21,7 @@
             { config, ... }:
             {
               sops.secrets.${secret} = {
-                sopsFile = sopsFile;
+                inherit sopsFile;
                 format = "json";
                 key = "";
               };

@@ -18,11 +18,7 @@
 
     provides = {
       docker = {
-        includes = [
-          den.aspects.apps._.containers
-          # TODO: Fix when https://github.com/vic/den/issues/145 resolved
-          # den.aspects.apps._.containers._.docker._.permission
-        ];
+        includes = [ den.aspects.apps._.containers ];
         nixos =
           { config, ... }:
           {
@@ -67,6 +63,11 @@
             environment.systemPackages = [ pkgs.podman-compose ];
           };
       };
+      distrobox.homeManager =
+        { pkgs, ... }:
+        {
+          home.packages = [ pkgs.distrobox ];
+        };
     };
   };
 }

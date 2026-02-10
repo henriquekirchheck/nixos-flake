@@ -5,19 +5,21 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.window-managers.provides.niri = {
+  den.aspects.apps.provides.window-managers.provides.niri = {
     includes = [
       (den.aspects.utils._.nixpkgs._.add-substituter {
         substituter = "https://niri.cachix.org";
         public-key = "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=";
       })
       (den.aspects.utils._.nixpkgs._.add-overlay inputs.niri.overlays.niri)
+      (den.aspects.apps._.wayland)
     ];
     description = "Niri";
     nixos =
       { pkgs, ... }:
       {
         imports = [ inputs.niri.nixosModules.niri ];
+
         niri-flake.cache.enable = false;
 
         programs.niri = {
@@ -68,16 +70,11 @@
         ...
       }:
       {
-        imports = [ inputs.niri.homeModules.config ];
-        home.packages = with pkgs; [
-          xwayland-run
-          openbox
-        ];
-
-        dconf = {
-          enable = true;
-          settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-        };
+        # TODO: Niri freaks out when imported both in nixos and home-manager.
+        # imports = [
+        #   inputs.niri.homeModules.config
+        #   inputs.niri.homeModules.stylix
+        # ];
 
         programs.niri = {
           package = pkgs.niri-unstable;
@@ -227,13 +224,13 @@
                 { proportion = 1. / 1.; }
               ];
               focus-ring.enable = false;
-              border = {
+              border = with config.lib.stylix.colors.withHashtag; {
                 enable = true;
                 width = 2;
-                inactive.color = "#181825";
+                inactive.color = base03;
                 active.gradient = {
-                  from = "#cba6f7";
-                  to = "#74c7ec";
+                  from = base0E;
+                  to = base0D;
                   angle = 45;
                   relative-to = "workspace-view";
                 };
@@ -248,67 +245,56 @@
 
             debug.honor-xdg-activation-with-invalid-serial = true;
 
-            binds =
-              with config.lib.niri.actions;
-              {
-                # Apps
-                "Mod+Return".action = spawn-sh "alacritty msg create-window || alacritty";
-                "Mod+B".action = spawn "firefox";
-                "Mod+P".action = lib.mkForce (spawn "rofi" "-show" "run");
-                "Mod+Space".action = lib.mkDefault (spawn "rofi" "-show" "drun");
+            binds = {
+              # Apps
+              "Mod+Return".action.spawn-sh = "alacritty msg create-window || alacritty";
+              "Mod+B".action.spawn = "firefox";
 
-                # Screenshot
-                "Print".action.screenshot = { };
-                "Shift+Print".action.screenshot-screen = {
-                  write-to-disk = false;
-                };
-                "Ctrl+Print".action.screenshot-window = {
-                  write-to-disk = false;
-                };
+              # Screenshot
+              "Print".action.screenshot = { };
+              "Shift+Print".action.screenshot-screen = {
+                write-to-disk = false;
+              };
+              "Ctrl+Print".action.screenshot-window = {
+                write-to-disk = false;
+              };
 
-                # Screencast
-                "Mod+Shift+R".action.set-dynamic-cast-monitor = { };
-                "Mod+Ctrl+R".action.set-dynamic-cast-window = { };
-                "Mod+R".action.clear-dynamic-cast-target = { };
+              # Screencast
+              "Mod+Shift+R".action.set-dynamic-cast-monitor = { };
+              "Mod+Ctrl+R".action.set-dynamic-cast-window = { };
+              "Mod+R".action.clear-dynamic-cast-target = { };
 
-                # WM keybinds
-                "Mod+Shift+C".action = close-window;
-                "Mod+Shift+Q".action = quit { skip-confirmation = true; };
-                "Mod+F".action = toggle-window-floating;
-                "Mod+Shift+F".action = fullscreen-window;
-                "Mod+S".action = switch-preset-column-width;
-                "Mod+A".action = toggle-overview;
+              # WM keybinds
+              "Mod+Shift+C".action.close-window = { };
+              "Mod+Shift+Q".action.quit = {
+                skip-confirmation = true;
+              };
+              "Mod+F".action.toggle-window-floating = { };
+              "Mod+Shift+F".action.fullscreen-window = { };
+              "Mod+S".action.switch-preset-column-width = { };
+              "Mod+A".action.toggle-overview = { };
 
-                # Move Windows
-                "Mod+Up".action = focus-window-or-workspace-up;
-                "Mod+Down".action = focus-window-or-workspace-down;
-                "Mod+Left".action = focus-column-left;
-                "Mod+Right".action = focus-column-right;
-                "Mod+Shift+Up".action = move-window-up-or-to-workspace-up;
-                "Mod+Shift+Down".action = move-window-down-or-to-workspace-down;
-                "Mod+Shift+Left".action = move-column-left;
-                "Mod+Shift+Right".action = move-column-right;
-
-                # Volume control
-                "XF86AudioRaiseVolume".action = lib.mkDefault (
-                  spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"
-                );
-                "XF86AudioLowerVolume".action = lib.mkDefault (
-                  spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"
-                );
-                "XF86AudioMute".action = lib.mkDefault (spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle");
-              }
-              // lib.mergeAttrsList (
-                builtins.genList (
-                  x:
-                  let
-                    n = x + 1;
-                  in
-                  {
-                    "Mod+${toString n}".action = focus-workspace n;
-                  }
-                ) 9
-              );
+              # Move Windows
+              "Mod+Up".action.focus-window-or-workspace-up = { };
+              "Mod+Down".action.focus-window-or-workspace-down = { };
+              "Mod+Left".action.focus-column-left = { };
+              "Mod+Right".action.focus-column-right = { };
+              "Mod+Shift+Up".action.move-window-up-or-to-workspace-up = { };
+              "Mod+Shift+Down".action.move-window-down-or-to-workspace-down = { };
+              "Mod+Shift+Left".action.move-column-left = { };
+              "Mod+Shift+Right".action.move-column-right = { };
+            }
+            // lib.mergeAttrsList (
+              builtins.genList (
+                x:
+                let
+                  n = x + 1;
+                in
+                {
+                  "Mod+${toString n}".action.focus-workspace = n;
+                }
+              ) 9
+            );
           };
         };
       };
