@@ -1,0 +1,21 @@
+keys:
+  - &henrique age1cmx764yuualp623t3urnuan747kpxpyacr7ghtsy5huwdqv6ps4qdw3xs6
+  - &pc age189jem67f5uc8hwsrmc0ac2x3fxugucdclmhe4usjmjnydw03vufsx38w9c
+  - &laptop age1kk0s3r3a7meuvz8xhr9nc2zrxx3v53rdf5y832y9fm6fq5v4x3dsmd8nss
+creation_rules:
+  - path_regex: modules/hosts/pc/secrets/.*$
+    key_groups:
+      - age:
+          - *henrique
+          - *pc
+  - path_regex: modules/hosts/laptop/secrets/.*$
+    key_groups:
+      - age:
+          - *henrique
+          - *laptop
+  - path_regex: modules/users/henrique/secrets/.*$
+    key_groups:
+      - age:
+          - *henrique
+          - *pc
+          - *laptop

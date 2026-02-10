@@ -1,0 +1,1 @@
+# Dentritic NixOS Configuration
