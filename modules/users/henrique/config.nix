@@ -147,6 +147,10 @@
       den.aspects.apps._.wine
       den.aspects.apps._.wine._.bottles
 
+      den.aspects.apps._.web._.aria2
+      # TODO: Unfree battery broken https://github.com/vic/den/issues/150
+      # den.aspects.apps._.web._.firefox
+
       den.aspects.apps._.terminals._.alacritty
 
       (den.aspects.utils._.user._.password {
@@ -185,6 +189,7 @@
       { config, ... }:
       {
         programs.nh.flake = "${config.home.homeDirectory}/src/dotfiles";
+        stylix.targets.firefox.profileNames = [ "user" ];
         home.sessionVariables = {
           EDITOR = "nvim";
           VISUAL = "zeditor";

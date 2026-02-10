@@ -7,7 +7,11 @@
   # den.hosts.x86_64-linux.laptop = {
   #   hostName = "henrique-laptop";
   #   description = "Laptop that I use occasionally";
-  #   users.henrique = { };
+  #   users = {
+  #     henrique = { };
+  #     maria = { };
+  #   };
   # };
   den.homes.x86_64-linux.henrique = { };
+  # den.homes.x86_64-linux.maria = { };
 }
