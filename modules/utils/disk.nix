@@ -1,5 +1,5 @@
 let
-  partitionName = "part";
+  partitionName = "volume";
 in
 {
   den.aspects.utils.provides.disk = {

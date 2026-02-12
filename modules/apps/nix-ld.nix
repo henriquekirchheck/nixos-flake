@@ -84,7 +84,7 @@
             SDL2_sound
             SDL2_ttf
 
-            glew110
+            glew_1_10
             libidn
 
             flac

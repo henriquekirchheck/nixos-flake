@@ -87,7 +87,7 @@ in
       (den.aspects.services._.vaultwarden._.includeEnvironment ./secrets/vaultwarden.env)
       (den.aspects.services._.vaultwarden._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "vault.henriquekh.dev.br")
 
-      (den.aspects.services._.bitwarden-sync ./secrets/bitwarden-sync)
+      (den.aspects.services._.bitwarden-sync ./secrets/bitwarden-sync.env)
 
       den.aspects.services._.searxng
       (den.aspects.services._.searxng._.includeEnvironment ./secrets/searxng.env)
