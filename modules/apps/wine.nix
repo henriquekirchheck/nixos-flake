@@ -6,7 +6,7 @@
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
-          wineWowPackages.full
+          wineWow64Packages.full
           winetricks
         ];
       };

@@ -42,7 +42,6 @@
     homeManager =
       { pkgs, ... }:
       {
-        # TODO: Add user and system level stylix config
         stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
         home.sessionVariables = {
           BROWSER = "chromium";

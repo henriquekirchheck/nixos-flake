@@ -40,9 +40,9 @@
       den.aspects.apps._.security._.permission._.doas
       den.aspects.apps._.security._.permission._.doas._.sudo-alias
       den.aspects.apps._.containers._.distrobox
-      # TODO: Unfree battery broken https://github.com/vic/den/issues/150
-      # den.aspects.apps._.games._.minecraft._.launchers._.prismlauncher
-      # den.aspects.apps._.games._.steam
+
+      den.aspects.apps._.games._.minecraft._.launchers._.prismlauncher
+      den.aspects.apps._.games._.steam
       den.aspects.apps._.games._.gamemode
       den.aspects.apps._.games._.gamescope
       den.aspects.apps._.comma
@@ -55,14 +55,12 @@
       den.aspects.apps._.media._.images._.swayimg
       den.aspects.apps._.media._.images._.krita
       den.aspects.apps._.media._.images._.gimp
-      # TODO: Unfree battery broken https://github.com/vic/den/issues/150
-      # den.aspects.apps._.media._.audio._.tidal-hifi
+      den.aspects.apps._.media._.audio._.tidal-hifi
       den.aspects.apps._.media._.audio._.mpd
       den.aspects.apps._.media._.ffmpeg
       den.aspects.apps._.media._.mpv
 
-      # TODO: Unfree battery broken https://github.com/vic/den/issues/150
-      # den.aspects.apps._.communication._.nixcord
+      den.aspects.apps._.communication._.nixcord
 
       den.aspects.apps._.documents._.zathura
       den.aspects.apps._.documents._.libreoffice
@@ -77,8 +75,7 @@
 
       den.aspects.apps._.development._.game-engines._.godot
 
-      # TODO: Unfree battery broken https://github.com/vic/den/issues/150
-      # den.aspects.apps._.development._.editors._.codium
+      den.aspects.apps._.development._.editors._.codium
       den.aspects.apps._.development._.editors._.emacs
       den.aspects.apps._.development._.editors._.neovim
       den.aspects.apps._.development._.editors._.zed
@@ -148,8 +145,7 @@
       den.aspects.apps._.wine._.bottles
 
       den.aspects.apps._.web._.aria2
-      # TODO: Unfree battery broken https://github.com/vic/den/issues/150
-      # den.aspects.apps._.web._.firefox
+      den.aspects.apps._.web._.firefox
 
       den.aspects.apps._.terminals._.alacritty
 
@@ -191,8 +187,7 @@
       { config, ... }:
       {
         programs.nh.flake = "${config.home.homeDirectory}/src/dotfiles";
-        # TODO: Unfree battery broken https://github.com/vic/den/issues/150
-        # stylix.targets.firefox.profileNames = [ "user" ];
+        stylix.targets.firefox.profileNames = [ "user" ];
         home.sessionVariables = {
           EDITOR = "nvim";
           VISUAL = "zeditor";

@@ -9,7 +9,6 @@
     description = "VSCodium";
     includes = [
       (den.aspects.utils._.nixpkgs._.add-overlay inputs.nix-vscode-extensions.overlays.default)
-      # TODO: Unfree battery broken https://github.com/vic/den/issues/150
       (den._.unfree [ "vscode-extension-bmewburn-vscode-intelephense-client" ])
     ];
 
