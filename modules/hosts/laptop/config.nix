@@ -8,6 +8,7 @@
       })
 
       den.aspects.apps._.sops
+      den.aspects.apps._.nix
       den.aspects.apps._.nix-ld
 
       den.aspects.hardware._.networking._.network-manager
@@ -115,6 +116,8 @@
           opacity = {
             terminal = 0.75;
             applications = 0.98;
+            popups = 0.75;
+            desktop = 0.75;
           };
           icons = {
             enable = true;
@@ -128,8 +131,8 @@
               name = "Roboto";
             };
             sansSerif = {
-              package = pkgs.roboto-serif;
-              name = "Roboto Serif";
+              package = pkgs.roboto;
+              name = "Roboto";
             };
             monospace = {
               package = pkgs.nerd-fonts.jetbrains-mono;

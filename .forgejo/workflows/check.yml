@@ -1,1 +1,46 @@
-{"env": {"CACHIX_AUTH_TOKEN": "${{ secrets.CACHIX_AUTH_TOKEN }}"}, "jobs": {"check": {"runs-on": "nixos-unstable", "steps": [{"name": "Install Node", "run": "nix profile add nixpkgs#nodejs_latest"}, {"uses": "https://data.forgejo.org/actions/checkout@v6"}, {"run": "nix -Lv flake check --all-systems"}, {"name": "Install Needed Packages", "run": "nix profile add github:juspay/omnix github:juspay/cachix-push nixpkgs#cachix"}, {"name": "Setup Cachix", "run": "CACHES=(\n  'henriquekh'\n  'nix-community'\n  'hyprland'\n  'niri'\n)\nfor cache in ${CACHES[@]}; do\n  cachix use $cache\ndone\n"}, {"name": "Build output", "run": "om ci run --results=/om.json"}, {"name": "Push to cache", "run": "cachix-push-om-outputs -c henriquekh --subflake ROOT --prefix \"$(git rev-parse --short HEAD)\" < /om.json"}]}}, "on": {"push": {"branches": ["main"]}, "workflow_dispatch": {}}}
+{
+  "env": {
+    "CACHIX_AUTH_TOKEN": "${{ secrets.CACHIX_AUTH_TOKEN }}"
+  },
+  "jobs": {
+    "check": {
+      "runs-on": "nixos-unstable",
+      "steps": [
+        {
+          "name": "Install Node",
+          "run": "nix profile add nixpkgs#nodejs_latest"
+        },
+        {
+          "uses": "https://data.forgejo.org/actions/checkout@v6"
+        },
+        {
+          "run": "nix -Lv flake check --all-systems"
+        },
+        {
+          "name": "Install Needed Packages",
+          "run": "nix profile add github:juspay/omnix github:juspay/cachix-push nixpkgs#cachix"
+        },
+        {
+          "name": "Setup Cachix",
+          "run": "CACHES=(\n  'henriquekh'\n  'nix-community'\n  'hyprland'\n  'niri'\n)\nfor cache in ${CACHES[@]}; do\n  cachix use $cache\ndone\n"
+        },
+        {
+          "name": "Build output",
+          "run": "om ci run --results=/om.json"
+        },
+        {
+          "name": "Push to cache",
+          "run": "cachix-push-om-outputs -c henriquekh --subflake ROOT --prefix \"$(git rev-parse --short HEAD)\" < /om.json"
+        }
+      ]
+    }
+  },
+  "on": {
+    "push": {
+      "branches": [
+        "main"
+      ]
+    },
+    "workflow_dispatch": {}
+  }
+}

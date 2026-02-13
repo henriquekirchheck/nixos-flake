@@ -8,7 +8,6 @@
         let
           nixConfig = {
             substituters = [ substituter ];
-            trusted-substituters = [ substituter ];
             trusted-public-keys = [ public-key ];
           };
         in

@@ -16,6 +16,7 @@ in
       })
 
       den.aspects.apps._.sops
+      den.aspects.apps._.nix
       den.aspects.apps._.nix-ld
       den.aspects.apps._.media._.audio._.mpd
 
@@ -30,7 +31,7 @@ in
       den.aspects.services._.ssh._.server
 
       den.aspects.system._.bootloader._.systemd-boot
-      den.aspects.system._.kernel._.cachy._.stable-v3
+      den.aspects.system._.kernel._.xanmod
       den.aspects.system._.oom._.systemd-oomd
 
       den.aspects.apps._.games._.minecraft._.server._.setup-ports
@@ -242,8 +243,8 @@ in
               name = "Roboto";
             };
             sansSerif = {
-              package = pkgs.roboto-serif;
-              name = "Roboto Serif";
+              package = pkgs.roboto;
+              name = "Roboto";
             };
             monospace = {
               package = pkgs.nerd-fonts.jetbrains-mono;
@@ -290,6 +291,8 @@ in
             fsType = "ext4";
           };
         };
+        
+        sops.age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
       };
   };
 }

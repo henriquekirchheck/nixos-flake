@@ -76,7 +76,6 @@
       den.aspects.apps._.development._.game-engines._.godot
 
       den.aspects.apps._.development._.editors._.codium
-      den.aspects.apps._.development._.editors._.emacs
       den.aspects.apps._.development._.editors._.neovim
       den.aspects.apps._.development._.editors._.zed
 

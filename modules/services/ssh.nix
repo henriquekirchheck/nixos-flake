@@ -5,21 +5,21 @@
 
     provides = {
       server = {
-        provides = {
-          description = "SSH Daemon";
+        description = "SSH Daemon";
 
-          nixos = {
-            services.openssh = {
-              enable = true;
-              openFirewall = true;
-              settings = {
-                PermitRootLogin = "no";
-                PasswordAuthentication = false;
-                KbdInteractiveAuthentication = false;
-              };
+        nixos = {
+          services.openssh = {
+            enable = true;
+            openFirewall = true;
+            settings = {
+              PermitRootLogin = "no";
+              PasswordAuthentication = false;
+              KbdInteractiveAuthentication = false;
             };
-            services.fail2ban.enable = true;
           };
+          services.fail2ban.enable = true;
+        };
+        provides = {
           allow-user =
             { user, ... }:
             {

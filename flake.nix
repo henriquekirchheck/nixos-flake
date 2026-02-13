@@ -73,7 +73,7 @@
       };
       url = "github:FlameFlag/nixcord";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-lib.follows = "nixpkgs";
     nur = {
       inputs = {

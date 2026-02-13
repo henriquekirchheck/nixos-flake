@@ -52,7 +52,6 @@
           ];
           nixos.services.searx = {
             inherit domain;
-            settings.server.base_url = domain;
           };
         };
         setupCloudflareTunnel = id: domain: {
@@ -65,7 +64,6 @@
           ];
           nixos.services.searx = {
             inherit domain;
-            settings.server.base_url = domain;
           };
         };
       };
