@@ -5,7 +5,11 @@
     inputs.den.flakeModules.dendritic
   ];
 
-  den.default.includes = [(den.aspects.utils._.nixpkgs._.add-substituter { substituter = "https://cache.nixos.org/"; public-key = "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="; })];
+  den.default.includes = [
+(den.aspects.utils._.nixpkgs._.add-substituter { substituter = "https://cache.nixos.org/"; public-key = "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="; })
+
+(den.aspects.utils._.nixpkgs._.add-substituter { substituter = "https://cache.nixos.org/"; public-key = "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="; })
+  ];
 
   flake-file = {
     description = "My Awesome Flake";
