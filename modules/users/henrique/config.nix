@@ -61,6 +61,7 @@
       den.aspects.apps._.media._.mpv
 
       den.aspects.apps._.communication._.nixcord
+      den.aspects.apps._.communication._.stoat
 
       den.aspects.apps._.documents._.zathura
       den.aspects.apps._.documents._.libreoffice
@@ -211,6 +212,10 @@
               "application/vnd.mozilla.xul+xml" = "firefox.desktop";
               "x-scheme-handler/http" = "firefox.desktop";
               "x-scheme-handler/https" = "firefox.desktop";
+              "x-scheme-handler/mailto" = "thunderbird.desktop";
+              "text/x-vcard" = "thunderbird.desktop";
+              "text/calendar" = "thunderbird.desktop";
+              "message/rfc822" = "thunderbird.desktop";
               "text/plain" = "dev.zed.Zed.desktop";
               "inode/directory" = "Alacritty.desktop";
             };

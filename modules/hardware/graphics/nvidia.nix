@@ -3,7 +3,13 @@
   den.aspects.hardware.provides.graphics = {
     provides = {
       nvidia = {
-        includes = [ den.aspects.hardware._.graphics (den._.unfree [ "nvidia-x11" "nvidia-settings" ])];
+        includes = [
+          den.aspects.hardware._.graphics
+          (den._.unfree [
+            "nvidia-x11"
+            "nvidia-settings"
+          ])
+        ];
         nixos =
           { config, ... }:
           {

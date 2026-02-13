@@ -230,6 +230,8 @@ in
           opacity = {
             terminal = 0.75;
             applications = 0.98;
+            popups = 0.75;
+            desktop = 0.75;
           };
           icons = {
             enable = true;
@@ -291,7 +293,7 @@ in
             fsType = "ext4";
           };
         };
-        
+
         sops.age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
       };
   };

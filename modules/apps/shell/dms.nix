@@ -51,8 +51,8 @@
                 id = "default";
                 innerPadding = 0;
                 leftWidgets = [
-                    "launcherButton"
-                     "systemTray"
+                  "launcherButton"
+                  "systemTray"
                   "workspaceSwitcher"
                 ];
                 name = "Main Bar";

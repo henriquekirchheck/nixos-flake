@@ -42,9 +42,31 @@
     homeManager =
       { pkgs, ... }:
       {
-        stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+        stylix = {
+          polarity = "dark";
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+        };
         home.sessionVariables = {
           BROWSER = "chromium";
+        };
+        xdg = {
+          enable = true;
+          mime.enable = true;
+          mimeApps = {
+            enable = true;
+            defaultApplications = {
+              "text/html" = "chromium-browser.desktop";
+              "application/xhtml+xml" = "chromium-browser.desktop";
+              "application/vnd.mozilla.xul+xml" = "chromium-browser.desktop";
+              "x-scheme-handler/http" = "chromium-browser.desktop";
+              "x-scheme-handler/https" = "chromium-browser.desktop";
+              "x-scheme-handler/mailto" = "chromium-browser.desktop";
+              "text/x-vcard" = "chromium-browser.desktop";
+              "text/calendar" = "chromium-browser.desktop";
+              "message/rfc822" = "chromium-browser.desktop";
+              "inode/directory" = "dolphin.desktop";
+            };
+          };
         };
       };
   };

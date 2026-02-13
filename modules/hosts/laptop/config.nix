@@ -170,6 +170,8 @@
         boot.kernelModules = [ "kvm-intel" ];
         boot.extraModulePackages = [ ];
         hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+        sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       };
   };
 }
