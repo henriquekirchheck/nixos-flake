@@ -55,6 +55,7 @@
       den.aspects.apps._.media._.images._.swayimg
       den.aspects.apps._.media._.images._.krita
       den.aspects.apps._.media._.images._.gimp
+      den.aspects.apps._.media._.images._.wayscriber
       den.aspects.apps._.media._.audio._.tidal-hifi
       den.aspects.apps._.media._.audio._.mpd
       den.aspects.apps._.media._.ffmpeg
