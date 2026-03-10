@@ -71,7 +71,7 @@ in
 
       (den.aspects.services._.caddy._.withPlugins {
         plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
-        hash = "sha256-dnhEjopeA0UiI+XVYHYpsjcEI6Y1Hacbi28hVKYQURg=";
+        hash = "sha256-Gb1nC5fZfj7IodQmKmEPGygIHNYhKWV1L0JJiqnVtbs=";
       })
       (den.aspects.services._.caddy._.includeEnvironment ./secrets/caddy.env)
       (den.aspects.services._.caddy._.includeGlobal ''
@@ -133,7 +133,7 @@ in
       })
     ];
 
-    disko.disko.devices.disk = {
+    disko.devices.disk = {
       system = {
         type = "disk";
         device = "/dev/disk/by-id/nvme-ADATA_LEGEND_710_4P1322221261";

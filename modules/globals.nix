@@ -1,3 +1,4 @@
+{ den, ... }:
 {
   den.default = {
     nixos = {
@@ -7,4 +8,6 @@
     };
     homeManager.home.stateVersion = "26.05";
   };
+
+  den.default.includes = [ den.provides.hostname ];
 }

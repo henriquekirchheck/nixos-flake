@@ -29,7 +29,7 @@
       den.aspects.apps._.virtualisation._.virt-manager
     ];
 
-    disko.disko.devices.disk = {
+    disko.devices.disk = {
       system = {
         type = "disk";
         device = "/dev/sda";
@@ -100,7 +100,7 @@
         };
       };
     };
-    
+
     nixos =
       {
         config,

@@ -9,7 +9,7 @@ in
         { name, device }:
         {
           description = "Create a new disk with the specified name on the specified device";
-          disko.disko.devices.disk.${name} = {
+          disko.devices.disk.${name} = {
             type = "disk";
             inherit device;
             content = {
@@ -36,7 +36,7 @@ in
         }:
         {
           description = "Create a subvolume on the disk with the specified name";
-          disko.disko.devices.disk.${name}.content.partitions.${partitionName}.content.subvolumes."/${subvolume}" =
+          disko.devices.disk.${name}.content.partitions.${partitionName}.content.subvolumes."/${subvolume}" =
             {
               inherit mountpoint;
               mountOptions = [
