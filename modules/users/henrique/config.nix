@@ -1,4 +1,4 @@
-{ den, ... }:
+{ den, inputs, ... }:
 {
   den.aspects.henrique = {
     includes = [
@@ -185,17 +185,62 @@
     };
 
     homeManager =
-      { config, ... }:
+      { config, pkgs, ... }:
       {
         programs.nh.flake = "${config.home.homeDirectory}/src/dotfiles";
-        stylix.targets.firefox.profileNames = [ "user" ];
+
+        imports = [ inputs.stylix.homeModules.stylix ];
+        stylix = {
+          enable = true;
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+          polarity = "dark";
+          targets = {
+            firefox.profileNames = [ "user" ];
+            qt.platform = "qtct";
+          };
+          cursor = {
+            package = pkgs.phinger-cursors;
+            name = "phinger-cursors-light";
+            size = 24;
+          };
+          opacity = {
+            terminal = 0.75;
+            applications = 0.98;
+            popups = 0.75;
+            desktop = 0.75;
+          };
+          icons = {
+            enable = true;
+            package = pkgs.papirus-icon-theme;
+            dark = "Papirus-Dark";
+            light = "Papirus-Light";
+          };
+          fonts = {
+            serif = {
+              package = pkgs.roboto;
+              name = "Roboto";
+            };
+            sansSerif = {
+              package = pkgs.roboto;
+              name = "Roboto";
+            };
+            monospace = {
+              package = pkgs.nerd-fonts.jetbrains-mono;
+              name = "JetBrainsMono Nerd Font";
+            };
+            emoji = {
+              package = pkgs.noto-fonts-color-emoji;
+              name = "Noto Color Emoji";
+            };
+          };
+        };
+
         home.sessionVariables = {
           EDITOR = "nvim";
           VISUAL = "zeditor";
           TERMINAL = "alacritty";
           BROWSER = "firefox";
         };
-        stylix.targets.qt.platform = "qtct";
         xdg = {
           enable = true;
           mime.enable = true;

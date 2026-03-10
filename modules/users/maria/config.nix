@@ -40,12 +40,7 @@
     };
 
     homeManager =
-      { pkgs, ... }:
       {
-        stylix = {
-          polarity = "dark";
-          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
-        };
         home.sessionVariables = {
           BROWSER = "chromium";
         };

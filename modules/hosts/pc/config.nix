@@ -215,51 +215,6 @@ in
       };
     };
 
-    stylix =
-      { pkgs, ... }:
-      {
-        stylix = {
-          enable = true;
-          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-          polarity = "dark";
-          cursor = {
-            package = pkgs.phinger-cursors;
-            name = "phinger-cursors-light";
-            size = 24;
-          };
-          opacity = {
-            terminal = 0.75;
-            applications = 0.98;
-            popups = 0.75;
-            desktop = 0.75;
-          };
-          icons = {
-            enable = true;
-            package = pkgs.papirus-icon-theme;
-            dark = "Papirus-Dark";
-            light = "Papirus-Light";
-          };
-          fonts = {
-            serif = {
-              package = pkgs.roboto;
-              name = "Roboto";
-            };
-            sansSerif = {
-              package = pkgs.roboto;
-              name = "Roboto";
-            };
-            monospace = {
-              package = pkgs.nerd-fonts.jetbrains-mono;
-              name = "JetBrainsMono Nerd Font";
-            };
-            emoji = {
-              package = pkgs.noto-fonts-color-emoji;
-              name = "Noto Color Emoji";
-            };
-          };
-        };
-      };
-
     nixos =
       {
         config,
