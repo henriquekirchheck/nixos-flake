@@ -40,6 +40,21 @@
           run = ''cachix-push-om-outputs -c henriquekh --subflake ROOT --prefix "''$(git rev-parse --short HEAD)" < /om.json'';
         }
       ];
+      toAction =
+        name: action:
+        pkgs.runCommand name
+          {
+            buildInputs = with pkgs; [
+              action-validator
+              yj
+            ];
+            action = builtins.toJSON action;
+            passAsFile = [ "action" ];
+          }
+          ''
+            yj -jy < "$actionPath" > $out
+            action-validator -v $out
+          '';
     in
     {
       packages.write-files = config.files.writer.drv;
@@ -92,7 +107,7 @@
         }
         {
           path_ = ".forgejo/workflows/check.yml";
-          drv = pkgs.writers.writeJSON "fj-actions-workflow-check.yaml" {
+          drv = toAction "fj-actions-workflow-check.yaml" {
             on = {
               push.branches = [ "main" ];
               workflow_dispatch = { };
@@ -111,7 +126,7 @@
         }
         {
           path_ = ".forgejo/workflows/update.yml";
-          drv = pkgs.writers.writeJSON "fj-actions-workflow-update.yaml" {
+          drv = toAction "fj-actions-workflow-update.yaml" {
             on = {
               schedule = [ { cron = "15 4 * * *"; } ];
               workflow_dispatch = { };
