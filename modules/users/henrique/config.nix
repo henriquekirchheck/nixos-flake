@@ -45,6 +45,7 @@
       den.aspects.apps._.games._.steam
       den.aspects.apps._.games._.gamemode
       den.aspects.apps._.games._.gamescope
+      den.aspects.apps._.games._.mangohud
       den.aspects.apps._.comma
       den.aspects.apps._.nh
 

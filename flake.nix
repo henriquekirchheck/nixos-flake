@@ -58,6 +58,13 @@
       url = "github:xddxdd/nix-cachyos-kernel/release";
       inputs.flake-parts.follows = "flake-parts";
     };
+    nix-gaming-edge = {
+      url = "github:powerofthe69/nix-gaming-edge";
+      inputs = {
+        millennium.follows = "";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -71,6 +78,7 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
+        nixpkgs-nixcord.follows = "nixpkgs";
       };
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

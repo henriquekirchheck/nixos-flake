@@ -4,6 +4,7 @@
     url = "github:FlameFlag/nixcord";
     inputs = {
       nixpkgs.follows = "nixpkgs";
+      nixpkgs-nixcord.follows = "nixpkgs";
       flake-parts.follows = "flake-parts";
     };
   };
@@ -52,7 +53,6 @@
             USRBG.enable = true;
             alwaysAnimate.enable = true;
             alwaysExpandRoles.enable = true;
-            betterFolders.enable = true;
             betterGifAltText.enable = true;
             betterGifPicker.enable = true;
             betterRoleContext.enable = true;
@@ -106,7 +106,6 @@
               hidePremiumOffersCount = true;
             };
             noUnblockToJump.enable = true;
-            normalizeMessageLinks.enable = true;
             permissionFreeWill.enable = true;
             permissionsViewer.enable = true;
             petpet.enable = true;
