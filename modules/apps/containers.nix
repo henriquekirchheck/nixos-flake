@@ -43,14 +43,17 @@
         nixos =
           { config, pkgs, ... }:
           {
-            virtualisation.podman = {
-              enable = true;
-              dockerCompat = true;
-              dockerSocket.enable = true;
-              defaultNetwork.settings.dns_enabled = true;
-              autoPrune.enable = true;
+            virtualisation = {
+              podman = {
+                enable = true;
+                dockerCompat = true;
+                dockerSocket.enable = true;
+                defaultNetwork.settings.dns_enabled = true;
+                autoPrune.enable = true;
+              };
+              oci-containers.backend = "podman";
+              containers.containersConf.settings.engine.compose_warning_logs = false;
             };
-            virtualisation.oci-containers.backend = "podman";
 
             networking.firewall.interfaces =
               let
