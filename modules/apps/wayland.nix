@@ -7,7 +7,7 @@
         dragon-drop
         xwayland-run
         openbox
-	feh
+        feh
       ];
       environment.variables = {
         NIXOS_OZONE_WL = "1";
