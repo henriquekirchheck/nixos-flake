@@ -251,5 +251,24 @@ in
 
         sops.age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
       };
+
+    homeManager.programs.niri.settings.outputs = {
+      DVI-D-1 = {
+        position.x = 0;
+        mode = {
+          width = 1920;
+          height = 1080;
+          refresh = 60;
+        };
+      };
+      HDMI-A-1 = {
+        position.x = 1920;
+        mode = {
+          width = 1920;
+          height = 1080;
+          refresh = 60;
+        };
+      };
+    };
   };
 }
