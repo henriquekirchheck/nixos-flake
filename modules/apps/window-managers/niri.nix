@@ -26,25 +26,6 @@
           enable = true;
           package = pkgs.niri-unstable;
         };
-        xdg.portal = {
-          enable = true;
-          extraPortals = [
-            pkgs.xdg-desktop-portal-gtk
-            pkgs.xdg-desktop-portal-gnome
-          ];
-          config.niri = {
-            default = [
-              "gnome"
-              "gtk"
-            ];
-            "org.freedesktop.impl.portal.ScreenCast" = "gnome";
-            "org.freedesktop.impl.portal.FileChooser" = "gtk";
-            "org.freedesktop.impl.portal.Access" = "gtk";
-            "org.freedesktop.impl.portal.Notification" = "gtk";
-            "org.freedesktop.impl.portal.AppChooser" = "gtk";
-            "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
-          };
-        };
 
         # Fix services starting before niri-session
         systemd.user.services = {
@@ -70,11 +51,24 @@
         ...
       }:
       {
-        # TODO: Niri freaks out when imported both in nixos and home-manager.
-        # imports = [
-        #   inputs.niri.homeModules.config
-        #   inputs.niri.homeModules.stylix
-        # ];
+        xdg.portal = {
+          enable = true;
+          extraPortals = [
+            pkgs.xdg-desktop-portal-gtk
+            pkgs.xdg-desktop-portal-gnome
+          ];
+          config.niri = {
+            default = [
+              "gnome"
+              "gtk"
+            ];
+            "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+            "org.freedesktop.impl.portal.FileChooser" = "gtk";
+            "org.freedesktop.impl.portal.Access" = "gtk";
+            "org.freedesktop.impl.portal.Notification" = "gtk";
+            "org.freedesktop.impl.portal.AppChooser" = "gtk";
+          };
+        };
 
         programs.niri = {
           package = pkgs.niri-unstable;

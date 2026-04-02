@@ -14,7 +14,11 @@
   ];
 
   perSystem =
-    { config, pkgs, ... }:
+    {
+      config,
+      pkgs,
+      ...
+    }:
     {
       pre-commit = {
         settings = {
@@ -41,14 +45,7 @@
         check.enable = false;
       };
       devShells.default = pkgs.mkShell {
-        shellHook = ''
-          ${config.pre-commit.shellHook}
-        '';
-
-        packages = [
-          config.packages.write-flake
-          config.packages.write-files
-        ];
+        shellHook = "${config.pre-commit.shellHook}";
       };
     };
 }

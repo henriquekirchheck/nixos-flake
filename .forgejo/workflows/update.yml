@@ -1,7 +1,7 @@
 env:
   CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 jobs:
-  check:
+  update:
     runs-on: nixos-unstable
     steps:
       - name: Install Node
