@@ -15,7 +15,7 @@
           {
             services.xserver.videoDrivers = [ "nvidia" ];
             hardware.nvidia = {
-              package = config.boot.kernelPackages.nvidiaPackages.stable;
+              package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
               nvidiaSettings = true;
               nvidiaPersistenced = true;
               open = false;
