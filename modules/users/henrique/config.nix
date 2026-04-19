@@ -237,6 +237,23 @@
           };
         };
 
+        programs.niri.settings.outputs = {
+          DVI-D-1 = {
+            position = {x = 0; y = 0;};
+            mode = {
+              width = 1920;
+              height = 1080;
+            };
+          };
+          HDMI-A-1 = {
+            position = {x = 1920; y = 0;};
+            mode = {
+              width = 1920;
+              height = 1080;
+            };
+          };
+        };
+
         home.sessionVariables = {
           EDITOR = "nvim";
           VISUAL = "zeditor";
