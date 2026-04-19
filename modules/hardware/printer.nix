@@ -15,10 +15,6 @@
           ];
         };
       };
-    provides.permission =
-      { user, ... }:
-      {
-        nixos.users.users.${user.userName}.extraGroups = [ "lp" ];
-      };
+    provides.permission.user.extraGroups = [ "lp" ];
   };
 }

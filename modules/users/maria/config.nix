@@ -29,14 +29,12 @@
       (den.aspects.utils._.user._.xdg-dirs { })
     ];
 
-    nixos = {
-      users.users.maria = {
-        description = "Maria Cecilia Kirch";
-        initialPassword = "password";
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBHzo1AzCHMwR6sctkN8hxilkKvjnr96xWPotO3eTcxR me@henriquekh.dev.br"
-        ];
-      };
+    user = {
+      description = "Maria Cecilia Kirch";
+      initialPassword = "password";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBHzo1AzCHMwR6sctkN8hxilkKvjnr96xWPotO3eTcxR me@henriquekh.dev.br"
+      ];
     };
 
     homeManager = {

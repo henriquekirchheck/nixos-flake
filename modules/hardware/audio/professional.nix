@@ -32,13 +32,9 @@
           autotalent
         ];
       };
-    provides.permission =
-      { user, ... }:
-      {
-        nixos.users.users.${user.userName}.extraGroups = [
-          "audio"
-          "rt"
-        ];
-      };
+    provides.permission.user.extraGroups = [
+      "audio"
+      "rt"
+    ];
   };
 }

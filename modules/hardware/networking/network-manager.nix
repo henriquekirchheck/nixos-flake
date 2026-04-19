@@ -6,10 +6,6 @@
       enable = true;
       dns = "none";
     };
-    provides.permission =
-      { user, ... }:
-      {
-        nixos.users.users.${user.userName}.extraGroups = [ "networkmanager" ];
-      };
+    provides.permission.user.extraGroups = [ "networkmanager" ];
   };
 }

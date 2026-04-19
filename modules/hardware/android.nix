@@ -9,10 +9,6 @@
           pkgs.android-tools
         ];
       };
-    provides.permission =
-      { user, ... }:
-      {
-        nixos.users.users.${user.userName}.extraGroups = [ "adbusers" ];
-      };
+    provides.permission.user.extraGroups = [ "adbusers" ];
   };
 }

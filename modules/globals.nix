@@ -1,6 +1,7 @@
 { den, ... }:
 {
   den.default = {
+    includes = [ den.provides.hostname ];
     nixos = {
       system.stateVersion = "26.05";
       time.timeZone = "America/Sao_Paulo";
@@ -8,6 +9,4 @@
     };
     homeManager.home.stateVersion = "26.05";
   };
-
-  den.default.includes = [ den.provides.hostname ];
 }

@@ -30,7 +30,7 @@
       den.aspects.hardware._.tablet
 
       den.aspects.apps._.window-managers._.niri
-      den.aspects.apps._.wallpapers._.swww
+      den.aspects.apps._.wallpapers._.awww
       den.aspects.apps._.shell._.dms
       den.aspects.apps._.shell._.dms._.niri
       den.aspects.apps._.keyrings._.gnome-keyring
@@ -177,13 +177,11 @@
       })
     ];
 
-    nixos = {
-      users.users.henrique = {
-        description = "Henrique Kirch Heck";
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBHzo1AzCHMwR6sctkN8hxilkKvjnr96xWPotO3eTcxR me@henriquekh.dev.br"
-        ];
-      };
+    user = {
+      description = "Henrique Kirch Heck";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBHzo1AzCHMwR6sctkN8hxilkKvjnr96xWPotO3eTcxR me@henriquekh.dev.br"
+      ];
     };
 
     homeManager =
@@ -239,14 +237,20 @@
 
         programs.niri.settings.outputs = {
           DVI-D-1 = {
-            position = {x = 0; y = 0;};
+            position = {
+              x = 0;
+              y = 0;
+            };
             mode = {
               width = 1920;
               height = 1080;
             };
           };
           HDMI-A-1 = {
-            position = {x = 1920; y = 0;};
+            position = {
+              x = 1920;
+              y = 0;
+            };
             mode = {
               width = 1920;
               height = 1080;

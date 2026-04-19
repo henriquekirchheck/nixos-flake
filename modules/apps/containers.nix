@@ -32,11 +32,7 @@
               oci-containers.backend = "docker";
             };
           };
-        provides.permission =
-          { user, ... }:
-          {
-            nixos.users.users.${user.userName}.extraGroups = [ "libvirtd" ];
-          };
+        provides.permission.user.extraGroups = [ "docker" ];
       };
       podman = {
         includes = [ den.aspects.apps._.containers ];

@@ -28,6 +28,7 @@
           enable = true;
           branch = "canary";
           vencord.enable = false;
+          openASAR.enable = true;
         };
         vesktop = {
           enable = true;
@@ -41,7 +42,6 @@
           updateNotify = false;
           rpcServer = true;
         };
-        openASAR.enable = true;
         config = {
           enableReactDevtools = true;
           frameless = true;

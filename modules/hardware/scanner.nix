@@ -14,13 +14,9 @@
           disabledDefaultBackends = [ "escl" ];
         };
       };
-    provides.permission =
-      { user, ... }:
-      {
-        nixos.users.users.${user.userName}.extraGroups = [
-          "lp"
-          "scanner"
-        ];
-      };
+    provides.permission.user.extraGroups = [
+      "lp"
+      "scanner"
+    ];
   };
 }

@@ -12,8 +12,8 @@ let
       fromClass = _: "disko";
       intoClass = _: host.class;
       intoPath = _: [ "disko" ];
+      fromAspect = _: den.lib.parametric.fixedTo { inherit host; } host.aspect;
       guard = { options, ... }: options ? disko;
-      fromAspect = _: den.aspects.${host.aspect};
     };
 in
 {

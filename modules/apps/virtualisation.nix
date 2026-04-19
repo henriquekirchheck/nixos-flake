@@ -39,11 +39,7 @@
           };
       };
 
-      permission =
-        { user, ... }:
-        {
-          nixos.users.users.${user.userName}.extraGroups = [ "libvirtd" ];
-        };
+      permission.user.extraGroups = [ "libvirtd" ];
     };
   };
 }

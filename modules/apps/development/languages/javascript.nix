@@ -5,7 +5,7 @@
       home.packages = with pkgs; [
         deno
         nodejs
-        nodePackages.pnpm
+        pnpm
         typescript-language-server
         angular-language-server
         svelte-language-server

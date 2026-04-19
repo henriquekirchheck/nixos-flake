@@ -18,17 +18,15 @@
         {
           description = "Add user password secret";
           includes = [ den.aspects.apps._.sops ];
-          nixos =
+          nixos.sops.secrets.${secret} = {
+            inherit key sopsFile;
+            format = "yaml";
+            neededForUsers = true;
+          };
+          user =
             { config, ... }:
             {
-              sops.secrets.${secret} = {
-                inherit key sopsFile;
-                format = "yaml";
-                neededForUsers = true;
-              };
-              users.users.${user.userName} = {
-                hashedPasswordFile = config.sops.secrets.${secret}.path;
-              };
+              hashedPasswordFile = config.sops.secrets.${secret}.path;
             };
         };
       xdg-dirs =
