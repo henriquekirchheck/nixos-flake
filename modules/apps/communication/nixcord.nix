@@ -25,7 +25,7 @@
       programs.nixcord = {
         enable = true;
         discord = {
-          enable = true;
+          enable = false;
           branch = "canary";
           vencord.enable = false;
           openASAR.enable = true;
@@ -143,7 +143,6 @@
           };
         };
       };
-
     };
   };
 }
