@@ -90,7 +90,7 @@
             nrwl.angular-console
 
             golang.go
-            
+
             valeryanm.vscode-phpsab
             sanderronde.phpstan-vscode
           ];
@@ -227,6 +227,8 @@
                       "source.organizeImports" = "explicit";
                     };
                   };
+
+                  "[php]"."editor.defaultFormatter" = "valeryanm.vscode-phpsab";
 
                   "svelte.enable-ts-plugin" = true;
                   "[svelte]"."editor.defaultFormatter" = "svelte.svelte-vscode";
