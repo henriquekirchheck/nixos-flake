@@ -34,6 +34,7 @@
             wix.vscode-import-cost
             christian-kohler.path-intellisense
             prettier.prettier-vscode
+            oxc.oxc-vscode
             svelte.svelte-vscode
             ms-python.python
             ms-python.debugpy
@@ -89,6 +90,9 @@
             nrwl.angular-console
 
             golang.go
+            
+            valeryanm.vscode-phpsab
+            sanderronde.phpstan-vscode
           ];
         extensionsVSCodeMarketplace =
           with codeExtensions.vscode-marketplace;
