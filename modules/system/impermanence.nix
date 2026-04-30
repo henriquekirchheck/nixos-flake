@@ -72,7 +72,6 @@
                   "date" = lib.getExe' pkgs.coreutils "date";
                   "stat" = lib.getExe' pkgs.coreutils "stat";
                   "mv" = lib.getExe' pkgs.coreutils "mv";
-                  "find" = lib.getExe' pkgs.coreutils "find";
                   "btrfs" = lib.getExe pkgs.btrfs-progs;
                 };
               };
