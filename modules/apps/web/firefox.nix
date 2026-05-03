@@ -4,23 +4,6 @@
     includes = [ (den._.unfree [ "youtube-recommended-videos" ]) ];
     homeManager =
       { pkgs, lib, ... }:
-      let
-        moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
-        mozExtensions =
-          f:
-          builtins.foldl' lib.attrsets.recursiveUpdate { } (
-            f (
-              short: id: {
-                ${id} = {
-                  install_url = moz short;
-                  installation_mode = "force_installed";
-                  updates_disabled = true;
-                };
-              }
-            )
-          );
-        extensions = mozExtensions (ext: [ (ext "vidiq-vision-youtube" "firefox@vid.io") ]);
-      in
       {
         programs.firefox = {
           enable = true;
@@ -36,6 +19,8 @@
             Certificates.ImportEnterpriseRoots = true;
             DisableFirefoxAcounts = true;
             DisableFirefoxStudies = true;
+
+            DisableMasterPasswordCreation = true;
             DisableAppUpdate = true;
             DisablePocket = true;
             DisableSetDesktopBackground = true;
@@ -74,10 +59,12 @@
               Locked = true;
             };
             ExtensionUpdate = false;
-            ExtensionSettings = extensions;
           };
           nativeMessagingHosts = with pkgs; [ ff2mpv-rust ];
-          profiles.user = {
+          profiles.default = {
+            id = 0;
+            isDefault = true;
+            name = "default";
             extensions = {
               force = true;
               packages = with pkgs.nur.repos.rycee.firefox-addons; [

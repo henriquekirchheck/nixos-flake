@@ -145,7 +145,7 @@
       (den.aspects.apps._.communication._.email._.thunderbird._.add-account "games")
 
       den.aspects.apps._.wine
-      den.aspects.apps._.wine._.bottles
+      # den.aspects.apps._.wine._.bottles
 
       den.aspects.apps._.web._.aria2
       den.aspects.apps._.web._.firefox
@@ -195,7 +195,7 @@
           base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
           polarity = "dark";
           targets = {
-            firefox.profileNames = [ "user" ];
+            firefox.profileNames = [ "default" ];
             qt.platform = "qtct";
           };
           cursor = {
