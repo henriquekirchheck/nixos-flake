@@ -39,6 +39,7 @@
             "ini"
             "haskell"
             "gdscript"
+            "lua"
             "just"
             "just-ls"
             "qml"
@@ -62,96 +63,6 @@
 
           userSettings = {
             disable_ai = true;
-
-            lsp = {
-              angular.binary = {
-                path = lib.getExe pkgs.angular-language-server;
-                arguments = [ "--stdio" ];
-              };
-              dockerfile-language-server.binary = {
-                path = lib.getExe pkgs.dockerfile-language-server;
-                arguments = [ "--stdio" ];
-              };
-              compose-language-service.binary.path = lib.getExe pkgs.docker-compose-language-service;
-              vscode-css-language-server.binary = {
-                path = lib.getExe pkgs.vscode-css-languageserver;
-                arguments = [ "--stdio" ];
-              };
-              json-language-server.binary = {
-                path = lib.getExe pkgs.vscode-json-languageserver;
-                arguments = [ "--stdio" ];
-              };
-              tailwindcss-language-server = {
-                binary.path = lib.getExe pkgs.tailwindcss-language-server;
-                settings.tailwindCSS.emmetCompletions = true;
-              };
-              emmet-language-server.binary = {
-                path = lib.getExe pkgs.emmet-language-server;
-                arguments = [ "--stdio" ];
-              };
-              phpactor.binary = {
-                path = lib.getExe pkgs.phpactor;
-                arguments = [ "language-server" ];
-              };
-              jdtls.binary.path = lib.getExe pkgs.jdt-language-server;
-              kotlin-language-server.binary.path = lib.getExe pkgs.kotlin-language-server;
-              neocmakelsp.binary.path = lib.getExe pkgs.neocmakelsp;
-              just-lsp.binary.path = lib.getExe pkgs.just-lsp;
-              haskell-language-server.binary.path = lib.getExe' pkgs.haskell-language-server "haskell-language-server-wrapper";
-              qmlls.binary.path = lib.getExe' pkgs.qt6.qtdeclarative "qmlls";
-              yaml-language-server.binary = {
-                path = lib.getExe pkgs.yaml-language-server;
-                arguments = [ "--stdio" ];
-              };
-              wgsl-analyzer.binary.path = lib.getExe pkgs.wgsl-analyzer;
-              tofu-ls.binary.path = lib.getExe pkgs.tofu-ls;
-              slangd.binary.path = lib.getExe' pkgs.shader-slang "slangd";
-              mesonlsp.binary.path = lib.getExe pkgs.mesonlsp;
-              bash-language-server.binary.path = lib.getExe pkgs.bash-language-server;
-              marksman.binary.path = lib.getExe pkgs.marksman;
-              tombi.binary = {
-                path = lib.getExe pkgs.tombi;
-                arguments = [ "lsp" ];
-              };
-              cargo-tom.initialization_options.hide_docs_info_message = true;
-              nixd = {
-                initialization_options.formatting.command = [
-                  (lib.getExe pkgs.nixfmt)
-                  "-q"
-                ];
-                binary.path = lib.getExe pkgs.nixd;
-              };
-              biome.binary = {
-                path = lib.getExe pkgs.biome;
-                arguments = [ "lsp-proxy" ];
-              };
-              deno.binary = {
-                path = lib.getExe pkgs.deno;
-                arguments = [ "lsp" ];
-              };
-              vtsls.binary = {
-                path = lib.getExe pkgs.vtsls;
-                arguments = [ "--stdio" ];
-              };
-              basedpyright.binary.path = lib.getExe pkgs.basedpyright;
-              ruff.binary = {
-                path = lib.getExe pkgs.ruff;
-                arguments = [ "server" ];
-              };
-              ty.binary = {
-                path = lib.getExe pkgs.ty;
-                arguments = [ "server" ];
-              };
-              rust-analizer = {
-                binary.path = lib.getExe pkgs.rust-analyzer;
-                initialization_options.check.command = "clippy";
-              };
-              zls.binary.path = lib.getExe pkgs.zls;
-
-              clangd.binary.path_lookup = true;
-              eslint.binary.path_lookup = true;
-              svelte-language-server.binary.path_lookup = true;
-            };
 
             languages = {
               "JavaScript".formatter.code_action = "source.fixAll.eslint";
@@ -215,7 +126,7 @@
               cursor_shape = "bar";
               max_scroll_history_lines = 100000;
             };
-            title_bar.show_branch_icon = true;
+            title_bar.show_branch_status_icon = true;
             toolbar = {
               agent_review = false;
               code_actions = true;
@@ -231,7 +142,6 @@
               npm_path = lib.getExe' pkgs.nodejs "npm";
             };
 
-            hour_format = "hour24";
             auto_update = false;
 
             load_direnv = "shell_hook";
