@@ -21,7 +21,7 @@ in
     url = "github:nix-community/disko";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-  den.ctx.host.includes = [
+  den.schema.host.includes = [
     fwd
     { nixos.imports = [ inputs.disko.nixosModules.disko ]; }
   ];
