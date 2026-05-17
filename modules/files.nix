@@ -1,7 +1,18 @@
 { inputs, ... }:
 {
-  flake-file.inputs.files.url = "github:mightyiam/files";
-  imports = [ inputs.files.flakeModules.default ];
+  flake-file.inputs.files = {
+    url = "github:mightyiam/files";
+    inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-parts.follows = "flake-parts";
+      git-hooks.follows = "git-hooks-nix";
+      import-tree.follows = "import-tree";
+      treefmt-nix.follows = "treefmt-nix";
+      systems.follows = "systems";
+    };
+  };
+
+  imports = [ (inputs.files + "/flake-module.nix") ];
   perSystem =
     { config, pkgs, ... }:
     {
@@ -12,7 +23,7 @@
       };
       files.files = [
         {
-          path_ = ".gitignore";
+          path = ".gitignore";
           drv = pkgs.writeText "gitignore" ''
             /result
             .direnv/
@@ -20,13 +31,13 @@
           '';
         }
         {
-          path_ = ".envrc";
+          path = ".envrc";
           drv = pkgs.writeText "envrc" ''
             use flake
           '';
         }
         {
-          path_ = "README.md";
+          path = "README.md";
           drv = pkgs.writeText "README.md" ''
             # Dentritic NixOS Configuration
           '';

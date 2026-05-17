@@ -3,10 +3,7 @@
   flake-file.inputs = {
     nix-gaming-edge = {
       url = "github:powerofthe69/nix-gaming-edge";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        millennium.follows = "";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

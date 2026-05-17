@@ -2,7 +2,10 @@
 {
   flake-file.inputs.git-hooks-nix = {
     url = "github:cachix/git-hooks.nix";
-    inputs.nixpkgs.follows = "nixpkgs";
+    inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-compat.follows = "";
+    };
   };
   imports = [ inputs.git-hooks-nix.flakeModule ];
 

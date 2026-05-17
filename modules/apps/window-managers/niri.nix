@@ -1,8 +1,25 @@
 { inputs, den, ... }:
 {
-  flake-file.inputs.niri = {
-    url = "github:sodiboo/niri-flake";
-    inputs.nixpkgs.follows = "nixpkgs";
+  flake-file.inputs = {
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "";
+        niri-unstable.follows = "niri-src";
+        niri-stable.follows = "";
+        xwayland-satellite-unstable.follows = "xwayland-satellite-src";
+        xwayland-satellite-stable.follows = "";
+      };
+    };
+    xwayland-satellite-src = {
+      url = "github:supreeeme/xwayland-satellite";
+      flake = false;
+    };
+    niri-src = {
+      url = "github:YaLTeR/niri";
+      flake = false;
+    };
   };
 
   den.aspects.apps.provides.window-managers.provides.niri = {
@@ -12,7 +29,7 @@
         public-key = "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=";
       })
       (den.aspects.utils._.nixpkgs._.add-overlay inputs.niri.overlays.niri)
-      (den.aspects.apps._.wayland)
+      den.aspects.apps._.wayland
     ];
     description = "Niri";
     nixos =
@@ -82,15 +99,17 @@
                   { app-id = "code-url-handler"; }
                   { app-id = "discord"; }
                   { app-id = "vesktop"; }
+                  { app-id = "dev.zed.Zed"; }
                 ];
                 opacity = 0.98;
                 draw-border-with-background = false;
+                # background-effect.blur.enable = true;
               }
               {
                 matches = [
                   { is-active = false; }
                 ];
-                opacity = 0.92;
+                opacity = 0.975;
               }
               {
                 matches = [
@@ -102,6 +121,7 @@
                   { app-id = "swayimg"; }
                 ];
                 draw-border-with-background = false;
+                # background-effect.blur.enable = true;
               }
 
               {
@@ -115,6 +135,7 @@
                 shadow.enable = false;
                 border.enable = false;
                 focus-ring.enable = false;
+                # background-effect.blur.enable = false;
               }
               {
                 matches = [
@@ -138,15 +159,26 @@
                   relative-to = "bottom-right";
                 };
                 open-focused = false;
+                opacity = 0.95;
+                #background-effect = {
+                #  blur.enable = true;
+                #  xray.enable = false;
+                #};
               }
-              {
-                matches = [
-                  {
-                    app-id = "org.quickshell$";
-                  }
-                ];
-                open-floating = true;
-              }
+              #{
+              #  matches = [
+              #    {
+              #      layer = "top";
+              #    }
+              #    {
+              #      layer = "overlay";
+              #    }
+              #  ];
+              #  background-effect = {
+              #    blur.enable = true;
+              #    xray.enable = false;
+              #  };
+              #}
               {
                 matches = [ { is-window-cast-target = true; } ];
                 border = {

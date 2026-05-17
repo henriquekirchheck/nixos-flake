@@ -58,7 +58,7 @@ in
     {
       files.files = [
         {
-          path_ = ".forgejo/workflows/check.yml";
+          path = ".forgejo/workflows/check.yml";
           drv = toAction "fj-actions-workflow-check.yaml" {
             on = {
               push.branches = [ "main" ];
@@ -77,7 +77,7 @@ in
           };
         }
         {
-          path_ = ".forgejo/workflows/update.yml";
+          path = ".forgejo/workflows/update.yml";
           drv = toAction "fj-actions-workflow-update.yaml" {
             on = {
               schedule = [ { cron = "15 4 * * *"; } ];

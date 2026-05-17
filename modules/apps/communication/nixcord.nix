@@ -25,9 +25,9 @@
       programs.nixcord = {
         enable = true;
         discord = {
-          enable = false;
+          enable = true;
           branch = "canary";
-          vencord.enable = false;
+          vencord.enable = true;
           openASAR.enable = true;
         };
         vesktop = {

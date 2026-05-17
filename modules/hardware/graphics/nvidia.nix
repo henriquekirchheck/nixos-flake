@@ -10,6 +10,10 @@
             "nvidia-settings"
             "nvidia-kernel-modules"
           ])
+          (den.aspects.utils._.nixpkgs._.add-substituter {
+            substituter = "https://cache.nixos-cuda.org";
+            public-key = "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=";
+          })
         ];
         nixos =
           { config, ... }:

@@ -17,7 +17,7 @@
     {
       files.files = [
         {
-          path_ = ".sops.yaml";
+          path = ".sops.yaml";
           drv = toSops "sops.yaml" rec {
             keys = {
               henrique = "age1cmx764yuualp623t3urnuan747kpxpyacr7ghtsy5huwdqv6ps4qdw3xs6";
