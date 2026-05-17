@@ -21,13 +21,6 @@
         nixpkgs-regression.follows = "nixpkgs";
       };
     };
-    determinate-nixd = {
-      url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-      inputs = {
-        nix.follows = "determinate-nix";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

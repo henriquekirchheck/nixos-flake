@@ -11,13 +11,6 @@
         git-hooks-nix.follows = "git-hooks-nix";
       };
     };
-    determinate-nixd = {
-      url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nix.follows = "determinate-nix";
-      };
-    };
   };
 
   den.aspects.apps.provides.nix = {
@@ -47,6 +40,9 @@
             use-xdg-base-directories = true;
             diff-hook = lib.getExe pkgs.dix;
             run-diff-hook = true;
+            eval-cores = 0;
+            max-jobs = "auto";
+            lazy-trees = true;
           };
           registry = {
             nixpkgs.flake = inputs.nixpkgs;
@@ -81,47 +77,6 @@
           };
         };
         environment.shellAliases.nixrepl = "nix repl --expr 'builtins.getFlake \"${inputs.self}\"'";
-
-        # Determinate-nixd
-        environment.etc."nix/nix.conf".target = "nix/nix.custom.conf";
-        systemd = {
-          services.nix-daemon.serviceConfig = {
-            ExecStart = [
-              ""
-              "@${
-                inputs.determinate-nixd.packages."${pkgs.stdenv.hostPlatform.system}".default
-              }/bin/determinate-nixd determinate-nixd --nix-bin ${config.nix.package}/bin daemon"
-            ];
-            KillMode = "process";
-            LimitNOFILE = 1048576;
-            LimitSTACK = "64M";
-            TasksMax = 1048576;
-          };
-
-          sockets = {
-            nix-daemon.socketConfig.FileDescriptorName = "nix-daemon.socket";
-
-            determinate-nixd = {
-              description = "Determinate Nixd Daemon Socket";
-              wantedBy = [ "sockets.target" ];
-              before = [ "multi-user.target" ];
-
-              unitConfig = {
-                RequiresMountsFor = [
-                  "/nix/store"
-                  "/nix/var/determinate"
-                ];
-              };
-
-              socketConfig = {
-                Service = "nix-daemon.service";
-                FileDescriptorName = "determinate-nixd.socket";
-                ListenStream = "/nix/var/determinate/determinate-nixd.socket";
-                DirectoryMode = "0755";
-              };
-            };
-          };
-        };
       };
     homeManager.nix.package = null;
 
