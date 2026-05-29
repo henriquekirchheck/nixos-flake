@@ -35,7 +35,7 @@
           programs.ssh = {
             enable = true;
             enableDefaultConfig = false;
-            matchBlocks."*".addKeysToAgent = "4h";
+            settings."Host *".AddKeysToAgent = "4h";
           };
         };
         provides = {
@@ -79,10 +79,9 @@
                     inherit sopsFile;
                     key = secretKey;
                   };
-                  programs.ssh.matchBlocks.${domain} = {
-                    host = domain;
-                    identitiesOnly = true;
-                    identityFile = [ config.sops.secrets.${secret}.path ];
+                  programs.ssh.settings."Host ${domain}" = {
+                    IdentitiesOnly = true;
+                    IdentityFile = [ config.sops.secrets.${secret}.path ];
                   };
                 };
             };

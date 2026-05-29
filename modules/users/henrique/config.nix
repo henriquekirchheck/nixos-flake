@@ -31,8 +31,8 @@
 
       den.aspects.apps._.window-managers._.niri
       den.aspects.apps._.wallpapers._.awww
-      den.aspects.apps._.shell._.dms
-      den.aspects.apps._.shell._.dms._.niri
+      den.aspects.apps._.shell._.noctalia
+      den.aspects.apps._.shell._.noctalia._.niri
       den.aspects.apps._.keyrings._.gnome-keyring
 
       den.aspects.apps._.fonts

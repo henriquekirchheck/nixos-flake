@@ -38,14 +38,7 @@
     };
     files = {
       url = "github:mightyiam/files";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks-nix";
-        import-tree.follows = "import-tree";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        treefmt-nix.follows = "treefmt-nix";
-      };
+      flake = false;
     };
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
@@ -118,6 +111,10 @@
       };
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell/v5";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur = {
       url = "github:nix-community/NUR";
       inputs = {

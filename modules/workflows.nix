@@ -56,58 +56,52 @@ in
           '';
     in
     {
-      files.files = [
-        {
-          path = ".forgejo/workflows/check.yml";
-          drv = toAction "fj-actions-workflow-check.yaml" {
-            on = {
-              push.branches = [ "main" ];
-              workflow_dispatch = { };
-            };
-            env.CACHIX_AUTH_TOKEN = "\${{ secrets.CACHIX_AUTH_TOKEN }}";
-            jobs.check = {
-              runs-on = "nixos-unstable";
-              steps =
-                checkout
-                ++ [
-                  { run = "nix -Lv flake check --all-systems"; }
-                ]
-                ++ cache;
-            };
+      files.file = {
+        ".forgejo/workflows/check.yml".source = toAction "fj-actions-workflow-check.yaml" {
+          on = {
+            push.branches = [ "main" ];
+            workflow_dispatch = { };
           };
-        }
-        {
-          path = ".forgejo/workflows/update.yml";
-          drv = toAction "fj-actions-workflow-update.yaml" {
-            on = {
-              schedule = [ { cron = "15 4 * * *"; } ];
-              workflow_dispatch = { };
-            };
-            env.CACHIX_AUTH_TOKEN = "\${{ secrets.CACHIX_AUTH_TOKEN }}";
-            jobs.update = {
-              runs-on = "nixos-unstable";
-              steps =
-                checkout
-                ++ [
-                  { run = "nix flake update"; }
-                  { run = "git add flake.lock"; }
-                  { run = "nix -Lv flake check --all-systems"; }
-                ]
-                ++ cache
-                ++ [
-                  {
-                    name = "Push new flake.lock";
-                    run = ''
-                      git config --global user.name "flake-update[bot]"
-                      git config --global user.email "<>"
-                      git commit -m "Update Flake Inputs: $(date +%F)"
-                      git push
-                    '';
-                  }
-                ];
-            };
+          env.CACHIX_AUTH_TOKEN = "\${{ secrets.CACHIX_AUTH_TOKEN }}";
+          jobs.check = {
+            runs-on = "nixos-unstable";
+            steps =
+              checkout
+              ++ [
+                { run = "nix -Lv flake check --all-systems"; }
+              ]
+              ++ cache;
           };
-        }
-      ];
+        };
+        ".forgejo/workflows/update.yml".source = toAction "fj-actions-workflow-update.yaml" {
+          on = {
+            schedule = [ { cron = "15 4 * * *"; } ];
+            workflow_dispatch = { };
+          };
+          env.CACHIX_AUTH_TOKEN = "\${{ secrets.CACHIX_AUTH_TOKEN }}";
+          jobs.update = {
+            runs-on = "nixos-unstable";
+            steps =
+              checkout
+              ++ [
+                { run = "nix flake update"; }
+                { run = "git add flake.lock"; }
+                { run = "nix -Lv flake check --all-systems"; }
+              ]
+              ++ cache
+              ++ [
+                {
+                  name = "Push new flake.lock";
+                  run = ''
+                    git config --global user.name "flake-update[bot]"
+                    git config --global user.email "<>"
+                    git commit -m "Update Flake Inputs: $(date +%F)"
+                    git push
+                  '';
+                }
+              ];
+          };
+        };
+      };
     };
 }

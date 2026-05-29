@@ -165,20 +165,6 @@
                 #  xray.enable = false;
                 #};
               }
-              #{
-              #  matches = [
-              #    {
-              #      layer = "top";
-              #    }
-              #    {
-              #      layer = "overlay";
-              #    }
-              #  ];
-              #  background-effect = {
-              #    blur.enable = true;
-              #    xray.enable = false;
-              #  };
-              #}
               {
                 matches = [ { is-window-cast-target = true; } ];
                 border = {
