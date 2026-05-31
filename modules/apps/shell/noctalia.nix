@@ -133,9 +133,10 @@
               power_profile_notify = true;
               position = "bottom_right";
               layer = "top";
-              background_opacity = 0.90;
-              offset_x = 20;
+              background_opacity = 0.40;
+              offset_x = 8;
               offset_y = 8;
+              scale = 0.8;
               monitors = [ ];
               collapse_on_dismiss = true;
             };
@@ -152,6 +153,9 @@
             ];
 
             widget = {
+              launcher = {
+                custom_image = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
+              };
               system = {
                 length = 10.0;
                 type = "spacer";
@@ -167,7 +171,7 @@
                 hide_when_full = true;
               };
               control-center = {
-                glyph = "settings";
+                glyph = "adjustments-alt";
               };
               notclip = {
                 length = 10.0;
