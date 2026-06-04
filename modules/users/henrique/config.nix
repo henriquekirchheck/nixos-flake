@@ -53,6 +53,10 @@
       den.aspects.apps._.comma
       den.aspects.apps._.nh
 
+      den.aspects.apps._.fetch._.fastfetch
+      den.aspects.apps._.fetch._.hyfetch
+      den.aspects.apps._.fetch._.onefetch
+
       den.aspects.apps._.media._.videos._.obs
       den.aspects.apps._.media._.videos._.yt-dlp
       den.aspects.apps._.media._.subtitles._.aegisub
@@ -61,8 +65,7 @@
       den.aspects.apps._.media._.images._.krita
       den.aspects.apps._.media._.images._.gimp
       den.aspects.apps._.media._.images._.wayscriber
-      den.aspects.apps._.media._.audio._.tidal-hifi
-      den.aspects.apps._.media._.audio._.mpd
+      den.aspects.apps._.media._.audio._.sone
       den.aspects.apps._.media._.ffmpeg
       den.aspects.apps._.media._.mpv
 

@@ -83,17 +83,6 @@
       url = "github:YaLTeR/niri";
       flake = false;
     };
-    nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel/release";
-      inputs = {
-        flake-compat.follows = "";
-        flake-parts.follows = "flake-parts";
-      };
-    };
-    nix-gaming-edge = {
-      url = "github:powerofthe69/nix-gaming-edge";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

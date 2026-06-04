@@ -18,7 +18,6 @@ in
       den.aspects.apps._.sops
       den.aspects.apps._.nix
       den.aspects.apps._.nix-ld
-      den.aspects.apps._.media._.audio._.mpd
 
       (den.aspects.hardware._.networking._.systemd._.networkd._.static-config {
         address = "10.0.0.10/24";
@@ -46,6 +45,8 @@ in
           "/var/lib/docker"
           "/var/lib/containers"
           "/var/lib/postgresql"
+          "/var/lib/vaultwarden"
+          "/var/lib/fail2ban"
           "/var/lib/systemd/coredump"
           "/var/lib/systemd/timers"
           "/etc/NetworkManager/system-connections"

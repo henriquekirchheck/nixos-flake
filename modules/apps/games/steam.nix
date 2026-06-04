@@ -1,20 +1,5 @@
-{ den, inputs, ... }:
+{ den, ... }:
 {
-  flake-file.inputs = {
-    nix-gaming-edge = {
-      url = "github:powerofthe69/nix-gaming-edge";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  den.default.includes = [
-    (den.aspects.utils._.nixpkgs._.add-substituter {
-      substituter = "https://nix-cache.tokidoki.dev/tokidoki";
-      public-key = "tokidoki:MD4VWt3kK8Fmz3jkiGoNRJIW31/QAm7l1Dcgz2Xa4hk=";
-    })
-    (den.aspects.utils._.nixpkgs._.add-overlay inputs.nix-gaming-edge.overlays.default)
-  ];
-
   den.aspects.apps.provides.games.provides.steam = {
     includes = [
       (den._.unfree [
@@ -40,7 +25,8 @@
           };
           extraCompatPackages = with pkgs; [
             proton-ge-bin
-            proton-cachyos-x86_64-v3
+            dwproton-bin
+            steam-play-none
           ];
           protontricks.enable = true;
 

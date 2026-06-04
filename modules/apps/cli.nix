@@ -39,7 +39,6 @@
           sops
           age
           ssh-to-age
-          fastfetch
           onefetch
           lolcat
           cowsay
