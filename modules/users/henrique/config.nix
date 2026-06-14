@@ -265,7 +265,7 @@
 
         home.sessionVariables = {
           EDITOR = "nvim";
-          VISUAL = "zeditor";
+          VISUAL = "zeditor --wait";
           TERMINAL = "alacritty";
           BROWSER = "firefox";
         };
