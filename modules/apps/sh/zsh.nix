@@ -28,19 +28,11 @@
               compinit -C
             fi
           '';
-          loginExtra = ''
-            {
-              # Compile zcompdump, if modified, to increase startup speed.
-              zcompdump="''${ZDOTDIR:-$HOME}/.zcompdump"
-              if [[ -s "$zcompdump" && (! -s "''${zcompdump}.zwc" || "$zcompdump" -nt "''${zcompdump}.zwc") ]]; then
-                zcompile "$zcompdump"
-              fi
-            } &!
-          '';
 
           initContent = lib.mkMerge [
             (lib.mkBefore "[[ $ZSH_PROFILE_RC -gt 0 ]] && zmodload zsh/zprof")
             (lib.mkAfter "[[ $ZSH_PROFILE_RC -gt 0 ]] && zprof")
+            (lib.mkAfter "fastfetch -c examples/21")
 
             ''
               # disable sort when completing `git checkout`

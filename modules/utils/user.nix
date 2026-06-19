@@ -40,6 +40,7 @@
           desktop ? null,
           publicShare ? null,
           dotfiles ? null,
+          projects ? null,
         }:
 
         {
@@ -60,6 +61,7 @@
                   pictures = appendHome pictures;
                   templates = appendHome templates;
                   download = appendHome download;
+                  projects = appendHome projects;
                   documents = appendHome documents;
                   desktop = appendHome desktop;
                   publicShare = appendHome publicShare;

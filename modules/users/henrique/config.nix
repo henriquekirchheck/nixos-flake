@@ -36,7 +36,6 @@
       den.aspects.apps._.keyrings._.gnome-keyring
 
       den.aspects.apps._.fonts
-      den.aspects.apps._.nh
       den.aspects.apps._.cli
       den.aspects.apps._.security._.permission._.doas
       den.aspects.apps._.security._.permission._.doas._.sudo-alias
@@ -51,13 +50,13 @@
       den.aspects.apps._.games._.archipelago
 
       den.aspects.apps._.comma
-      den.aspects.apps._.nh
 
       den.aspects.apps._.fetch._.fastfetch
       den.aspects.apps._.fetch._.hyfetch
       den.aspects.apps._.fetch._.onefetch
 
       den.aspects.apps._.media._.videos._.obs
+      den.aspects.apps._.media._.videos._.gpu-screen-recorder
       den.aspects.apps._.media._.videos._.yt-dlp
       den.aspects.apps._.media._.subtitles._.aegisub
       den.aspects.apps._.media._.models._.blender
@@ -178,6 +177,7 @@
         templates = "templates";
         download = "downloads";
         documents = "dcuments";
+        projects = "src";
         dotfiles = "src/dotfiles";
       })
     ];
@@ -192,8 +192,6 @@
     homeManager =
       { config, pkgs, ... }:
       {
-        programs.nh.flake = "${config.home.homeDirectory}/src/dotfiles";
-
         imports = [ inputs.stylix.homeModules.stylix ];
         stylix = {
           enable = true;
