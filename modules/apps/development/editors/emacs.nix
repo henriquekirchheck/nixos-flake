@@ -43,6 +43,7 @@
           clang-tools
           age
           emacs-lsp-booster
+	  graphviz
         ];
 
         services.emacs = {

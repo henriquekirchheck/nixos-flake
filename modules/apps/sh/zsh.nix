@@ -13,6 +13,49 @@
         pkgs,
         ...
       }:
+      let
+        fastfetchConfig = pkgs.writers.writeJSON "fastfetch-simple.jsonc" {
+          logo.type = "small";
+          display.constants = [ "██ " ];
+          modules = [
+            {
+              "key" = "{$1}Distro";
+              "keyColor" = "38;5;210";
+              "type" = "os";
+            }
+            {
+              "key" = "{$1}Kernel";
+              "keyColor" = "38;5;84";
+              "type" = "kernel";
+            }
+            {
+              "key" = "{$1}Shell";
+              "keyColor" = "38;5;147";
+              "type" = "shell";
+            }
+            {
+              "key" = "{$1}WM";
+              "keyColor" = "38;5;44";
+              "type" = "wm";
+            }
+            {
+              "key" = "{$1}CPU";
+              "keyColor" = "38;5;75";
+              "type" = "cpu";
+            }
+            {
+              "key" = "{$1}GPU";
+              "keyColor" = "38;5;200";
+              "type" = "gpu";
+            }
+            {
+              "key" = "{$1}Memory";
+              "keyColor" = "38;5;123";
+              "type" = "memory";
+            }
+          ];
+        };
+      in
       {
         programs.zsh = {
           enable = true;
@@ -32,7 +75,7 @@
           initContent = lib.mkMerge [
             (lib.mkBefore "[[ $ZSH_PROFILE_RC -gt 0 ]] && zmodload zsh/zprof")
             (lib.mkAfter "[[ $ZSH_PROFILE_RC -gt 0 ]] && zprof")
-            (lib.mkAfter "fastfetch -c examples/21")
+            (lib.mkAfter "[[ $ZSH_DISABLE_FASTFETCH -gt 0 ]] || fastfetch -c \"${fastfetchConfig}\"")
 
             ''
               # disable sort when completing `git checkout`

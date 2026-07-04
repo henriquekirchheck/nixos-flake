@@ -50,7 +50,7 @@
           autoUpdateNotification = false;
           notifyAboutUpdates = false;
           plugins = {
-            USRBG.enable = true;
+            usrbg.enable = true;
             alwaysAnimate.enable = true;
             alwaysExpandRoles.enable = true;
             betterGifAltText.enable = true;
@@ -61,7 +61,7 @@
             betterSettings.enable = true;
             biggerStreamPreview.enable = true;
             callTimer.enable = true;
-            ClearURLs.enable = true;
+            clearUrls.enable = true;
             copyFileContents.enable = true;
             disableCallIdle.enable = true;
             experiments = {
@@ -79,7 +79,6 @@
             fixSpotifyEmbeds.enable = true;
             fixYoutubeEmbeds.enable = true;
             forceOwnerCrown.enable = true;
-            friendsSince.enable = true;
             fullSearchContext.enable = true;
             fullUserInChatbox.enable = true;
             gameActivityToggle.enable = true;
@@ -96,7 +95,7 @@
             messageLatency.enable = true;
             messageLinkEmbeds.enable = true;
             messageLogger.enable = true;
-            MutualGroupDMs.enable = true;
+            mutualGroupDms.enable = true;
             noDevtoolsWarning.enable = true;
             noF1.enable = true;
             noOnboardingDelay.enable = true;
@@ -109,7 +108,7 @@
             permissionFreeWill.enable = true;
             permissionsViewer.enable = true;
             petpet.enable = true;
-            PinDMs.enable = true;
+            pinDms.enable = true;
             platformIndicators.enable = true;
             previewMessage.enable = true;
             reactErrorDecoder.enable = true;

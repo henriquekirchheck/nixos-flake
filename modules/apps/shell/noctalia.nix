@@ -15,6 +15,7 @@
       }:
       {
         imports = [ inputs.noctalia.homeModules.default ];
+	stylix.targets.noctalia.enable = false;
         programs.noctalia = {
           enable = true;
           systemd.enable = true;
@@ -30,7 +31,7 @@
               time_format = "{:%I:%M %p}";
               date_format = "{:%A}\n{:%Y-%m-%d}";
 
-              font_family = "JetBrainsMono Nerd Font Propo";
+              font_family = lib.mkForce "JetBrainsMono Nerd Font Propo";
               lang = "en";
 
               clipboard_enabled = true;
@@ -73,9 +74,10 @@
               capsule_padding = 11.0;
               margin_edge = 4.0;
               margin_ends = 4.0;
-              background_opacity = 0.4;
+              background_opacity = lib.mkForce 0.4;
               start = [
                 "launcher"
+                "cat"
                 "tray"
                 "workspaces"
               ];
@@ -84,6 +86,7 @@
                 "media"
               ];
               end = [
+                "recorder"
                 "clipboard"
                 "notifications"
                 "notclip"
@@ -101,6 +104,10 @@
               mode = "dark";
               source = "builtin";
               builtin = "Catppuccin";
+              templates = {
+                enable_builtin_templates = false;
+                enable_community_templates = false;
+              };
             };
             wallpaper = {
               enabled = true;
@@ -133,7 +140,7 @@
               power_profile_notify = true;
               position = "bottom_right";
               layer = "top";
-              background_opacity = 0.40;
+              background_opacity = lib.mkForce 0.4;
               offset_x = 8;
               offset_y = 8;
               scale = 0.8;
@@ -141,7 +148,10 @@
               collapse_on_dismiss = true;
             };
 
-            osd.position = "bottom_center";
+            osd = {
+              position = "bottom_center";
+              background_opacity = lib.mkForce 0.4;
+            };
 
             control_center.shortcuts = [
               { type = "caffeine"; }
@@ -184,6 +194,23 @@
                 hide_when_empty = true;
                 minimal = true;
               };
+              cat = {
+                audio_spectrum = true;
+                tappy_mode = true;
+                type = "noctalia/bongocat:cat";
+              };
+              recorder.type = "noctalia/screen_recorder:recorder";
+            };
+
+            plugins = {
+              enabled = [
+                "noctalia/bongocat"
+                "noctalia/screen_recorder"
+                "noctalia/translator"
+              ];
+            };
+            plugin_settings = {
+              "noctalia/screen_recorder".directory = "~/media/videos";
             };
 
             desktop_widgets = rec {
@@ -233,6 +260,8 @@
                 };
               };
             };
+
+            lockscreen_widgets.enabled = false;
           };
         };
       };

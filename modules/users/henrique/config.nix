@@ -86,6 +86,7 @@
 
       den.aspects.apps._.development._.editors._.neovim
       den.aspects.apps._.development._.editors._.zed
+      den.aspects.apps._.development._.editors._.emacs
 
       den.aspects.apps._.development._.versioning._.git
       (den.aspects.apps._.development._.versioning._.git._.include-settings {
