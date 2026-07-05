@@ -15,7 +15,7 @@
       }:
       {
         imports = [ inputs.noctalia.homeModules.default ];
-	stylix.targets.noctalia.enable = false;
+        stylix.targets.noctalia.enable = false;
         programs.noctalia = {
           enable = true;
           systemd.enable = true;
