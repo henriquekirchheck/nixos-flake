@@ -1,11 +1,14 @@
 {
-  den.aspects.system.provides.swap.provides = {
-    zram.nixos.zramSwap = {
-      enable = true;
-      priority = 100;
-      algorithm = "zstd";
-      memoryPercent = 50;
+  den.aspects.system.provides.swap = {
+    nixos.boot.kernel.sysctl = {
+      "vm.swappiness" = 100;
     };
-    zswap.nixos.boot.kernelParams = [ "zswap.enabled=1" ];
+    provides = {
+      zswap.nixos.boot.zswap = {
+        enable = true;
+        compressor = "zstd";
+        zpool = "zsmalloc";
+      };
+    };
   };
 }

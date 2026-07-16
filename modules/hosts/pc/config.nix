@@ -32,6 +32,8 @@ in
       den.aspects.system._.bootloader._.systemd-boot
       den.aspects.system._.kernel._.xanmod
       den.aspects.system._.oom._.systemd-oomd
+      den.aspects.system._.swap
+      den.aspects.system._.swap._.zswap
 
       den.aspects.apps._.games._.minecraft._.server._.setup-ports
 
