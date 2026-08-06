@@ -30,6 +30,7 @@
       den.aspects.hardware._.tablet
 
       den.aspects.apps._.window-managers._.niri
+      den.aspects.apps._.window-managers._.hyprland
       den.aspects.apps._.wallpapers._.awww
       den.aspects.apps._.shell._.noctalia
       den.aspects.apps._.shell._.noctalia._.niri
@@ -65,6 +66,7 @@
       den.aspects.apps._.media._.images._.gimp
       den.aspects.apps._.media._.images._.wayscriber
       den.aspects.apps._.media._.audio._.sone
+      den.aspects.apps._.media._.audio._.fin
       den.aspects.apps._.media._.ffmpeg
       den.aspects.apps._.media._.mpv
 

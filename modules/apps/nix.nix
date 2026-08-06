@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ den, inputs, ... }:
 {
   flake-file.inputs = {
     determinate-nix = {
@@ -15,6 +15,12 @@
 
   den.aspects.apps.provides.nix = {
     description = "Nix";
+    includes = [
+      (den.aspects.utils._.nixpkgs._.add-substituter {
+        substituter = "https://install.determinate.systems";
+        public-key = "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM=";
+      })
+    ];
     nixos =
       {
         config,

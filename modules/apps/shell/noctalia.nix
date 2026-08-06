@@ -1,11 +1,18 @@
-{ inputs, ... }:
+{ den, inputs, ... }:
 {
   flake-file.inputs.noctalia = {
-    url = "github:noctalia-dev/noctalia-shell";
+    url = "github:noctalia-dev/noctalia-shell/cachix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
   den.aspects.apps.provides.shell.provides.noctalia = {
+    description = "Noctalia Shell";
+    includes = [
+      (den.aspects.utils._.nixpkgs._.add-substituter {
+        substituter = "https://noctalia.cachix.org";
+        public-key = "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=";
+      })
+    ];
     homeManager =
       {
         config,

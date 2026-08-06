@@ -5,7 +5,6 @@
       { pkgs, ... }:
       {
         environment.systemPackages = [
-          pkgs.jmtpfs
           pkgs.android-tools
         ];
       };

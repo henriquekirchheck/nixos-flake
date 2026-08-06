@@ -40,10 +40,21 @@
       url = "github:mightyiam/files";
       flake = false;
     };
+    fin = {
+      url = "github:tsirysndr/fin";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
     };
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
@@ -92,8 +103,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixcord = {
-      url = "github:FlameFlag/nixcord";
+      url = "github:4evy/nixcord";
       inputs = {
+        flake-compat.follows = "";
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-nixcord.follows = "nixpkgs";

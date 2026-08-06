@@ -1,11 +1,12 @@
 { den, inputs, ... }:
 {
   flake-file.inputs.nixcord = {
-    url = "github:FlameFlag/nixcord";
+    url = "github:4evy/nixcord";
     inputs = {
       nixpkgs.follows = "nixpkgs";
       nixpkgs-nixcord.follows = "nixpkgs";
       flake-parts.follows = "flake-parts";
+      flake-compat.follows = "";
     };
   };
   den.aspects.apps.provides.communication.provides.nixcord = {
@@ -27,13 +28,18 @@
         discord = {
           enable = true;
           branch = "canary";
+          krisp.enable = true;
           vencord.enable = true;
+          equicord.enable = false;
           openASAR.enable = true;
+          commandLineArgs = [
+            "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,VaapiVideoDecoder,MiddleClickAutoscroll"
+            "--ozone-platform-hint=auto"
+            "--enable-wayland-ime"
+          ];
         };
-        vesktop = {
-          enable = true;
-          useSystemVencord = true;
-        };
+        vesktop.enable = false;
+        equibop.enable = false;
         dorion = {
           enable = false;
           desktopNotifications = true;
@@ -41,6 +47,19 @@
           sysTray = true;
           updateNotify = false;
           rpcServer = true;
+        };
+        legcord = {
+          enable = true;
+          vencord.enable = true;
+          equicord.enable = false;
+          settings = {
+            channel = "stable";
+            doneSetup = true;
+            hardwareAcceleration = true;
+            minimizeToTray = true;
+            mods = [ "vencord" ];
+            tray = "dynamic";
+          };
         };
         config = {
           enableReactDevtools = true;
@@ -74,7 +93,6 @@
               transformCompoundSentence = true;
             };
             favoriteEmojiFirst.enable = true;
-            favoriteGifSearch.enable = true;
             fixCodeblockGap.enable = true;
             fixSpotifyEmbeds.enable = true;
             fixYoutubeEmbeds.enable = true;
