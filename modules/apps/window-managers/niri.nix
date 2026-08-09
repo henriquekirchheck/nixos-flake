@@ -2,7 +2,8 @@
 {
   flake-file.inputs = {
     niri = {
-      url = "github:sodiboo/niri-flake";
+      # url = "github:sodiboo/niri-flake";
+      url = "github:epireyn/niri-flake";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "";
@@ -17,7 +18,7 @@
       flake = false;
     };
     niri-src = {
-      url = "github:YaLTeR/niri";
+      url = "github:niri-wm/niri";
       flake = false;
     };
   };
@@ -27,6 +28,10 @@
       (den.aspects.utils._.nixpkgs._.add-substituter {
         substituter = "https://niri.cachix.org";
         public-key = "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=";
+      })
+      (den.aspects.utils._.nixpkgs._.add-substituter {
+        substituter = "https://niri-epireyn.cachix.org";
+        public-key = "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA=";
       })
       (den.aspects.utils._.nixpkgs._.add-overlay inputs.niri.overlays.niri)
       den.aspects.apps._.wayland
@@ -103,7 +108,7 @@
                 ];
                 opacity = 0.98;
                 draw-border-with-background = false;
-                # background-effect.blur.enable = true;
+                background-effect.blur = true;
               }
               {
                 matches = [
@@ -121,7 +126,7 @@
                   { app-id = "swayimg"; }
                 ];
                 draw-border-with-background = false;
-                # background-effect.blur.enable = true;
+                background-effect.blur = true;
               }
 
               {
@@ -135,13 +140,17 @@
                 shadow.enable = false;
                 border.enable = false;
                 focus-ring.enable = false;
-                # background-effect.blur.enable = false;
+                background-effect.blur = false;
               }
               {
                 matches = [
                   {
                     title = "Extension:.*Bitwarden.*";
                     app-id = "firefox";
+                  }
+                  {
+                    title = "Extension:.*Bitwarden.*";
+                    app-id = "zen-twilight";
                   }
                 ];
                 open-floating = true;
@@ -160,10 +169,10 @@
                 };
                 open-focused = false;
                 opacity = 0.95;
-                #background-effect = {
-                #  blur.enable = true;
-                #  xray.enable = false;
-                #};
+                background-effect = {
+                  blur = true;
+                  xray = false;
+                };
               }
               {
                 matches = [ { is-window-cast-target = true; } ];
@@ -244,7 +253,7 @@
             binds = {
               # Apps
               "Mod+Return".action.spawn-sh = "alacritty msg create-window || alacritty";
-              "Mod+B".action.spawn = "firefox";
+              "Mod+B".action.spawn = "zen-twilight";
 
               # Screenshot
               "Print".action.screenshot = { };

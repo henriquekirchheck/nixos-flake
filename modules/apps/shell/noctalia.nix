@@ -282,6 +282,10 @@
                 matches = [ { namespace = "^noctalia-backdrop"; } ];
                 place-within-backdrop = true;
               }
+              {
+                matches = [ { namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"; } ];
+                background-effect.xray = false;
+              }
             ];
             window-rules = [
               {

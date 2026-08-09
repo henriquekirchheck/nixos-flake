@@ -80,7 +80,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:epireyn/niri-flake";
       inputs = {
         niri-stable.follows = "";
         niri-unstable.follows = "niri-src";
@@ -91,7 +91,7 @@
       };
     };
     niri-src = {
-      url = "github:YaLTeR/niri";
+      url = "github:niri-wm/niri";
       flake = false;
     };
     nix-index-database = {
@@ -113,7 +113,7 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia-shell/cachix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
@@ -148,6 +148,13 @@
     xwayland-satellite-src = {
       url = "github:supreeeme/xwayland-satellite";
       flake = false;
+    };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
   };
 }

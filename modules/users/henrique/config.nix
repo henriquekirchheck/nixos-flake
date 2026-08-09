@@ -155,7 +155,7 @@
       # den.aspects.apps._.wine._.bottles
 
       den.aspects.apps._.web._.aria2
-      den.aspects.apps._.web._.firefox
+      den.aspects.apps._.web._.zen
 
       den.aspects.apps._.terminals._.alacritty
 
@@ -268,7 +268,6 @@
           EDITOR = "nvim";
           VISUAL = "zeditor --wait";
           TERMINAL = "alacritty";
-          BROWSER = "firefox";
         };
         xdg = {
           enable = true;
@@ -282,11 +281,6 @@
               ];
             };
             defaultApplications = {
-              "text/html" = "firefox.desktop";
-              "application/xhtml+xml" = "firefox.desktop";
-              "application/vnd.mozilla.xul+xml" = "firefox.desktop";
-              "x-scheme-handler/http" = "firefox.desktop";
-              "x-scheme-handler/https" = "firefox.desktop";
               "x-scheme-handler/mailto" = "thunderbird.desktop";
               "text/x-vcard" = "thunderbird.desktop";
               "text/calendar" = "thunderbird.desktop";
