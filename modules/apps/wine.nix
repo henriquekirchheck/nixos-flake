@@ -6,8 +6,9 @@
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
-          wineWow64Packages.full
+          wineWow64Packages.waylandFull
           winetricks
+          (writeShellScriptBin "wine64" ''exec wine "$@"'')
         ];
       };
 

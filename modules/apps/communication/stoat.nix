@@ -3,7 +3,7 @@
     { pkgs, ... }:
     {
       home.packages = [
-        # pkgs.stoat-desktop
+        pkgs.stoat-desktop
       ];
     };
 }

@@ -17,6 +17,8 @@
 
       den.aspects.apps._.nix._.trusted-user
 
+      den.aspects.apps._.auth._.bitwarden-cli
+
       den.aspects.hardware._.printer._.permission
       den.aspects.hardware._.scanner._.permission
       den.aspects.hardware._.audio._.professional._.permission
