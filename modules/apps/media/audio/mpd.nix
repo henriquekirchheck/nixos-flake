@@ -21,26 +21,28 @@
           ...
         }:
         {
-          services.mpd = {
-            enable = true;
-            network.startWhenNeeded = true;
-            playlistDirectory = "${config.xdg.userDirs.music}/playlists";
+          services = {
+            mpd = {
+              enable = true;
+              network.startWhenNeeded = true;
+              playlistDirectory = "${config.xdg.userDirs.music}/playlists";
 
-            extraConfig = ''
-              audio_output {
-                type "pipewire"
-                name "PipeWire Sound Server"
-              }
+              extraConfig = ''
+                audio_output {
+                  type "pipewire"
+                  name "PipeWire Sound Server"
+                }
 
-              database {
-                plugin "proxy"
-                host "${address}"
-                port ${toString port}
-              }
-            '';
+                database {
+                  plugin "proxy"
+                  host "${address}"
+                  port ${toString port}
+                }
+              '';
+            };
+            mpd-discord-rpc.enable = true;
+            mpd-mpris.enable = true;
           };
-          services.mpd-discord-rpc.enable = true;
-          services.mpd-mpris.enable = true;
         };
       provides.setupMusicDir = musicDir: {
         description = "Setups music dir for mpd";

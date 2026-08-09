@@ -272,95 +272,93 @@
           };
         };
       };
-    provides.niri.homeManager =
-      { config, lib, ... }:
-      {
-        programs.niri = {
-          settings = {
-            layer-rules = [
-              {
-                matches = [ { namespace = "^noctalia-backdrop"; } ];
-                place-within-backdrop = true;
-              }
-              {
-                matches = [ { namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"; } ];
-                background-effect.xray = false;
-              }
-            ];
-            window-rules = [
-              {
-                matches = [ { app-id = "dev.noctalia.Noctalia.Settings"; } ];
-                open-floating = true;
-              }
-            ];
-            binds =
-              let
-                noctalia-ipc = args: {
-                  spawn = [
-                    "noctalia"
-                    "msg"
-                  ]
-                  ++ args;
-                };
-              in
-              {
-                "Mod+Space" = {
-                  action = noctalia-ipc [
-                    "panel-toggle"
-                    "launcher"
-                  ];
-                  hotkey-overlay.title = "Toggle Application Launcher";
-                };
-                "Mod+Comma" = {
-                  action = noctalia-ipc [ "settings-toggle" ];
-                  hotkey-overlay.title = "Toggle Settings";
-                };
-                "Mod+X" = {
-                  action = noctalia-ipc [
-                    "panel-toggle"
-                    "session"
-                  ];
-                  hotkey-overlay.title = "Toggle Power Menu";
-                };
-                "Mod+V" = {
-                  action = noctalia-ipc [
-                    "panel-toggle"
-                    "clipboard"
-                  ];
-                  hotkey-overlay.title = "Toggle Clipboard Manager";
-                };
-                "Super+Alt+L" = {
-                  action = noctalia-ipc [ "screen-lock" ];
-                  hotkey-overlay.title = "Toggle Lock Screen";
-                };
-
-                "XF86AudioRaiseVolume" = {
-                  allow-when-locked = true;
-                  action = noctalia-ipc [ "volume-up" ];
-                };
-                "XF86AudioLowerVolume" = {
-                  allow-when-locked = true;
-                  action = noctalia-ipc [ "volume-down" ];
-                };
-                "XF86AudioMute" = {
-                  allow-when-locked = true;
-                  action = noctalia-ipc [ "volume-mute" ];
-                };
-                "XF86AudioMicMute" = {
-                  allow-when-locked = true;
-                  action = noctalia-ipc [ "mic-mute" ];
-                };
-                "XF86MonBrightnessUp" = {
-                  allow-when-locked = true;
-                  action = noctalia-ipc [ "brightness-up" ];
-                };
-                "XF86MonBrightnessDown" = {
-                  allow-when-locked = true;
-                  action = noctalia-ipc [ "brightness-down" ];
-                };
+    provides.niri.homeManager = {
+      programs.niri = {
+        settings = {
+          layer-rules = [
+            {
+              matches = [ { namespace = "^noctalia-backdrop"; } ];
+              place-within-backdrop = true;
+            }
+            {
+              matches = [ { namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"; } ];
+              background-effect.xray = false;
+            }
+          ];
+          window-rules = [
+            {
+              matches = [ { app-id = "dev.noctalia.Noctalia.Settings"; } ];
+              open-floating = true;
+            }
+          ];
+          binds =
+            let
+              noctalia-ipc = args: {
+                spawn = [
+                  "noctalia"
+                  "msg"
+                ]
+                ++ args;
               };
-          };
+            in
+            {
+              "Mod+Space" = {
+                action = noctalia-ipc [
+                  "panel-toggle"
+                  "launcher"
+                ];
+                hotkey-overlay.title = "Toggle Application Launcher";
+              };
+              "Mod+Comma" = {
+                action = noctalia-ipc [ "settings-toggle" ];
+                hotkey-overlay.title = "Toggle Settings";
+              };
+              "Mod+X" = {
+                action = noctalia-ipc [
+                  "panel-toggle"
+                  "session"
+                ];
+                hotkey-overlay.title = "Toggle Power Menu";
+              };
+              "Mod+V" = {
+                action = noctalia-ipc [
+                  "panel-toggle"
+                  "clipboard"
+                ];
+                hotkey-overlay.title = "Toggle Clipboard Manager";
+              };
+              "Super+Alt+L" = {
+                action = noctalia-ipc [ "screen-lock" ];
+                hotkey-overlay.title = "Toggle Lock Screen";
+              };
+
+              "XF86AudioRaiseVolume" = {
+                allow-when-locked = true;
+                action = noctalia-ipc [ "volume-up" ];
+              };
+              "XF86AudioLowerVolume" = {
+                allow-when-locked = true;
+                action = noctalia-ipc [ "volume-down" ];
+              };
+              "XF86AudioMute" = {
+                allow-when-locked = true;
+                action = noctalia-ipc [ "volume-mute" ];
+              };
+              "XF86AudioMicMute" = {
+                allow-when-locked = true;
+                action = noctalia-ipc [ "mic-mute" ];
+              };
+              "XF86MonBrightnessUp" = {
+                allow-when-locked = true;
+                action = noctalia-ipc [ "brightness-up" ];
+              };
+              "XF86MonBrightnessDown" = {
+                allow-when-locked = true;
+                action = noctalia-ipc [ "brightness-down" ];
+              };
+            };
         };
       };
+    };
   };
 }

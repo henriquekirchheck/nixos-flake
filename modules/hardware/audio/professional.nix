@@ -1,4 +1,4 @@
-{ inputs, den, ... }:
+{ inputs, ... }:
 {
   flake-file.inputs.musnix = {
     url = "github:musnix/musnix";

@@ -105,7 +105,6 @@
     nixcord = {
       url = "github:4evy/nixcord";
       inputs = {
-        flake-compat.follows = "";
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-nixcord.follows = "nixpkgs";
@@ -141,10 +140,6 @@
       };
     };
     systems.url = "github:nix-systems/default";
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     xwayland-satellite-src = {
       url = "github:supreeeme/xwayland-satellite";
       flake = false;

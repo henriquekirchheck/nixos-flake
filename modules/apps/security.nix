@@ -7,9 +7,11 @@
     nixos =
       { lib, ... }:
       {
-        security.sudo.enable = lib.mkDefault false;
-        security.sudo-rs.enable = lib.mkDefault false;
-        security.doas.enable = lib.mkDefault false;
+        security = {
+          sudo.enable = lib.mkDefault false;
+          sudo-rs.enable = lib.mkDefault false;
+          doas.enable = lib.mkDefault false;
+        };
       };
 
     provides =

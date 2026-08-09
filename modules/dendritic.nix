@@ -17,6 +17,8 @@
     })
   ];
 
+  flake-file.formatter = pkgs: pkgs.nixfmt;
+
   flake-file = {
     description = "My Awesome Flake";
     inputs = {

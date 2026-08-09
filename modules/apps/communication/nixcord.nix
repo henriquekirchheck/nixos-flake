@@ -6,7 +6,6 @@
       nixpkgs.follows = "nixpkgs";
       nixpkgs-nixcord.follows = "nixpkgs";
       flake-parts.follows = "flake-parts";
-      flake-compat.follows = "";
     };
   };
   den.aspects.apps.provides.communication.provides.nixcord = {

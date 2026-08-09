@@ -1,4 +1,3 @@
-{ den, ... }:
 {
   den.aspects.apps.provides.development.provides.versioning.provides.jujutsu = {
     description = "Jujutsu VCS";

@@ -1,4 +1,4 @@
-{ inputs, den, ... }:
+{ den, ... }:
 {
   den.aspects.apps.provides.window-managers.provides.hyprland = {
     includes = [ den.aspects.apps._.wayland ];

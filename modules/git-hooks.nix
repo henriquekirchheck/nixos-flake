@@ -20,6 +20,7 @@
     {
       config,
       pkgs,
+      lib,
       ...
     }:
     {
@@ -27,28 +28,25 @@
         settings = {
           package = pkgs.prek;
           hooks = {
-            nix-fmt = {
-              enable = true;
-              name = "nix fmt";
-              entry = "nix fmt";
-              always_run = true;
-              pass_filenames = false;
-              types = [ ];
-            };
-            nix-check = {
-              enable = true;
-              name = "nix flake check";
-              entry = "nix flake check";
-              pass_filenames = false;
-              after = [ "nix-fmt" ];
-              types = [ ];
-            };
+            nixfmt.enable = true;
+            statix.enable = true;
+            deadnix.enable = true;
+            flake-checker.enable = true;
+
+            shfmt.enable = true;
+            shellcheck.enable = true;
+
+            check-toml.enable = true;
+            check-xml.enable = true;
+            check-yaml.enable = true;
+            yamlfmt.enable = true;
           };
         };
-        check.enable = false;
+        check.enable = true;
       };
-      devShells.default = pkgs.mkShell {
-        shellHook = "${config.pre-commit.shellHook}";
-      };
+      devShells.default = config.pre-commit.devShell;
+      formatter = pkgs.writeShellScriptBin "pre-commit-run" ''
+        ${lib.getExe config.pre-commit.settings.package} run --all-files --config ${config.pre-commit.settings.configPath}
+      '';
     };
 }

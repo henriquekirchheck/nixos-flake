@@ -7,7 +7,7 @@
 
   imports = [ (inputs.files + "/flake-module.nix") ];
   perSystem =
-    { config, pkgs, ... }:
+    { config, ... }:
     {
       apps.write-files = {
         type = "app";
@@ -21,6 +21,7 @@
           .pre-commit-config.yaml
         '';
         ".envrc".text = ''
+          # shellcheck shell=bash
           use flake
         '';
         "README.md".text = ''

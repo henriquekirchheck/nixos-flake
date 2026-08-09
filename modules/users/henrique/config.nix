@@ -195,7 +195,7 @@
     };
 
     homeManager =
-      { config, pkgs, ... }:
+      { pkgs, ... }:
       {
         imports = [ inputs.stylix.homeModules.stylix ];
         stylix = {
