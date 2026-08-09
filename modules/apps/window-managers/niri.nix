@@ -118,7 +118,7 @@
               }
               {
                 matches = [
-                  { app-id = "^org\.wezfurlong\.wezterm$"; }
+                  { app-id = "^org.wezfurlong.wezterm$"; }
                   { app-id = "Alacritty"; }
                   { app-id = "zen"; }
                   { app-id = "com.mitchellh.ghostty"; }
@@ -145,12 +145,10 @@
               {
                 matches = [
                   {
-                    title = "Extension:.*Bitwarden.*";
-                    app-id = "firefox";
+                    title = "^Extension:.*Bitwarden";
                   }
                   {
-                    title = "Extension:.*Bitwarden.*";
-                    app-id = "zen-twilight";
+                    title = "^Picture-in-Picture$";
                   }
                 ];
                 open-floating = true;
