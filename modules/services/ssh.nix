@@ -42,6 +42,7 @@
           secret-keys =
             {
               sopsFile,
+              keyName,
               keyPath ? ".ssh/id_ed25519",
             }:
             {
@@ -50,12 +51,14 @@
               homeManager =
                 { config, ... }:
                 {
-                  sops.secrets.private = {
+                  sops.secrets."${keyName}-ssh-private" = {
                     inherit sopsFile;
+                    key = "private";
                     path = "${config.home.homeDirectory}/${keyPath}";
                   };
-                  sops.secrets.public = {
+                  sops.secrets."${keyName}-ssh-public" = {
                     inherit sopsFile;
+                    key = "public";
                     path = "${config.home.homeDirectory}/${keyPath}.pub";
                   };
                 };
@@ -65,6 +68,7 @@
               sopsFile,
               secretKey,
               domain,
+              extraConfig ? { },
             }:
             {
               description = "Add host";
@@ -82,7 +86,8 @@
                   programs.ssh.settings."Host ${domain}" = {
                     IdentitiesOnly = true;
                     IdentityFile = [ config.sops.secrets.${secret}.path ];
-                  };
+                  }
+                  // extraConfig;
                 };
             };
         };

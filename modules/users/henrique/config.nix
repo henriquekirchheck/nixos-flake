@@ -99,7 +99,7 @@
         gpg.format = "ssh";
       })
       (den.aspects.apps._.development._.versioning._.git._.include-ssh-signing {
-        sopsFile = ./secrets/sshkey.yaml;
+        sopsFile = ./secrets/henrique_sshkey.yaml;
         secretKey = "public";
       })
 
@@ -107,7 +107,7 @@
 
       den.aspects.apps._.development._.versioning._.git._.gh
       (den.aspects.services._.ssh._.client._.add-host {
-        sopsFile = ./secrets/sshkey.yaml;
+        sopsFile = ./secrets/henrique_sshkey.yaml;
         secretKey = "private";
         domain = "github.com";
       })
@@ -121,15 +121,29 @@
         alias = "fjc";
       })
       (den.aspects.services._.ssh._.client._.add-host {
-        sopsFile = ./secrets/sshkey.yaml;
+        sopsFile = ./secrets/henrique_sshkey.yaml;
         secretKey = "private";
         domain = "codeberg.org";
       })
 
       den.aspects.apps._.development._.versioning._.jujutsu
       (den.aspects.apps._.development._.versioning._.jujutsu._.include-settings {
-        user.name = "Henrique Kirch Heck";
-        user.email = "me@henriquekh.dev.br";
+        user.name = "Lina Lilith";
+        user.email = "me@lina.dev.br";
+      })
+      (den.aspects.apps._.development._.versioning._.jujutsu._.include-ssh-signing {
+        sopsFile = ./secrets/lina_sshkey.yaml;
+        secretKey = "public";
+      })
+      (den.aspects.services._.ssh._.client._.add-host {
+        sopsFile = ./secrets/lina_sshkey.yaml;
+        secretKey = "private";
+        domain = "tangled.org";
+        extraConfig = {
+          Hostname = "tangled.org";
+          User = "git";
+          AddressFamily = "inet";
+        };
       })
 
       den.aspects.apps._.communication._.email._.thunderbird
@@ -171,8 +185,14 @@
       den.aspects.services._.ssh._.server._.allow-user
       den.aspects.services._.ssh._.client
       (den.aspects.services._.ssh._.client._.secret-keys {
-        keyPath = ".ssh/id_ed25519";
-        sopsFile = ./secrets/sshkey.yaml;
+        keyName = "henrique";
+        keyPath = ".ssh/id_henrique";
+        sopsFile = ./secrets/henrique_sshkey.yaml;
+      })
+      (den.aspects.services._.ssh._.client._.secret-keys {
+        keyName = "lina";
+        keyPath = ".ssh/id_lina";
+        sopsFile = ./secrets/lina_sshkey.yaml;
       })
 
       (den.aspects.utils._.user._.xdg-dirs {
@@ -191,6 +211,7 @@
       description = "Henrique Kirch Heck";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBHzo1AzCHMwR6sctkN8hxilkKvjnr96xWPotO3eTcxR me@henriquekh.dev.br"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVXY79mm5Z2lWGRYZBpNVpM8NfptJ+zApV9iDrHRCLP me@lina.dev.br"
       ];
     };
 
