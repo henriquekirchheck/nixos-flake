@@ -607,6 +607,8 @@
 
               "JavaScript".formatter.code_action = "source.fixAll.eslint";
               "TypeScript".formatter.code_action = "source.fixAll.eslint";
+
+              "Rust".tab_size = 4;
             };
 
           };
