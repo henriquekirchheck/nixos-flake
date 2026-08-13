@@ -145,13 +145,20 @@
               {
                 matches = [
                   {
-                    title = "^Extension:.*Bitwarden";
-                  }
-                  {
+                    app-id = "(zen-twilight|firefox)$";
                     title = "^Picture-in-Picture$";
                   }
                 ];
                 open-floating = true;
+              }
+              {
+                matches = [
+                  {
+                    app-id = "^gimp";
+                    title = "^GIMP Startup$";
+                  }
+                ];
+                open-focused = false;
               }
               {
                 matches = [
