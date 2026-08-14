@@ -69,6 +69,7 @@
             "typst"
             "nginx"
             "latex"
+            "ansible"
 
             "catppuccin-icons"
           ];
@@ -274,8 +275,15 @@
                   path = lib.getExe pkgs.yaml-language-server;
                   arguments = [ "--stdio" ];
                 };
+                settings.yaml.schemas = {
+                  "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/inventory.json" =
+                    [
+                      "./inventory/*.yaml"
+                      "hosts.yml"
+                    ];
+                };
               };
-              ansible-language-server = {
+              ansible = {
                 binary = {
                   path = lib.getExe pkgs.ansible-language-server;
                   arguments = [ "--stdio" ];
@@ -609,6 +617,7 @@
               "TypeScript".formatter.code_action = "source.fixAll.eslint";
 
               "Rust".tab_size = 4;
+              "Ansible".semantic_tokens = "combined";
             };
 
           };
