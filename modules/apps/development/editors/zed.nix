@@ -70,6 +70,7 @@
             "nginx"
             "latex"
             "ansible"
+            "ruby"
 
             "catppuccin-icons"
           ];
@@ -526,6 +527,25 @@
                   arguments = [ "run" ];
                 };
               };
+              solargraph = {
+                binary = {
+                  path = lib.getExe pkgs.solargraph;
+                  arguments = [ "stdio" ];
+                };
+                initialization_options = {
+                  diagnostics = true;
+                  formatting = true;
+                };
+              };
+              rubocop = {
+                binary = {
+                  path = lib.getExe pkgs.rubocop;
+                  arguments = [ "--lsp" ];
+                };
+                initialization_options = {
+                  safeAutocorrect = false;
+                };
+              };
             };
 
             file_types = {
@@ -618,6 +638,13 @@
 
               "Rust".tab_size = 4;
               "Ansible".semantic_tokens = "combined";
+              "Ruby".language_servers = [
+                "solargraph"
+                "rubocop"
+                "sorbet"
+                "!ruby-lsp"
+                "..."
+              ];
             };
 
           };
