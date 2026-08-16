@@ -71,6 +71,7 @@
             "latex"
             "ansible"
             "ruby"
+            "php"
 
             "catppuccin-icons"
           ];
@@ -546,6 +547,7 @@
                   safeAutocorrect = false;
                 };
               };
+              phpantom.binary.path = lib.getExe pkgs.phpantom-lsp;
             };
 
             file_types = {
@@ -632,21 +634,49 @@
                 };
                 formatter.language_server.name = "ruff";
               };
-
-              "JavaScript".formatter.code_action = "source.fixAll.eslint";
-              "TypeScript".formatter.code_action = "source.fixAll.eslint";
-
-              "Rust".tab_size = 4;
-              "Ansible".semantic_tokens = "combined";
-              "Ruby".language_servers = [
-                "solargraph"
-                "rubocop"
-                "sorbet"
-                "!ruby-lsp"
-                "..."
-              ];
+              "JavaScript" = {
+                formatter.code_action = "source.fixAll.eslint";
+              };
+              "TypeScript" = {
+                formatter.code_action = "source.fixAll.eslint";
+              };
+              "Rust" = {
+                tab_size = 4;
+              };
+              "Ansible" = {
+                semantic_tokens = "combined";
+              };
+              "Ruby" = {
+                language_servers = [
+                  "solargraph"
+                  "rubocop"
+                  "sorbet"
+                  "!ruby-lsp"
+                  "..."
+                ];
+              };
+              "PHP" = {
+                language_servers = [
+                  "phpantom"
+                  "!intelephense"
+                  "!phpactor"
+                  "!phptools"
+                  "..."
+                ];
+                format_on_save = "on";
+                formatter = {
+                  external = {
+                    command = lib.getExe pkgs.mago;
+                    arguments = [
+                      "format"
+                      "--stdin-input"
+                      "--stdin-filepath"
+                      "{buffer_path}"
+                    ];
+                  };
+                };
+              };
             };
-
           };
 
           userKeymaps = [
