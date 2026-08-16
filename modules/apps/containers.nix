@@ -8,9 +8,9 @@
       {
         virtualisation.containers = {
           enable = true;
-          registries.search = [
-            "quay.io"
-            "docker.io"
+          registries.settings.registry = [
+            { location = "docker.io"; }
+            { location = "quay.io"; }
           ];
         };
         environment.systemPackages = [ pkgs.compose2nix ];
