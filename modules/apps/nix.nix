@@ -29,11 +29,12 @@
       }:
       {
         nix = {
-          package =
-            inputs.determinate-nix.packages."${pkgs.stdenv.hostPlatform.system}".default.overrideAttrs
-              (_: {
-                doCheck = false;
-              });
+          package = pkgs.nixVersions.git;
+          # package =
+          #   inputs.determinate-nix.packages."${pkgs.stdenv.hostPlatform.system}".default.overrideAttrs
+          #     (_: {
+          #       doCheck = false;
+          #     });
           # package = pkgs.lix;
           settings = {
             auto-optimise-store = true;
@@ -45,14 +46,13 @@
             use-xdg-base-directories = true;
             diff-hook = lib.getExe pkgs.dix;
             run-diff-hook = true;
-            eval-cores = 0;
             max-jobs = "auto";
-            lazy-trees = true;
+            #eval-cores = 0;
+            #lazy-trees = true;
           };
           registry = {
             nixpkgs.flake = inputs.nixpkgs;
             home-manager.flake = inputs.home-manager;
-            blender-bin.flake = inputs.blender-bin;
             disko.flake = inputs.disko;
             emacs-overlay.flake = inputs.emacs-overlay;
             flake-parts.flake = inputs.flake-parts;
@@ -65,7 +65,6 @@
           nixPath = [
             "nixpkgs=flake:nixpkgs"
             "home-manager=flake:home-manager"
-            "blender-bin=flake:blender-bin"
             "disko=flake:disko"
             "emacs-overlay=flake:emacs-overlay"
             "flake-parts=flake:flake-parts"

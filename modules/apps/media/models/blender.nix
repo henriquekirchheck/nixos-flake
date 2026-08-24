@@ -1,15 +1,20 @@
-{ inputs, ... }:
+{ den, ... }:
 {
-  flake-file.inputs.blender-bin = {
-    url = "github:edolstra/nix-warez?dir=blender";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   den.aspects.apps.provides.media.provides.models.provides.blender = {
+    includes = [
+      (den._.unfree [
+        "blender"
+        "cuda_cudart"
+        "cuda_cccl"
+        "cuda_nvcc"
+        "cuda_nvrtc"
+        "libcublas"
+      ])
+    ];
     homeManager =
       { pkgs, ... }:
       {
-        home.packages = [ inputs.blender-bin.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+        home.packages = [ pkgs.pkgsCuda.blender ];
       };
   };
 }

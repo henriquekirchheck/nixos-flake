@@ -225,7 +225,7 @@
           polarity = "dark";
           targets = {
             firefox.profileNames = [ "default" ];
-            zen-browser.profileNames = [ ];
+            zen-browser.enable = false;
             qt.platform = "qtct";
           };
           cursor = {

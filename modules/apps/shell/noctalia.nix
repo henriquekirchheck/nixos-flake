@@ -1,4 +1,4 @@
-{ den, inputs, ... }:
+{ den, ... }:
 {
   flake-file.inputs.noctalia = {
     url = "github:noctalia-dev/noctalia-shell/cachix";
@@ -21,7 +21,7 @@
         ...
       }:
       {
-        imports = [ inputs.noctalia.homeModules.default ];
+        # imports = [ inputs.noctalia.homeModules.default ];
         stylix.targets.noctalia.enable = false;
         programs.noctalia = {
           enable = true;

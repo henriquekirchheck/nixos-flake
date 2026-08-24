@@ -26,7 +26,10 @@
         enable = true;
         discord = {
           enable = true;
-          branch = "canary";
+          branches = [
+            "canary"
+            "stable"
+          ];
           krisp.enable = true;
           vencord.enable = true;
           equicord.enable = false;
@@ -48,7 +51,7 @@
           rpcServer = true;
         };
         legcord = {
-          enable = true;
+          enable = false;
           vencord.enable = true;
           equicord.enable = false;
           settings = {
@@ -58,6 +61,15 @@
             minimizeToTray = true;
             mods = [ "vencord" ];
             tray = "dynamic";
+          };
+        };
+        goofcord = {
+          enable = true;
+          clientMod = "vencord";
+          autoscroll.enable = true;
+          settings = {
+            minimizeToTray = true;
+            hardwareAcceleration = true;
           };
         };
         config = {
