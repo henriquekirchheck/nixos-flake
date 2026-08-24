@@ -62,7 +62,7 @@
       den.aspects.apps._.media._.videos._.gpu-screen-recorder
       den.aspects.apps._.media._.videos._.yt-dlp
       den.aspects.apps._.media._.subtitles._.aegisub
-      den.aspects.apps._.media._.models._.blender
+      # den.aspects.apps._.media._.models._.blender
       den.aspects.apps._.media._.images._.swayimg
       den.aspects.apps._.media._.images._.krita
       den.aspects.apps._.media._.images._.gimp
