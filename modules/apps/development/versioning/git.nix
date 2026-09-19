@@ -9,8 +9,57 @@
           enable = true;
           package = pkgs.gitFull;
           settings = {
+            core = {
+              compression = 9;
+              whitespace = "error";
+              preloadindex = true;
+            };
             init.defaultBranch = "main";
-            pull.rebase = true;
+            status = {
+              branch = true;
+              showStash = true;
+              showUntrackedFiles = "all";
+            };
+            log.abbrevCommit = true;
+            branch.sort = "-committerdate";
+            tag.sort = "-taggerdate";
+            pager = {
+              branch = false;
+              tag = false;
+            };
+            push = {
+              autoSetupRemote = true;
+              default = "current";
+              followTags = true;
+            };
+            pull = {
+              default = "current";
+              rebase = true;
+            };
+            rebase = {
+              autoStash = true;
+              missingCommitsCheck = "warn";
+            };
+            rerere = {
+              enabled = true;
+              autoupdate = true;
+            };
+            diff = {
+              algorithm = "histogram";
+              colorMoved = "default";
+              mnemonicPrefix = true;
+            };
+            interactive.singlekey = true;
+            merge.conflictStyle = "zdiff3";
+            alias = {
+              d = "diff";
+              s = "status";
+              a = "add";
+              ap = "add -p";
+              c = "commit";
+              l = "log --all --graph --oneline";
+              cl = "clone";
+            };
           };
           signing = {
             format = "ssh";
@@ -49,6 +98,13 @@
         homeManager.programs.delta = {
           enable = true;
           enableGitIntegration = true;
+        };
+      };
+      lazy = {
+        description = "LazyGit";
+        homeManager = { config, lib, ... }: {
+          programs.lazygit.enable = true;
+          programs.git.settings.alias.lazy = "!${lib.getExe config.programs.lazygit.package}";
         };
       };
       gh = {

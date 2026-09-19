@@ -74,6 +74,7 @@
 
       den.aspects.apps._.communication._.nixcord
       den.aspects.apps._.communication._.stoat
+      den.aspects.apps._.communication._.element
 
       den.aspects.apps._.documents._.zathura
       den.aspects.apps._.documents._.libreoffice

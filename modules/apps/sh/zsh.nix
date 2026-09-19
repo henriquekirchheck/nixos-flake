@@ -178,6 +178,11 @@
               src = pkgs.zsh-fast-syntax-highlighting;
               file = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
             }
+            {
+              name = "zsh-completion-sync";
+              src = pkgs.zsh-completion-sync;
+              file = "share/zsh-completion-sync/zsh-completion-sync.plugin.zsh";
+            }
           ];
         };
       };
