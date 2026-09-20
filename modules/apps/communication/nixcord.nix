@@ -5,7 +5,8 @@
     inputs = {
       nixpkgs.follows = "nixpkgs";
       nixpkgs-nixcord.follows = "nixpkgs";
-      flake-parts.follows = "flake-parts";
+      home-manager.follows = "home-manager";
+      nix-darwin.follows = "";
     };
   };
   den.aspects.apps.provides.communication.provides.nixcord = {
@@ -64,7 +65,7 @@
           };
         };
         goofcord = {
-          enable = true;
+          enable = false;
           clientMod = "vencord";
           autoscroll.enable = true;
           settings = {

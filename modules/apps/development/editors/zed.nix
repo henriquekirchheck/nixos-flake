@@ -145,8 +145,8 @@
             };
 
             node = {
-              path = lib.getExe pkgs.nodejs_latest;
-              npm_path = lib.getExe' pkgs.nodejs_latest "npm";
+              path = lib.getExe pkgs.nodejs;
+              npm_path = lib.getExe' pkgs.nodejs "npm";
             };
             prettier.allowed = false;
 

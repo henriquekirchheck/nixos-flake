@@ -74,7 +74,7 @@ in
 
       (den.aspects.services._.caddy._.withPlugins {
         plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
-        hash = "sha256-mqIa0wI/VfjDblg0NnkzKllWHXZZPLwHP8xEVSwZuPE=";
+        hash = "sha256-xAw+kBA+rdhzABdogwNCo9zEtNMPG7zj5rgPpFxvpDo=";
       })
       (den.aspects.services._.caddy._.includeEnvironment ./secrets/caddy.env)
       (den.aspects.services._.caddy._.includeGlobal ''

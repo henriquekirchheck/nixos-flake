@@ -6,7 +6,7 @@
       {
         home.packages = [
           pkgs.seahorse
-          pkgs.gcr
+          pkgs.gcr_4
         ];
         xdg.portal = {
           extraPortals = [ pkgs.gnome-keyring ];

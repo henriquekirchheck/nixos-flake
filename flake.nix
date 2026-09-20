@@ -1,4 +1,4 @@
-# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# DO-NOT-EDIT. This file was auto-generated using github:denful/flake-file.
 # Use `nix run .#write-flake` to regenerate it.
 {
   description = "My Awesome Flake";
@@ -70,7 +70,7 @@
         nixpkgs.follows = "";
       };
     };
-    import-tree.url = "github:vic/import-tree";
+    import-tree.url = "github:denful/import-tree";
     musnix = {
       url = "github:musnix/musnix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -101,7 +101,8 @@
     nixcord = {
       url = "github:4evy/nixcord";
       inputs = {
-        flake-parts.follows = "flake-parts";
+        home-manager.follows = "home-manager";
+        nix-darwin.follows = "";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-nixcord.follows = "nixpkgs";
       };
