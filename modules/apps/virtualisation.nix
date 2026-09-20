@@ -8,8 +8,17 @@
       {
         virtualisation.libvirtd = {
           enable = true;
-          qemu.swtpm.enable = true;
+          qemu = {
+            package = pkgs.qemu;
+            swtpm.enable = true;
+            vhostUserPackages = [ pkgs.virtiofsd ];
+          };
+          nss.enableGuest = true;
         };
+        boot.binfmt.emulatedSystems = [
+          "aarch64-linux"
+          "riscv64-linux"
+        ];
         environment.systemPackages = [
           pkgs.dnsmasq
         ];
@@ -20,23 +29,21 @@
       qemu = {
         includes = [ den.aspects.apps._.virtualisation ];
         nixos =
-          { pkgs, ... }:
+          { config, pkgs, ... }:
+          let
+            qemu = config.virtualisation.libvirtd.qemu.package;
+          in
           {
             environment.defaultPackages = [
-              pkgs.qemu
+              qemu
               pkgs.quickemu
             ];
-            systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
+            systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${qemu}/share/qemu/firmware" ];
           };
       };
       virt-manager = {
         includes = [ den.aspects.apps._.virtualisation ];
-        nixos =
-          { pkgs, ... }:
-          {
-            virtualisation.libvirtd.qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
-            programs.virt-manager.enable = true;
-          };
+        nixos.programs.virt-manager.enable = true;
       };
 
       permission.user.extraGroups = [ "libvirtd" ];
