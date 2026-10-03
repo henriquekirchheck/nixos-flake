@@ -1,6 +1,10 @@
 { den, ... }:
 let
-  otherDiskName = "other";
+  mediaDomain = service: [
+    "${service}.localhost"
+    "${service}.zt.henriquekh.dev.br"
+    "${service}.henriquekh.dev.br"
+  ];
 in
 {
   den.aspects.pc = {
@@ -11,7 +15,11 @@ in
       })
 
       (den.aspects.utils._.disk._.createDisk {
-        name = otherDiskName;
+        name = "drive";
+        device = "/dev/disk/by-id/ata-ST1000DM010-2EP102_ZN109QYB";
+      })
+      (den.aspects.utils._.disk._.createDisk {
+        name = "ssd";
         device = "/dev/disk/by-id/ata-KINGSTON_SA400S37120G_50026B738010441A";
       })
 
@@ -97,25 +105,17 @@ in
       (den.aspects.services._.searxng._.includeEnvironment ./secrets/searxng.env)
       (den.aspects.services._.searxng._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "search.henriquekh.dev.br")
 
-      den.aspects.services._.media
-      (den.aspects.services._.media._.setupCaddy (
-        let
-          domain = service: [
-            "${service}.localhost"
-            "${service}.zt.henriquekh.dev.br"
-            "${service}.henriquekh.dev.br"
-          ];
-        in
-        {
-          jelly = domain "jelly";
-          qbit = domain "qbit";
-          radarr = domain "radarr";
-          sonarr = domain "sonarr";
-          bazarr = domain "bazarr";
-          prowlarr = domain "prowlarr";
-        }
-      ))
-      (den.aspects.services._.media._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "jelly.henriquekh.dev.br")
+     #den.aspects.services._.media._.jellyfin
+     #(den.aspects.services._.media._.jellyfin._.setupCaddy (mediaDomain "jelly"))
+     #(den.aspects.services._.media._.jellyfin._.setupCloudflareTunnel "52ba507f-2e7c-4527-9010-aaa4ff579fa2" "jelly.henriquekh.dev.br")
+     #den.aspects.services._.media._.qbittorrent
+     #(den.aspects.services._.media._.qbittorrent._.setupCaddy (mediaDomain "qbit"))
+     #den.aspects.services._.media._.prowlarr
+     #(den.aspects.services._.media._.prowlarr._.setupCaddy (mediaDomain "prowlarr"))
+     #den.aspects.services._.media._.radarr
+     #(den.aspects.services._.media._.radarr._.setupCaddy (mediaDomain "radarr"))
+     #den.aspects.services._.media._.sonarr
+     #(den.aspects.services._.media._.sonarr._.setupCaddy (mediaDomain "sonarr"))
 
       (den.aspects.services._.ddclient {
         protocol = "cloudflare";
@@ -124,15 +124,52 @@ in
         sopsFile = ./secrets/ddclient.yaml;
       })
 
-      (den.aspects.services._.forgejo-runner._.addInstance {
-        name = "henrique-pc";
-        url = "https://codeberg.org";
-        sopsFile = ./secrets/forgejo-runner.env;
+      # (den.aspects.services._.forgejo-runner._.addInstance {
+      #   name = "henrique-pc";
+      #   url = "https://codeberg.org";
+      #   sopsFile = ./secrets/forgejo-runner.env;
+      # })
+      # (den.aspects.utils._.disk._.addSubvolume {
+      #   name = "ssd";
+      #   subvolume = "forgejo-runner";
+      #   mountpoint = "/var/lib/private/gitea-runner";
+      # })
+
+      (den.aspects.utils._.disk._.addSubvolume {
+        name = "ssd";
+        subvolume = "servers";
+        mountpoint = "/media/servers";
       })
       (den.aspects.utils._.disk._.addSubvolume {
-        name = otherDiskName;
-        subvolume = "forgejo-runner";
-        mountpoint = "/var/lib/private/gitea-runner";
+        name = "ssd";
+        subvolume = "games";
+        mountpoint = "/media/games";
+      })
+      (den.aspects.utils._.disk._.addSubvolume {
+        name = "ssd";
+        subvolume = "steam-ssd";
+        mountpoint = "/media/steam-ssd";
+      })
+      (den.aspects.utils._.disk._.addSubvolume {
+        name = "hdd";
+        subvolume = "steam-hdd";
+        mountpoint = "/media/steam-hdd";
+      })
+      (den.aspects.utils._.disk._.addSubvolume {
+        name = "hdd";
+        subvolume = "recordings";
+        mountpoint = "/media/recordings";
+        extraMountOptions = [ ];
+      })
+      (den.aspects.utils._.disk._.addSubvolume {
+        name = "hdd";
+        subvolume = "storage";
+        mountpoint = "/media/storage";
+      })
+      (den.aspects.utils._.disk._.addSubvolume {
+        name = "hdd";
+        subvolume = "media";
+        mountpoint = "/media/media";
       })
     ];
 
@@ -250,14 +287,9 @@ in
         fileSystems = {
           "/persist".neededForBoot = true;
           "/var/log".neededForBoot = true;
-          "/vol/drive" = {
-            device = "/dev/disk/by-uuid/f2c7fa52-5b47-46e9-b95c-4c467175cdce";
-            fsType = "ext4";
-          };
         };
 
         sops.age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
       };
-
   };
 }

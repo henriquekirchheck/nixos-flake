@@ -33,6 +33,7 @@ in
           name,
           subvolume,
           mountpoint,
+          extraMountOptions ? [ "compress=zstd" ],
         }:
         {
           description = "Create a subvolume on the disk with the specified name";
@@ -41,9 +42,9 @@ in
               inherit mountpoint;
               mountOptions = [
                 "subvol=${subvolume}"
-                "compress=zstd"
                 "noatime"
-              ];
+              ]
+              ++ extraMountOptions;
             };
         };
     };
