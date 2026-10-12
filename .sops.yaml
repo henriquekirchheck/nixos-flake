@@ -1,17 +1,17 @@
 creation_rules:
   - key_groups:
       - age:
-          - age1cmx764yuualp623t3urnuan747kpxpyacr7ghtsy5huwdqv6ps4qdw3xs6
-          - age1kk0s3r3a7meuvz8xhr9nc2zrxx3v53rdf5y832y9fm6fq5v4x3dsmd8nss
-          - age189jem67f5uc8hwsrmc0ac2x3fxugucdclmhe4usjmjnydw03vufsx38w9c
-    path_regex: modules/users/henrique/secrets/.*$
+          - age1zpmvfcsynflufcrgj3v9qlsq5cyl00xgf3vm6gkf2nuwdwcra4fq7pkc42
+          - age129qafr4na6saelysulf4pf5ax43cj4jg6lg8wa7g7ex9ahtcvefqes6lxp
+    path_regex: modules/hosts/artemis/secrets.yaml$
   - key_groups:
       - age:
-          - age1cmx764yuualp623t3urnuan747kpxpyacr7ghtsy5huwdqv6ps4qdw3xs6
-          - age1kk0s3r3a7meuvz8xhr9nc2zrxx3v53rdf5y832y9fm6fq5v4x3dsmd8nss
-    path_regex: modules/hosts/laptop/secrets/.*$
+          - age1tvz9sv3mkmlad0esyfp6exrmqa7lrz938xp0z6f2hr0c8l9l9smq2den52
+          - age129qafr4na6saelysulf4pf5ax43cj4jg6lg8wa7g7ex9ahtcvefqes6lxp
+    path_regex: modules/hosts/athena/secrets.yaml$
   - key_groups:
       - age:
-          - age1cmx764yuualp623t3urnuan747kpxpyacr7ghtsy5huwdqv6ps4qdw3xs6
-          - age189jem67f5uc8hwsrmc0ac2x3fxugucdclmhe4usjmjnydw03vufsx38w9c
-    path_regex: modules/hosts/pc/secrets/.*$
+          - age129qafr4na6saelysulf4pf5ax43cj4jg6lg8wa7g7ex9ahtcvefqes6lxp
+          - age1zpmvfcsynflufcrgj3v9qlsq5cyl00xgf3vm6gkf2nuwdwcra4fq7pkc42
+          - age1tvz9sv3mkmlad0esyfp6exrmqa7lrz938xp0z6f2hr0c8l9l9smq2den52
+    path_regex: modules/users/lina/secrets.yaml$
