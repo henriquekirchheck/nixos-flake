@@ -1,0 +1,198 @@
+{ __findFile, inputs, ... }:
+{
+  flake-file.inputs.nixcord = {
+    url = "github:4evy/nixcord";
+    inputs = {
+      nixpkgs.follows = "nixpkgs";
+      nixpkgs-ci.follows = "nixpkgs";
+      nixpkgs-packages.follows = "nixpkgs";
+      home-manager.follows = "home-manager";
+      nix-darwin.follows = "";
+      treefmt-nix.follows = "";
+    };
+  };
+
+  den.aspects.apps.communication.discord = {
+    includes = [
+      (<den/unfree> [
+        "discord"
+        "discord-canary"
+        "discord-development"
+        "discord-ptb"
+      ])
+    ];
+
+    homeManager = {
+      imports = [ inputs.nixcord.homeModules.nixcord ];
+
+      programs.nixcord = {
+        enable = true;
+        discord = {
+          enable = true;
+          branches = [
+            "canary"
+            "stable"
+          ];
+          krisp.enable = true;
+          vencord.enable = true;
+          equicord.enable = false;
+          openASAR.enable = true;
+          commandLineArgs = [
+            "--enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,VaapiVideoDecoder,MiddleClickAutoscroll"
+            "--ozone-platform-hint=auto"
+            "--enable-wayland-ime"
+          ];
+        };
+        vesktop.enable = false;
+        equibop.enable = false;
+        dorion = {
+          enable = false;
+          desktopNotifications = true;
+          streamerModeDetection = true;
+          sysTray = true;
+          updateNotify = false;
+          rpcServer = true;
+        };
+        legcord = {
+          enable = false;
+          vencord.enable = true;
+          equicord.enable = false;
+          settings = {
+            channel = "stable";
+            doneSetup = true;
+            hardwareAcceleration = true;
+            minimizeToTray = true;
+            mods = [ "vencord" ];
+            tray = "dynamic";
+          };
+        };
+        goofcord = {
+          enable = false;
+          clientMod = "vencord";
+          autoscroll.enable = true;
+          settings = {
+            minimizeToTray = true;
+            hardwareAcceleration = true;
+          };
+        };
+        config = {
+          enableReactDevtools = true;
+          frameless = true;
+          transparent = true;
+          autoUpdate = false;
+          autoUpdateNotification = false;
+          notifyAboutUpdates = false;
+          plugins = {
+            usrbg.enable = true;
+            alwaysAnimate.enable = true;
+            alwaysExpandRoles.enable = true;
+            betterGifAltText.enable = true;
+            betterGifPicker.enable = true;
+            betterRoleContext.enable = true;
+            betterRoleDot.enable = true;
+            betterSessions.enable = true;
+            betterSettings.enable = true;
+            biggerStreamPreview.enable = true;
+            callTimer.enable = true;
+            clearUrls.enable = true;
+            copyFileContents.enable = true;
+            disableCallIdle.enable = true;
+            experiments = {
+              enable = true;
+              toolbarDevMenu = true;
+            };
+            expressionCloner.enable = true;
+            fakeNitro = {
+              enable = true;
+              transformCompoundSentence = true;
+            };
+            favoriteEmojiFirst.enable = true;
+            fixCodeblockGap.enable = true;
+            fixSpotifyEmbeds.enable = true;
+            fixYoutubeEmbeds.enable = true;
+            forceOwnerCrown.enable = true;
+            fullSearchContext.enable = true;
+            fullUserInChatbox.enable = true;
+            gameActivityToggle.enable = true;
+            gifPaste.enable = true;
+            greetStickerPicker.enable = true;
+            imageFilename.enable = true;
+            imageZoom = {
+              enable = true;
+              nearestNeighbour = true;
+            };
+            implicitRelationships.enable = true;
+            memberCount.enable = true;
+            mentionAvatars.enable = true;
+            messageLatency.enable = true;
+            messageLinkEmbeds.enable = true;
+            messageLogger.enable = true;
+            mutualGroupDms.enable = true;
+            noDevtoolsWarning.enable = true;
+            noF1.enable = true;
+            noOnboardingDelay.enable = true;
+            noPendingCount = {
+              enable = true;
+              hideFriendRequestsCount = false;
+              hidePremiumOffersCount = true;
+            };
+            noUnblockToJump.enable = true;
+            permissionFreeWill.enable = true;
+            permissionsViewer.enable = true;
+            petpet.enable = true;
+            pinDms.enable = true;
+            platformIndicators.enable = true;
+            previewMessage.enable = true;
+            reactErrorDecoder.enable = true;
+            readAllNotificationsButton.enable = true;
+            reverseImageSearch.enable = true;
+            roleColorEverywhere.enable = true;
+            sendTimestamps.enable = true;
+            serverInfo.enable = true;
+            shikiCodeblocks = {
+              enable = true;
+              useDevIcon = "COLOR";
+            };
+            showHiddenChannels.enable = true;
+            showHiddenThings.enable = true;
+            silentMessageToggle.enable = true;
+            spotifyCrack.enable = true;
+            startupTimings.enable = true;
+            typingIndicator.enable = true;
+            typingTweaks.enable = true;
+            userMessagesPronouns.enable = true;
+            validReply.enable = true;
+            validUser.enable = true;
+            viewIcons.enable = true;
+            viewRaw.enable = true;
+            voiceDownload.enable = true;
+            voiceMessages.enable = true;
+            volumeBooster.enable = true;
+            webScreenShareFixes.enable = true;
+            whoReacted.enable = true;
+            youtubeAdblock.enable = true;
+          };
+        };
+      };
+    };
+
+    niri-window-rules = _: [
+      {
+        matches = [
+          { app-id = "discord"; }
+          { app-id = "vesktop"; }
+        ];
+        opacity = 0.98;
+        draw-border-with-background = false;
+        background-effect.blur = true;
+      }
+    ];
+
+    cacheHome = _: {
+      directories = [
+        ".config/discord"
+        ".config/discordcanary"
+      ];
+    };
+  };
+}
